@@ -63,3 +63,34 @@ Next.js + MDX を採用し、コンテンツとデザインの完全なコント
 │   └── mdx.ts            # 記事取得ロジック (fs, gray-matter)
 └── public/               # 静的画像
 ```
+
+# Blog Development Roadmap
+
+## Phase 1: 記事を表示させる (Now!)
+
+- [x] プロジェクト作成 & 初期設定 (Next.js, Tailwind, TypeScript)
+- [x] UIライブラリ導入 (shadcn/ui, Lucide)
+- [x] MDX環境のセットアップ (next-mdx-remote-client, gray-matter)
+- [x] 記事データの取得ロジック実装 (単体取得: `getPost`)
+- [ ] **記事データの取得ロジック実装 (全件取得: `getAllPosts`)** 👈 次はココ！
+- [ ] 記事詳細ページの作成 (`app/blog/[slug]/page.tsx`)
+- [ ] 記事のデザイン調整 (`@tailwindcss/typography` 導入)
+
+## Phase 2: トップページを作る
+
+- [ ] 記事一覧を取得して表示する (`app/page.tsx`)
+- [ ] 記事カードコンポーネントのデザイン (shadcn/ui `Card` 使用)
+- [ ] ヘッダーとフッターの作成
+
+## Phase 3: ブログとしての機能を強化
+
+- [ ] コードブロックのシンタックスハイライト実装 (`shiki`)
+- [ ] タグ/カテゴリ機能の実装
+- [ ] ページネーション実装 (記事が増えてきたら)
+- [ ] OGP画像の自動生成 (SNSシェア用)
+
+## Phase 4: デプロイ & 運用
+
+- [ ] Vercelへのデプロイ
+- [ ] 独自ドメインの設定 (もしあれば)
+- [ ] Analytics導入 (Umami / Vercel Analytics)
