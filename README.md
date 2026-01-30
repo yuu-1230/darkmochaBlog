@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tech Stack & Architecture
 
-## Getting Started
+## 🚀 Core
 
-First, run the development server:
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
+  - 最新のReact機能とSSG/SSRを活用。
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+  - 型安全性のため必須。
+- **Deployment**: [Vercel](https://vercel.com/)
+  - デプロイ、ホスティング、CI/CD。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## UI & Design
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+  - CSSフレームワーク。
+- **Component Library**: [shadcn/ui](https://ui.shadcn.com/)
+  - 再利用可能なコンポーネント集（Button, Card etc.）。
+  - インストールコマンド: `pnpm dlx shadcn@latest init`
+- **Icons**: [Lucide React](https://lucide.dev/)
+  - アイコンライブラリ。`import { IconName } from 'lucide-react'` で使用。
+- **Font**: Geist (Next.js Default) / Noto Sans JP (予定)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content Management
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Format**: MDX (`.mdx`)
+  - Markdownの中にReactコンポーネントを埋め込める形式。
+  - 記事データはリポジトリ内の `content/posts/` で管理。
+- **Writer**: [Obsidian](https://obsidian.md/)
+  - ローカルでの執筆環境。Gitでコンテンツを同期。
+- **MDX Processor**: `next-mdx-remote` (予定)
+  - MDXファイルをHTML/Reactコンポーネントに変換するライブラリ。
 
-## Learn More
+## Features & Libraries (Planned)
 
-To learn more about Next.js, take a look at the following resources:
+- **Syntax Highlighting**: [Shiki](https://shiki.style/) (予定)
+  - コードブロックを美しく色付けする。
+- **Comments**: [Giscus](https://giscus.app/) (予定)
+  - GitHub Discussionsを利用したコメントシステム。
+- **Analytics**: [Umami](https://umami.is/) (予定)
+  - プライバシー重視のアクセス解析。
+- **Date Formatting**: `date-fns`
+  - 日付操作用。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure Idea
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+.
+├── app/ # Next.js App Router
+├── components/
+│ ├── ui/ # shadcn/ui components
+│ └── mdx/ # MDXで使用するカスタムコンポーネント (Map, YouTube etc.)
+├── content/
+│ └── posts/ # 記事ファイル (.mdx)
+├── lib/ # ユーティリティ関数
+└── public/ # 静的画像
