@@ -15,7 +15,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.563.0",
-    "next": "16.0.8",
+    "next": "16.1.6",
     "next-mdx-remote-client": "^2.1.7",
     "react": "19.2.1",
     "react-dom": "19.2.1",
