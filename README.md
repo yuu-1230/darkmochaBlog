@@ -42,7 +42,7 @@
   - 日付操作用。
 
 ## Project Structure Idea
-
+```text
 .
 ├── app/ # Next.js App Router
 ├── components/
@@ -52,3 +52,4 @@
 │ └── posts/ # 記事ファイル (.mdx)
 ├── lib/ # ユーティリティ関数
 └── public/ # 静的画像
+```
