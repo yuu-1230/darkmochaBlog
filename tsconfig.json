@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@components/*": ["components/*"],
+      "@content/*": ["content/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": [
@@ -28,7 +32,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "content/posts/test.mdx"
   ],
   "exclude": ["node_modules"]
 }
