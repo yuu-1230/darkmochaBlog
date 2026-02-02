@@ -7,7 +7,7 @@ type Frontmatter = {
   date: string;
   tags?: string[];
 };
-type PostData = {
+export type PostData = {
   slug: string;
   content: string;
   frontmatter: Frontmatter;
