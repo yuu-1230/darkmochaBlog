@@ -72,9 +72,9 @@ Next.js + MDX を採用し、コンテンツとデザインの完全なコント
 - [x] UIライブラリ導入 (shadcn/ui, Lucide)
 - [x] MDX環境のセットアップ (next-mdx-remote-client, gray-matter)
 - [x] 記事データの取得ロジック実装 (単体取得: `getPost`)
-- [ ] **記事データの取得ロジック実装 (全件取得: `getAllPosts`)** 👈 次はココ！
-- [ ] 記事詳細ページの作成 (`app/blog/[slug]/page.tsx`)
-- [ ] 記事のデザイン調整 (`@tailwindcss/typography` 導入)
+- [x] 記事データの取得ロジック実装 (全件取得: `getAllPosts`)
+- [x] 記事詳細ページの作成 (`app/blog/[slug]/page.tsx`)
+- [ ] **記事のデザイン調整 (`@tailwindcss/typography` 導入)** 👈 次はココ！
 
 ## Phase 2: トップページを作る
 
