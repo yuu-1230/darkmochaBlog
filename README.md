@@ -50,8 +50,7 @@ Next.js + MDX を採用し、コンテンツとデザインの完全なコント
 ```text
 .
 ├── app/                  # Next.js App Router
-│   ├── blog/
-│   │   └── [slug]/       # 記事詳細ページ (実装中)
+│   ├── [slug]/           # 記事詳細ページ (フラット化完了) ✅
 │   └── page.tsx          # トップページ
 ├── components/
 │   ├── ui/               # shadcn/ui components (Button, Card...)
@@ -74,6 +73,7 @@ Next.js + MDX を採用し、コンテンツとデザインの完全なコント
 - [x] 記事データの取得ロジック実装 (単体取得: `getPost`)
 - [x] 記事データの取得ロジック実装 (全件取得: `getAllPosts`)
 - [x] 記事詳細ページの作成 (`app/blog/[slug]/page.tsx`)
+- [x] URL構造のフラット化 (SEO対策)
 - [ ] **記事のデザイン調整 (`@tailwindcss/typography` 導入)** 👈 次はココ！
 
 ## Phase 2: トップページを作る
