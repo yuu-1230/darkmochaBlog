@@ -6,6 +6,7 @@ type Frontmatter = {
   title: string;
   date: string;
   tags?: string[];
+  description?: string;
 };
 export type PostData = {
   slug: string;
