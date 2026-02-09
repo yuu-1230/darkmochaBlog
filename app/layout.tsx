@@ -17,8 +17,26 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Darkmocha Blog",
-  description: "VS Code Styled Engineer Blog",
+  title: {
+    template: "%s | Darkmocha Blog",
+    default: "Darkmocha Blog",
+  },
+  description: "Next.jsとVS Code風デザインで作られたエンジニアブログ。",
+  openGraph: {
+    title: "Darkmocha Blog",
+    description: "日常の記録とエンジニアの両方を発信するブログ",
+    url: "https://your-domain.com",
+    siteName: "Darkmocha Blog",
+    images: [
+      {
+        url: "https://your-domain.com/og.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

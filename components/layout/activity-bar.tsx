@@ -46,23 +46,23 @@ export const ActivityBar = ({
 
         {/* Inactive Icons (Search, Git...) */}
         {/* これらは今回は機能させず、常に非アクティブ表示にします */}
-        <div className="cursor-pointer opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
           <Search className="w-6 h-6 text-[#858585]" />
         </div>
-        <div className="cursor-pointer opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
           <GitGraph className="w-6 h-6 text-[#858585]" />
         </div>
-        <div className="cursor-pointer opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
           <Bug className="w-6 h-6 text-[#858585]" />
         </div>
       </div>
 
       {/* 下部アイコン群 */}
       <div className="mt-auto flex flex-col gap-6 mb-4 w-full items-center">
-        <div className="cursor-pointer opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
+        <div className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
           <UserCircle className="w-6 h-6 text-[#858585]" />
         </div>
-        <div className="cursor-pointer opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
+        <div className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
           <Settings className="w-6 h-6 text-[#858585]" />
         </div>
       </div>

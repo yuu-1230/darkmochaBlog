@@ -3,18 +3,15 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { findFileByPath, TSXIcon } from "@/lib/file-tree";
 
 export const TabBar = () => {
   const pathname = usePathname();
 
-  // 現在のパスに基づいてファイル情報を取得
   const activeFile = findFileByPath(pathname);
 
-  // 見つからなかった場合のデフォルト表示 (例: 動的ルートなど)
   const displayFile = activeFile || {
-    name: "preview.tsx", // 該当なしの場合の名前
+    name: "preview.tsx",
     icon: <TSXIcon color="blue" />,
   };
 
