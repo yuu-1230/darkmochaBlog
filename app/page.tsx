@@ -1,60 +1,101 @@
-import React from "react";
-import { getAllPosts, PostData } from "@/lib/mdx";
 import Link from "next/link";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
+import { getAllPosts } from "@/lib/mdx";
+import { Coffee } from "lucide-react";
 
-const Home = () => {
-  const posts: PostData[] = getAllPosts();
+export default function Home() {
+  const posts = getAllPosts();
 
   return (
-    <main className="container mx-auto py-10 px-6 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8 tracking-tight text-foreground">
-        Latest Posts
-      </h1>
-      <div className="flex flex-col gap-4">
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-            <Card className="flex flex-row overflow-hidden hover:shadow-lg hover:transition-all duration-300 cursor-pointer h-32 items-center rounded-lg bg-card">
-              {post.frontmatter.image ?
-                <div className="relative w-40 h-full shrink-0 overflow-hidden rounded-r-lg">
-                  <Image
-                    src={post.frontmatter.image}
-                    alt={post.frontmatter.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-              : <div className="w-32 h-full bg-muted/50 flex items-center justify-center shrink-0 overflow-hidden rounded-r-lg">
-                  <span className="text-muted-foreground/50 text-xs font-mono">
-                    No Image
-                  </span>
-                </div>
-              }
-              <div className="flex flex-col justify-center p-4 w-full">
-                <div className="flex items-center gap-2 mb-1">
-                  {post.frontmatter.tags && (
-                    <span className="text-[10px] text-primary font-bold uppercase tracking-widest border border-primary/20 px-1.5 py-0.5 rounded-sm">
-                      {post.frontmatter.tags[0]}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="text-lg font-bold leading-tight mb-1 text-foreground group-hover:text-primary transition-colors duration-300">
-                  {post.frontmatter.title}
-                </h3>
-                <div className="flex justify-between items-center mt-auto">
-                  <p className="text-xs text-muted-foreground font-mono">
-                    {post.frontmatter.date}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </Link>
-        ))}
+    <div className="relative h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans overflow-y-auto overflow-x-hidden p-6 md:p-12 select-none">
+      {/* Background Watermark */}
+      <div className="absolute bottom-[-50px] right-[-50px] opacity-[0.04] pointer-events-none rotate-[-15deg]">
+        <Coffee size={400} />
       </div>
-    </main>
-  );
-};
 
-export default Home;
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto z-10 relative">
+        {/* Header */}
+        <div className="mb-8 px-2">
+          <h1 className="text-3xl md:text-4xl font-light mb-2 tracking-tight text-[#cccccc]">
+            Darkmocha Blog
+          </h1>
+          <p className="text-lg md:text-xl text-[#858585] font-light flex items-center gap-2">
+            Code, Coffee, and Creative Engineering.
+          </p>
+        </div>
+
+        {/* Latest Posts List */}
+        <section>
+          <ul className="space-y-4">
+            {posts.map((post) => (
+              <li key={post.slug}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col md:flex-row bg-[#252526]/40 hover:bg-[#252526]/80 backdrop-blur-sm border border-white/5 hover:border-white/10 rounded-2xl p-3 transition-all duration-300 hover:shadow-lg gap-4 items-stretch"
+                >
+                  {/* --- 写真エリア (Compact) --- */}
+                  <div className="w-full md:w-52 aspect-video shrink-0 relative rounded-xl overflow-hidden bg-[#1e1e1e]/50 border border-white/5 self-center md:self-auto">
+                    {post.frontmatter.image ?
+                      <Image
+                        src={post.frontmatter.image}
+                        alt={post.frontmatter.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    : <div className="w-full h-full flex items-center justify-center text-[#333]">
+                        <Coffee className="w-8 h-8 opacity-50" />
+                      </div>
+                    }
+                  </div>
+
+                  {/* --- テキスト情報エリア --- */}
+                  <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                    <div>
+                      {/* Title & Date */}
+                      <div className="flex flex-col-reverse md:flex-row md:items-baseline justify-between w-full mb-1.5 gap-1">
+                        <h2 className="text-[#3794ff] group-hover:text-[#4daafc] text-lg md:text-xl font-bold leading-tight transition-colors line-clamp-1">
+                          {post.frontmatter.title}
+                        </h2>
+                        <span className="text-[10px] text-[#858585] shrink-0 font-mono bg-white/5 px-1.5 py-0.5 rounded self-start md:self-auto border border-white/5">
+                          {post.frontmatter.date}
+                        </span>
+                      </div>
+
+                      {/* Description (Max 2 lines) */}
+                      {post.frontmatter.description && (
+                        <p className="text-xs md:text-sm text-[#a0a0a0] line-clamp-2 leading-relaxed font-light opacity-90">
+                          {post.frontmatter.description}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Footer Info (Compact) */}
+                    <div className="flex items-center gap-2 text-[10px] md:text-xs text-[#858585] font-mono opacity-60 group-hover:opacity-100 mt-2 transition-opacity">
+                      <span className="truncate">~/blog/{post.slug}.mdx</span>
+                      {post.frontmatter.tags &&
+                        post.frontmatter.tags.length > 0 && (
+                          <>
+                            <span className="w-1 h-1 rounded-full bg-[#565656]" />
+                            <span className="text-[#ce9178] truncate">
+                              {post.frontmatter.tags.join(", ")}
+                            </span>
+                          </>
+                        )}
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+
+            {posts.length === 0 && (
+              <li className="text-[#858585] text-center italic py-8 bg-[#252526]/40 rounded-2xl border border-white/5">
+                No posts found.
+              </li>
+            )}
+          </ul>
+        </section>
+      </div>
+    </div>
+  );
+}

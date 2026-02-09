@@ -1,112 +1,142 @@
-# 🛠️ Tech Stack & Architecture (Updated: 2026-02-09)
+# ☕ Darkmocha Blog
 
-このブログで使用している技術スタックとライブラリのメモ。
-Next.js + MDX を採用し、**「Darkmocha」テーマ（カフェ・温かみのあるデザイン）** を基調としたモダンなブログアーキテクチャを構築中。
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-## Core
+**Visual Studio Code (VS Code)** のUI/UXを忠実に再現した、エンジニアのためのポートフォリオブログです。
+Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブログ」** へとアーキテクチャを刷新しました。(Updated: 2026-02-09)
+
+## 🎨 Concept & Design (Major Update!)
+
+テーマコンセプトは **"VS Code IDE Style (Zen Mode)"**。
+エンジニアにとって最も馴染み深いインターフェースであるIDEのレイアウト（Activity Bar, Sidebar, Tab Bar, Status Bar）をWeb上で再現しています。
+
+- **Authentic UI**: `globals.css` にVS Code (Dark+) の配色変数を定義し、リアルな没入感を実現。
+- **Typography**: コードやエディタ部分には `JetBrains Mono` を採用し、可読性と雰囲気を両立。
+- **Interactive**: Activity Barによるサイドバーの開閉や、ルーティングに連動したタブ表示など、SPAならではの挙動を実装。
+
+## 🛠️ Tech Stack & Architecture
+
+### Core
 
 - **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Deployment**: [Vercel](https://vercel.com/) (予定)
 - **Package Manager**: [pnpm](https://pnpm.io/)
-  - `npm` との競合を解消し、`pnpm` に統一完了。
 
-## UI & Design (Updated!)
+### UI & Styling
 
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-  - **Theme**: **Darkmocha** (Custom)
-    - Base Color: Warm Brown / Coffee tones (`oklch` color space)
-    - Features: Dark Mode 対応, CSS Variables による動的テーマ変更
-- **Component Library**: [shadcn/ui](https://ui.shadcn.com/) ✅
-  - 使用コンポーネント: `button`, `card`, `separator`
+  - **Colors**:
+    - `#1E1E1E` (Editor Background - Dark+)
+    - `#252526` (Sidebar - Dark+)
+    - `#007ACC` (Status Bar Blue)
+- **Fonts**:
+  - **UI**: `Inter` (Google Fonts)
+  - **Code / Editor**: `JetBrains Mono` (Google Fonts)
 - **Icons**:
-  - [Lucide React](https://lucide.dev/) ✅ (UI汎用アイコン)
-  - **[React Icons](https://react-icons.github.io/react-icons/) (Simple Icons)** ✅ (New!)
-    - GitHub, X (Twitter), Bluesky, Instagram などのブランドアイコン表示に使用。
-- **Animations**:
-  - **[react-typed](https://github.com/ssbeefeater/react-typed)** ✅ (New!)
-    - タイプライター風のアニメーション効果（導入済み、実装待ち）。
-  - **Custom CSS Animations**:
-    - `animate-blink`: カーソルの点滅アニメーション（`tailwind.config` / CSS Variables に追加）。
+  - **[Lucide React](https://lucide.dev/)**: ファイルアイコン、UIパーツに使用。
+  - **[React Icons](https://react-icons.github.io/react-icons/)**: `VscVscode` (VS Code公式ロゴ) を使用。
 
-## Content Management
+### Architecture & Logic
 
-- **Format**: MDX (`.mdx`)
-- **Frontmatter Parser**: [`gray-matter`](https://github.com/jonschlinkert/gray-matter) ✅
-  - **Schema Update**:
-    - `image`: サムネイル画像のパスを追加（例: `/images/post.jpg`）。
-    - `tags`: 配列形式 `['Tag1', 'Tag2']` に修正完了。
-- **Assets**:
-  - `public/images/`: 記事のサムネイル画像を管理。
+- **File Tree System (`lib/file-tree.ts`)**:
+  サイドバーの表示内容とタブバーの表示名を一元管理する「Single Source of Truth」を実装。URLパス (`usePathname`) とツリー定義を照合し、現在のファイル名（例: `About_me.md`）を動的に特定します。
+- **Componentization**:
+  `layout.tsx` を「司令塔」とし、各UIパーツ（Header/Footer等）を `components/layout/` 配下に独立化。
+- **SEO & AEO Strategy**:
+  - **Next.js Metadata API**: 各ページに適切な `title`, `description`, `OGP` を設定。
+  - **Semantic HTML**: `main`, `h1`, `article` タグを適切に使用し、クローラーに構造を伝達。
 
-## Current Project Structure
+## 📂 Current Project Structure
 
 ```text
 .
 ├── app/                  # Next.js App Router
 │   ├── blog/
-│   │   └── [slug]/       # 記事詳細ページ
-│   ├── globals.css       # Tailwind v4 設定 & Darkmochaテーマ定義 ✅
-│   ├── layout.tsx        # Sticky Footer対応済み ✅
-│   └── page.tsx          # トップページ (横長カードレイアウト) ✅
+│   │   └── [slug]/       # 記事詳細ページ (Markdown Rendering)
+│   ├── globals.css       # VS Code Dark+ 配色定義
+│   ├── layout.tsx        # Root Layout (MainLayout)
+│   └── page.tsx          # トップページ (Dashboard / Editor)
 ├── components/
-│   ├── ui/               # shadcn/ui components
-│   ├── site-header.tsx   # ヘッダー (Blinking cursor, Blur effect) ✅
-│   ├── site-footer.tsx   # フッター (Social Icons, Copyright) ✅
-│   └── typewriter.tsx    # タイプライターコンポーネント (New!)
+│   ├── layout/           # IDE UI Components
+│   │   ├── activity-bar.tsx # サイドバー開閉トグル
+│   │   ├── main-layout.tsx  # クライアント状態管理 (Sidebar State)
+│   │   ├── sidebar.tsx      # 再帰的ファイルツリー表示
+│   │   ├── status-bar.tsx   # Gitブランチ情報・Prettierステータス
+│   │   ├── tab-bar.tsx      # 動的タブバー
+│   │   └── title-bar.tsx    # シンプルなウィンドウヘッダー
+│   └── ui/               # Common UI Components
 ├── content/
 │   └── posts/            # 記事ファイル (.mdx)
 ├── lib/
-│   └── mdx.ts            # 記事取得ロジック (Frontmatter型定義更新済み)
+│   ├── file-tree.ts      # ファイルツリー構造の定義データ
+│   ├── projects.ts       # プロジェクト実績データ
+│   └── mdx.ts            # 記事取得ロジック
 └── public/
-    └── images/           # ブログ用画像格納フォルダ ✅
+    └── images/           # Static Assets
 ```
 
----
+## 🚀 Getting Started
 
-# Blog Development Roadmap
+```bash
+# Clone the repository
+git clone [https://github.com/your-username/darkmocha-blog.git](https://github.com/your-username/darkmocha-blog.git)
 
-## Phase 1: 記事を表示させる (Done)
+# Install dependencies
+pnpm install
+
+# Run development server
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🗺️ Blog Development Roadmap
+
+### Phase 1: 記事を表示させる (Done ✅)
 
 - [x] プロジェクト作成 & 初期設定
 - [x] MDX環境のセットアップ
-- [x] 記事データの取得ロジック実装 (`getAllPosts`, `getPost`)
-- [x] 記事詳細ページの作成
-- [x] **Frontmatterの型定義修正 (Tags, Image)**
+- [x] 記事データの取得ロジック実装
+- [x] Frontmatterの型定義修正
 
-## Phase 2: トップページを作る (Done)
+### Phase 2: デザイン刷新 - VS Code化 (Done ✅)
 
-- [x] 記事一覧の取得・表示
-- [x] **記事カードのデザイン刷新**
-  - [x] 横長リストレイアウト (Flexbox)
-  - [x] サムネイル画像の表示 (`next/image`)
-  - [x] 画像がない場合のフォールバック表示 (`bg-muted`)
-  - [x] ホバーエフェクト (画像の拡大, テキスト色の変化)
-- [x] **ヘッダーの作成**
-  - [x] ロゴデザイン (Gradient / Monospace + Blinking Cursor)
-  - [x] ナビゲーションリンク
-- [x] **フッターの作成**
-  - [x] 最下部固定 (Sticky Footer)
-  - [x] SNSリンク設置 (React Icons)
+- [x] **全体レイアウトのIDE化**
+  - [x] `h-screen`, `overflow-hidden` によるアプリ風挙動の実装
+  - [x] 画面分割 (ActivityBar / Sidebar / Editor / StatusBar)
+- [x] **コンポーネント分割**
+  - [x] `TitleBar`: メニューバーを排除し、ロゴとタイトルのみのシンプル構成へ変更
+  - [x] `ActivityBar`: サイドバー開閉トグルの実装 (`useState`)
+  - [x] `Sidebar`: 再帰的なファイルツリー表示、開閉アニメーション
+  - [x] `TabBar`: URLに連動したファイル名・アイコンの自動切り替え
+  - [x] `StatusBar`: Gitブランチ名、Prettier等のステータス表示
+- [x] **アセット管理の強化**
+  - [x] `lib/file-tree.ts` による仮想ファイル構造の一元管理
+  - [x] `JetBrains Mono` フォントの導入
 
-## Phase 3: デザインとブランディング (In Progress)
+### Phase 3: コンテンツ拡充 (In Progress 🚧)
 
-- [x] **テーマカラーの刷新 (Darkmocha)**
-  - [x] `globals.css` の変数を茶色ベースに書き換え
-  - [x] ライト/ダークモードのカラーパレット調整
-- [ ] **トップページの演出強化**
-  - [ ] `react-typed` を使った自己紹介エリアの実装 👈 **Next!**
-- [ ] **記事の中身のデザイン (`@tailwindcss/typography`)**
-  - [ ] 見出し、リスト、リンクなどのスタイル調整
+- [x] **Projects Page**: 拡張機能マーケットプレイス風の実績一覧ページ (New!)
+- [x] **Markdown Style**: 記事プレビューのハイコントラスト化 (VS Code Style)
+- [ ] **About Me**: ターミナル風自己紹介ページの実装
+- [ ] **Mobile Responsiveness**: スマホ閲覧時のレイアウト最適化
+- [ ] **Unity Integration**: WebGLビルド成果物の埋め込み
 
-## Phase 4: ブログ機能の拡充
+## 👤 Author
 
-- [ ] タグ/カテゴリページの実装 (`/tags/[tag]`)
-- [ ] ページネーション (記事数が増えたら)
-- [ ] OGP画像の自動生成
-- [ ] `shiki` によるコードブロックのシンタックスハイライト調整
+**Yuto Nagata**
 
-## Phase 5: デプロイ
+- Web Developer (Next.js / React)
+- Game Creator (Unity)
+- Student at Public University of Science, Suwa
 
-- [ ] Vercelへのデプロイ
-- [ ] Analytics導入
+---
+
+© 2026 Darkmocha Blog. Built with Code & Coffee.
+
+```
+
+```
