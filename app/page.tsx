@@ -1,75 +1,154 @@
-import React from "react";
-import { getAllPosts, PostData } from "@/lib/mdx";
 import Link from "next/link";
-import Image from "next/image";
-import { Card } from "@/components/ui/card";
-import { Typewriter } from "@/components/typewriter"; // インポート追加
+import { getAllPosts } from "@/lib/mdx";
+import {
+  FileText,
+  Search,
+  User,
+  Coffee,
+  ArrowRight,
+  Github,
+  MonitorPlay,
+} from "lucide-react";
 
-const Home = () => {
-  const posts: PostData[] = getAllPosts();
+export default function Home() {
+  // 記事を取得 (日付順にソート済み)
+  const posts = getAllPosts();
+  const recentPosts = posts.slice(0, 5); // 最新5件を表示
+  const latestPost = posts[0]; // 最新記事（Startセクション用）
 
   return (
-    // container max-w-4xl を削除し、w-full p-8 に変更
-    <main className="w-full p-6 md:p-10">
-      {/* Typewriter (前のリクエストにあったもの) */}
-      <div className="mb-8">
-        <Typewriter />
+    <div className="relative h-full w-full bg-[#1f1f1f] overflow-x-hidden text-[#cccccc] font-sans overflow-y-auto p-8 md:p-16 select-none">
+      <div className="absolute bottom-[-50px] right-[-50px] opacity-[0.04] pointer-events-none rotate-[-15deg]">
+        <Coffee size={400} />
       </div>
 
-      <h1 className="text-2xl font-bold mb-6 tracking-tight text-foreground">
-        Latest Posts
-      </h1>
+      {/* Main Content */}
+      <div className="max-w-5xl mx-auto z-10 relative">
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-light mb-2 tracking-tight text-[#cccccc]">
+            Darkmocha Blog
+          </h1>
+          <p className="text-xl text-[#858585] font-light flex items-center gap-2">
+            Code, Coffee, and Creative Engineering.
+          </p>
+        </div>
 
-      {/* エディタっぽく、カードの幅も制限せず可変にするか、あるいは一定幅で止めるか */}
-      <div className="flex flex-col gap-3 max-w-3xl">
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-            <Card className="flex flex-row overflow-hidden hover:bg-[#2A2D2E] hover:border-[#007ACC] border-border transition-all duration-100 cursor-pointer h-28 items-center rounded-none border bg-card">
-              {/* 画像エリア */}
-              {post.frontmatter.image ?
-                <div className="relative w-32 h-full shrink-0 overflow-hidden">
-                  <Image
-                    src={post.frontmatter.image}
-                    alt={post.frontmatter.title}
-                    fill
-                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-              : <div className="w-32 h-full bg-[#252526] flex items-center justify-center shrink-0 border-r border-border">
-                  <span className="text-muted-foreground/40 text-xs font-mono">
-                    No Image
-                  </span>
-                </div>
-              }
+        {/* Two Columns Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          {/* Left Column: Start */}
+          <section>
+            <h2 className="text-xl font-normal mb-4 text-[#cccccc]">Start</h2>
+            <ul className="space-y-2">
+              {/* Action: Read Latest Post */}
+              {latestPost && (
+                <li>
+                  <Link
+                    href={`/blog/${latestPost.slug}`}
+                    className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
+                  >
+                    <FileText className="w-5 h-5 opacity-80 group-hover:opacity-100" />
+                    <div className="flex flex-col leading-tight">
+                      <span>Read Latest Post</span>
+                      <span className="text-xs text-[#858585] no-underline">
+                        {latestPost.frontmatter.title}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              )}
 
-              {/* テキストエリア */}
-              <div className="flex flex-col justify-center px-4 py-2 w-full">
-                <div className="flex items-center gap-2 mb-1">
-                  {post.frontmatter.tags && (
-                    <span className="text-[10px] text-[#569CD6] font-mono">
-                      #{post.frontmatter.tags[0]}
-                    </span>
-                  )}
+              {/* Action: Search / All Posts */}
+              <li>
+                <div className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1">
+                  <Search className="w-5 h-5 opacity-80 group-hover:opacity-100" />
+                  <span className="leading-tight">Search Posts...</span>
                 </div>
+              </li>
 
-                <h3 className="text-base font-bold leading-tight mb-1 text-[#D4D4D4] group-hover:text-white">
-                  {post.frontmatter.title}
-                </h3>
+              {/* Action: About Me */}
+              <li>
+                <Link
+                  href="/about"
+                  className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
+                >
+                  <User className="w-5 h-5 opacity-80 group-hover:opacity-100" />
+                  <span className="leading-tight">About Author</span>
+                </Link>
+              </li>
 
-                <div className="flex justify-between items-center mt-auto">
-                  <p className="text-xs text-[#6A9955] font-mono">
-                    {/* 日付の前にアイコンっぽく */}
-                    <span className="opacity-50">updated: </span>
-                    {post.frontmatter.date}
-                  </p>
+              {/* Action: Unity Projects */}
+              <li>
+                <div className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1">
+                  <MonitorPlay className="w-5 h-5 opacity-80 group-hover:opacity-100" />
+                  <span className="leading-tight">Play Unity Games</span>
                 </div>
-              </div>
-            </Card>
-          </Link>
-        ))}
+              </li>
+            </ul>
+
+            {/* Help / Socials Section */}
+            <h2 className="text-xl font-normal mt-10 mb-4 text-[#cccccc]">
+              Connect
+            </h2>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://github.com/your-github-id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
+                >
+                  <Github className="w-5 h-5 opacity-80 group-hover:opacity-100" />
+                  <span className="leading-tight">GitHub Repository</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          {/* Right Column: Recent */}
+          <section>
+            <h2 className="text-xl font-normal mb-4 text-[#cccccc]">Recent</h2>
+            <ul className="space-y-1">
+              {recentPosts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="block group py-1 px-2 -mx-2 rounded hover:bg-[#2a2d2e] transition-colors duration-100"
+                  >
+                    <div className="flex items-baseline justify-between w-full">
+                      <span className="text-[#3794ff] group-hover:text-[#4daafc] text-[15px] truncate mr-2">
+                        {post.frontmatter.title}
+                      </span>
+                      <span className="text-xs text-[#858585] shrink-0 font-mono">
+                        {post.frontmatter.date}
+                      </span>
+                    </div>
+                    <div className="text-xs text-[#858585] truncate font-mono opacity-70 group-hover:opacity-100">
+                      ~/blog/{post.slug}.mdx
+                    </div>
+                  </Link>
+                </li>
+              ))}
+
+              {/* もし記事がなければ */}
+              {recentPosts.length === 0 && (
+                <li className="text-[#858585] text-sm italic py-1">
+                  No recent posts found.
+                </li>
+              )}
+            </ul>
+
+            <div className="mt-6">
+              <Link
+                href="/blog/archive" // アーカイブページを作るならここ
+                className="text-xs text-[#3794ff] hover:underline flex items-center gap-1"
+              >
+                View all posts <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </section>
+        </div>
       </div>
-    </main>
+    </div>
   );
-};
-
-export default Home;
+}
