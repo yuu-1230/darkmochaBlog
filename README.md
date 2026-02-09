@@ -74,12 +74,12 @@ Next.js + MDX を採用し、コンテンツとデザインの完全なコント
 - [x] 記事データの取得ロジック実装 (全件取得: `getAllPosts`)
 - [x] 記事詳細ページの作成 (`app/blog/[slug]/page.tsx`)
 - [x] URL構造のフラット化 (SEO対策)
-- [ ] **記事のデザイン調整 (`@tailwindcss/typography` 導入)** 👈 次はココ！
+- [x] **記事のデザイン調整 (`@tailwindcss/typography` 導入)** 👈 次はココ！
 
 ## Phase 2: トップページを作る
 
-- [ ] 記事一覧を取得して表示する (`app/page.tsx`)
-- [ ] 記事カードコンポーネントのデザイン (shadcn/ui `Card` 使用)
+- [x] 記事一覧を取得して表示する (`app/page.tsx`)
+- [x] 記事カードコンポーネントのデザイン (shadcn/ui `Card` 使用)
 - [ ] ヘッダーとフッターの作成
 
 ## Phase 3: ブログとしての機能を強化
