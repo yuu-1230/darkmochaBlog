@@ -1,153 +1,100 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/mdx";
-import {
-  FileText,
-  Search,
-  User,
-  Coffee,
-  ArrowRight,
-  Github,
-  MonitorPlay,
-} from "lucide-react";
+import { Coffee } from "lucide-react";
 
 export default function Home() {
-  // 記事を取得 (日付順にソート済み)
   const posts = getAllPosts();
-  const recentPosts = posts.slice(0, 5); // 最新5件を表示
-  const latestPost = posts[0]; // 最新記事（Startセクション用）
 
   return (
-    <div className="relative h-full w-full bg-[#1f1f1f] overflow-x-hidden text-[#cccccc] font-sans overflow-y-auto p-8 md:p-16 select-none">
+    <div className="relative h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans overflow-y-auto overflow-x-hidden p-6 md:p-12 select-none">
+      {/* Background Watermark */}
       <div className="absolute bottom-[-50px] right-[-50px] opacity-[0.04] pointer-events-none rotate-[-15deg]">
         <Coffee size={400} />
       </div>
 
       {/* Main Content */}
-      <div className="max-w-5xl mx-auto z-10 relative">
+      <div className="max-w-4xl mx-auto z-10 relative">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-light mb-2 tracking-tight text-[#cccccc]">
+        <div className="mb-8 px-2">
+          <h1 className="text-3xl md:text-4xl font-light mb-2 tracking-tight text-[#cccccc]">
             Darkmocha Blog
           </h1>
-          <p className="text-xl text-[#858585] font-light flex items-center gap-2">
+          <p className="text-lg md:text-xl text-[#858585] font-light flex items-center gap-2">
             Code, Coffee, and Creative Engineering.
           </p>
         </div>
 
-        {/* Two Columns Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Left Column: Start */}
-          <section>
-            <h2 className="text-xl font-normal mb-4 text-[#cccccc]">Start</h2>
-            <ul className="space-y-2">
-              {/* Action: Read Latest Post */}
-              {latestPost && (
-                <li>
-                  <Link
-                    href={`/blog/${latestPost.slug}`}
-                    className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
-                  >
-                    <FileText className="w-5 h-5 opacity-80 group-hover:opacity-100" />
-                    <div className="flex flex-col leading-tight">
-                      <span>Read Latest Post</span>
-                      <span className="text-xs text-[#858585] no-underline">
-                        {latestPost.frontmatter.title}
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              )}
-
-              {/* Action: Search / All Posts */}
-              <li>
-                <div className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1">
-                  <Search className="w-5 h-5 opacity-80 group-hover:opacity-100" />
-                  <span className="leading-tight">Search Posts...</span>
-                </div>
-              </li>
-
-              {/* Action: About Me */}
-              <li>
+        {/* Latest Posts List */}
+        <section>
+          <ul className="space-y-4">
+            {posts.map((post) => (
+              <li key={post.slug}>
                 <Link
-                  href="/about"
-                  className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col md:flex-row bg-[#252526]/40 hover:bg-[#252526]/80 backdrop-blur-sm border border-white/5 hover:border-white/10 rounded-2xl p-3 transition-all duration-300 hover:shadow-lg gap-4 items-stretch"
                 >
-                  <User className="w-5 h-5 opacity-80 group-hover:opacity-100" />
-                  <span className="leading-tight">About Author</span>
+                  {/* --- 写真エリア (Compact) --- */}
+                  <div className="w-full md:w-52 aspect-video shrink-0 relative rounded-xl overflow-hidden bg-[#1e1e1e]/50 border border-white/5 self-center md:self-auto">
+                    {post.frontmatter.image ?
+                      <Image
+                        src={post.frontmatter.image}
+                        alt={post.frontmatter.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    : <div className="w-full h-full flex items-center justify-center text-[#333]">
+                        <Coffee className="w-8 h-8 opacity-50" />
+                      </div>
+                    }
+                  </div>
+
+                  {/* --- テキスト情報エリア --- */}
+                  <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                    <div>
+                      {/* Title & Date */}
+                      <div className="flex flex-col-reverse md:flex-row md:items-baseline justify-between w-full mb-1.5 gap-1">
+                        <h2 className="text-[#3794ff] group-hover:text-[#4daafc] text-lg md:text-xl font-bold leading-tight transition-colors line-clamp-1">
+                          {post.frontmatter.title}
+                        </h2>
+                        <span className="text-[10px] text-[#858585] shrink-0 font-mono bg-white/5 px-1.5 py-0.5 rounded self-start md:self-auto border border-white/5">
+                          {post.frontmatter.date}
+                        </span>
+                      </div>
+
+                      {/* Description (Max 2 lines) */}
+                      {post.frontmatter.description && (
+                        <p className="text-xs md:text-sm text-[#a0a0a0] line-clamp-2 leading-relaxed font-light opacity-90">
+                          {post.frontmatter.description}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Footer Info (Compact) */}
+                    <div className="flex items-center gap-2 text-[10px] md:text-xs text-[#858585] font-mono opacity-60 group-hover:opacity-100 mt-2 transition-opacity">
+                      <span className="truncate">~/blog/{post.slug}.mdx</span>
+                      {post.frontmatter.tags &&
+                        post.frontmatter.tags.length > 0 && (
+                          <>
+                            <span className="w-1 h-1 rounded-full bg-[#565656]" />
+                            <span className="text-[#ce9178] truncate">
+                              {post.frontmatter.tags.join(", ")}
+                            </span>
+                          </>
+                        )}
+                    </div>
+                  </div>
                 </Link>
               </li>
+            ))}
 
-              {/* Action: Unity Projects */}
-              <li>
-                <div className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1">
-                  <MonitorPlay className="w-5 h-5 opacity-80 group-hover:opacity-100" />
-                  <span className="leading-tight">Play Unity Games</span>
-                </div>
+            {posts.length === 0 && (
+              <li className="text-[#858585] text-center italic py-8 bg-[#252526]/40 rounded-2xl border border-white/5">
+                No posts found.
               </li>
-            </ul>
-
-            {/* Help / Socials Section */}
-            <h2 className="text-xl font-normal mt-10 mb-4 text-[#cccccc]">
-              Connect
-            </h2>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="https://github.com/your-github-id"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-[#3794ff] hover:underline decoration-1 underline-offset-2 cursor-pointer py-1"
-                >
-                  <Github className="w-5 h-5 opacity-80 group-hover:opacity-100" />
-                  <span className="leading-tight">GitHub Repository</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-
-          {/* Right Column: Recent */}
-          <section>
-            <h2 className="text-xl font-normal mb-4 text-[#cccccc]">Recent</h2>
-            <ul className="space-y-1">
-              {recentPosts.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="block group py-1 px-2 -mx-2 rounded hover:bg-[#2a2d2e] transition-colors duration-100"
-                  >
-                    <div className="flex items-baseline justify-between w-full">
-                      <span className="text-[#3794ff] group-hover:text-[#4daafc] text-[15px] truncate mr-2">
-                        {post.frontmatter.title}
-                      </span>
-                      <span className="text-xs text-[#858585] shrink-0 font-mono">
-                        {post.frontmatter.date}
-                      </span>
-                    </div>
-                    <div className="text-xs text-[#858585] truncate font-mono opacity-70 group-hover:opacity-100">
-                      ~/blog/{post.slug}.mdx
-                    </div>
-                  </Link>
-                </li>
-              ))}
-
-              {/* もし記事がなければ */}
-              {recentPosts.length === 0 && (
-                <li className="text-[#858585] text-sm italic py-1">
-                  No recent posts found.
-                </li>
-              )}
-            </ul>
-
-            <div className="mt-6">
-              <Link
-                href="/blog/archive" // アーカイブページを作るならここ
-                className="text-xs text-[#3794ff] hover:underline flex items-center gap-1"
-              >
-                View all posts <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </section>
-        </div>
+            )}
+          </ul>
+        </section>
       </div>
     </div>
   );

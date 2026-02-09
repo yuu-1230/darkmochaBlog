@@ -65,6 +65,12 @@ export const generateFileTree = (
       path: "/about",
       icon: <InfoIcon />,
     },
+    {
+      name: "Projects.json",
+      type: "file",
+      path: "/projects",
+      icon: <JsonIcon />,
+    },
 
     // 2. Articles (ここに動的データを注入！)
     {
