@@ -2,7 +2,7 @@ import React from "react";
 import { FileType } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// --- 共通アイコンコンポーネント ---
+// --- 1. アイコン定義 (そのまま) ---
 export const TSXIcon = ({ color }: { color: "blue" | "yellow" }) => (
   <span
     className={cn(
@@ -34,7 +34,7 @@ export const JsonIcon = () => (
   </span>
 );
 
-// ---  型定義 ---
+// --- 2. 型定義 (そのまま) ---
 export type FileNode = {
   name: string;
   type: "file" | "folder";
@@ -44,76 +44,86 @@ export type FileNode = {
   isOpen?: boolean;
 };
 
-// --- ファイルツリーの定義  ---
-export const fileTree: FileNode[] = [
-  // About me
-  {
-    name: "About_me.md",
+// --- 3. 自動生成関数  ---
+// 記事データ(posts)を受け取って、動的にツリーを結合します
+export const generateFileTree = (
+  posts: { slug: string; frontmatter: { title: string } }[],
+): FileNode[] => {
+  // 記事データをFileNode形式に変換
+  const articleNodes: FileNode[] = posts.map((post) => ({
+    name: `${post.slug}.mdx`, // ファイル名っぽく表示
     type: "file",
-    path: "/about",
-    icon: <InfoIcon />,
-  },
+    path: `/blog/${post.slug}`,
+    icon: <MDIcon />,
+  }));
 
-  // Articles
-  {
-    name: "Articles",
-    type: "folder",
-    isOpen: true,
-    children: [
-      {
-        name: "latest_posts.tsx",
-        type: "file",
-        path: "/",
-        icon: <TSXIcon color="yellow" />,
-      },
-      {
-        name: "hello-world.mdx",
-        type: "file",
-        path: "/blog/hello",
-        icon: <MDIcon />,
-      },
-      // 記事が増えたらここに追加
-    ],
-  },
+  return [
+    // 1. About me
+    {
+      name: "About_me.md",
+      type: "file",
+      path: "/about",
+      icon: <InfoIcon />,
+    },
 
-  // Unity
-  {
-    name: "Unity_Projects",
-    type: "folder",
-    isOpen: false,
-    children: [
-      {
-        name: "TankGame_v0.1.exe",
-        type: "file",
-        path: "/projects/tank",
-        icon: <CSharpIcon />,
-      },
-      {
-        name: "WebcamBot.cs",
-        type: "file",
-        path: "/projects/bot",
-        icon: <CSharpIcon />,
-      },
-    ],
-  },
+    // 2. Articles (ここに動的データを注入！)
+    {
+      name: "Articles",
+      type: "folder",
+      isOpen: true,
+      children: [
+        {
+          name: "latest_posts.tsx",
+          type: "file",
+          path: "/",
+          icon: <TSXIcon color="yellow" />,
+        },
+        ...articleNodes,
+      ],
+    },
 
-  // Config
-  { name: "package.json", type: "file", path: "/package", icon: <JsonIcon /> },
-];
+    // 3. Unity
+    {
+      name: "Unity_Projects",
+      type: "folder",
+      isOpen: false,
+      children: [
+        {
+          name: "TankGame_v0.1.exe",
+          type: "file",
+          path: "/projects/tank",
+          icon: <CSharpIcon />,
+        },
+        {
+          name: "WebcamBot.cs",
+          type: "file",
+          path: "/projects/bot",
+          icon: <CSharpIcon />,
+        },
+      ],
+    },
 
-// --- 4. パスからファイル情報を探すヘルパー関数 ---
+    // 4. Config
+    {
+      name: "package.json",
+      type: "file",
+      path: "/package",
+      icon: <JsonIcon />,
+    },
+  ];
+};
+
+// --- 検索関数 ---
 export const findFileByPath = (
+  tree: FileNode[],
   path: string,
-  nodes: FileNode[] = fileTree,
 ): FileNode | null => {
-  for (const node of nodes) {
-    // ファイルかつパスが一致する場合
+  for (const node of tree) {
     if (node.type === "file" && node.path === path) {
       return node;
     }
-    // フォルダなら再帰的に探索
     if (node.type === "folder" && node.children) {
-      const found = findFileByPath(path, node.children);
+      const found = findFileByPath(node.children, path);
       if (found) return found;
     }
   }
