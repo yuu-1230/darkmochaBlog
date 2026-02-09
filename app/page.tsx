@@ -16,7 +16,7 @@ const Home = () => {
       <h1 className="text-3xl font-bold mb-8">Latest Posts</h1>
       <div className="grid gap-6  ">
         {posts.map((post) => (
-          <Link key={post.slug} href={`/${post.slug}`}>
+          <Link key={post.slug} href={`/blog/${post.slug}`}>
             <Card className="h-full hover:shadow-lg transition-shadow ">
               <CardHeader>
                 <CardTitle>{post.frontmatter.title}</CardTitle>
