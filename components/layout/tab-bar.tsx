@@ -4,45 +4,37 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { findFileByPath, TSXIcon } from "@/lib/file-tree";
 
 export const TabBar = () => {
   const pathname = usePathname();
 
-  // パスとファイル名のマッピング
-  const getFileInfo = (path: string) => {
-    if (path === "/")
-      return { name: "page.tsx", icon: "TSX", color: "text-yellow-400" };
-    if (path.startsWith("/blog/"))
-      return { name: "post.mdx", icon: "MD", color: "text-blue-300" };
-    if (path === "/about")
-      return { name: "readme.md", icon: "i", color: "text-blue-400" };
-    return { name: "layout.tsx", icon: "TSX", color: "text-blue-400" };
+  // 現在のパスに基づいてファイル情報を取得
+  const activeFile = findFileByPath(pathname);
+
+  // 見つからなかった場合のデフォルト表示 (例: 動的ルートなど)
+  const displayFile = activeFile || {
+    name: "preview.tsx", // 該当なしの場合の名前
+    icon: <TSXIcon color="blue" />,
   };
 
-  const currentFile = getFileInfo(pathname);
-
   return (
-    <header className="h-7 bg-[#252526] flex items-center overflow-x-auto select-none scrollbar-hide shrink-0">
-      {/* Active Tab (現在のページ) */}
-      <div className="h-full bg-[#1E1E1E] px-3 flex items-center min-w-fit border-t border-t-transparent border-r border-r-[#252526] pr-2 relative group cursor-pointer border-t-[1px] border-t-transparent data-[state=active]:border-t-blue-400">
-        <span
-          className={cn(
-            "mr-2 text-xs font-bold w-4 text-center",
-            currentFile.color,
-          )}
-        >
-          {currentFile.icon}
+    <header className="h-8 bg-[#252526] flex items-center overflow-x-auto select-none scrollbar-hide shrink-0">
+      {/* Active Tab */}
+      <div className="h-full bg-[#1E1E1E] px-3 flex items-center min-w-fit border-t border-t-transparent border-r border-r-[#252526] pr-2 relative group cursor-pointer border-t-[1px] data-[state=active]:border-t-blue-400">
+        <span className="mr-2 shrink-0">{displayFile.icon}</span>
+        <span className="text-sm text-[#ffffff] mr-2 italic whitespace-nowrap">
+          {displayFile.name}
         </span>
-        <span className="text-sm text-[#ffffff] mr-2 italic">
-          {currentFile.name}
-        </span>
-        <X className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 hover:bg-gray-700 rounded p-0.5" />
+        <div className="opacity-0 group-hover:opacity-100 hover:bg-[#4E4E4E] rounded p-0.5 transition-opacity">
+          <X className="w-3 h-3 text-gray-200" />
+        </div>
       </div>
 
-      {/* Inactive Tab  */}
+      {/* Inactive Tab (Decoration) */}
       <div className="h-full bg-transparent px-3 flex items-center min-w-fit border-r border-r-[#252526] pr-2 text-[#969696] hover:bg-[#2A2D2E] cursor-pointer opacity-70">
-        <span className="text-blue-400 mr-2 text-xs font-bold w-4 text-center">
-          TSX
+        <span className="mr-2 text-[10px] font-bold w-4 text-center">
+          <TSXIcon color="blue" />
         </span>
         <span className="text-sm italic">layout.tsx</span>
       </div>
