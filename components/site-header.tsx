@@ -3,7 +3,7 @@ import { SiGithub, SiX } from "react-icons/si";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-
+import { Typewriter } from "./typewriter";
 export const SiteHeader = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -14,8 +14,7 @@ export const SiteHeader = () => {
             className="group mr-6 flex items-center space-x-2 font-bold text-lg tracking-tight"
           >
             <span className="font-mono text-xl font-bold text-primary flex items-center">
-              Darkmocha
-              <span className="ml-0.5 group-hover:animate-blink">_</span>
+              <Typewriter />
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">

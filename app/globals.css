@@ -50,38 +50,29 @@
 :root {
   --radius: 0.625rem;
 
-  /* ベース：温かみのあるクリーム色 */
   --background: oklch(0.985 0.005 60);
-  /* 文字：濃いコーヒーブラウン */
   --foreground: oklch(0.25 0.02 50);
-
-  /* カード：少し濃いベージュ */
   --card: oklch(0.97 0.01 60);
   --card-foreground: oklch(0.25 0.02 50);
   --popover: oklch(0.97 0.01 60);
   --popover-foreground: oklch(0.25 0.02 50);
 
-  /* プライマリー：深煎りエスプレッソ（ボタンなどの色） */
   --primary: oklch(0.35 0.04 50);
   --primary-foreground: oklch(0.98 0.005 60);
 
-  /* セカンダリー：ミルクティー色 */
   --secondary: oklch(0.94 0.02 60);
   --secondary-foreground: oklch(0.35 0.04 50);
 
-  /* その他：全体的に茶色寄りのグレー */
   --muted: oklch(0.94 0.02 60);
   --muted-foreground: oklch(0.5 0.03 50);
   --accent: oklch(0.94 0.02 60);
   --accent-foreground: oklch(0.35 0.04 50);
   --destructive: oklch(0.577 0.245 27.325);
 
-  /* 枠線：薄いベージュ */
   --border: oklch(0.9 0.02 60);
   --input: oklch(0.9 0.02 60);
   --ring: oklch(0.35 0.04 50);
 
-  /* チャート類（必要なら） */
   --chart-1: oklch(0.35 0.04 50); /* 茶 */
   --chart-2: oklch(0.5 0.1 40); /* 濃いオレンジ */
   --chart-3: oklch(0.7 0.1 50); /* 黄土色 */
@@ -99,33 +90,26 @@
 }
 
 .dark {
-  /* ベース：かなり深いダークブラウン（ほぼ黒に近い茶色） */
   --background: oklch(0.15 0.02 50);
-  /* 文字：温かいラテフォーム色 */
   --foreground: oklch(0.95 0.01 60);
 
-  /* カード：背景より少し明るいダークブラウン */
   --card: oklch(0.2 0.03 50);
   --card-foreground: oklch(0.95 0.01 60);
   --popover: oklch(0.2 0.03 50);
   --popover-foreground: oklch(0.95 0.01 60);
 
-  /* プライマリー：カフェモカ・ゴールド（アクセント） */
   --primary: oklch(0.7 0.1 50);
   --primary-foreground: oklch(0.15 0.02 50);
 
-  /* セカンダリー：濃いココア色 */
   --secondary: oklch(0.25 0.04 50);
   --secondary-foreground: oklch(0.95 0.01 60);
 
-  /* その他 */
   --muted: oklch(0.25 0.04 50);
   --muted-foreground: oklch(0.7 0.04 60);
   --accent: oklch(0.25 0.04 50);
   --accent-foreground: oklch(0.95 0.01 60);
   --destructive: oklch(0.4 0.15 20);
 
-  /* 枠線：焦げ茶 */
   --border: oklch(0.3 0.03 50);
   --input: oklch(0.3 0.03 50);
   --ring: oklch(0.7 0.1 50);
