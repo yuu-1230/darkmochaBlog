@@ -11,9 +11,12 @@ export const SiteHeader = () => {
         <div className="mr-4 flex">
           <Link
             href="/"
-            className="mr-6 flex items-center space-x-2 font-bold text-lg tracking-tight"
+            className="group mr-6 flex items-center space-x-2 font-bold text-lg tracking-tight"
           >
-            <span>Darkmocha</span>
+            <span className="font-mono text-xl font-bold text-primary flex items-center">
+              Darkmocha
+              <span className="ml-0.5 group-hover:animate-blink">_</span>
+            </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
@@ -42,6 +45,7 @@ export const SiteHeader = () => {
               href="https://github.com/yuu-1230"
               target="_blank"
               rel="noreferrer"
+              className="text-muted-foreground transition-colors hover:text-foreground"
             >
               <div
                 className={cn(
@@ -60,6 +64,7 @@ export const SiteHeader = () => {
               href="https://x.com/DarkmochaJP"
               target="_blank"
               rel="noreferrer"
+              className="text-muted-foreground transition-colors hover:text-foreground"
             >
               <div
                 className={cn(
@@ -83,7 +88,7 @@ export const SiteHeader = () => {
                 "h-8 w-8 px-0",
               )}
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-4 w-4 text-muted-foreground transition-colors hover:text-foreground" />
               <span className="sr-only">Search</span>
             </div>
           </nav>
