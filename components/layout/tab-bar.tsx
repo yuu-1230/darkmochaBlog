@@ -22,7 +22,7 @@ export const TabBar = () => {
   const currentFile = getFileInfo(pathname);
 
   return (
-    <header className="h-9 bg-[#252526] flex items-center overflow-x-auto select-none scrollbar-hide shrink-0">
+    <header className="h-7 bg-[#252526] flex items-center overflow-x-auto select-none scrollbar-hide shrink-0">
       {/* Active Tab (現在のページ) */}
       <div className="h-full bg-[#1E1E1E] px-3 flex items-center min-w-fit border-t border-t-transparent border-r border-r-[#252526] pr-2 relative group cursor-pointer border-t-[1px] border-t-transparent data-[state=active]:border-t-blue-400">
         <span
