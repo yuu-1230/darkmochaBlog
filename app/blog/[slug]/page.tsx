@@ -6,8 +6,29 @@ import Image from "next/image";
 import { ArrowLeft, Calendar, Tag, Clock } from "lucide-react";
 import React, { ComponentPropsWithoutRef } from "react";
 
-// --- Custom MDX Components (VS Code High Contrast Style) ---
+// --- 1. 文字色変更用コンポーネント <C c="red">... ---
+const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
+  const colorMap: Record<string, string> = {
+    red: "text-[#f4b1a2]",
+    blue: "text-[#acdaff]",
+    green: "text-[#b9ffdc]",
+    orange: "text-[#ce9178]",
+    yellow: "text-[#dcdcaa]",
+    purple: "text-[#c586c0]",
+    comment: "text-[#6a9955]",
+    gray: "text-[#808080]",
+  };
+
+  const className = colorMap[c];
+
+  return className ?
+      <span className={className}>{children}</span>
+    : <span style={{ color: c }}>{children}</span>;
+};
+
+// --- Custom MDX Components ---
 const components = {
+  C,
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
       className="text-3xl font-bold text-white mt-12 mb-6 border-b border-[#333] pb-2"
@@ -104,7 +125,7 @@ export default async function BlogPost({
 
   return (
     <div className="min-h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans selection:bg-[#264f78] selection:text-white pb-20">
-      {/* 記事ヘッダー画像 (あれば) */}
+      {/* 記事ヘッダー画像 */}
       {frontmatter.image && (
         <div className="w-full h-64 md:h-80 relative bg-[#252526]">
           <Image
@@ -140,10 +161,12 @@ export default async function BlogPost({
                 {frontmatter.tags.join(", ")}
               </span>
             )}
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
-              Reading time: 5 min
-            </span>
+            {frontmatter.readTime && (
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5" />
+                Reading time: {frontmatter.readTime}
+              </span>
+            )}
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
