@@ -90,7 +90,7 @@ export default function AboutPage() {
                 <MapPin className="w-4 h-4" /> Nagano, Japan
               </span>
               <span className="flex items-center gap-1.5 bg-[#1f1f1f]/50 px-2 py-0.5 rounded backdrop-blur-sm border border-white/5">
-                <LinkIcon className="w-4 h-4" /> Public Univ. of Suwa
+                <LinkIcon className="w-4 h-4" /> Suwa Tokyo Univ. of Science
               </span>
             </div>
             <p className="text-[#a0a0a0] leading-relaxed max-w-xl mt-2 text-base md:text-lg drop-shadow-sm">
