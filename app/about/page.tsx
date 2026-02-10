@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import {
   Github,
   Twitter,
@@ -11,8 +10,6 @@ import {
   Gamepad2,
 } from "lucide-react";
 import { FaBluesky } from "react-icons/fa6";
-
-// --- Helper Components (Defined at top to avoid export issues) ---
 
 const SkillBadge = ({ name, color }: { name: string; color: string }) => (
   <span

@@ -7,10 +7,10 @@ export default function Home() {
   const posts = getAllPosts();
 
   return (
-    <div className="relative h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans overflow-y-auto overflow-x-hidden p-6 md:p-12 select-none">
+    <div className="relative h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans overflow-x-hidden p-4 md:p-12 select-none">
       {/* Background Watermark */}
-      <div className="absolute bottom-[-50px] right-[-50px] opacity-[0.04] pointer-events-none rotate-[-15deg]">
-        <Coffee size={400} />
+      <div className="fixed bottom-[-50px] right-[-50px] opacity-[0.04] pointer-events-none rotate-[-15deg] z-0">
+        <Coffee size={300} className="md:w-[400px] md:h-[400px]" />
       </div>
 
       {/* Main Content */}
@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className="text-3xl md:text-4xl font-light mb-2 tracking-tight text-[#cccccc]">
             Darkmocha Blog
           </h1>
-          <p className="text-lg md:text-xl text-[#858585] font-light flex items-center gap-2">
+          <p className="text-sm md:text-xl text-[#858585] font-light flex items-center gap-2">
             Code, Coffee, and Creative Engineering.
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function Home() {
         <section>
           <ul className="space-y-4">
             {posts.map((post) => (
-              <li key={post.slug}>
+              <li key={post.slug} className="block">
                 <Link
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col md:flex-row bg-[#252526]/40 hover:bg-[#252526]/80 backdrop-blur-sm border border-white/5 hover:border-white/10 rounded-2xl p-3 transition-all duration-300 hover:shadow-lg gap-4 items-stretch"
@@ -70,7 +70,7 @@ export default function Home() {
                       )}
                     </div>
 
-                    {/* Footer Info (Compact) */}
+                    {/* Footer Info (Path & Tags) */}
                     <div className="flex items-center gap-2 text-[10px] md:text-xs text-[#858585] font-mono opacity-60 group-hover:opacity-100 mt-2 transition-opacity">
                       <span className="truncate">~/blog/{post.slug}.mdx</span>
                       {post.frontmatter.tags &&
