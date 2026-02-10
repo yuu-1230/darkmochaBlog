@@ -93,20 +93,7 @@ export const generateFileTree = (
       name: "Unity_Projects",
       type: "folder",
       isOpen: false,
-      children: [
-        {
-          name: "TankGame_v0.1.exe",
-          type: "file",
-          path: "/projects/tank",
-          icon: <CSharpIcon />,
-        },
-        {
-          name: "WebcamBot.cs",
-          type: "file",
-          path: "/projects/bot",
-          icon: <CSharpIcon />,
-        },
-      ],
+      children: [],
     },
   ];
 };
