@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+
 import { StatusBar } from "@/components/layout/status-bar";
 import { MainLayout } from "@/components/layout/main-layout";
 import { getAllPosts } from "@/lib/mdx";
@@ -15,6 +16,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Darkmocha Blog",
   description: "VS Code Styled Engineer Blog",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +36,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
       >
         <MainLayout tree={fileTree}>{children}</MainLayout>
+
         <StatusBar />
       </body>
     </html>
