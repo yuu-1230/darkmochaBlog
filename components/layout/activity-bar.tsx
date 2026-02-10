@@ -1,5 +1,3 @@
-"use client"; // 必要ならつける（親がclientならなくても動きますが明示）
-
 import React from "react";
 import {
   Files,

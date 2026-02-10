@@ -29,20 +29,15 @@ export default function ProjectsPage() {
               // カードの角丸に合わせて調整
               className="w-full md:w-80 h-64 md:h-auto shrink-0 bg-[#1e1e1e] relative flex items-center justify-center border-b md:border-b-0 md:border-r border-white/5 p-4 rounded-t-xl md:rounded-l-xl md:rounded-tr-none group-hover:z-20 transition-all"
             >
-              {
-                project.image ?
-                  // 画像がある場合
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    // 👇 変更点: scale-110 -> scale-105, shadow-lg -> shadow-md で控えめに
-                    className="object-contain transition-transform duration-500 group-hover:scale-105 rounded-t-xl md:rounded-l-xl md:rounded-tr-none group-hover:shadow-md"
-                  />
-                  // 画像がない場合
-                  // 👇 変更点: ここも scale-110 -> scale-105
-                : <project.icon className="w-16 h-16 text-[#cccccc] opacity-50 group-hover:scale-105 transition-transform duration-500" />
-
+              {project.image ?
+                // 画像がある場合
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-contain transition-transform duration-500 group-hover:scale-105 rounded-t-xl md:rounded-l-xl md:rounded-tr-none group-hover:shadow-md"
+                />
+              : <project.icon className="w-16 h-16 text-[#cccccc] opacity-50 group-hover:scale-105 transition-transform duration-500" />
               }
             </div>
 

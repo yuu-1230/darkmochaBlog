@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-import { TitleBar } from "@/components/layout/title-bar";
 import { StatusBar } from "@/components/layout/status-bar";
 import { MainLayout } from "@/components/layout/main-layout";
-// 👇 記事取得ロジックとツリー生成関数をインポート
 import { getAllPosts } from "@/lib/mdx";
 import { generateFileTree } from "@/lib/file-tree";
 
@@ -25,10 +22,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // 1. サーバー側で記事全件取得 (ファイル操作OK)
   const posts = getAllPosts();
-
-  // 2. ツリー構造を生成
   const fileTree = generateFileTree(posts);
 
   return (
@@ -36,11 +30,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
       >
-        <TitleBar />
-
-        {/* 3. MainLayout にツリーを渡す */}
         <MainLayout tree={fileTree}>{children}</MainLayout>
-
         <StatusBar />
       </body>
     </html>

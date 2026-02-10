@@ -9,9 +9,9 @@ import { FileNode } from "@/lib/file-tree";
 
 export const Sidebar = ({ tree }: { tree: FileNode[] }) => {
   return (
-    <aside className="w-64 h-full bg-[#252526] border-r border-[#1E1E1E] hidden md:flex flex-col shrink-0 text-[#CCCCCC]">
+    <aside className="w-full h-full bg-[#252526] flex flex-col shrink-0 text-[#CCCCCC]">
       {/* Explorer Header */}
-      <div className="h-9 px-4 flex items-center text-[11px] font-bold text-[#BBBBBB] tracking-wide select-none">
+      <div className="h-9 px-4 flex items-center text-[11px] font-bold text-[#BBBBBB] tracking-wide select-none shrink-0">
         EXPLORER
       </div>
 
@@ -25,7 +25,7 @@ export const Sidebar = ({ tree }: { tree: FileNode[] }) => {
         </div>
 
         {/* Recursive Tree Rendering */}
-        <div className="flex flex-col">
+        <div className="flex flex-col pb-10">
           {tree.map((node, index) => (
             <TreeNode key={index} node={node} level={1} />
           ))}
@@ -35,7 +35,7 @@ export const Sidebar = ({ tree }: { tree: FileNode[] }) => {
   );
 };
 
-// --- TreeNode コンポーネント  ---
+// --- TreeNode コンポーネント (変更なし) ---
 const TreeNode = ({ node, level }: { node: FileNode; level: number }) => {
   const [isOpen, setIsOpen] = useState(node.isOpen ?? false);
   const pathname = usePathname();
@@ -47,7 +47,6 @@ const TreeNode = ({ node, level }: { node: FileNode; level: number }) => {
   };
 
   const isFile = node.type === "file";
-  // 完全一致判定
   const isActive = node.path === pathname;
 
   return (
@@ -62,7 +61,6 @@ const TreeNode = ({ node, level }: { node: FileNode; level: number }) => {
         style={{ paddingLeft: `${level * 12}px` }}
         onClick={handleToggle}
       >
-        {/* 開閉アイコン */}
         <span className="mr-1.5 opacity-80 shrink-0">
           {node.type === "folder" ?
             isOpen ?
@@ -71,18 +69,15 @@ const TreeNode = ({ node, level }: { node: FileNode; level: number }) => {
           : <span className="w-4 h-4 inline-block" />}
         </span>
 
-        {/* ファイルアイコン */}
         {node.icon && <span className="mr-1.5 shrink-0">{node.icon}</span>}
 
-        {/* ファイル名 */}
         {isFile && node.path ?
-          <Link href={node.path} className="flex-1 truncate">
+          <Link href={node.path} className="flex-1 truncate block w-full">
             {node.name}
           </Link>
         : <span className="flex-1 truncate">{node.name}</span>}
       </div>
 
-      {/* 子階層 */}
       {node.type === "folder" && isOpen && node.children && (
         <div>
           {node.children.map((child, i) => (
