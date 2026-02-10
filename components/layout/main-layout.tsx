@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { ActivityBar } from "@/components/layout/activity-bar";
 import { TitleBar } from "@/components/layout/title-bar";
 import { TabBar } from "@/components/layout/tab-bar";
+import { StatusBar } from "@/components/layout/status-bar";
 import { X } from "lucide-react";
 import { FileNode } from "@/lib/file-tree";
 import { cn } from "@/lib/utils";
@@ -45,7 +46,7 @@ export const MainLayout = ({
   }, [pathname]);
 
   return (
-    // ■ 画面全体レイアウト: 縦方向 (TitleBar + 下部のワークスペース)
+    // ■ 画面全体レイアウト: 縦方向
     <div className="flex h-[100dvh] w-screen flex-col bg-[#1e1e1e] text-[#cccccc] overflow-hidden">
       {/* 1. Title Bar */}
       <div className="shrink-0 z-50 w-full relative">
@@ -55,9 +56,9 @@ export const MainLayout = ({
         />
       </div>
 
-      {/* 2. Workspace Area (横並び: ActivityBar + Sidebar + Main) */}
+      {/* 2. Workspace Area */}
       <div className="flex flex-1 overflow-hidden relative md:flex-row">
-        {/* Activity Bar (PCのみ表示) */}
+        {/* Activity Bar (PCのみ) */}
         <div className="hidden md:flex flex-col shrink-0 z-20 h-full">
           <ActivityBar
             isSidebarOpen={isSidebarOpen}
@@ -65,17 +66,15 @@ export const MainLayout = ({
           />
         </div>
 
-        {/* Sidebar (PC & Mobile) */}
+        {/* Sidebar */}
         <div
           className={cn(
             "fixed inset-y-0 left-0 z-40 w-64 bg-[#252526] border-r border-[#1E1E1E] transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 h-full",
-            // サイドバーが閉じている時の挙動
             !isSidebarOpen && "-translate-x-full md:hidden",
-            // スマホ表示時の位置調整（必要に応じて top-10 等を追加）
             isMobile && "h-full",
           )}
         >
-          {/* スマホ用: サイドバー内の閉じるボタン */}
+          {/* スマホ用: 閉じるボタン */}
           <div className="md:hidden flex items-center justify-between p-3 border-b border-[#333] text-xs font-bold text-[#CCCCCC]">
             <span>EXPLORER</span>
             <button onClick={() => setIsSidebarOpen(false)} className="p-1">
@@ -86,7 +85,7 @@ export const MainLayout = ({
           <Sidebar tree={tree} />
         </div>
 
-        {/* Mobile Overlay (サイドバーが開いている時の背景) */}
+        {/* Mobile Overlay */}
         {isMobile && isSidebarOpen && (
           <div
             className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden"
@@ -101,9 +100,12 @@ export const MainLayout = ({
             <TabBar tree={tree} />
           </div>
 
-          {/* Page Content Scroll Area */}
-          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-[#424242] scrollbar-track-transparent">
-            {children}
+          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-[#424242] scrollbar-track-transparent flex flex-col">
+            {/* コンテンツ本体 */}
+            <div className="flex-1">{children}</div>
+
+            {/* 最下部のステータスバー */}
+            <StatusBar />
           </div>
         </main>
       </div>
