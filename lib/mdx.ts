@@ -8,6 +8,7 @@ type Frontmatter = {
   tags?: string[];
   description?: string;
   image?: string;
+  readTime?: string;
 };
 export type PostData = {
   slug: string;

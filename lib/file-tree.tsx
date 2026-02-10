@@ -108,14 +108,6 @@ export const generateFileTree = (
         },
       ],
     },
-
-    // 4. Config
-    {
-      name: "package.json",
-      type: "file",
-      path: "/package",
-      icon: <JsonIcon />,
-    },
   ];
 };
 
