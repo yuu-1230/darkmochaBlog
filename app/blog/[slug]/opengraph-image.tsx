@@ -14,9 +14,9 @@ export default async function Image({
   const post = getPost(slug);
   const { title, description, image } = post.frontmatter;
 
-  // 👇 ご自身の本番URL（wwwの有無）と完全に一致させてください！
+  const isDev = process.env.NODE_ENV === "development";
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev";
+    isDev ? "http://localhost:3000" : "https://www.darkmocha.dev/";
 
   // 記事の画像があればそれを使用、なければデフォルト画像
   const bgImageUrl = image ? `${baseUrl}${image}` : `${baseUrl}/images/OG.jpg`;
