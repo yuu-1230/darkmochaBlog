@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   try {
     const post = getPost(slug);
-    const { title, description, image } = post.frontmatter;
+    const { title, description } = post.frontmatter;
 
     return {
       title: `${title} | Darkmocha`, // タブや検索結果に表示されるタイトル
@@ -26,16 +26,15 @@ export async function generateMetadata({
         title: title,
         description: description,
         type: "article",
-        images: image ? [{ url: image }] : [], // 画像があればOGP画像としてセット
+        // images は opengraph-image.tsx が自動で入れてくれるので書かなくてOK！
       },
       twitter: {
-        card: "summary_large_image", // X(Twitter)で大きく画像を表示する設定
+        card: "summary_large_image",
         title: title,
         description: description,
-        images: image ? [image] : [],
       },
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Not Found",
     };

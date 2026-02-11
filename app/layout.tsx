@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev",
   ),
   title: "Darkmocha Blog",
-  description: "VS Code Styled Engineer Blog",
+  description: "Engineer and Everyday life Blog by Yuto Nagata",
   icons: {
     icon: "/images/icon.png",
     apple: "/images/icon.png",
@@ -67,6 +67,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <MainLayout tree={fileTree}>{children}</MainLayout>
         <SpeedInsights />
         <Analytics />
