@@ -14,7 +14,9 @@ export default async function Image({
   const post = getPost(slug);
   const { title, description, image } = post.frontmatter;
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev";
+  // 👇 ご自身の本番URL（wwwの有無）と完全に一致させてください！
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev";
 
   // 記事の画像があればそれを使用、なければデフォルト画像
   const bgImageUrl = image ? `${baseUrl}${image}` : `${baseUrl}/images/OG.jpg`;
@@ -25,13 +27,11 @@ export default async function Image({
         width: 1200,
         height: 630,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        padding: "80px",
-        position: "relative",
+        position: "relative", // 大枠を相対配置に
         backgroundColor: "#1e1e1e",
       }}
     >
+      {/* 第1層: 背景画像（パディングなしの絶対配置） */}
       <img
         src={bgImageUrl}
         alt="Background"
@@ -44,6 +44,8 @@ export default async function Image({
           objectFit: "cover",
         }}
       />
+
+      {/* 第2層: 黒グラデーション（パディングなしの絶対配置） */}
       <div
         style={{
           position: "absolute",
@@ -52,13 +54,22 @@ export default async function Image({
           width: 1200,
           height: 630,
           backgroundImage:
-            "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%)",
         }}
       />
+
+      {/* 第3層: テキストコンテンツ（ここにだけパディングを入れる） */}
       <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 1200,
+          height: 630,
           display: "flex",
           flexDirection: "column",
+          justifyContent: "flex-end",
+          padding: "80px", // ここで内側の余白を確保
         }}
       >
         <h1

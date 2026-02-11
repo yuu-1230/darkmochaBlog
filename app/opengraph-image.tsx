@@ -5,6 +5,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
+  // 👇 もしサイトのURLが www ありの場合は "https://www.darkmocha.dev" にしてください！
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev";
 
   // サイト全体用の背景画像（プロフ画像や風景など）
@@ -19,14 +20,11 @@ export default async function Image() {
         width: 1200,
         height: 630,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        padding: "80px",
-        position: "relative",
-        backgroundColor: "#1e1e1e", // 万が一画像がない時の背景色
+        position: "relative", // 大枠は相対配置のみ（パディングは入れない）
+        backgroundColor: "#1e1e1e",
       }}
     >
-      {/* 背景画像 */}
+      {/* 第1層: 背景画像 */}
       <img
         src={bgImageUrl}
         alt="Background"
@@ -40,7 +38,7 @@ export default async function Image() {
         }}
       />
 
-      {/* 黒グラデーション（z-indexを使わず、書いた順番で上に重ねる） */}
+      {/* 第2層: 黒グラデーション */}
       <div
         style={{
           position: "absolute",
@@ -49,15 +47,22 @@ export default async function Image() {
           width: 1200,
           height: 630,
           backgroundImage:
-            "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%)",
         }}
       />
 
-      {/* テキスト部分 */}
+      {/* 第3層: テキスト部分（ここにだけ絶対配置とパディングを設定して余白を作る） */}
       <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 1200,
+          height: 630,
           display: "flex",
           flexDirection: "column",
+          justifyContent: "flex-end", // 下寄せ
+          padding: "80px", // テキスト用の余白
         }}
       >
         <h1
@@ -67,6 +72,7 @@ export default async function Image() {
             color: "white",
             margin: 0,
             marginBottom: 20,
+            lineHeight: 1.2,
           }}
         >
           {title}
