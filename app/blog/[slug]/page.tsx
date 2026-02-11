@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Calendar, Tag, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Tag, Clock } from "lucide-react";
 import React, { ComponentPropsWithoutRef } from "react";
 
 // 動的にメタデータを生成する関数
@@ -41,6 +41,7 @@ export async function generateMetadata({
     };
   }
 }
+
 // --- 1. 文字色変更用コンポーネント <C c="red">... ---
 const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
   const colorMap: Record<string, string> = {
@@ -149,14 +150,21 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post;
-  try {
-    post = getPost(slug);
-  } catch {
+
+  const allPosts = getAllPosts();
+  const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+
+  if (currentIndex === -1) {
     notFound();
   }
 
+  const post = allPosts[currentIndex];
   const { frontmatter, content } = post;
+
+  const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const prevPost =
+    currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -172,8 +180,14 @@ export default async function BlogPost({
     },
     keywords: frontmatter.tags,
   };
+
   return (
     <div className="min-h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans selection:bg-[#264f78] selection:text-white pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* 記事ヘッダー画像 */}
       {frontmatter.image && (
         <div className="w-full h-64 md:h-80 relative bg-[#252526]">
@@ -234,8 +248,45 @@ export default async function BlogPost({
           <MDXRemote source={content} components={components} />
         </div>
 
+        <nav
+          aria-label="Post navigation"
+          className="mt-20 pt-10 border-t border-[#333] flex flex-col md:flex-row justify-between gap-4"
+        >
+          {/* 前の記事 (古い記事) */}
+          {prevPost ?
+            <Link
+              href={`/blog/${prevPost.slug}`}
+              className="group flex-1 flex flex-col p-4 border border-[#333] hover:border-[#569cd6] rounded-lg bg-[#252526] hover:bg-[#2a2d2e] transition-all outline-none"
+            >
+              <span className="flex items-center gap-2 text-xs text-[#858585] mb-2 font-mono">
+                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                Previous Post
+              </span>
+              <span className="text-sm text-[#3794ff] group-hover:text-[#569cd6] font-medium line-clamp-2 transition-colors">
+                {prevPost.frontmatter.title}
+              </span>
+            </Link>
+          : <div className="flex-1" />}
+
+          {/* 次の記事 (新しい記事) */}
+          {nextPost ?
+            <Link
+              href={`/blog/${nextPost.slug}`}
+              className="group flex-1 flex flex-col items-end text-right p-4 border border-[#333] hover:border-[#569cd6] rounded-lg bg-[#252526] hover:bg-[#2a2d2e] transition-all outline-none"
+            >
+              <span className="flex items-center gap-2 text-xs text-[#858585] mb-2 font-mono">
+                Next Post
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+              <span className="text-sm text-[#3794ff] group-hover:text-[#569cd6] font-medium line-clamp-2 transition-colors">
+                {nextPost.frontmatter.title}
+              </span>
+            </Link>
+          : <div className="flex-1" />}
+        </nav>
+
         {/* フッター */}
-        <div className="mt-20 pt-10 border-t border-[#333] flex justify-between items-center">
+        <div className="mt-8 pt-6 border-t border-[#333] flex justify-between items-center">
           <span className="text-sm text-[#565656]">Thanks for reading.</span>
           <div className="flex gap-4">{/* Share Buttons if needed */}</div>
         </div>
