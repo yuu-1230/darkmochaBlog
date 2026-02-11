@@ -28,7 +28,35 @@ export default function RootLayout({
 }) {
   const posts = getAllPosts();
   const fileTree = generateFileTree(posts);
-
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Yuto Nagata",
+    url: "https://darkmocha.dev",
+    image: "https://darkmocha.dev/images/About/profile.jpg",
+    jobTitle: "Student Engineer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Suwa Univ. of science",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Nagano",
+      addressCountry: "JP",
+    },
+    sameAs: [
+      "https://github.com/yuu-1230",
+      "https://twitter.com/DarkmochaJP",
+      "https://bsky.app/profile/darkmochajapan.bsky.social",
+    ],
+    knowsAbout: [
+      "Next.js",
+      "React",
+      "Unity",
+      "Web Development",
+      "Game Development",
+    ],
+  };
   return (
     <html lang="ja" suppressHydrationWarning>
       <body

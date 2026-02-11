@@ -157,7 +157,21 @@ export default async function BlogPost({
   }
 
   const { frontmatter, content } = post;
-
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    image:
+      frontmatter.image ? [`https://darkmocha.dev${frontmatter.image}`] : [],
+    datePublished: frontmatter.date,
+    author: {
+      "@type": "Person",
+      name: "Yuto Nagata",
+      url: "https://darkmocha.dev",
+    },
+    keywords: frontmatter.tags,
+  };
   return (
     <div className="min-h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans selection:bg-[#264f78] selection:text-white pb-20">
       {/* 記事ヘッダー画像 */}
