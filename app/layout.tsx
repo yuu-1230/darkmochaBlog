@@ -6,6 +6,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { getAllPosts } from "@/lib/mdx";
 import { generateFileTree } from "@/lib/file-tree";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
 const jetbrainsMono = JetBrains_Mono({
@@ -65,6 +66,7 @@ export default function RootLayout({
       >
         <MainLayout tree={fileTree}>{children}</MainLayout>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
