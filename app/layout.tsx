@@ -15,11 +15,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev",
+  ),
   title: "Darkmocha Blog",
   description: "VS Code Styled Engineer Blog",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/images/icon.png",
+    apple: "/images/icon.png",
   },
 };
 

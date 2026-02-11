@@ -1,4 +1,5 @@
 import React from "react";
+// 👇 Image を再度インポート
 import Image from "next/image";
 import { Minus, Square, X, Menu } from "lucide-react";
 
@@ -31,23 +32,30 @@ export const TitleBar = ({
         )}
 
         <div className="flex items-center gap-2">
+          {/* 👇 <Image> に戻し、unoptimized を追加！ */}
+          {/* パスも /images/icon.png にしています */}
           <Image
-            src="/icon.png"
+            src="/images/icon.png"
             alt="Darkmocha Icon"
             width={16}
             height={16}
             className="rounded-sm opacity-90"
+            unoptimized
           />
+
           {/* サイト名 */}
           <h1 className="font-medium text-xs tracking-wide opacity-90 truncate m-0">
             DARKMOCHA_BLOG
           </h1>
+
+          {/* 👇 こちらも同様に修正 */}
           <Image
-            src="/icon.png"
+            src="/images/icon.png"
             alt="Darkmocha Icon"
             width={16}
             height={16}
             className="rounded-sm opacity-90"
+            unoptimized
           />
         </div>
       </div>
