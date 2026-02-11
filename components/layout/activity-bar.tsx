@@ -20,12 +20,21 @@ export const ActivityBar = ({
   onToggleSidebar,
 }: ActivityBarProps) => {
   return (
-    <aside className="w-12 bg-[#333333] flex flex-col items-center py-4 z-40 shrink-0 select-none h-full border-r border-[#252526]">
-      {/* 上部アイコン群 */}
-      <div className="flex flex-col gap-6 w-full items-center">
-        {/* --- Files Icon (Toggle Button) --- */}
-        <div
-          onClick={onToggleSidebar} // クリックで切り替え
+    // MainLayout側ですでに <aside> で囲んでいますが、コンポーネント単体としても独立させるために <nav> を使用
+    <nav
+      aria-label="Activity Bar"
+      className="w-12 bg-[#333333] flex flex-col items-center py-4 z-40 shrink-0 select-none h-full border-r border-[#252526]"
+    >
+      <div
+        role="group"
+        aria-label="Primary views"
+        className="flex flex-col gap-6 w-full items-center"
+      >
+        <button
+          type="button"
+          onClick={onToggleSidebar}
+          aria-label="Explorer" // アイコンの意味をテキストで定義
+          aria-expanded={isSidebarOpen} // サイドバーが開いているか閉じているかの状態を伝える
           className={cn(
             "cursor-pointer w-full flex justify-center py-1 transition-all border-l-2 hover:opacity-100",
             // サイドバーが開いている時は「白線＋白アイコン」、閉じている時は「透明線＋グレーアイコン」
@@ -40,30 +49,52 @@ export const ActivityBar = ({
               isSidebarOpen ? "text-white" : "text-[#858585]",
             )}
           />
-        </div>
+        </button>
 
-        {/* Inactive Icons (Search, Git...) */}
-        {/* これらは今回は機能させず、常に非アクティブ表示にします */}
-        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        <button
+          type="button"
+          aria-label="Search"
+          className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent"
+        >
           <Search className="w-6 h-6 text-[#858585]" />
-        </div>
-        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        </button>
+        <button
+          type="button"
+          aria-label="Source Control"
+          className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent"
+        >
           <GitGraph className="w-6 h-6 text-[#858585]" />
-        </div>
-        <div className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent">
+        </button>
+        <button
+          type="button"
+          aria-label="Run and Debug"
+          className="opacity-50 hover:opacity-100 w-full flex justify-center transition-opacity border-l-2 border-transparent"
+        >
           <Bug className="w-6 h-6 text-[#858585]" />
-        </div>
+        </button>
       </div>
 
       {/* 下部アイコン群 */}
-      <div className="mt-auto flex flex-col gap-6 mb-4 w-full items-center">
-        <div className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
+      <div
+        role="group"
+        aria-label="Settings and Accounts"
+        className="mt-auto flex flex-col gap-6 mb-4 w-full items-center"
+      >
+        <button
+          type="button"
+          aria-label="Accounts"
+          className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent"
+        >
           <UserCircle className="w-6 h-6 text-[#858585]" />
-        </div>
-        <div className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent">
+        </button>
+        <button
+          type="button"
+          aria-label="Manage"
+          className="opacity-50 hover:opacity-100 w-full flex justify-center border-l-2 border-transparent"
+        >
           <Settings className="w-6 h-6 text-[#858585]" />
-        </div>
+        </button>
       </div>
-    </aside>
+    </nav>
   );
 };

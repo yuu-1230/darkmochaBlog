@@ -1,4 +1,5 @@
 import { getPost, getAllPosts } from "@/lib/mdx";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -6,6 +7,40 @@ import Image from "next/image";
 import { ArrowLeft, Calendar, Tag, Clock } from "lucide-react";
 import React, { ComponentPropsWithoutRef } from "react";
 
+// 動的にメタデータを生成する関数
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  try {
+    const post = getPost(slug);
+    const { title, description, image } = post.frontmatter;
+
+    return {
+      title: `${title} | Darkmocha`, // タブや検索結果に表示されるタイトル
+      description: description || "VS Code Styled Engineer Blog",
+      openGraph: {
+        title: title,
+        description: description,
+        type: "article",
+        images: image ? [{ url: image }] : [], // 画像があればOGP画像としてセット
+      },
+      twitter: {
+        card: "summary_large_image", // X(Twitter)で大きく画像を表示する設定
+        title: title,
+        description: description,
+        images: image ? [image] : [],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Not Found",
+    };
+  }
+}
 // --- 1. 文字色変更用コンポーネント <C c="red">... ---
 const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
   const colorMap: Record<string, string> = {
