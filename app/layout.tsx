@@ -5,6 +5,7 @@ import "./globals.css";
 import { MainLayout } from "@/components/layout/main-layout";
 import { getAllPosts } from "@/lib/mdx";
 import { generateFileTree } from "@/lib/file-tree";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
 const jetbrainsMono = JetBrains_Mono({
@@ -63,6 +64,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
       >
         <MainLayout tree={fileTree}>{children}</MainLayout>
+        <SpeedInsights />
       </body>
     </html>
   );
