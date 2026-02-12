@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { MainLayout } from "@/components/layout/main-layout";
 import { getAllPosts } from "@/lib/mdx";
 import { generateFileTree } from "@/lib/file-tree";
@@ -74,6 +74,7 @@ export default function RootLayout({
         <MainLayout tree={fileTree}>{children}</MainLayout>
         <SpeedInsights />
         <Analytics />
+        <GoogleAnalytics gaId="G-SFN4E61ERK" />
       </body>
     </html>
   );
