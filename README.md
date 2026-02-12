@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
 **Visual Studio Code (VS Code)** のUI/UXを忠実に再現した、エンジニアのためのポートフォリオブログです。
-Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブログ」** へとアーキテクチャを刷新しました。(Updated: 2026-02-11)
+Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブログ」** へとアーキテクチャを刷新しました。(Updated: 2026-02-12)
 
 ## 🎨 Concept & Design
 
@@ -23,8 +23,9 @@ Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブロ
 
 - **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Deployment**: [Vercel](https://vercel.com/) (予定)
+- **Deployment**: [Vercel](https://vercel.com/)
 - **Package Manager**: [pnpm](https://pnpm.io/)
+- **Analytics**: [Vercel Analytics](https://vercel.com/analytics), [Vercel Speed Insights](https://vercel.com/docs/speed-insights)
 
 ### UI & Styling
 
@@ -37,8 +38,8 @@ Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブロ
 
 - **File Tree System (`lib/file-tree.ts`)**:
   サイドバーの表示内容とタブバーの表示名を一元管理する「Single Source of Truth」を実装。URLパスとツリー定義を照合し、現在のファイル名を動的に特定。
-- **Custom MDX Components**:
-  VS Codeのシンタックスハイライト風にテキストを装飾できる専用コンポーネント `<C c="color">` を実装し、記事執筆のDXを向上。
+- **Dynamic OGP Generation (`@vercel/og`)**:
+  記事のタイトルやメタデータを動的に取得し、VS Codeエディタ風のサムネイル画像をビルド時に自動生成。
 
 ### 🤖 SEO & AEO (AI Engine Optimization) Strategy
 
@@ -46,7 +47,8 @@ Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブロ
 
 - **Semantic HTML**: `<nav role="tablist">`, `<aside>`, `<article>`, `<time>` や `aria-label` 等のアクセシビリティタグを徹底。
 - **Structured Data (JSON-LD)**: `Person` および `BlogPosting` スキーマを動的に生成し、AI検索エンジンへの直接的な自己紹介（スキルや記事の文脈）を実装。
-- **Dynamic Metadata**: 記事ごとの動的OGPルーティング生成、および前後記事への回遊リンク(`Next/Prev`)によるクロールバジェットの最適化。
+- **Sitemap & Robots**: `next-sitemap` を導入し、全記事の `sitemap.xml` と `robots.txt` を自動生成。Google Search Consoleへのインデックス登録を完全自動化。
+- **Dynamic Open Graph Image**: `opengraph-image.tsx` により、記事ごとに最適化されたOGP画像を動的に生成。SNSシェア時の視認性とクリック率を向上。
 
 ## 📂 Current Project Structure
 
@@ -55,9 +57,13 @@ Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブロ
 ├── app/                  # Next.js App Router
 │   ├── blog/
 │   │   └── [slug]/       # 記事詳細ページ (Markdown Rendering & JSON-LD)
+│   │       ├── page.tsx  # 記事本体
+│   │       └── opengraph-image.tsx # 動的OGP生成 (記事タイトル埋め込み)
 │   ├── globals.css       # VS Code Dark+ 配色定義
 │   ├── layout.tsx        # Root Layout (MainLayout & Person JSON-LD)
-│   └── page.tsx          # トップページ (Dashboard / Article List)
+│   ├── opengraph-image.tsx # サイト全体用OGP (Default)
+│   ├── page.tsx          # トップページ (Dashboard / Article List)
+│   └── robots.txt/       # 動的robots.txt生成 (Route Handler)
 ├── components/
 │   ├── layout/           # Semantic IDE UI Components
 │   │   ├── activity-bar.tsx # サイドバー開閉トグル (nav)
@@ -81,7 +87,7 @@ Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブロ
 
 ```bash
 # Clone the repository
-git clone [https://github.com/your-username/darkmocha-blog.git](https://github.com/your-username/darkmocha-blog.git)
+git clone https://github.com/yuu-1230/darkmocha-blog.git
 
 # Install dependencies
 pnpm install
@@ -112,17 +118,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - [x] **Semantic HTML**: 全UIコンポーネントのWeb標準・アクセシビリティ対応
 - [x] **Structured Data**: JSON-LD（Person, BlogPosting）の動的埋め込み
-- [x] **Metadata**: 記事ごとの動的OGP生成と、トップページのリード文最適化
+- [x] **Dynamic Metadata**: 記事ごとの動的OGP生成と、トップページのリード文最適化
 - [x] **Crawling**: 記事最下部への「前後記事リンク」実装
+- [x] **Sitemap & Robots**: `next-sitemap` 導入と `robots.txt` の動的生成対応
 
 ### Phase 4: コンテンツ拡充 & 本番公開 (In Progress 🚧)
 
 - [x] **Projects Page**: 拡張機能マーケットプレイス風の実績一覧ページ
 - [x] **Markdown Style**: MDXカスタムコンポーネント (`<C>`) による文字色装飾機能
+- [x] **Deployment**: Vercelへの本番デプロイ完了
+- [x] **Analytics**: Vercel Analytics / Speed Insights の導入
 - [ ] **About Me (AEO強化)**: AI検索に引用されやすい「Q&A形式」の自然言語セクションを追加
-- [ ] **SEO Tools**: `sitemap.xml` と `robots.txt` の自動生成
 - [ ] **Content**: Next.jsやUnityに関する技術解説記事の執筆
-- [ ] **Deployment**: Vercelへの本番デプロイとカスタムドメイン設定
 
 ## 👤 Author
 
