@@ -70,7 +70,7 @@ export const TitleBar = ({
           <button
             type="button"
             aria-label="Minimize"
-            className="hover:bg-white/10 rounded cursor-pointer p-1 outline-none flex items-center justify-center transition-colors"
+            className="hover:bg-white/10 rounded p-1 outline-none flex items-center justify-center transition-colors"
           >
             <Minus className="w-3.5 h-3.5" />
           </button>
@@ -78,7 +78,7 @@ export const TitleBar = ({
           <button
             type="button"
             aria-label="Maximize"
-            className="hover:bg-white/10 rounded cursor-pointer p-1 outline-none flex items-center justify-center transition-colors"
+            className="hover:bg-white/10 rounded p-1 outline-none flex items-center justify-center transition-colors"
           >
             <Square className="w-3 h-3" />
           </button>
@@ -86,7 +86,7 @@ export const TitleBar = ({
           <button
             type="button"
             aria-label="Close"
-            className="hover:bg-[#E81123] hover:text-white rounded cursor-pointer p-1 outline-none flex items-center justify-center transition-colors"
+            className="hover:bg-[#E81123] hover:text-white rounded p-1 outline-none flex items-center justify-center transition-colors"
           >
             <X className="w-3.5 h-3.5" />
           </button>

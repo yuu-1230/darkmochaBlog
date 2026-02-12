@@ -63,7 +63,7 @@ export const TabBar = ({ tree }: { tree: FileNode[] }) => {
           role="tab"
           aria-selected="false" // 選択されていないタブであることを明示
           aria-label="layout.tsx, inactive"
-          className="flex items-center h-full outline-none cursor-pointer"
+          className="flex items-center h-full outline-none"
         >
           <span className="mr-2 text-[10px] font-bold w-4 text-center">
             <TSXIcon color="blue" />
