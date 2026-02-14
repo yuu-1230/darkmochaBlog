@@ -63,6 +63,9 @@ const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
 
 // --- Custom MDX Components ---
 const components = {
+  // 👇 Linkコンポーネントを追加！これでMDX内で <Link> が使える
+  Link,
+
   C,
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
@@ -97,12 +100,30 @@ const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => (
     <li className="leading-7" {...props} />
   ),
-  a: (props: ComponentPropsWithoutRef<"a">) => (
-    <a
-      className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4"
-      {...props}
-    />
-  ),
+  // 通常のリンク(aタグ)もNext.jsのLinkに置き換える設定（自動最適化）
+  a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
+    if (href?.startsWith("/")) {
+      return (
+        <Link
+          href={href}
+          className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4"
+        >
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a
+        href={href}
+        className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4"
+        target="_blank"
+        rel="noopener noreferrer"
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  },
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
       className="border-l-4 border-[#3794ff] bg-[#252526] px-4 py-3 mb-6 text-[#a0a0a0] italic rounded-r"
