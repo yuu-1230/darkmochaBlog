@@ -1,3 +1,4 @@
+// app/blog/[slug]/page.tsx
 import { getPost, getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -63,8 +64,20 @@ const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
 
 // --- Custom MDX Components ---
 const components = {
-  // 👇 Linkコンポーネントを追加！これでMDX内で <Link> が使える
-  Link,
+  // 👇 Linkコンポーネントをカスタマイズ（VS Code風の青色）
+  Link: ({
+    href,
+    children,
+    ...props
+  }: ComponentPropsWithoutRef<typeof Link>) => (
+    <Link
+      href={href}
+      className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4 cursor-pointer"
+      {...props}
+    >
+      {children}
+    </Link>
+  ),
 
   C,
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
@@ -100,13 +113,13 @@ const components = {
   li: (props: ComponentPropsWithoutRef<"li">) => (
     <li className="leading-7" {...props} />
   ),
-  // 通常のリンク(aタグ)もNext.jsのLinkに置き換える設定（自動最適化）
+  // 通常のリンク(aタグ)も青色のLinkに置き換える設定（自動最適化）
   a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
     if (href?.startsWith("/")) {
       return (
         <Link
           href={href}
-          className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4"
+          className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4 cursor-pointer"
         >
           {children}
         </Link>
@@ -115,7 +128,7 @@ const components = {
     return (
       <a
         href={href}
-        className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4"
+        className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4 cursor-pointer"
         target="_blank"
         rel="noopener noreferrer"
         {...props}
