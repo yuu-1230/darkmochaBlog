@@ -16,8 +16,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev",
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev",
   ),
+  alternates: {
+    canonical: "./",
+  },
   title: "Darkmocha Blog",
   description: "Engineer and Everyday life Blog by Yuto Nagata",
   icons: {
@@ -37,8 +40,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Yuto Nagata",
-    url: "https://darkmocha.dev",
-    image: "https://darkmocha.dev/images/About/profile.jpg",
+    url: "https://www.darkmocha.dev",
+    image: "https://www.darkmocha.dev/images/About/profile.jpg",
     jobTitle: "Student Engineer",
     worksFor: {
       "@type": "Organization",
