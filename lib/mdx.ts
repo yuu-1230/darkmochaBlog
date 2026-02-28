@@ -9,6 +9,7 @@ type Frontmatter = {
   description?: string;
   image?: string;
   readTime?: string;
+  category?: string;
 };
 export type PostData = {
   slug: string;
