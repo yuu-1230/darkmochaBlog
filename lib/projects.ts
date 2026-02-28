@@ -120,9 +120,7 @@ export const projects: Project[] = [
     description:
       "Bluesky内で9時間おきに世界中のWebカメラ画像をランダムで投稿するBot。",
     techStack: ["Python 3.12", "GitHub Actions", "atproto", "Windy API"],
-    links: [
-      { label: "GitHub(private)", url: "https://github.com/yuu-1230" }, // リンク修正必要かも
-    ],
+    links: [{ label: "GitHub(private)", url: "https://github.com/yuu-1230" }],
     icon: Bot,
     learned:
       "APIの呼び出し処理やデータ取得の実装だけでなく、GitHub Actionsを用いたサーバーレス運用の構築に苦戦しました。特にリポジトリ認識までのラグ（約3日）や、Cron実行の時間の誤差（±20分）など、運用して初めて分かる知見を得ました。",

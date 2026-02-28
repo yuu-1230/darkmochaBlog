@@ -2,7 +2,7 @@ import React from "react";
 import { FileType } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// --- 1. アイコン定義 (そのまま) ---
+// --- 1. アイコン定義 ---
 export const TSXIcon = ({ color }: { color: "blue" | "yellow" }) => (
   <span
     className={cn(
@@ -34,7 +34,7 @@ export const JsonIcon = () => (
   </span>
 );
 
-// --- 2. 型定義 (そのまま) ---
+// --- 2. 型定義 ---
 export type FileNode = {
   name: string;
   type: "file" | "folder";
@@ -47,18 +47,30 @@ export type FileNode = {
 // --- 3. 自動生成関数  ---
 // 記事データ(posts)を受け取って、動的にツリーを結合します
 export const generateFileTree = (
-  posts: { slug: string; frontmatter: { title: string } }[],
+  posts: { slug: string; frontmatter: { title: string; category?: string } }[],
 ): FileNode[] => {
-  // 記事データをFileNode形式に変換
-  const articleNodes: FileNode[] = posts.map((post) => ({
-    name: `${post.slug}.mdx`, // ファイル名っぽく表示
-    type: "file",
-    path: `/blog/${post.slug}`,
-    icon: <MDIcon />,
-  }));
+  // 記事をカテゴリごとに分類
+  const techPosts = posts.filter((p) => p.frontmatter.category === "Tech");
+  const unityPosts = posts.filter((p) => p.frontmatter.category === "Unity");
+  const lifePosts = posts.filter((p) => p.frontmatter.category === "Life");
+
+  // ノード作成のヘルパー関数
+  const createNodes = (filteredPosts: typeof posts) =>
+    filteredPosts.map((post) => ({
+      name: `${post.slug}.mdx`,
+      type: "file" as const,
+      path: `/blog/${post.slug}`,
+      icon: <MDIcon />,
+    }));
 
   return [
-    // 1. About me
+    // 👇 ここに Home.tsx (トップページ) を追加！
+    {
+      name: "Home.tsx",
+      type: "file",
+      path: "/",
+      icon: <TSXIcon color="blue" />,
+    },
     {
       name: "About_me.md",
       type: "file",
@@ -72,28 +84,23 @@ export const generateFileTree = (
       icon: <JsonIcon />,
     },
 
-    // 2. Articles (ここに動的データを注入！)
     {
-      name: "Articles",
+      name: "Tech_Articles",
       type: "folder",
       isOpen: true,
-      children: [
-        {
-          name: "latest_posts.tsx",
-          type: "file",
-          path: "/",
-          icon: <TSXIcon color="yellow" />,
-        },
-        ...articleNodes,
-      ],
+      children: createNodes(techPosts),
     },
-
-    // 3. Unity
     {
-      name: "Unity_Projects",
+      name: "Unity_Dev",
       type: "folder",
-      isOpen: false,
-      children: [],
+      isOpen: true,
+      children: createNodes(unityPosts),
+    },
+    {
+      name: "Life_and_Travel",
+      type: "folder",
+      isOpen: true,
+      children: createNodes(lifePosts),
     },
   ];
 };
