@@ -5,8 +5,17 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, Calendar, Tag, Clock } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Tag,
+  Clock,
+  List,
+} from "lucide-react"; // List を追加
 import React, { ComponentPropsWithoutRef } from "react";
+import rehypeSlug from "rehype-slug"; // 追加
+import GithubSlugger from "github-slugger"; // 追加
 
 // 動的にメタデータを生成する関数
 export async function generateMetadata({
@@ -42,6 +51,37 @@ export async function generateMetadata({
   }
 }
 
+// --- 目次（TOC）を自動生成＆番号付けする関数 ---
+function generateTOC(content: string) {
+  const slugger = new GithubSlugger();
+  let h2Count = 0;
+  let h3Count = 0;
+
+  // MDXテキストの中から ## と ### を抽出
+  const headings = Array.from(content.matchAll(/^(##|###)\s+(.*)$/gm)).map(
+    (match) => {
+      const level = match[1].length; // 2 or 3
+      const rawText = match[2].trim();
+      const id = slugger.slug(rawText);
+
+      // 1, 1-1 の番号を生成
+      let numberLabel = "";
+      if (level === 2) {
+        h2Count++;
+        h3Count = 0; // h2が変わったらh3のカウントをリセット
+        numberLabel = `${h2Count}`;
+      } else if (level === 3) {
+        h3Count++;
+        numberLabel = `${h2Count}-${h3Count}`;
+      }
+
+      return { level, text: rawText, id, numberLabel };
+    },
+  );
+
+  return headings;
+}
+
 // --- 1. 文字色変更用コンポーネント <C c="red">... ---
 const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
   const colorMap: Record<string, string> = {
@@ -64,7 +104,7 @@ const C = ({ c, children }: { c: string; children: React.ReactNode }) => {
 
 // --- Custom MDX Components ---
 const components = {
-  // 👇 Linkコンポーネントをカスタマイズ（VS Code風の青色）
+  // Linkコンポーネントをカスタマイズ（VS Code風の青色）
   Link: ({
     href,
     children,
@@ -86,14 +126,18 @@ const components = {
       {...props}
     />
   ),
+  // rehype-slug が付与した id は ...props に含まれるため、ジャンプ機能がそのまま動きます！
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
     <h2
-      className="text-2xl font-semibold text-[#569cd6] mt-10 mb-4 flex items-center gap-2"
+      className="text-2xl font-semibold text-[#569cd6] mt-10 mb-4 flex items-center gap-2 pt-16 -mt-16"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="text-xl font-medium text-[#4ec9b0] mt-8 mb-3" {...props} />
+    <h3
+      className="text-xl font-medium text-[#4ec9b0] mt-8 mb-3 pt-16 -mt-16"
+      {...props}
+    />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
     <p className="text-[#cccccc] leading-8 mb-6 text-[16px]" {...props} />
@@ -115,6 +159,18 @@ const components = {
   ),
   // 通常のリンク(aタグ)も青色のLinkに置き換える設定（自動最適化）
   a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
+    // ページ内リンク（#から始まるもの）の対応を追加
+    if (href?.startsWith("#")) {
+      return (
+        <a
+          href={href}
+          className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4 cursor-pointer"
+          {...props}
+        >
+          {children}
+        </a>
+      );
+    }
     if (href?.startsWith("/")) {
       return (
         <Link
@@ -198,6 +254,9 @@ export default async function BlogPost({
   const prevPost =
     currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
+  // コンテンツから目次データを生成
+  const toc = generateTOC(content);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -270,15 +329,56 @@ export default async function BlogPost({
           </h1>
 
           {frontmatter.description && (
-            <p className="text-lg text-[#a0a0a0] leading-relaxed">
+            <p className="text-lg text-[#a0a0a0] leading-relaxed whitespace-pre-wrap">
               {frontmatter.description}
             </p>
           )}
         </div>
 
+        {/* 目次UI */}
+        {toc.length > 0 && (
+          <div className="mb-10 bg-[#1e1e1e] border border-[#333] rounded-lg p-5 md:p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-white font-bold mb-4 border-b border-[#333] pb-3 text-lg">
+              <List className="w-5 h-5 text-[#569cd6]" />
+              目次
+            </div>
+            <ul className="space-y-3">
+              {toc.map((heading, index) => (
+                <li
+                  key={index}
+                  className={
+                    heading.level === 3 ?
+                      "ml-6 text-sm text-[#a0a0a0]"
+                    : "text-[#cccccc] font-medium mt-4 first:mt-0"
+                  }
+                >
+                  <a
+                    href={`#${heading.id}`}
+                    className="hover:text-[#3794ff] hover:underline underline-offset-4 transition-colors flex items-start gap-2"
+                  >
+                    <span className="text-[#858585] font-mono shrink-0">
+                      {heading.numberLabel} |
+                    </span>
+                    <span>{heading.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         {/* MDXレンダリングエリア */}
+        {/* options に rehypeSlug を追加 */}
         <div className="min-h-[200px]">
-          <MDXRemote source={content} components={components} />
+          <MDXRemote
+            source={content}
+            components={components}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [rehypeSlug],
+              },
+            }}
+          />
         </div>
 
         <nav
