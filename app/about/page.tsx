@@ -94,10 +94,11 @@ export default function AboutPage() {
               </span>
             </div>
             <p className="text-[#a0a0a0] leading-relaxed max-w-xl mt-2 text-base md:text-lg drop-shadow-sm">
-              Web Developer & Game Creator. <br />
-              Building with{" "}
-              <span className="text-[#3794ff] font-medium">Code</span> &{" "}
-              <span className="text-[#ce9178] font-medium">Coffee</span>.
+              University Student in Japan. <br />
+              Enjoying <span className="text-[#3794ff] font-medium">
+                Code
+              </span>, <span className="text-[#4ec9b0] font-medium">Games</span>{" "}
+              & <span className="text-[#ce9178] font-medium">Travel</span>.
             </p>
           </div>
         </div>
@@ -114,7 +115,7 @@ export default function AboutPage() {
               <p>
                 長野（Nagano）出身の大学生。
                 <br />
-                主にWebフロントエンド（Next.js、Reactなど）とUnityを勉強しながらたまに開発しています。
+                主にWebフロントエンド（Next.js、Reactなど）とUnityを勉強しています。
                 <br />
                 趣味は音楽・アニメ・ゲーム・テニスです。
               </p>
