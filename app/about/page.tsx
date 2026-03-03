@@ -73,7 +73,12 @@ export default function AboutPage() {
               src={profileImageSrc}
               alt="Yuto Nagata"
               fill
-              className="object-cover"
+              // 変更点: select-none (選択不可) と pointer-events-none (クリックイベント無効化) を追加
+              className="object-cover select-none pointer-events-none"
+              // 変更点: ドラッグ&ドロップ禁止、右クリックメニュー禁止、iOS長押し保存メニュー禁止を追加
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
+              style={{ WebkitTouchCallout: "none" }}
             />
             <div className="w-full h-full flex items-center justify-center bg-[#252526]">
               <Coffee className="w-12 h-12 md:w-16 md:h-16 text-[#565656]" />
