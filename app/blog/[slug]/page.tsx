@@ -16,7 +16,7 @@ import {
 import React, { ComponentPropsWithoutRef } from "react";
 import rehypeSlug from "rehype-slug"; // 追加
 import GithubSlugger from "github-slugger"; // 追加
-
+import remarkGfm from "remark-gfm";
 // 動的にメタデータを生成する関数
 export async function generateMetadata({
   params,
@@ -112,7 +112,7 @@ const components = {
   }: ComponentPropsWithoutRef<typeof Link>) => (
     <Link
       href={href}
-      className="text-[#3794ff] hover:underline decoration-[#3794ff] underline-offset-4 cursor-pointer"
+      className="text-[#3794ff] hover:underline decoration-[#c08457] underline-offset-4 cursor-pointer"
       {...props}
     >
       {children}
@@ -122,25 +122,51 @@ const components = {
   C,
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
-      className="text-3xl font-bold text-white mt-12 mb-6 border-b border-[#333] pb-2"
+      className="text-3xl font-bold text-white mt-12 mb-6 border-b border-[#f5e6d3] pb-2"
       {...props}
     />
   ),
   // rehype-slug が付与した id は ...props に含まれるため、ジャンプ機能がそのまま動きます！
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
     <h2
-      className="text-2xl font-semibold text-[#569cd6] mt-10 mb-4 flex items-center gap-2 pt-16 -mt-16"
+      className="text-2xl font-semibold text-[#d4a373] mt-4 mb-4 flex items-center gap-2 pt-4 -mt-4"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3
-      className="text-xl font-medium text-[#4ec9b0] mt-8 mb-3 pt-16 -mt-16"
+      className="text-xl font-medium text-[#a47148] mt-4 mb-3 pt-4"
       {...props}
     />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="text-[#cccccc] leading-8 mb-6 text-[16px]" {...props} />
+    <p className="text-[#ffffffdb] leading-8 mb-6 text-[16px]" {...props} />
+  ),
+  table: (props: ComponentPropsWithoutRef<"table">) => (
+    <div className="overflow-x-auto mb-8">
+      <table
+        className="w-full text-left border-collapse border border-[#333]"
+        {...props}
+      />
+    </div>
+  ),
+  thead: (props: ComponentPropsWithoutRef<"thead">) => (
+    <thead className="bg-[#252526]" {...props} />
+  ),
+  tbody: (props: ComponentPropsWithoutRef<"tbody">) => (
+    <tbody className="divide-y divide-[#333]" {...props} />
+  ),
+  tr: (props: ComponentPropsWithoutRef<"tr">) => (
+    <tr className="hover:bg-[#2a2d2e] transition-colors" {...props} />
+  ),
+  th: (props: ComponentPropsWithoutRef<"th">) => (
+    <th
+      className="px-4 py-3 font-bold text-[#cccccc] border border-[#333] whitespace-nowrap"
+      {...props}
+    />
+  ),
+  td: (props: ComponentPropsWithoutRef<"td">) => (
+    <td className="px-4 py-3 text-[#a0a0a0] border border-[#333]" {...props} />
   ),
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
     <ul
@@ -214,7 +240,7 @@ const components = {
   img: (props: ComponentPropsWithoutRef<"img">) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className="rounded-lg border border-[#333] my-8 w-full h-auto object-contain bg-[#1e1e1e]"
+      className="rounded-lg border border-[#333] my-8 max-w-full mx-auto h-auto object-contain bg-[#1e1e1e]"
       alt={props.alt || ""}
       {...props}
     />
@@ -375,6 +401,7 @@ export default async function BlogPost({
             components={components}
             options={{
               mdxOptions: {
+                remarkPlugins: [remarkGfm],
                 rehypePlugins: [rehypeSlug],
               },
             }}

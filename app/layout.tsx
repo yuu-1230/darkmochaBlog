@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+// 変更点: Yomogi をインポート
+import { Yomogi, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { MainLayout } from "@/components/layout/main-layout";
@@ -8,7 +9,13 @@ import { generateFileTree } from "@/lib/file-tree";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
+// 変更点: Yomogiの読み込み設定
+const yomogi = Yomogi({
+  weight: "400", // Yomogiもウェイト400のみです
+  subsets: ["latin"],
+  variable: "--font-geist-sans", // Tailwindの設定を変えずに適用
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
@@ -68,7 +75,8 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
+        // 変更点: yomogi.variable を適用
+        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
       >
         <script
           type="application/ld+json"
