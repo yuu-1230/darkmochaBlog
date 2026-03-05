@@ -12,6 +12,12 @@ import {
   Tag,
   Clock,
   List,
+  Lightbulb,
+  AlertTriangle,
+  Info,
+  ChevronRight,
+  Instagram,
+  ExternalLink,
 } from "lucide-react"; // List を追加
 import React, { ComponentPropsWithoutRef } from "react";
 import rehypeSlug from "rehype-slug"; // 追加
@@ -135,7 +141,7 @@ const components = {
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3
-      className="text-xl font-medium text-[#a47148] mt-4 mb-3 pt-4"
+      className="text-xl font-medium text-[#a47148] mt-4 mb-3 pt-0"
       {...props}
     />
   ),
@@ -240,7 +246,7 @@ const components = {
   img: (props: ComponentPropsWithoutRef<"img">) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className="rounded-lg border border-[#333] my-8 max-w-full mx-auto h-auto object-contain bg-[#1e1e1e]"
+      className="block rounded-2xl border border-[#333] my-8 max-w-full mx-auto h-auto object-contain bg-[#1e1e1e]"
       alt={props.alt || ""}
       {...props}
     />
@@ -248,6 +254,89 @@ const components = {
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr className="border-[#333] my-10" {...props} />
   ),
+  InstagramLink: ({ href, title }: { href: string; title?: string }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="my-8 flex items-center gap-4 p-4 rounded-xl border border-[#333] bg-[#252526] hover:bg-[#2a2d2e] hover:border-[#569cd6] transition-all group no-underline shadow-sm"
+    >
+      {/* インスタ風のグラデーションアイコン */}
+      <div className="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-2 rounded-full shrink-0">
+        <Instagram className="w-5 h-5 text-white" />
+      </div>
+
+      {/* テキスト部分 */}
+      <div className="flex-1 min-w-0">
+        <div className="text-sm md:text-base font-medium text-[#cccccc] group-hover:text-white transition-colors truncate">
+          {title || "Instagramで動画を見る"}
+        </div>
+        <div className="text-[10px] md:text-xs text-[#858585] truncate mt-1 font-mono">
+          {href}
+        </div>
+      </div>
+
+      {/* 矢印アイコン */}
+      <ExternalLink className="w-4 h-4 text-[#858585] group-hover:text-white transition-colors shrink-0" />
+    </a>
+  ),
+  Tip: ({
+    children,
+    type = "tip",
+    title,
+  }: {
+    children: React.ReactNode;
+    type?: "tip" | "warning" | "info";
+    title?: string;
+  }) => {
+    // タイプに合わせて色とアイコンを切り替える
+    const config = {
+      tip: {
+        color: "text-[#dcdcaa]",
+        border: "border-[#dcdcaa]",
+        bg: "bg-[#dcdcaa]/10",
+        icon: <Lightbulb className="w-5 h-5 shrink-0" />,
+        defaultTitle: "TIPS",
+      },
+      warning: {
+        color: "text-[#ce9178]",
+        border: "border-[#ce9178]",
+        bg: "bg-[#ce9178]/10",
+        icon: <AlertTriangle className="w-5 h-5 shrink-0" />,
+        defaultTitle: "WARNING",
+      },
+      info: {
+        color: "text-[#569cd6]",
+        border: "border-[#569cd6]",
+        bg: "bg-[#569cd6]/10",
+        icon: <Info className="w-5 h-5 shrink-0" />,
+        defaultTitle: "INFO",
+      },
+    };
+
+    const style = config[type];
+
+    return (
+      <details
+        className={`my-8 border-l-4 ${style.border} ${style.bg} rounded-r-lg shadow-sm group cursor-pointer`}
+      >
+        <summary
+          className={`flex items-center gap-2 font-bold ${style.color} p-4 md:p-5 outline-none list-none [&::-webkit-details-marker]:hidden`}
+        >
+          {/* 👇 ここがポイント！開いた時に90度回転（▶ から ▼ になる）アニメーション */}
+          <ChevronRight className="w-4 h-4 transition-transform duration-200 group-open:rotate-90 shrink-0" />
+
+          {style.icon}
+          <span>{title || style.defaultTitle}</span>
+        </summary>
+
+        {/* 中身の文章 */}
+        <div className="text-[#cccccc] text-sm md:text-base leading-relaxed px-4 pb-4 md:px-5 md:pb-5 pt-0 mt-2">
+          {children}
+        </div>
+      </details>
+    );
+  },
 };
 
 // --- Static Params ---
