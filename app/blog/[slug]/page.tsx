@@ -246,7 +246,7 @@ const components = {
   img: (props: ComponentPropsWithoutRef<"img">) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className="block rounded-2xl border border-[#333] my-8 max-w-full mx-auto h-auto object-contain bg-[#1e1e1e]"
+      className="block mx-auto w-full h-[250px] rounded-2xl border border-[#333] shadow-md object-contain my-8 bg-[#1e1e1e]"
       alt={props.alt || ""}
       {...props}
     />
