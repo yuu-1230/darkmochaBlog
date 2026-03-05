@@ -23,6 +23,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 import rehypeSlug from "rehype-slug"; // 追加
 import GithubSlugger from "github-slugger"; // 追加
 import remarkGfm from "remark-gfm";
+import ImageSlider from "@/components/ImageSlider";
 // 動的にメタデータを生成する関数
 export async function generateMetadata({
   params,
@@ -146,7 +147,7 @@ const components = {
     />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="text-[#ffffffdb] leading-8 mb-6 text-[16px]" {...props} />
+    <div className="text-[#ffffffdb] leading-8 mb-6 text-[16px]" {...props} />
   ),
   table: (props: ComponentPropsWithoutRef<"table">) => (
     <div className="overflow-x-auto mb-8">
@@ -243,13 +244,17 @@ const components = {
       {...props}
     />
   ),
+  // img: (props: ComponentPropsWithoutRef<"img">) => (
+  //   // eslint-disable-next-line @next/next/no-img-element
+  //   <img
+  //     className="block mx-auto w-full h-[250px] rounded-2xl border border-[#333] shadow-md object-contain my-8 bg-[#1e1e1e]"
+  //     alt={props.alt || ""}
+  //     {...props}
+  //   />
+  // ),
+  ImageSlider,
   img: (props: ComponentPropsWithoutRef<"img">) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      className="block mx-auto w-full h-[250px] rounded-2xl border border-[#333] shadow-md object-contain my-8 bg-[#1e1e1e]"
-      alt={props.alt || ""}
-      {...props}
-    />
+    <ImageSlider images={typeof props.src === "string" ? props.src : ""} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr className="border-[#333] my-10" {...props} />
