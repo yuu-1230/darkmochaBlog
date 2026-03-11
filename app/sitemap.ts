@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/mdx";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://www.darkmocha.dev";
+  const baseUrl = "https://darkmocha.dev";
 
   const staticRoutes = ["", "/about", "/projects"].map((route) => ({
     url: `${baseUrl}${route}`,
