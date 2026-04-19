@@ -5,6 +5,7 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { MainLayout } from "@/components/layout/main-layout";
 import { getAllPosts } from "@/lib/mdx";
+import { getAllNotes } from "@/lib/notes";
 import { generateFileTree } from "@/lib/file-tree";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
@@ -42,7 +43,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const posts = getAllPosts();
-  const fileTree = generateFileTree(posts);
+  const fileTree = generateFileTree(posts, {
+    hasNotes: getAllNotes().length > 0,
+  });
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
