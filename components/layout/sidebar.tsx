@@ -9,10 +9,7 @@ import { FileNode } from "@/lib/file-tree";
 
 export const Sidebar = ({ tree }: { tree: FileNode[] }) => {
   return (
-    // MainLayout側で <nav> で囲まれているため、ここは div でOKです
     <div className="w-full h-full bg-[#252526] flex flex-col shrink-0 text-[#CCCCCC]">
-      {/* Explorer Header */}
-      {/* 見出し要素としてAIに伝えるため id を付与 */}
       <div
         id="explorer-heading"
         className="h-9 px-4 flex items-center text-[11px] font-bold text-[#BBBBBB] tracking-wide select-none shrink-0"
@@ -54,7 +51,7 @@ const TreeNode = ({ node, level }: { node: FileNode; level: number }) => {
   };
 
   const isFile = node.type === "file";
-  const isActive = node.path === pathname;
+  const isActive = isFile && node.path === pathname;
 
   return (
     <li className="list-none">
