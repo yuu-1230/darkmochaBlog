@@ -48,7 +48,9 @@ export type FileNode = {
 // 記事データ(posts)を受け取って、動的にツリーを結合します
 export const generateFileTree = (
   posts: { slug: string; frontmatter: { title: string; category?: string } }[],
+  options?: { hasNotes?: boolean },
 ): FileNode[] => {
+  const hasNotes = options?.hasNotes ?? false;
   // 記事をカテゴリごとに分類
   const techPosts = posts.filter((p) => p.frontmatter.category === "Tech");
   const unityPosts = posts.filter((p) => p.frontmatter.category === "Unity");
@@ -83,6 +85,16 @@ export const generateFileTree = (
       path: "/projects",
       icon: <JsonIcon />,
     },
+    ...(hasNotes ?
+      [
+        {
+          name: "notes.json",
+          type: "file" as const,
+          path: "/#daily-notes",
+          icon: <JsonIcon />,
+        },
+      ]
+    : []),
 
     {
       name: "Tech_Articles",

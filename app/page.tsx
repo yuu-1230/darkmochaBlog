@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts } from "@/lib/mdx";
+import { getAllNotes } from "@/lib/notes";
+import { NoteTimeline } from "@/components/note-timeline";
 import { Coffee, ChevronRight } from "lucide-react";
 
 // --- 型定義 ---
@@ -8,6 +10,7 @@ type Post = ReturnType<typeof getAllPosts>[0];
 
 export default function Home() {
   const allPosts = getAllPosts();
+  const notes = getAllNotes();
 
   // 記事をカテゴリごとにフィルタリング
   const techPosts = allPosts.filter((p) => p.frontmatter.category === "Tech");
@@ -53,6 +56,8 @@ export default function Home() {
             </Link>
           </div>
         </header>
+
+        <NoteTimeline notes={notes} />
 
         {/* --- 2. カテゴリ別 記事リスト --- */}
         <div className="space-y-16">
