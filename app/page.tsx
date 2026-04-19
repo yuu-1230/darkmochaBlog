@@ -57,7 +57,7 @@ export default function Home() {
           </div>
         </header>
 
-        <NoteTimeline notes={notes} />
+        <NoteTimeline notes={notes} mode="preview" />
 
         {/* --- 2. カテゴリ別 記事リスト --- */}
         <div className="space-y-16">
