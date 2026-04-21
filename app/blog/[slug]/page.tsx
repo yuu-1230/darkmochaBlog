@@ -24,6 +24,8 @@ import rehypeSlug from "rehype-slug"; // 追加
 import GithubSlugger from "github-slugger"; // 追加
 import remarkGfm from "remark-gfm";
 import ImageSlider from "@/components/ImageSlider";
+import { TocPortal } from "@/components/TocPortal";
+import { TableOfContents } from "@/components/TableOfContents";
 // 動的にメタデータを生成する関数
 export async function generateMetadata({
   params,
@@ -455,37 +457,13 @@ export default async function BlogPost({
           )}
         </div>
 
-        {/* 目次UI */}
-        {toc.length > 0 && (
-          <div className="mb-10 bg-[#1e1e1e] border border-[#333] rounded-lg p-5 md:p-6 shadow-sm">
-            <div className="flex items-center gap-2 text-white font-bold mb-4 border-b border-[#333] pb-3 text-lg">
-              <List className="w-5 h-5 text-[#569cd6]" />
-              目次
-            </div>
-            <ul className="space-y-3">
-              {toc.map((heading, index) => (
-                <li
-                  key={index}
-                  className={
-                    heading.level === 3 ?
-                      "ml-6 text-sm text-[#a0a0a0]"
-                    : "text-[#cccccc] font-medium mt-4 first:mt-0"
-                  }
-                >
-                  <a
-                    href={`#${heading.id}`}
-                    className="hover:text-[#3794ff] hover:underline underline-offset-4 transition-colors flex items-start gap-2"
-                  >
-                    <span className="text-[#858585] font-mono shrink-0">
-                      {heading.numberLabel} |
-                    </span>
-                    <span>{heading.text}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* --- スマホ用: 記事内の目次 (PCサイズでは非表示) --- */}
+        <div className="block md:hidden">
+          <TableOfContents toc={toc} />
+        </div>
+
+        {/* --- PC用: どこでもドアでサイドバーへ目次をワープ --- */}
+        <TocPortal toc={toc} />
 
         {/* MDXレンダリングエリア */}
         {/* options に rehypeSlug を追加 */}
