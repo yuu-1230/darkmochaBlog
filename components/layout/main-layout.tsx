@@ -98,7 +98,7 @@ export const MainLayout = ({
           <nav aria-label="Tabs" className="shrink-0">
             <TabBar tree={tree} />
           </nav>
-          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-[#424242] scrollbar-track-transparent flex flex-col">
+          <div className="flex-1 overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-[#424242] scrollbar-track-transparent flex flex-col">
             <div className="flex-1">{children}</div>
             <StatusBar />
           </div>
