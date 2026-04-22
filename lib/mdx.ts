@@ -22,7 +22,8 @@ export type PostData = {
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
 export const getPost = (slug: string): PostData => {
-  const fullPath = path.join(postsDirectory, slug + ".mdx");
+  const safeSlug = path.basename(slug);
+  const fullPath = path.join(postsDirectory, safeSlug + ".mdx");
   const fileContents = fs.readFileSync(fullPath, "utf-8");
   const matterResult = matter(fileContents);
 
