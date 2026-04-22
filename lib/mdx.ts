@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cache } from "react";
 
 type Frontmatter = {
   title: string;
@@ -21,10 +22,10 @@ export type PostData = {
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
-export const getPost = (slug: string): PostData => {
+export const getPost = cache(async (slug: string): Promise<PostData> => {
   const safeSlug = path.basename(slug);
   const fullPath = path.join(postsDirectory, safeSlug + ".mdx");
-  const fileContents = fs.readFileSync(fullPath, "utf-8");
+  const fileContents = await fs.promises.readFile(fullPath, "utf-8");
   const matterResult = matter(fileContents);
 
   return {
@@ -32,18 +33,20 @@ export const getPost = (slug: string): PostData => {
     content: matterResult.content,
     frontmatter: matterResult.data as Frontmatter,
   };
-};
+});
 
-export const getAllPosts = (): PostData[] => {
-  const files = fs.readdirSync(postsDirectory);
+export const getAllPosts = cache(async (): Promise<PostData[]> => {
+  const files = await fs.promises.readdir(postsDirectory);
 
   // 本番環境かどうかの判定を追加
   const isProd = process.env.NODE_ENV === "production";
 
-  const posts = files.map((fileName) => {
+  const postsPromises = files.map(async (fileName) => {
     const slug = path.parse(fileName).name;
-    return getPost(slug);
+    return await getPost(slug);
   });
+  
+  const posts = await Promise.all(postsPromises);
 
   // draft: true の記事を除外するフィルタリング処理を追加
   const visiblePosts = posts.filter((post) => {
@@ -62,4 +65,4 @@ export const getAllPosts = (): PostData[] => {
       return -1;
     }
   });
-};
+});

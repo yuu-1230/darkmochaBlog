@@ -36,12 +36,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const fileTree = generateFileTree(posts);
   const jsonLd = {
     "@context": "https://schema.org",

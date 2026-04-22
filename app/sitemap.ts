@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // MDX記事から動的ページ(ブログ記事)を生成
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const dynamicRoutes = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.frontmatter.date).toISOString(),
