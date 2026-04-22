@@ -1,15 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getAllPosts } from "@/lib/mdx";
+import { getAllPosts, PostData } from "@/lib/mdx";
 import { getAllNotes } from "@/lib/notes";
 import { NoteTimeline } from "@/components/note-timeline";
 import { Coffee, ChevronRight } from "lucide-react";
 
 // --- 型定義 ---
-type Post = ReturnType<typeof getAllPosts>[0];
+type Post = PostData;
 
-export default function Home() {
-  const allPosts = getAllPosts();
+export default async function Home() {
+  const allPosts = await getAllPosts();
   const notes = getAllNotes();
 
   // 記事をカテゴリごとにフィルタリング

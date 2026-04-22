@@ -4,140 +4,124 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-**Visual Studio Code (VS Code)** のUI/UXを忠実に再現した、エンジニアのためのポートフォリオブログです。
-Next.js (App Router) + MDX を採用し、**「IDE風ポートフォリオブログ」** へとアーキテクチャを刷新しました。(Updated: 2026-02-12)
+**Visual Studio Code（VS Code）** のUI/UXを忠実に再現した、エンジニア向けのポートフォリオブログです。
+Next.js（App Router）とMDXを採用し、**「IDE風ポートフォリオブログ」** としてアーキテクチャを継続的に改善しています。（Updated: 2026-04）
 
-## 🎨 Concept & Design
+## 🎨 コンセプト・デザイン
 
-テーマコンセプトは **"VS Code IDE Style (Zen Mode)"**。
-エンジニアにとって最も馴染み深いインターフェースであるIDEのレイアウト（Activity Bar, Sidebar, Tab Bar, Status Bar）をWeb上で再現しています。
+テーマコンセプトは **"VS Code IDE Style（Zen Mode）"**。
+エンジニアにとって最も馴染み深いIDEのレイアウト（Activity Bar、Sidebar、Tab Bar、Status Bar）をWeb上で再現しています。
 
-- **Authentic UI**: `globals.css` にVS Code (Dark+) の配色変数を定義し、リアルな没入感を実現。
-- **Typography**: コードやエディタ部分には `JetBrains Mono` を採用し、可読性と雰囲気を両立。
-- **Interactive**: Activity Barによるサイドバーの開閉や、ルーティングに連動したタブ表示など、SPAならではの挙動を実装。
-- **Mobile Friendly**: スマホ閲覧時はエクスプローラーをドロワーメニュー化し、ステータスバーを最適化するなど、レスポンシブにも完全対応。
+- **本物に近いUI**: `globals.css` にVS Code（Dark+）の配色変数を定義し、リアルな没入感を実現。
+- **タイポグラフィ**: コードやエディタ部分に `JetBrains Mono` を採用し、可読性と雰囲気を両立。
+- **インタラクション**: Activity Barによるサイドバーの開閉や、ルーティングに連動したタブ表示など、SPAならではの動作を実装。
+- **モバイル対応**: スマートフォン閲覧時はエクスプローラーをドロワーメニュー化し、ステータスバーを最適化するなど、レスポンシブデザインに完全対応。
 
-## 🛠️ Tech Stack & Architecture
+## 🛠️ 技術スタック・アーキテクチャ
 
-### Core
+### コア
 
-- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Deployment**: [Vercel](https://vercel.com/)
-- **Package Manager**: [pnpm](https://pnpm.io/)
-- **Analytics**: [Vercel Analytics](https://vercel.com/analytics), [Vercel Speed Insights](https://vercel.com/docs/speed-insights)
+- **フレームワーク**: [Next.js 16 (App Router)](https://nextjs.org/)
+- **言語**: [TypeScript](https://www.typescriptlang.org/)
+- **デプロイ**: [Vercel](https://vercel.com/)
+- **パッケージマネージャー**: [pnpm](https://pnpm.io/)
+- **アナリティクス**: [Vercel Analytics](https://vercel.com/analytics)、[Vercel Speed Insights](https://vercel.com/docs/speed-insights)
 
-### UI & Styling
+### UIとスタイリング
 
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-  - **Colors**: `#1E1E1E` (Editor Background), `#252526` (Sidebar), `#007ACC` (Status Bar Blue)
-- **Fonts**: `Inter` (UI), `JetBrains Mono` (Code/Editor)
-- **Icons**: [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/)
+- **スタイリング**: [Tailwind CSS v4](https://tailwindcss.com/)
+  - **カラー**: `#1E1E1E`（エディター背景）、`#252526`（サイドバー）、`#007ACC`（ステータスバーブルー）
+- **フォント**: `Inter`（UI）、`JetBrains Mono`（コード・エディター）、`Yomogi`（手書き風）
+- **アイコン**: [Lucide React](https://lucide.dev/)、[React Icons](https://react-icons.github.io/react-icons/)
 
-### Architecture & Logic
+### 🚀 パフォーマンスとセキュリティ
 
-- **File Tree System (`lib/file-tree.ts`)**:
-  サイドバーの表示内容とタブバーの表示名を一元管理する「Single Source of Truth」を実装。URLパスとツリー定義を照合し、現在のファイル名を動的に特定。
-- **Dynamic OGP Generation (`@vercel/og`)**:
-  記事のタイトルやメタデータを動的に取得し、VS Codeエディタ風のサムネイル画像をビルド時に自動生成。
+- **高パフォーマンス**: `fs.promises` とReactの `cache()` を活用した完全非同期のデータフェッチにより、Node.jsのI/Oブロッキングを排除し、高速なページロード（TTFB最適化）を実現。
+- **クリーンアーキテクチャ**: 肥大化しやすいMDXコンポーネント群を独立ファイルに分離（`mdx-components.tsx`）し、保守性と再利用性を高めた堅牢なコード設計。
+- **セキュリティ重視**:
+  - `path.basename` によるパストラバーサル（LFI）攻撃の防止。
+  - JSON-LD出力時の `<` エスケープ処理によるXSS（クロスサイトスクリプティング）対策。
+  - `next.config.ts` での強固なセキュリティヘッダー（HSTS、X-Frame-Options、X-Content-Type-Optionsなど）の適用。
 
-### 🤖 SEO & AEO (AI Engine Optimization) Strategy
+### 🤖 SEO・AEO（AI Engine Optimization）戦略
 
-見た目はVS Codeでありながら、クローラーやAI（Perplexity, ChatGPT等）が完璧に解析できる裏側を構築しています。
+見た目はVS Codeでありながら、クローラーやAI（Perplexity、ChatGPTなど）が完全に解析できる構造を裏側に構築しています。
 
-- **Semantic HTML**: `<nav role="tablist">`, `<aside>`, `<article>`, `<time>` や `aria-label` 等のアクセシビリティタグを徹底。
-- **Structured Data (JSON-LD)**: `Person` および `BlogPosting` スキーマを動的に生成し、AI検索エンジンへの直接的な自己紹介（スキルや記事の文脈）を実装。
-- **Sitemap & Robots**: `next-sitemap` を導入し、全記事の `sitemap.xml` と `robots.txt` を自動生成。Google Search Consoleへのインデックス登録を完全自動化。
-- **Dynamic Open Graph Image**: `opengraph-image.tsx` により、記事ごとに最適化されたOGP画像を動的に生成。SNSシェア時の視認性とクリック率を向上。
+- **セマンティックHTML**: `<nav role="tablist">`、`<aside>`、`<article>`、`<time>` や `aria-label` などのアクセシビリティタグを徹底的に活用。
+- **構造化データ（JSON-LD）**: `Person` および `BlogPosting` スキーマを動的に生成し、AI検索エンジンへスキルや記事の文脈を直接伝える仕組みを実装。
+- **サイトマップとRobots**: 全静的・動的ルートの `sitemap.xml` と `robots.txt` を自動生成。
+- **動的OGP画像**: `opengraph-image.tsx` により記事ごとに最適化されたOGP画像を動的生成。SNSシェア時の視認性とクリック率を向上。
 
-## 📂 Current Project Structure
+## 📂 プロジェクト構成
 
 ```text
 .
 ├── app/                  # Next.js App Router
 │   ├── blog/
-│   │   └── [slug]/       # 記事詳細ページ (Markdown Rendering & JSON-LD)
-│   │       ├── page.tsx  # 記事本体
-│   │       └── opengraph-image.tsx # 動的OGP生成 (記事タイトル埋め込み)
+│   │   └── [slug]/       # 記事詳細ページ（Markdownレンダリング）
+│   │       ├── page.tsx  # 記事本体（async/await最適化済み）
+│   │       └── opengraph-image.tsx # 動的OGP生成
 │   ├── globals.css       # VS Code Dark+ 配色定義
-│   ├── layout.tsx        # Root Layout (MainLayout & Person JSON-LD)
-│   ├── opengraph-image.tsx # サイト全体用OGP (Default)
-│   ├── page.tsx          # トップページ (Dashboard / Article List)
-│   └── robots.txt/       # 動的robots.txt生成 (Route Handler)
+│   ├── layout.tsx        # ルートレイアウト & Person JSON-LD
+│   ├── opengraph-image.tsx # サイト全体用OGP（デフォルト）
+│   ├── page.tsx          # トップページ（カテゴリ & タイムライン）
+│   ├── sitemap.ts        # 動的サイトマップ生成
+│   └── robots.txt/       # robots.txt 生成
 ├── components/
-│   ├── layout/           # Semantic IDE UI Components
-│   │   ├── activity-bar.tsx # サイドバー開閉トグル (nav)
-│   │   ├── main-layout.tsx  # クライアント状態管理 & レスポンシブ制御
-│   │   ├── sidebar.tsx      # 再帰的ファイルツリー表示 (ul/li lists)
-│   │   ├── status-bar.tsx   # Git・エラー情報 (footer)
-│   │   ├── tab-bar.tsx      # 動的タブバー (tablist)
-│   │   └── title-bar.tsx    # ウィンドウヘッダー & アプリアイコン
-│   └── ui/               # Common UI Components
+│   ├── layout/           # セマンティックIDE UIコンポーネント
+│   │   ├── activity-bar.tsx # サイドバー開閉トグル
+│   │   ├── main-layout.tsx  # クライアント状態管理 & レスポンシブ
+│   │   ├── sidebar.tsx      # 再帰的ファイルツリー表示
+│   │   └── ...
+│   ├── mdx-components.tsx   # MDXカスタムコンポーネント群
+│   ├── note-timeline.tsx    # ノートタイムラインUI
+│   ├── TableOfContents.tsx  # 目次生成UI
+│   └── ui/                  # 共通UIコンポーネント
 ├── content/
-│   └── posts/            # 記事ファイル (.mdx)
+│   ├── posts/            # ブログ記事ファイル（.mdx）
+│   └── notes/            # 短いノートファイル（.mdx）
 ├── lib/
-│   ├── file-tree.ts      # ファイルツリー構造の定義データ
+│   ├── file-tree.ts      # ファイルツリー構造の定義
 │   ├── projects.ts       # プロジェクト実績データ
-│   └── mdx.ts            # 記事取得・前後の記事判定ロジック
+│   ├── notes.ts          # ノートデータ取得ロジック
+│   └── mdx.ts            # 記事取得・キャッシュロジック（fs.promises）
 └── public/
-    └── images/           # Static Assets & App Icons
+    └── images/           # 静的アセット & アプリアイコン
 ```
 
-## 🚀 Getting Started
+## 🗺️ 開発ロードマップ
 
-```bash
-# Clone the repository
-git clone https://github.com/yuu-1230/darkmocha-blog.git
-
-# Install dependencies
-pnpm install
-
-# Run development server
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 🗺️ Blog Development Roadmap
-
-### Phase 1: 記事を表示させる (Done ✅)
-
+### Phase 1: 記事を表示する（完了 ✅）
 - [x] プロジェクト作成 & 初期設定
-- [x] MDX環境のセットアップ
-- [x] 記事データの取得ロジック実装
-- [x] Frontmatterの型定義修正
+- [x] MDX環境のセットアップ・Frontmatter定義
 
-### Phase 2: デザイン刷新 - VS Code化 (Done ✅)
+### Phase 2: デザイン刷新 - VS Code化（完了 ✅）
+- [x] 全体レイアウトのIDE化（`h-screen`、画面分割）
+- [x] コンポーネント分割（`ActivityBar`、`Sidebar`、`TabBar` など）
+- [x] モバイルレスポンシブ対応
 
-- [x] **全体レイアウトのIDE化** (`h-screen`, 画面分割)
-- [x] **コンポーネント分割** (`TitleBar`, `ActivityBar`, `Sidebar`, `TabBar`, `StatusBar`)
-- [x] **アセット管理の強化** (仮想ファイル構造、フォント)
-- [x] **Mobile Responsiveness**: スマホ閲覧時のレイアウト最適化・ドロワーメニュー実装
+### Phase 3: SEO・AEO最適化（完了 ✅）
+- [x] セマンティックHTML & 構造化データ（JSON-LD）
+- [x] 動的OGP生成 & サイトマップ / robots.txt
 
-### Phase 3: SEO & AEO 最適化 (Done ✅)
+### Phase 4: パフォーマンス・セキュリティ・機能拡張（完了 ✅）
+- [x] カテゴリ別記事一覧 & タイムライン実装（`app/page.tsx`）
+- [x] 目次（TOC）の自動生成機能
+- [x] 非同期ファイルI/O（`fs.promises`）と `React.cache()` による高速化
+- [x] パストラバーサル・XSS対策およびセキュリティヘッダーの導入
+- [x] MDXコンポーネントの分離によるコード設計の改善
 
-- [x] **Semantic HTML**: 全UIコンポーネントのWeb標準・アクセシビリティ対応
-- [x] **Structured Data**: JSON-LD（Person, BlogPosting）の動的埋め込み
-- [x] **Dynamic Metadata**: 記事ごとの動的OGP生成と、トップページのリード文最適化
-- [x] **Crawling**: 記事最下部への「前後記事リンク」実装
-- [x] **Sitemap & Robots**: `next-sitemap` 導入と `robots.txt` の動的生成対応
+### Phase 5: コンテンツ拡充 & さらなる進化（進行中 🚧）
+- [ ] **About Me（AEO強化）**: AI検索に引用されやすい「Q&A形式」の自然言語セクションを追加
+- [ ] **コンテンツ**: Next.jsやUnityに関する技術解説記事の執筆
 
-### Phase 4: コンテンツ拡充 & 本番公開 (In Progress 🚧)
-
-- [x] **Projects Page**: 拡張機能マーケットプレイス風の実績一覧ページ
-- [x] **Markdown Style**: MDXカスタムコンポーネント (`<C>`) による文字色装飾機能
-- [x] **Deployment**: Vercelへの本番デプロイ完了
-- [x] **Analytics**: Vercel Analytics / Speed Insights の導入
-- [ ] **About Me (AEO強化)**: AI検索に引用されやすい「Q&A形式」の自然言語セクションを追加
-- [ ] **Content**: Next.jsやUnityに関する技術解説記事の執筆
-
-## 👤 Author
+## 👤 作者
 
 **Yuto Nagata**
 
-- Web Developer (Next.js / React)
-- Game Creator (Unity)
-- Student at Public University of Science, Suwa
+- Webデベロッパー（Next.js / React）
+- ゲームクリエイター（Unity）
+- 諏訪公立大学 在学中
 
 ---
 

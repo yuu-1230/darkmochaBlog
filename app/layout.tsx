@@ -36,12 +36,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const fileTree = generateFileTree(posts);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,7 +80,7 @@ export default function RootLayout({
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
         <MainLayout tree={fileTree}>{children}</MainLayout>
         <SpeedInsights />

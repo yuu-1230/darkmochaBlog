@@ -11,7 +11,7 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   const { title, description, image } = post.frontmatter;
 
   const isDev = process.env.NODE_ENV === "development";
