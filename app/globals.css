@@ -30,13 +30,6 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Charts */
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -46,87 +39,79 @@
 }
 
 /* ============================================
-   Light Mode (Default)
+   Light Mode
+   温かみのあるクリームベージュ × テラコッタ
    ============================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #F3EAD3;
+  --foreground: #2D2D2D;
 
-  --card: #f9f9f9;
-  --card-foreground: #0a0a0a;
+  --card: #EDE3CA;
+  --card-foreground: #2D2D2D;
 
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
+  --popover: #EDE3CA;
+  --popover-foreground: #2D2D2D;
 
-  /* Primary: 落ち着いたインディゴ */
-  --primary: #4f46e5;
+  /* Primary: テラコッタ */
+  --primary: #C05C20;
   --primary-foreground: #ffffff;
 
-  /* Secondary: ライトグレー */
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
+  /* Secondary: 薄いベージュ */
+  --secondary: #E5DABF;
+  --secondary-foreground: #2D2D2D;
 
-  /* Muted: 薄いグレー背景 */
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  /* Muted: ウォームグレー背景 */
+  --muted: #E5DABF;
+  --muted-foreground: #8C8577;
 
-  /* Accent: ホバーや強調 */
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
+  /* Accent: ホバー用のほんのり暗いベージュ */
+  --accent: #E0D5BC;
+  --accent-foreground: #2D2D2D;
 
-  --destructive: #ef4444;
+  --destructive: #c0392b;
 
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #4f46e5;
+  --border: #E5DABF;
+  --input: #E5DABF;
+  --ring: #C05C20;
 
   --radius: 0.5rem;
-
-  /* Charts */
-  --chart-1: #4f46e5;
-  --chart-2: #06b6d4;
-  --chart-3: #10b981;
-  --chart-4: #f59e0b;
-  --chart-5: #ef4444;
 }
 
 /* ============================================
    Dark Mode
+   深みのあるウォームダークグレー × ブライトオレンジ
    ============================================ */
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #2B2B2B;
+  --foreground: #F4F0E6;
 
-  --card: #18181b;
-  --card-foreground: #fafafa;
+  --card: #333333;
+  --card-foreground: #F4F0E6;
 
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
+  --popover: #333333;
+  --popover-foreground: #F4F0E6;
 
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  /* Primary: ブライトオレンジ */
+  --primary: #F29C38;
+  --primary-foreground: #2B2B2B;
 
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
+  /* Secondary */
+  --secondary: #3D3D3D;
+  --secondary-foreground: #F4F0E6;
 
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
+  /* Muted */
+  --muted: #363636;
+  --muted-foreground: #A39E93;
 
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
+  /* Accent */
+  --accent: #383838;
+  --accent-foreground: #F4F0E6;
 
-  --destructive: #ef4444;
+  --destructive: #e74c3c;
 
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #6366f1;
-
-  /* Charts */
-  --chart-1: #6366f1;
-  --chart-2: #22d3ee;
-  --chart-3: #34d399;
-  --chart-4: #fbbf24;
-  --chart-5: #f87171;
+  --border: #363636;
+  --input: #363636;
+  --ring: #F29C38;
 }
 
 @layer base {
@@ -134,12 +119,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
   }
 }
 
 @layer utilities {
-  /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -160,7 +144,6 @@
     background-color: var(--muted-foreground);
   }
 
-  /* Firefox */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
