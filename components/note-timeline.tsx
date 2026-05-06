@@ -127,7 +127,7 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
   });
 
   return (
-    <article className="flex gap-4 group">
+    <article className="flex gap-4 group" style={{ contentVisibility: "auto", containIntrinsicSize: "0 120px" }}>
       {/* Timeline column */}
       <div className="flex flex-col items-center shrink-0 pt-1">
         <div className="w-2 h-2 rounded-full bg-primary/40 group-hover:bg-primary ring-4 ring-background transition-colors shrink-0 mt-0.5" />
@@ -146,14 +146,15 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
         </time>
         <NoteContent content={note.content} />
         {note.image && (
-          <div className="mt-3 max-w-sm w-full rounded-lg overflow-hidden border border-border">
+          <div className="mt-3 max-w-sm w-full rounded-lg overflow-hidden border border-border relative"
+            style={{ aspectRatio: "4/3" }}>
             <Image
               src={resolveImageSrc(note.image)}
               alt=""
-              width={0}
-              height={0}
+              fill
               sizes="(max-width: 768px) 100vw, 24rem"
-              className="w-full h-auto"
+              className="object-contain"
+              loading="lazy"
             />
           </div>
         )}
