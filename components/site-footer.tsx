@@ -22,7 +22,6 @@ export const SiteFooter = () => {
       className="border-t border-border mt-16"
     >
       <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-        {/* Left */}
         <div className="flex flex-col md:flex-row items-center gap-4">
           <span>© Yuto Nagata 2026</span>
           <Link
@@ -36,7 +35,6 @@ export const SiteFooter = () => {
           </Link>
         </div>
 
-        {/* Right: Social */}
         <nav className="flex items-center gap-4" aria-label="Social links">
           {socialLinks.map((link) => (
             <Link

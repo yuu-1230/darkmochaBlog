@@ -5,7 +5,6 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import type { PostData } from "@/lib/mdx";
 
-// ── Animation variants ──────────────────────────────────
 const container = {
   hidden: {},
   visible: {
@@ -22,7 +21,6 @@ const item = {
   },
 };
 
-// ── Inline link helper ───────────────────────────────────
 function InlineLink({ word, href }: { word: string; href: string }) {
   return (
     <Link
@@ -34,7 +32,6 @@ function InlineLink({ word, href }: { word: string; href: string }) {
   );
 }
 
-// ── Category label ───────────────────────────────────────
 function categoryLabel(category?: string): string {
   const map: Record<string, string> = {
     Tech: "Tech",
@@ -44,7 +41,6 @@ function categoryLabel(category?: string): string {
   return category ? (map[category] ?? category) : "Article";
 }
 
-// ── Main client component ────────────────────────────────
 type Props = { recentPosts: PostData[] };
 
 export function HomeClient({ recentPosts }: Props) {
@@ -55,7 +51,6 @@ export function HomeClient({ recentPosts }: Props) {
       animate="visible"
       className="max-w-2xl mx-auto px-4 py-24"
     >
-      {/* ── Hero ── */}
       <div className="space-y-8">
         <motion.h1
           variants={item}
@@ -90,7 +85,6 @@ export function HomeClient({ recentPosts }: Props) {
           普段はNext.js/Reactを用いたWebフロントエンド開発や、Unityでのゲーム開発、LLMを組み込んだアプリケーション制作を行っています。小中学生向けのプログラミング講師としての顔も持っています。
         </motion.p>
 
-        {/* Quick nav */}
         <motion.nav
           variants={item}
           className="flex flex-wrap gap-x-5 gap-y-2 pt-2"
@@ -116,11 +110,10 @@ export function HomeClient({ recentPosts }: Props) {
         </motion.nav>
       </div>
 
-      {/* ── Decorative separator ── */}
       {recentPosts.length > 0 && (
         <motion.div
           variants={item}
-          className="mt-20 flex items-center justify-center gap-3 text-border"
+          className="mt-20 flex items-center justify-center gap-3"
           aria-hidden
         >
           <div className="h-px flex-1 bg-border/50" />
@@ -129,7 +122,6 @@ export function HomeClient({ recentPosts }: Props) {
         </motion.div>
       )}
 
-      {/* ── Recent Posts ── */}
       {recentPosts.length > 0 && (
         <div className="mt-12">
           <motion.p
@@ -146,17 +138,12 @@ export function HomeClient({ recentPosts }: Props) {
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4"
                 >
-                  {/* Date */}
                   <span className="w-28 shrink-0 text-sm text-muted-foreground font-mono">
                     {post.frontmatter.date}
                   </span>
-
-                  {/* Title */}
                   <span className="flex-1 text-sm font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
                     {post.frontmatter.title}
                   </span>
-
-                  {/* Category */}
                   <span className="hidden sm:block ml-auto text-xs text-muted-foreground shrink-0 pl-4">
                     {categoryLabel(post.frontmatter.category)}
                   </span>
@@ -165,7 +152,6 @@ export function HomeClient({ recentPosts }: Props) {
             ))}
           </ul>
 
-          {/* View all */}
           <motion.div variants={item} className="mt-10">
             <Link
               href="/blog"

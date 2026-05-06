@@ -41,7 +41,6 @@ export const SiteHeader = () => {
       className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-sm"
     >
       <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-        {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2 font-bold text-base text-foreground hover:text-primary transition-colors"
@@ -50,7 +49,6 @@ export const SiteHeader = () => {
           darkmocha.dev
         </Link>
 
-        {/* Nav + Toggle */}
         <div className="flex items-center gap-1">
           <nav className="hidden md:flex items-center gap-0 mr-2">
             {navItems.map((item) => (
