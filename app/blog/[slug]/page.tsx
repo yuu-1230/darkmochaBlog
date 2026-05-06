@@ -17,6 +17,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { mdxComponents, generateTOC } from "@/components/mdx-components";
 import { TableOfContents } from "@/components/TableOfContents";
+import { AnchorScroll } from "@/components/anchor-scroll";
 
 export async function generateMetadata({
   params,
@@ -98,6 +99,7 @@ export default async function BlogPost({
 
   return (
     <div className="pb-20">
+      <AnchorScroll />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}

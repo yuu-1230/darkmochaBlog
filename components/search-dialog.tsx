@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight } from "lucide-react";
+import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight, Hash } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { SearchItem } from "@/app/api/search/route";
-import { extractSnippet } from "@/lib/search-utils";
+import { extractSnippet, findMatchedSection } from "@/lib/search-utils";
 
 // ──────────────────────────────────────────
 // Helpers
@@ -25,7 +25,10 @@ const TYPE_ICON: Record<SearchItem["type"], React.ReactNode> = {
 
 function highlight(text: string, query: string) {
   if (!query.trim()) return <>{text}</>;
-  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+  const regex = new RegExp(
+    `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+    "gi",
+  );
   const parts = text.split(regex);
   return (
     <>
@@ -42,13 +45,122 @@ function highlight(text: string, query: string) {
   );
 }
 
-function score(item: SearchItem, q: string): number {
-  const lq = q.toLowerCase();
+function scoreItem(item: SearchItem, lq: string): number {
   if (item.title.toLowerCase().includes(lq)) return 4;
   if (item.description.toLowerCase().includes(lq)) return 3;
   if (item.tags.some((t) => t.toLowerCase().includes(lq))) return 2;
   if (item.body?.toLowerCase().includes(lq)) return 1;
   return 0;
+}
+
+/**
+ * ブログ記事のみ: マッチしたセクションのアンカーを href に付加して返す
+ * notes / project はそのまま
+ */
+function resolveHref(item: SearchItem, query: string): string {
+  if (item.type !== "blog" || !item.sections || !query.trim()) return item.href;
+  const lq = query.toLowerCase();
+  // title/description にマッチしていれば記事トップ
+  if (
+    item.title.toLowerCase().includes(lq) ||
+    item.description.toLowerCase().includes(lq)
+  ) return item.href;
+
+  const section = findMatchedSection(item.sections, query);
+  if (section?.anchor) return `${item.href}#${section.anchor}`;
+  return item.href;
+}
+
+// ──────────────────────────────────────────
+// Result card
+// ──────────────────────────────────────────
+type CardProps = {
+  item: SearchItem;
+  query: string;
+  isActive: boolean;
+  idx: number;
+  onClose: () => void;
+  onHover: (idx: number) => void;
+};
+
+function ResultCard({ item, query, isActive, idx, onClose, onHover }: CardProps) {
+  const href = resolveHref(item, query);
+  const lq = query.toLowerCase();
+
+  // どこにマッチしたか判定
+  const inTitle = item.title.toLowerCase().includes(lq);
+  const inDesc  = item.description.toLowerCase().includes(lq);
+  const inBody  = !inTitle && !inDesc && !!item.body?.toLowerCase().includes(lq);
+
+  // セクション（見出し）情報
+  const matchedSection =
+    item.type === "blog" && item.sections && !inTitle && !inDesc
+      ? findMatchedSection(item.sections, query)
+      : null;
+
+  // スニペット
+  const snippet = inBody && item.body
+    ? (matchedSection
+        ? extractSnippet(matchedSection.body, query)
+        : extractSnippet(item.body, query))
+    : null;
+
+  return (
+    <li data-idx={idx}>
+      <Link
+        href={href}
+        onClick={onClose}
+        onMouseEnter={() => onHover(idx)}
+        className={`flex items-start gap-3 px-4 py-2.5 transition-colors ${
+          isActive ? "bg-accent text-foreground" : "text-foreground/80 hover:bg-accent/50"
+        }`}
+      >
+        <div className="flex-1 min-w-0">
+          {/* 記事タイトル */}
+          <p className="text-sm font-medium leading-tight line-clamp-1">
+            {highlight(item.title, query)}
+          </p>
+
+          {/* マッチしたセクションのバッジ */}
+          {matchedSection?.heading && (
+            <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-mono text-primary/70 bg-primary/10 rounded px-1.5 py-0.5">
+              <Hash className="w-2.5 h-2.5" />
+              {matchedSection.heading}
+            </span>
+          )}
+
+          {/* スニペット or description */}
+          {snippet ? (
+            <p className="text-xs text-muted-foreground line-clamp-2 mt-1 leading-relaxed">
+              {highlight(snippet, query)}
+            </p>
+          ) : item.description ? (
+            <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
+              {highlight(item.description, query)}
+            </p>
+          ) : null}
+
+          {/* タグ */}
+          {item.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {item.tags.slice(0, 4).map((t) => (
+                <span
+                  key={t}
+                  className="text-[10px] font-mono text-muted-foreground/70 bg-muted rounded px-1"
+                >
+                  {highlight(t, query)}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {isActive && (
+          <ArrowRight className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+        )}
+      </Link>
+    </li>
+  );
 }
 
 // ──────────────────────────────────────────
@@ -70,12 +182,10 @@ export function SearchDialog() {
       const res = await fetch("/api/search");
       const data: SearchItem[] = await res.json();
       setIndex(data);
-    } catch {
-      // ignore
-    }
+    } catch { /* ignore */ }
   }, [index.length]);
 
-  // keyboard shortcut
+  // Cmd+K / Esc
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -88,7 +198,7 @@ export function SearchDialog() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // focus input when opened
+  // focus & reset on open
   useEffect(() => {
     if (open) {
       loadIndex();
@@ -98,27 +208,33 @@ export function SearchDialog() {
     }
   }, [open, loadIndex]);
 
-  // filter & group results
-  const results = query.trim()
-    ? index
-        .map((item) => ({ item, s: score(item, query) }))
-        .filter(({ s }) => s > 0)
-        .sort((a, b) => b.s - a.s)
-        .map(({ item }) => item)
-        .slice(0, 12)
-    : [];
+  // filter & sort
+  const results = useMemo(() => {
+    if (!query.trim()) return [];
+    const lq = query.toLowerCase();
+    return index
+      .map((item) => ({ item, s: scoreItem(item, lq) }))
+      .filter(({ s }) => s > 0)
+      .sort((a, b) => b.s - a.s)
+      .map(({ item }) => item)
+      .slice(0, 12);
+  }, [query, index]);
 
-  const grouped = (["blog", "note", "project"] as const).reduce<
-    Record<string, SearchItem[]>
-  >((acc, type) => {
-    const filtered = results.filter((r) => r.type === type);
-    if (filtered.length) acc[type] = filtered;
-    return acc;
-  }, {});
+  const grouped = useMemo(() =>
+    (["blog", "note", "project"] as const).reduce<Record<string, SearchItem[]>>(
+      (acc, type) => {
+        const f = results.filter((r) => r.type === type);
+        if (f.length) acc[type] = f;
+        return acc;
+      },
+      {},
+    ),
+    [results],
+  );
 
-  const flat = Object.values(grouped).flat();
+  const flat = useMemo(() => Object.values(grouped).flat(), [grouped]);
 
-  // keyboard navigation in list
+  // Enter で navigate
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -127,20 +243,23 @@ export function SearchDialog() {
       e.preventDefault();
       setActiveIdx((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter" && flat[activeIdx]) {
-      router.push(flat[activeIdx].href);
+      router.push(resolveHref(flat[activeIdx], query));
       setOpen(false);
     }
   };
 
-  // scroll active item into view
+  // scroll active into view
   useEffect(() => {
-    const el = listRef.current?.querySelector(`[data-idx="${activeIdx}"]`);
-    el?.scrollIntoView({ block: "nearest" });
+    listRef.current
+      ?.querySelector(`[data-idx="${activeIdx}"]`)
+      ?.scrollIntoView({ block: "nearest" });
   }, [activeIdx]);
+
+  const close = () => setOpen(false);
 
   return (
     <>
-      {/* Search trigger button */}
+      {/* Trigger */}
       <button
         onClick={() => setOpen(true)}
         aria-label="検索"
@@ -149,7 +268,6 @@ export function SearchDialog() {
         <Search className="w-4 h-4" />
       </button>
 
-      {/* Modal */}
       <AnimatePresence>
         {open && (
           <>
@@ -160,7 +278,7 @@ export function SearchDialog() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              onClick={() => setOpen(false)}
+              onClick={close}
               className="fixed inset-0 z-[60] bg-background/70 backdrop-blur-sm"
             />
 
@@ -174,7 +292,7 @@ export function SearchDialog() {
               className="fixed left-1/2 top-[10vh] z-[70] w-full max-w-lg -translate-x-1/2 px-4 sm:px-0"
             >
               <div className="rounded-xl border border-border bg-background shadow-2xl overflow-hidden">
-                {/* Input row */}
+                {/* Input */}
                 <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
                   <Search className="w-4 h-4 text-muted-foreground shrink-0" />
                   <input
@@ -186,22 +304,19 @@ export function SearchDialog() {
                     className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 outline-none"
                   />
                   {query && (
-                    <button
-                      onClick={() => setQuery("")}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                      aria-label="クリア"
-                    >
+                    <button onClick={() => setQuery("")} aria-label="クリア"
+                      className="text-muted-foreground hover:text-foreground transition-colors">
                       <X className="w-4 h-4" />
                     </button>
                   )}
-                  <kbd className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5">
+                  <kbd className="hidden sm:inline-flex text-[10px] font-mono text-muted-foreground border border-border rounded px-1.5 py-0.5">
                     Esc
                   </kbd>
                 </div>
 
                 {/* Results */}
                 <div className="max-h-[60vh] overflow-y-auto">
-                  {query.trim() === "" && (
+                  {!query.trim() && (
                     <div className="px-5 py-10 text-center text-xs text-muted-foreground">
                       キーワードを入力してください
                       <div className="mt-2 flex items-center justify-center gap-1 opacity-50">
@@ -212,7 +327,7 @@ export function SearchDialog() {
                     </div>
                   )}
 
-                  {query.trim() !== "" && flat.length === 0 && (
+                  {query.trim() && flat.length === 0 && (
                     <div className="px-5 py-10 text-center text-xs text-muted-foreground">
                       「{query}」に一致する結果が見つかりませんでした
                     </div>
@@ -226,71 +341,25 @@ export function SearchDialog() {
                         let runningIdx = flat.indexOf(items[0]);
                         return (
                           <li key={type}>
-                            {/* Group header */}
                             <div className="px-4 pt-3 pb-1 flex items-center gap-1.5">
                               <span className="text-primary/50">{TYPE_ICON[type]}</span>
                               <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
                                 {TYPE_LABEL[type]}
                               </span>
                             </div>
-
                             <ul>
                               {items.map((item) => {
                                 const idx = runningIdx++;
-                                const isActive = idx === activeIdx;
                                 return (
-                                  <li key={`${item.type}-${item.title}`} data-idx={idx}>
-                                    <Link
-                                      href={item.href}
-                                      onClick={() => setOpen(false)}
-                                      onMouseEnter={() => setActiveIdx(idx)}
-                                      className={`flex items-start gap-3 px-4 py-2.5 transition-colors ${
-                                        isActive
-                                          ? "bg-accent text-foreground"
-                                          : "text-foreground/80 hover:bg-accent/50"
-                                      }`}
-                                    >
-                                      <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-medium leading-tight line-clamp-1">
-                                          {highlight(item.title, query)}
-                                        </p>
-                                        {/* 本文マッチ時はスニペット、それ以外は description */}
-                                        {(() => {
-                                          const lq = query.toLowerCase();
-                                          const bodyMatch = item.body?.toLowerCase().includes(lq) &&
-                                            !item.title.toLowerCase().includes(lq) &&
-                                            !item.description.toLowerCase().includes(lq);
-                                          if (bodyMatch && item.body) {
-                                            return (
-                                              <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5 leading-relaxed">
-                                                {highlight(extractSnippet(item.body, query), query)}
-                                              </p>
-                                            );
-                                          }
-                                          return item.description ? (
-                                            <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
-                                              {highlight(item.description, query)}
-                                            </p>
-                                          ) : null;
-                                        })()}
-                                        {item.tags.length > 0 && (
-                                          <div className="flex flex-wrap gap-1 mt-1">
-                                            {item.tags.slice(0, 4).map((t) => (
-                                              <span
-                                                key={t}
-                                                className="text-[10px] font-mono text-muted-foreground/70 bg-muted rounded px-1"
-                                              >
-                                                {highlight(t, query)}
-                                              </span>
-                                            ))}
-                                          </div>
-                                        )}
-                                      </div>
-                                      {isActive && (
-                                        <ArrowRight className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                                      )}
-                                    </Link>
-                                  </li>
+                                  <ResultCard
+                                    key={`${item.type}-${item.title}`}
+                                    item={item}
+                                    query={query}
+                                    isActive={idx === activeIdx}
+                                    idx={idx}
+                                    onClose={close}
+                                    onHover={setActiveIdx}
+                                  />
                                 );
                               })}
                             </ul>
