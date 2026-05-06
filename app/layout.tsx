@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Yomogi, JetBrains_Mono } from "next/font/google";
+import { Yomogi, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Providers } from "@/components/providers";
+import { CoffeeBackground } from "@/components/coffee-background";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -17,6 +18,12 @@ const yomogi = Yomogi({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -72,7 +79,7 @@ export default async function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
+        className={`${yomogi.variable} ${jetbrainsMono.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         <script
           type="application/ld+json"
@@ -81,6 +88,7 @@ export default async function RootLayout({
           }}
         />
         <Providers>
+          <CoffeeBackground />
           <SiteHeader />
           <main className="min-h-screen max-w-4xl mx-auto px-6 py-12">
             {children}

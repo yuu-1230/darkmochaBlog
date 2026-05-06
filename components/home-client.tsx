@@ -59,7 +59,7 @@ export function HomeClient({ recentPosts }: Props) {
       <div className="space-y-8">
         <motion.h1
           variants={item}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight"
+          className="font-serif italic text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight"
         >
           Hi, I&apos;m Yuto Nagata
         </motion.h1>
@@ -116,9 +116,22 @@ export function HomeClient({ recentPosts }: Props) {
         </motion.nav>
       </div>
 
+      {/* ── Decorative separator ── */}
+      {recentPosts.length > 0 && (
+        <motion.div
+          variants={item}
+          className="mt-20 flex items-center justify-center gap-3 text-border"
+          aria-hidden
+        >
+          <div className="h-px flex-1 bg-border/50" />
+          <span className="text-xs text-muted-foreground/40 tracking-[0.3em] select-none">· · ·</span>
+          <div className="h-px flex-1 bg-border/50" />
+        </motion.div>
+      )}
+
       {/* ── Recent Posts ── */}
       {recentPosts.length > 0 && (
-        <div className="mt-24">
+        <div className="mt-12">
           <motion.p
             variants={item}
             className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-8"

@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -70,6 +71,11 @@
 
   --destructive: #c0392b;
 
+  /* Coffee background blobs */
+  --coffee-blob-1: #C8893A; /* caramel espresso */
+  --coffee-blob-2: #F0DEB4; /* steamed milk */
+  --coffee-blob-3: #A0622A; /* dark roast */
+
   --border: #E5DABF;
   --input: #E5DABF;
   --ring: #C05C20;
@@ -108,6 +114,11 @@
   --accent-foreground: #F4F0E6;
 
   --destructive: #e74c3c;
+
+  /* Coffee background blobs */
+  --coffee-blob-1: #3E2723; /* deep espresso */
+  --coffee-blob-2: #D7CCC8; /* milk foam */
+  --coffee-blob-3: #6D4C41; /* medium roast */
 
   --border: #363636;
   --input: #363636;
