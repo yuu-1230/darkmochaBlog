@@ -8,14 +8,22 @@ type NoteTimelineProps = {
   notes: Note[];
   mode?: "preview" | "full";
   limit?: number;
+  activeTag?: string;
 };
 
 export function NoteTimeline({
   notes,
   mode = "preview",
   limit = PREVIEW_LIMIT,
+  activeTag,
 }: NoteTimelineProps) {
-  if (notes.length === 0) return null;
+  if (notes.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">
+        {activeTag ? `#${activeTag} のノートはありません。` : "ノートはまだありません。"}
+      </p>
+    );
+  }
 
   const isFull = mode === "full";
   const displayNotes = isFull ? notes : notes.slice(0, limit);
@@ -36,6 +44,22 @@ export function NoteTimeline({
             ({notes.length})
           </span>
         </h2>
+      )}
+
+      {/* Active tag filter indicator */}
+      {isFull && activeTag && (
+        <div className="mb-8 flex items-center gap-2">
+          <span className="text-xs font-mono text-muted-foreground">フィルター中:</span>
+          <span className="inline-flex items-center gap-1 text-xs font-mono bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+            #{activeTag}
+          </span>
+          <Link
+            href="/notes-timeline"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+          >
+            クリア
+          </Link>
+        </div>
       )}
 
       {/* Thread-style list */}
@@ -64,6 +88,34 @@ export function NoteTimeline({
   );
 }
 
+function resolveImageSrc(image: string): string {
+  if (image.startsWith("http") || image.startsWith("/")) return image;
+  return `/images/Notes/${image}`;
+}
+
+function NoteContent({ content }: { content: string }) {
+  const parts = content.split(/(#[\wぁ-鿿゠-ヿ一-鿿]+)/g);
+  return (
+    <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+      {parts.map((part, i) => {
+        if (part.startsWith("#")) {
+          const tag = part.slice(1);
+          return (
+            <Link
+              key={i}
+              href={`/notes-timeline?tag=${encodeURIComponent(tag)}`}
+              className="text-primary/80 hover:text-primary font-mono text-xs hover:underline underline-offset-2 transition-colors"
+            >
+              {part}
+            </Link>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </p>
+  );
+}
+
 function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
   const dateStr = new Date(note.createdAt).toLocaleString("ja-JP", {
     year: "numeric",
@@ -71,15 +123,14 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Asia/Tokyo",
   });
 
   return (
     <article className="flex gap-4 group">
       {/* Timeline column */}
       <div className="flex flex-col items-center shrink-0 pt-1">
-        {/* Dot */}
         <div className="w-2 h-2 rounded-full bg-primary/40 group-hover:bg-primary ring-4 ring-background transition-colors shrink-0 mt-0.5" />
-        {/* Vertical line */}
         {!isLast && (
           <div className="w-px flex-1 bg-border mt-2 min-h-[2rem]" />
         )}
@@ -93,13 +144,11 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
         >
           {dateStr}
         </time>
-        <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
-          {note.content}
-        </p>
+        <NoteContent content={note.content} />
         {note.image && (
           <div className="mt-3 relative max-w-sm w-full aspect-video rounded-lg overflow-hidden border border-border">
             <Image
-              src={note.image}
+              src={resolveImageSrc(note.image)}
               alt=""
               fill
               className="object-cover"
