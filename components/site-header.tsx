@@ -1,98 +1,79 @@
+"use client";
+
 import Link from "next/link";
-import { SiGithub, SiX } from "react-icons/si";
-import { Search } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Typewriter } from "./typewriter";
+import { useTheme } from "next-themes";
+import { Sun, Moon, Coffee } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const navItems = [
+  { label: "blog", href: "/blog" },
+  { label: "notes", href: "/notes" },
+  { label: "travel", href: "/travel" },
+  { label: "project", href: "/projects" },
+  { label: "about", href: "/about" },
+];
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // ハイドレーション対策: マウント後にのみ表示
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <div className="w-8 h-8" />;
+  }
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+    >
+      {theme === "dark" ? (
+        <Sun className="w-4 h-4" />
+      ) : (
+        <Moon className="w-4 h-4" />
+      )}
+    </button>
+  );
+}
+
 export const SiteHeader = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center mx-auto px-6 max-w-5xl">
-        <div className="mr-4 flex">
-          <Link
-            href="/"
-            className="group mr-6 flex items-center space-x-2 font-bold text-lg tracking-tight"
-          >
-            <span className="font-mono text-xl font-bold text-primary flex items-center">
-              <Typewriter />
-            </span>
-          </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/blog"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/about"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              About
-            </Link>
-            <Link
-              href="/projects"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Projects
-            </Link>
-          </nav>
-        </div>
-        <div className="flex flex-1 items-center justify-end space-x-2">
-          <nav className="flex items-center gap-1">
-            <Link
-              href="https://github.com/yuu-1230"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <div
-                className={cn(
-                  buttonVariants({
-                    variant: "ghost",
-                    size: "icon",
-                  }),
-                  "h-8 w-8 px-0",
-                )}
+    <motion.header
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-sm"
+    >
+      <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+        {/* Left: Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-semibold text-foreground hover:text-primary transition-colors"
+        >
+          <Coffee className="w-4 h-4 text-primary" />
+          <span className="text-sm tracking-tight">darkmocha.dev</span>
+        </Link>
+
+        {/* Right: Nav + Theme Toggle */}
+        <div className="flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5 mr-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="px-2 py-1 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
               >
-                <SiGithub className="h-4 w-4" />
-                <span className="sr-only">GitHub</span>
-              </div>
-            </Link>
-            <Link
-              href="https://x.com/DarkmochaJP"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <div
-                className={cn(
-                  buttonVariants({
-                    variant: "ghost",
-                    size: "icon",
-                  }),
-                  "h-8 w-8 px-0",
-                )}
-              >
-                <SiX className="h-4 w-4" />
-                <span className="sr-only">X</span>
-              </div>
-            </Link>
-            <div
-              className={cn(
-                buttonVariants({
-                  variant: "ghost",
-                  size: "icon",
-                }),
-                "h-8 w-8 px-0",
-              )}
-            >
-              <Search className="h-4 w-4 text-muted-foreground transition-colors hover:text-foreground" />
-              <span className="sr-only">Search</span>
-            </div>
+                [{item.label}]
+              </Link>
+            ))}
           </nav>
+          <ThemeToggle />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };

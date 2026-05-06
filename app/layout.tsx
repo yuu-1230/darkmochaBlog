@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Providers } from "@/components/providers";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -71,17 +72,21 @@ export default async function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
-        <SiteHeader />
-        <main className="min-h-screen max-w-4xl mx-auto px-4 py-8">
-          {children}
-        </main>
-        <SiteFooter />
+        <Providers>
+          <SiteHeader />
+          <main className="min-h-screen max-w-4xl mx-auto px-6 py-12">
+            {children}
+          </main>
+          <SiteFooter />
+        </Providers>
         <SpeedInsights />
         <Analytics />
         <GoogleAnalytics gaId="G-SFN4E61ERK" />
