@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { Sun, Moon, Coffee, X, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
+import { SearchDialog } from "@/components/search-dialog";
 
 const navItems = [
   { label: "blog",    href: "/blog" },
@@ -81,6 +82,7 @@ export const SiteHeader = () => {
               ))}
             </nav>
 
+            <SearchDialog />
             <ThemeToggle />
 
             {/* Hamburger button (mobile only) */}
