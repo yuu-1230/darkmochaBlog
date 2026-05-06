@@ -16,9 +16,8 @@ import React from "react";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { mdxComponents, generateTOC } from "@/components/mdx-components";
-import { TocPortal } from "@/components/TocPortal";
 import { TableOfContents } from "@/components/TableOfContents";
-// 動的にメタデータを生成する関数
+
 export async function generateMetadata({
   params,
 }: {
@@ -31,13 +30,12 @@ export async function generateMetadata({
     const { title, description } = post.frontmatter;
 
     return {
-      title: `${title} | Darkmocha`, // タブや検索結果に表示されるタイトル
-      description: description || "VS Code Styled Engineer Blog",
+      title: `${title} | Darkmocha`,
+      description: description || "Darkmocha Blog",
       openGraph: {
         title: title,
         description: description,
         type: "article",
-        // images は opengraph-image.tsx が自動で入れてくれるので書かなくてOK！
       },
       twitter: {
         card: "summary_large_image",
@@ -52,8 +50,6 @@ export async function generateMetadata({
   }
 }
 
-
-// --- Static Params ---
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({
@@ -61,7 +57,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// --- Main Page Component ---
 export default async function BlogPost({
   params,
 }: {
@@ -83,7 +78,6 @@ export default async function BlogPost({
   const prevPost =
     currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
-  // コンテンツから目次データを生成
   const toc = generateTOC(content);
 
   const jsonLd = {
@@ -103,38 +97,38 @@ export default async function BlogPost({
   };
 
   return (
-    <div className="min-h-full w-full bg-[#1f1f1f] text-[#cccccc] font-sans selection:bg-[#264f78] selection:text-white pb-20">
+    <div className="pb-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
 
-      {/* 記事ヘッダー画像 */}
+      {/* Hero image */}
       {frontmatter.image && (
-        <div className="w-full h-64 md:h-80 relative bg-[#252526]">
+        <div className="w-full h-56 md:h-72 relative rounded-xl overflow-hidden mb-8 -mx-4 md:mx-0" style={{ width: "calc(100% + 2rem)" }}>
           <Image
             src={frontmatter.image}
             alt={frontmatter.title}
             fill
-            className="object-cover opacity-80"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f1f] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
         </div>
       )}
 
-      <article className="max-w-3xl mx-auto px-6 md:px-10 pt-10">
-        {/* ナビゲーション */}
+      <article className="max-w-3xl mx-auto">
+        {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-[#858585] hover:text-white transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Dashboard
+          Back to Home
         </Link>
 
-        {/* 記事タイトルエリア */}
-        <div className="mb-12 border-b border-[#333] pb-8">
-          <div className="flex flex-wrap gap-4 text-xs font-mono text-[#858585] mb-4">
+        {/* Article header */}
+        <div className="mb-8 border-b pb-8">
+          <div className="flex flex-wrap gap-3 text-xs font-mono text-muted-foreground mb-4">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5" />
               {frontmatter.date}
@@ -148,32 +142,28 @@ export default async function BlogPost({
             {frontmatter.readTime && (
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />
-                Reading time: {frontmatter.readTime}
+                {frontmatter.readTime}
               </span>
             )}
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
+          <h1 className="text-2xl md:text-4xl font-bold text-foreground tracking-tight leading-tight mb-4">
             {frontmatter.title}
           </h1>
 
           {frontmatter.description && (
-            <p className="text-lg text-[#a0a0a0] leading-relaxed whitespace-pre-wrap">
+            <p className="text-base text-muted-foreground leading-relaxed">
               {frontmatter.description}
             </p>
           )}
         </div>
 
-        {/* --- スマホ用: 記事内の目次 (PCサイズでは非表示) --- */}
-        <div className="block md:hidden">
-          <TableOfContents toc={toc} />
-        </div>
+        {/* Table of Contents (記事上部に表示) */}
+        {toc.length > 0 && (
+          <TableOfContents toc={toc} className="mb-10" />
+        )}
 
-        {/* --- PC用: どこでもドアでサイドバーへ目次をワープ --- */}
-        <TocPortal toc={toc} />
-
-        {/* MDXレンダリングエリア */}
-        {/* options に rehypeSlug を追加 */}
+        {/* MDX content */}
         <div className="min-h-[200px]">
           <MDXRemote
             source={content}
@@ -187,47 +177,49 @@ export default async function BlogPost({
           />
         </div>
 
+        {/* Prev / Next navigation */}
         <nav
           aria-label="Post navigation"
-          className="mt-20 pt-10 border-t border-[#333] flex flex-col md:flex-row justify-between gap-4"
+          className="mt-20 pt-10 border-t flex flex-col md:flex-row justify-between gap-4"
         >
-          {/* 前の記事 (古い記事) */}
-          {prevPost ?
+          {prevPost ? (
             <Link
               href={`/blog/${prevPost.slug}`}
-              className="group flex-1 flex flex-col p-4 border border-[#333] hover:border-[#569cd6] rounded-lg bg-[#252526] hover:bg-[#2a2d2e] transition-all outline-none"
+              className="group flex-1 flex flex-col p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
             >
-              <span className="flex items-center gap-2 text-xs text-[#858585] mb-2 font-mono">
+              <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
                 <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
                 Previous Post
               </span>
-              <span className="text-sm text-[#3794ff] group-hover:text-[#569cd6] font-medium line-clamp-2 transition-colors">
+              <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">
                 {prevPost.frontmatter.title}
               </span>
             </Link>
-          : <div className="flex-1" />}
+          ) : (
+            <div className="flex-1" />
+          )}
 
-          {/* 次の記事 (新しい記事) */}
-          {nextPost ?
+          {nextPost ? (
             <Link
               href={`/blog/${nextPost.slug}`}
-              className="group flex-1 flex flex-col items-end text-right p-4 border border-[#333] hover:border-[#569cd6] rounded-lg bg-[#252526] hover:bg-[#2a2d2e] transition-all outline-none"
+              className="group flex-1 flex flex-col items-end text-right p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
             >
-              <span className="flex items-center gap-2 text-xs text-[#858585] mb-2 font-mono">
+              <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
                 Next Post
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
-              <span className="text-sm text-[#3794ff] group-hover:text-[#569cd6] font-medium line-clamp-2 transition-colors">
+              <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">
                 {nextPost.frontmatter.title}
               </span>
             </Link>
-          : <div className="flex-1" />}
+          ) : (
+            <div className="flex-1" />
+          )}
         </nav>
 
-        {/* フッター */}
-        <div className="mt-8 pt-6 border-t border-[#333] flex justify-between items-center">
-          <span className="text-sm text-[#565656]">Thanks for reading.</span>
-          <div className="flex gap-4">{/* Share Buttons if needed */}</div>
+        <div className="mt-8 pt-6 border-t flex justify-between items-center">
+          <span className="text-sm text-muted-foreground">Thanks for reading.</span>
+          <div className="flex gap-4" />
         </div>
       </article>
     </div>
