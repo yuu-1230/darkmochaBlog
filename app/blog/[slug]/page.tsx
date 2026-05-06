@@ -28,20 +28,29 @@ export async function generateMetadata({
 
   try {
     const post = await getPost(slug);
-    const { title, description } = post.frontmatter;
+    const { title, description, image, date } = post.frontmatter;
+    const canonical = `https://www.darkmocha.dev/blog/${slug}`;
+    const ogImage = image
+      ? [{ url: image, width: 1200, height: 630, alt: title }]
+      : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
 
     return {
-      title: `${title} | Darkmocha`,
+      title,
       description: description || "Darkmocha Blog",
+      alternates: { canonical },
       openGraph: {
-        title: title,
-        description: description,
+        title,
+        description: description ?? "",
         type: "article",
+        url: canonical,
+        publishedTime: date,
+        images: ogImage,
       },
       twitter: {
         card: "summary_large_image",
-        title: title,
-        description: description,
+        title,
+        description: description ?? "",
+        images: ogImage.map((img) => img.url),
       },
     };
   } catch {
@@ -112,6 +121,7 @@ export default async function BlogPost({
             src={frontmatter.image}
             alt={frontmatter.title}
             fill
+            priority
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
