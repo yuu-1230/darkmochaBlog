@@ -146,13 +146,14 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
         </time>
         <NoteContent content={note.content} />
         {note.image && (
-          <div className="mt-3 relative max-w-sm w-full aspect-video rounded-lg overflow-hidden border border-border">
+          <div className="mt-3 max-w-sm w-full rounded-lg overflow-hidden border border-border">
             <Image
               src={resolveImageSrc(note.image)}
               alt=""
-              fill
-              className="object-cover"
+              width={0}
+              height={0}
               sizes="(max-width: 768px) 100vw, 24rem"
+              className="w-full h-auto"
             />
           </div>
         )}
