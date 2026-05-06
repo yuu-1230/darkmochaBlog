@@ -2,20 +2,21 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/mdx";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://darkmocha.dev";
+  const baseUrl = "https://www.darkmocha.dev";
 
-  // 存在する静的ページのみをリストアップ
-  const staticRoutes = ["", "/about", "/projects", "/notes-timeline"].map(
-    (route) => ({
-      url: `${baseUrl}${route}`,
-      lastModified: new Date().toISOString(),
-      changeFrequency: "weekly" as const,
-      priority:
-        route === "" ? 1.0
-        : route === "/notes-timeline" ? 0.75
-        : 0.8, // /about と /projects
-    }),
-  );
+  const staticRoutes = [
+    { route: "",               priority: 1.0 },
+    { route: "/blog",          priority: 0.9 },
+    { route: "/about",         priority: 0.8 },
+    { route: "/projects",      priority: 0.8 },
+    { route: "/travel",        priority: 0.8 },
+    { route: "/notes-timeline",priority: 0.75 },
+  ].map(({ route, priority }) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "weekly" as const,
+    priority,
+  }));
 
   // MDX記事から動的ページ(ブログ記事)を生成
   const posts = await getAllPosts();

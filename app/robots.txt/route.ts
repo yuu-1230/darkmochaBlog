@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 export async function GET() {
   // 環境変数からドメインを取得（ローカルならlocalhost）
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://darkmocha.dev";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev";
 
   // Vercelの本番環境以外（プレビュー等）ならクロールを拒否する設定
   const isProduction = process.env.VERCEL_ENV === "production";

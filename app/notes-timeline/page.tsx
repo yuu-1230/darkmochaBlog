@@ -4,8 +4,14 @@ import { NoteTimeline } from "@/components/note-timeline";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Notes | Darkmocha",
+  title: "Notes",
   description: "短文ログ（Daily Notes）の一覧",
+  alternates: { canonical: "https://www.darkmocha.dev/notes-timeline" },
+  openGraph: {
+    title: "Notes | Darkmocha",
+    description: "短文ログ（Daily Notes）の一覧",
+    url: "https://www.darkmocha.dev/notes-timeline",
+  },
 };
 
 type Props = {

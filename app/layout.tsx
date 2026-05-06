@@ -29,12 +29,31 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev",
   ),
-  alternates: { canonical: "./" },
-  title: "Darkmocha Blog",
+  title: {
+    default: "Darkmocha Blog",
+    template: "%s | Darkmocha",
+  },
   description: "Engineer and Everyday life Blog by Yuto Nagata",
   icons: {
     icon: "/images/icon.png",
     apple: "/images/icon.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: "https://www.darkmocha.dev",
+    siteName: "Darkmocha Blog",
+    title: "Darkmocha Blog",
+    description: "Engineer and Everyday life Blog by Yuto Nagata",
+    images: [{ url: "/images/OG.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@DarkmochaJP",
+    creator: "@DarkmochaJP",
+    title: "Darkmocha Blog",
+    description: "Engineer and Everyday life Blog by Yuto Nagata",
+    images: ["/images/OG.jpg"],
   },
 };
 

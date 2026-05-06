@@ -4,8 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Blog | Darkmocha",
+  title: "Blog",
   description: "技術記事・Web開発・Unity・旅行記録",
+  alternates: { canonical: "https://www.darkmocha.dev/blog" },
+  openGraph: {
+    title: "Blog | Darkmocha",
+    description: "技術記事・Web開発・Unity・旅行記録",
+    url: "https://www.darkmocha.dev/blog",
+  },
 };
 
 export default async function BlogPage() {
