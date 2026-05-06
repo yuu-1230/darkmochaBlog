@@ -28,7 +28,7 @@ export default async function NotesTimelinePage({ searchParams }: Props) {
     <div className="py-12 max-w-3xl mx-auto">
       <header className="space-y-2 border-b border-border pb-8 mb-10">
         <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          // notes
+          {"// notes"}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Daily Notes

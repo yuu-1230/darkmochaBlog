@@ -23,7 +23,7 @@ export default async function TravelPage() {
       {/* Page header */}
       <header className="space-y-2 border-b border-border pb-8">
         <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          // travel
+          {"// travel"}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Travel</h1>
         <p className="text-sm text-muted-foreground">

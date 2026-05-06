@@ -19,7 +19,8 @@ const navItems = [
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setMounted(true); }, []);
   if (!mounted) return <div className="w-8 h-8" />;
 
   return (
@@ -38,7 +39,8 @@ export const SiteHeader = () => {
   const [open, setOpen] = useState(false);
 
   // パス変更でメニューを閉じる
-  useEffect(() => setOpen(false), [pathname]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   // メニュー開閉中は body スクロールをロック
   useEffect(() => {
@@ -155,7 +157,7 @@ export const SiteHeader = () => {
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
                       }`}
                     >
-                      <span className="text-primary/50 text-xs">//</span>
+                      <span className="text-primary/50 text-xs">{"//"}</span>
                       {item.label}
                     </Link>
                   </motion.li>

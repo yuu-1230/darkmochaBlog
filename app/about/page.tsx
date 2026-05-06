@@ -113,7 +113,7 @@ export default function AboutPage() {
       {/* ── Bio ── */}
       <motion.section variants={item} className="space-y-4">
         <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">//</span>
+          <span className="text-primary/60">{"//"}</span>
           Bio
         </h2>
         <div className="space-y-4 text-foreground/85 leading-8 text-[15px]">
@@ -132,7 +132,7 @@ export default function AboutPage() {
       {/* ── Tech Stack ── */}
       <motion.section variants={item} className="space-y-6">
         <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">//</span>
+          <span className="text-primary/60">{"//"}</span>
           Tech Stack
         </h2>
         <div className="space-y-5">
@@ -152,7 +152,7 @@ export default function AboutPage() {
       {/* ── Connect ── */}
       <motion.section variants={item} className="space-y-6">
         <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">//</span>
+          <span className="text-primary/60">{"//"}</span>
           Connect
         </h2>
         <ul className="flex flex-wrap gap-4">
