@@ -121,6 +121,7 @@ export default async function BlogPost({
             src={frontmatter.image}
             alt={frontmatter.title}
             fill
+            priority
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />

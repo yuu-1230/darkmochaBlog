@@ -17,52 +17,49 @@ type Frontmatter = {
 export type PostData = {
   slug: string;
   content: string;
-  frontmatter: Frontmatter;
+  frontmatter: Frontmatter & { readTime: string };
 };
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
+
+/** 本文から読了時間を自動計算（日本語: 400文字/分、英語: 200語/分） */
+function calcReadTime(content: string): string {
+  const japanese = (content.match(/[　-鿿豈-﫿]/g) ?? []).length;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(japanese / 400 + words / 200);
+  return `${minutes} min read`;
+}
 
 export const getPost = cache(async (slug: string): Promise<PostData> => {
   const safeSlug = path.basename(slug);
   const fullPath = path.join(postsDirectory, safeSlug + ".mdx");
   const fileContents = await fs.promises.readFile(fullPath, "utf-8");
   const matterResult = matter(fileContents);
+  const frontmatter = matterResult.data as Frontmatter;
 
   return {
     slug,
     content: matterResult.content,
-    frontmatter: matterResult.data as Frontmatter,
+    frontmatter: {
+      ...frontmatter,
+      readTime: frontmatter.readTime ?? calcReadTime(matterResult.content),
+    },
   };
 });
 
 export const getAllPosts = cache(async (): Promise<PostData[]> => {
   const files = await fs.promises.readdir(postsDirectory);
-
-  // 本番環境かどうかの判定を追加
   const isProd = process.env.NODE_ENV === "production";
 
-  const postsPromises = files.map(async (fileName) => {
-    const slug = path.parse(fileName).name;
-    return await getPost(slug);
-  });
-  
-  const posts = await Promise.all(postsPromises);
+  const posts = await Promise.all(
+    files.map((fileName) => getPost(path.parse(fileName).name)),
+  );
 
-  // draft: true の記事を除外するフィルタリング処理を追加
-  const visiblePosts = posts.filter((post) => {
-    if (isProd) {
-      // 本番環境では、draftがtrueのものは除外（表示しない）
-      return !post.frontmatter.draft;
-    }
-    // ローカル開発環境では、下書きも含めてすべて表示
-    return true;
-  });
+  const visiblePosts = posts.filter((post) =>
+    isProd ? !post.frontmatter.draft : true,
+  );
 
-  return visiblePosts.sort((a, b) => {
-    if (a.frontmatter.date < b.frontmatter.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  return visiblePosts.sort((a, b) =>
+    a.frontmatter.date < b.frontmatter.date ? 1 : -1,
+  );
 });
