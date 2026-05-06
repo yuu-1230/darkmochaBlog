@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { SearchItem } from "@/app/api/search/route";
+import { extractSnippet } from "@/lib/search-utils";
 
 // ──────────────────────────────────────────
 // Helpers
@@ -43,9 +44,10 @@ function highlight(text: string, query: string) {
 
 function score(item: SearchItem, q: string): number {
   const lq = q.toLowerCase();
-  if (item.title.toLowerCase().includes(lq)) return 3;
-  if (item.description.toLowerCase().includes(lq)) return 2;
-  if (item.tags.some((t) => t.toLowerCase().includes(lq))) return 1;
+  if (item.title.toLowerCase().includes(lq)) return 4;
+  if (item.description.toLowerCase().includes(lq)) return 3;
+  if (item.tags.some((t) => t.toLowerCase().includes(lq))) return 2;
+  if (item.body?.toLowerCase().includes(lq)) return 1;
   return 0;
 }
 
@@ -252,11 +254,25 @@ export function SearchDialog() {
                                         <p className="text-sm font-medium leading-tight line-clamp-1">
                                           {highlight(item.title, query)}
                                         </p>
-                                        {item.description && (
-                                          <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
-                                            {highlight(item.description, query)}
-                                          </p>
-                                        )}
+                                        {/* 本文マッチ時はスニペット、それ以外は description */}
+                                        {(() => {
+                                          const lq = query.toLowerCase();
+                                          const bodyMatch = item.body?.toLowerCase().includes(lq) &&
+                                            !item.title.toLowerCase().includes(lq) &&
+                                            !item.description.toLowerCase().includes(lq);
+                                          if (bodyMatch && item.body) {
+                                            return (
+                                              <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5 leading-relaxed">
+                                                {highlight(extractSnippet(item.body, query), query)}
+                                              </p>
+                                            );
+                                          }
+                                          return item.description ? (
+                                            <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">
+                                              {highlight(item.description, query)}
+                                            </p>
+                                          ) : null;
+                                        })()}
                                         {item.tags.length > 0 && (
                                           <div className="flex flex-wrap gap-1 mt-1">
                                             {item.tags.slice(0, 4).map((t) => (
