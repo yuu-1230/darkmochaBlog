@@ -1,128 +1,136 @@
-# ☕ Darkmocha Blog
+# darkmocha.dev
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)
+**Yuto Nagata** のパーソナルブログ。技術・ゲーム開発・旅行を発信。
 
-**Visual Studio Code（VS Code）** のUI/UXを忠実に再現した、エンジニア向けのポートフォリオブログです。
-Next.js（App Router）とMDXを採用し、**「IDE風ポートフォリオブログ」** としてアーキテクチャを継続的に改善しています。（Updated: 2026-04）
-
-## 🎨 コンセプト・デザイン
-
-テーマコンセプトは **"VS Code IDE Style（Zen Mode）"**。
-エンジニアにとって最も馴染み深いIDEのレイアウト（Activity Bar、Sidebar、Tab Bar、Status Bar）をWeb上で再現しています。
-
-- **本物に近いUI**: `globals.css` にVS Code（Dark+）の配色変数を定義し、リアルな没入感を実現。
-- **タイポグラフィ**: コードやエディタ部分に `JetBrains Mono` を採用し、可読性と雰囲気を両立。
-- **インタラクション**: Activity Barによるサイドバーの開閉や、ルーティングに連動したタブ表示など、SPAならではの動作を実装。
-- **モバイル対応**: スマートフォン閲覧時はエクスプローラーをドロワーメニュー化し、ステータスバーを最適化するなど、レスポンシブデザインに完全対応。
-
-## 🛠️ 技術スタック・アーキテクチャ
-
-### コア
-
-- **フレームワーク**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **言語**: [TypeScript](https://www.typescriptlang.org/)
-- **デプロイ**: [Vercel](https://vercel.com/)
-- **パッケージマネージャー**: [pnpm](https://pnpm.io/)
-- **アナリティクス**: [Vercel Analytics](https://vercel.com/analytics)、[Vercel Speed Insights](https://vercel.com/docs/speed-insights)
-
-### UIとスタイリング
-
-- **スタイリング**: [Tailwind CSS v4](https://tailwindcss.com/)
-  - **カラー**: `#1E1E1E`（エディター背景）、`#252526`（サイドバー）、`#007ACC`（ステータスバーブルー）
-- **フォント**: `Inter`（UI）、`JetBrains Mono`（コード・エディター）、`Yomogi`（手書き風）
-- **アイコン**: [Lucide React](https://lucide.dev/)、[React Icons](https://react-icons.github.io/react-icons/)
-
-### 🚀 パフォーマンスとセキュリティ
-
-- **高パフォーマンス**: `fs.promises` とReactの `cache()` を活用した完全非同期のデータフェッチにより、Node.jsのI/Oブロッキングを排除し、高速なページロード（TTFB最適化）を実現。
-- **クリーンアーキテクチャ**: 肥大化しやすいMDXコンポーネント群を独立ファイルに分離（`mdx-components.tsx`）し、保守性と再利用性を高めた堅牢なコード設計。
-- **セキュリティ重視**:
-  - `path.basename` によるパストラバーサル（LFI）攻撃の防止。
-  - JSON-LD出力時の `<` エスケープ処理によるXSS（クロスサイトスクリプティング）対策。
-  - `next.config.ts` での強固なセキュリティヘッダー（HSTS、X-Frame-Options、X-Content-Type-Optionsなど）の適用。
-
-### 🤖 SEO・AEO（AI Engine Optimization）戦略
-
-見た目はVS Codeでありながら、クローラーやAI（Perplexity、ChatGPTなど）が完全に解析できる構造を裏側に構築しています。
-
-- **セマンティックHTML**: `<nav role="tablist">`、`<aside>`、`<article>`、`<time>` や `aria-label` などのアクセシビリティタグを徹底的に活用。
-- **構造化データ（JSON-LD）**: `Person` および `BlogPosting` スキーマを動的に生成し、AI検索エンジンへスキルや記事の文脈を直接伝える仕組みを実装。
-- **サイトマップとRobots**: 全静的・動的ルートの `sitemap.xml` と `robots.txt` を自動生成。
-- **動的OGP画像**: `opengraph-image.tsx` により記事ごとに最適化されたOGP画像を動的生成。SNSシェア時の視認性とクリック率を向上。
-
-## 📂 プロジェクト構成
-
-```text
-.
-├── app/                  # Next.js App Router
-│   ├── blog/
-│   │   └── [slug]/       # 記事詳細ページ（Markdownレンダリング）
-│   │       ├── page.tsx  # 記事本体（async/await最適化済み）
-│   │       └── opengraph-image.tsx # 動的OGP生成
-│   ├── globals.css       # VS Code Dark+ 配色定義
-│   ├── layout.tsx        # ルートレイアウト & Person JSON-LD
-│   ├── opengraph-image.tsx # サイト全体用OGP（デフォルト）
-│   ├── page.tsx          # トップページ（カテゴリ & タイムライン）
-│   ├── sitemap.ts        # 動的サイトマップ生成
-│   └── robots.txt/       # robots.txt 生成
-├── components/
-│   ├── layout/           # セマンティックIDE UIコンポーネント
-│   │   ├── activity-bar.tsx # サイドバー開閉トグル
-│   │   ├── main-layout.tsx  # クライアント状態管理 & レスポンシブ
-│   │   ├── sidebar.tsx      # 再帰的ファイルツリー表示
-│   │   └── ...
-│   ├── mdx-components.tsx   # MDXカスタムコンポーネント群
-│   ├── note-timeline.tsx    # ノートタイムラインUI
-│   ├── TableOfContents.tsx  # 目次生成UI
-│   └── ui/                  # 共通UIコンポーネント
-├── content/
-│   ├── posts/            # ブログ記事ファイル（.mdx）
-│   └── notes/            # 短いノートファイル（.mdx）
-├── lib/
-│   ├── file-tree.ts      # ファイルツリー構造の定義
-│   ├── projects.ts       # プロジェクト実績データ
-│   ├── notes.ts          # ノートデータ取得ロジック
-│   └── mdx.ts            # 記事取得・キャッシュロジック（fs.promises）
-└── public/
-    └── images/           # 静的アセット & アプリアイコン
-```
-
-## 🗺️ 開発ロードマップ
-
-### Phase 1: 記事を表示する（完了 ✅）
-- [x] プロジェクト作成 & 初期設定
-- [x] MDX環境のセットアップ・Frontmatter定義
-
-### Phase 2: デザイン刷新 - VS Code化（完了 ✅）
-- [x] 全体レイアウトのIDE化（`h-screen`、画面分割）
-- [x] コンポーネント分割（`ActivityBar`、`Sidebar`、`TabBar` など）
-- [x] モバイルレスポンシブ対応
-
-### Phase 3: SEO・AEO最適化（完了 ✅）
-- [x] セマンティックHTML & 構造化データ（JSON-LD）
-- [x] 動的OGP生成 & サイトマップ / robots.txt
-
-### Phase 4: パフォーマンス・セキュリティ・機能拡張（完了 ✅）
-- [x] カテゴリ別記事一覧 & タイムライン実装（`app/page.tsx`）
-- [x] 目次（TOC）の自動生成機能
-- [x] 非同期ファイルI/O（`fs.promises`）と `React.cache()` による高速化
-- [x] パストラバーサル・XSS対策およびセキュリティヘッダーの導入
-- [x] MDXコンポーネントの分離によるコード設計の改善
-
-### Phase 5: コンテンツ拡充 & さらなる進化（進行中 🚧）
-- [ ] **About Me（AEO強化）**: AI検索に引用されやすい「Q&A形式」の自然言語セクションを追加
-- [ ] **コンテンツ**: Next.jsやUnityに関する技術解説記事の執筆
-
-## 👤 作者
-
-**Yuto Nagata**
-
-- Webデベロッパー（Next.js / React）
-- ゲームクリエイター（Unity）
-- 諏訪公立大学 在学中
+🌐 **[darkmocha.dev](https://www.darkmocha.dev)**　|　🗃 **[v1 アーカイブ](https://v1.darkmocha.dev)**
 
 ---
 
-© 2026 Darkmocha Blog. Built with Code & Coffee.
+## 技術スタック
+
+| カテゴリ | 採用技術 |
+|----------|----------|
+| フレームワーク | [Next.js 16](https://nextjs.org/) (App Router) |
+| 言語 | TypeScript 5 |
+| スタイリング | Tailwind CSS v4 |
+| アニメーション | Motion (Framer Motion) |
+| コンテンツ | MDX（gray-matter）|
+| デプロイ | Vercel |
+| パッケージ管理 | pnpm |
+
+---
+
+## 主な機能
+
+- **ブログ** — MDX による記事管理。カテゴリ（Tech / Unity / Life）別表示
+- **Daily Notes** — 短文ログ。ハッシュタグフィルタリング対応
+- **サイト内検索** — `Cmd+K` で起動。記事本文・Notes・Projects を横断検索し、マッチしたセクションへ直接ジャンプ
+- **モバイル対応** — ハンバーガーメニュー、スライドドロワー
+- **目次（TOC）** — 記事内の見出しから自動生成
+- **ダークモード** — システム設定に連動
+
+---
+
+## ディレクトリ構成
+
+```
+.
+├── app/
+│   ├── api/search/         # 全文検索 API
+│   ├── blog/[slug]/        # 記事詳細ページ
+│   ├── notes-timeline/     # Daily Notes
+│   ├── projects/           # 制作物一覧
+│   ├── travel/             # 旅行記
+│   ├── about/              # プロフィール
+│   ├── sitemap.ts          # サイトマップ自動生成
+│   └── robots.txt/         # robots.txt
+├── components/
+│   ├── site-header.tsx     # ヘッダー & ハンバーガーメニュー
+│   ├── search-dialog.tsx   # 検索ダイアログ（Cmd+K）
+│   ├── note-timeline.tsx   # Notes タイムライン
+│   ├── anchor-scroll.tsx   # アンカージャンプ（画面中央スクロール）
+│   ├── TableOfContents.tsx # 目次コンポーネント
+│   └── mdx-components.tsx  # MDX カスタムコンポーネント
+├── content/
+│   ├── posts/              # ブログ記事（.mdx）
+│   └── notes.json          # Daily Notes データ
+├── lib/
+│   ├── mdx.ts              # 記事取得・readTime 自動計算
+│   ├── notes.ts            # Notes 取得・タグ抽出・JST 日付処理
+│   ├── projects.ts         # プロジェクトデータ
+│   └── search-utils.ts     # 検索ユーティリティ（セクション分割・スニペット生成）
+└── public/
+    └── images/             # 画像アセット（圧縮済み）
+```
+
+---
+
+## ローカル開発
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/yuu-1230/darkmochaBlog.git
+cd darkmochaBlog
+
+# 依存関係インストール
+pnpm install
+
+# 開発サーバー起動
+pnpm dev
+```
+
+`http://localhost:3000` でアクセス。
+
+---
+
+## 記事の書き方
+
+`content/posts/` に `.mdx` ファイルを作成：
+
+```mdx
+---
+title: "記事タイトル"
+date: "2026-05-07"
+category: "Tech"        # Tech | Unity | Life
+tags: ["Next.js", "React"]
+description: "記事の説明"
+image: "/images/Articles/xxx/hero.jpg"
+draft: false            # true にすると本番環境で非表示
+---
+
+本文をここに書く。
+```
+
+`readTime` は省略可（本文から自動計算）。
+
+---
+
+## Notes の書き方
+
+`content/notes.json` に追記：
+
+```json
+{
+  "id": "7",
+  "content": "今日の気づき。 #Tech #Life",
+  "createdAt": "2026-05-07T10:00:00",
+  "image": "photo.jpg"
+}
+```
+
+- `createdAt` はタイムゾーン省略で JST として扱われる
+- `image` は `public/images/Notes/` 配下のファイル名のみ指定
+
+---
+
+## 作者
+
+**Yuto Nagata** — 諏訪公立大学 在学中
+
+[![GitHub](https://img.shields.io/badge/GitHub-yuu--1230-181717?logo=github)](https://github.com/yuu-1230)
+[![X](https://img.shields.io/badge/X-@DarkmochaJP-000?logo=x)](https://x.com/DarkmochaJP)
+[![Bluesky](https://img.shields.io/badge/Bluesky-darkmochajapan-0285FF?logo=bluesky)](https://bsky.app/profile/darkmochajapan.bsky.social)
+
+---
+
+© 2026 Yuto Nagata. Built with Next.js & ☕
