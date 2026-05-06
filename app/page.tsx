@@ -1,123 +1,105 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import { getAllPosts, PostData } from "@/lib/mdx";
-import { ChevronRight } from "lucide-react";
-import { HomeContent } from "@/components/home-content";
+import { motion } from "motion/react";
 
-type Post = PostData;
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
 
-export default async function Home() {
-  const allPosts = await getAllPosts();
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" as const },
+  },
+};
 
-  const techPosts = allPosts.filter((p) => p.frontmatter.category === "Tech");
-  const unityPosts = allPosts.filter((p) => p.frontmatter.category === "Unity");
-  const lifePosts = allPosts.filter((p) => p.frontmatter.category === "Life");
+// テキスト内の特定ワードをリンクに変換
+const inlineLinks: { word: string; href: string }[] = [
+  { word: "blog", href: "/blog" },
+  { word: "notes", href: "/notes-timeline" },
+  { word: "travel", href: "/travel" },
+  { word: "project", href: "/projects" },
+];
 
+function InlineLink({ word, href }: { word: string; href: string }) {
   return (
-    <div className="space-y-16 pb-20">
-      {/* Animated Hero Section */}
-      <HomeContent />
-
-      {/* Recent Posts by Category */}
-      <div className="space-y-16">
-        <CategorySection title="Web / Tech" posts={techPosts} categorySlug="tech" />
-        <CategorySection title="Game Dev (Unity)" posts={unityPosts} categorySlug="unity" />
-        <CategorySection title="Life & Travel" posts={lifePosts} categorySlug="life" />
-
-        {allPosts.length === 0 && (
-          <div className="text-muted-foreground text-center italic py-8 bg-muted rounded-lg border border-border">
-            No posts found.
-          </div>
-        )}
-      </div>
-    </div>
+    <Link
+      href={href}
+      className="underline underline-offset-4 decoration-primary/40 hover:decoration-primary hover:text-primary transition-colors"
+    >
+      {word}
+    </Link>
   );
 }
 
-function CategorySection({
-  title,
-  posts,
-  categorySlug,
-}: {
-  title: string;
-  posts: Post[];
-  categorySlug: string;
-}) {
-  if (posts.length === 0) return null;
-
-  const displayPosts = posts.slice(0, 5);
-  const hasMore = posts.length > 5;
-
+export default function Home() {
   return (
-    <section aria-label={title}>
-      <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span className="text-primary/60">//</span>
-        {title}
-        <span className="text-muted-foreground/50 font-normal normal-case tracking-normal">
-          ({posts.length})
-        </span>
-      </h2>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className="max-w-2xl mx-auto px-4 py-24 space-y-10"
+    >
+      {/* Greeting */}
+      <motion.div variants={item}>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight">
+          Hi, I&apos;m Yuto Nagata
+        </h1>
+      </motion.div>
 
-      <ul className="space-y-3">
-        {displayPosts.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
-      </ul>
+      {/* Tagline */}
+      <motion.p variants={item} className="text-lg text-muted-foreground font-light -mt-6">
+        Welcome to my digital sandbox.
+      </motion.p>
 
-      {hasMore && (
-        <div className="mt-5 text-right">
+      {/* Paragraph 1 */}
+      <motion.p
+        variants={item}
+        className="text-[15px] md:text-base text-foreground/85 leading-[1.9] -mt-2"
+      >
+        長野県で活動する学生エンジニア兼、個人事業主です。この場所は、私の技術的なアウトプット（
+        <InlineLink word="blog" href="/blog" />
+        ）、日々の短い思考の記録（
+        <InlineLink word="notes" href="/notes-timeline" />
+        ）、趣味の旅行記（
+        <InlineLink word="travel" href="/travel" />
+        ）、そしてこれまで開発してきたポートフォリオ（
+        <InlineLink word="project" href="/projects" />
+        ）をまとめたデジタルな遊び場です。
+      </motion.p>
+
+      {/* Paragraph 2 */}
+      <motion.p
+        variants={item}
+        className="text-[15px] md:text-base text-foreground/85 leading-[1.9]"
+      >
+        普段はNext.js/Reactを用いたWebフロントエンド開発や、Unityでのゲーム開発、LLMを組み込んだアプリケーション制作を行っています。小中学生向けのプログラミング講師としての顔も持っています。
+      </motion.p>
+
+      {/* Quick nav */}
+      <motion.nav
+        variants={item}
+        className="flex flex-wrap gap-x-5 gap-y-2 pt-2"
+        aria-label="Quick navigation"
+      >
+        {inlineLinks.concat([{ word: "about", href: "/about" }]).map((link) => (
           <Link
-            href={`/category/${categorySlug}`}
-            className="inline-flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-foreground transition-colors group"
+            key={link.href}
+            href={link.href}
+            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors group"
           >
-            Show more
-            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <span className="text-primary/60 group-hover:text-primary transition-colors">[</span>
+            {link.word}
+            <span className="text-primary/60 group-hover:text-primary transition-colors">]</span>
           </Link>
-        </div>
-      )}
-    </section>
-  );
-}
-
-function PostCard({ post }: { post: Post }) {
-  return (
-    <li>
-      <Link href={`/blog/${post.slug}`} className="group block outline-none">
-        <article className="flex gap-4 items-start py-3 px-1 rounded-lg hover:bg-accent/50 transition-colors -mx-1">
-          {/* Thumbnail */}
-          {post.frontmatter.image && (
-            <div className="w-16 h-12 shrink-0 relative rounded-md overflow-hidden bg-muted border border-border">
-              <Image
-                src={post.frontmatter.image}
-                alt={post.frontmatter.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-          )}
-
-          {/* Text */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-baseline justify-between gap-4">
-              <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1">
-                {post.frontmatter.title}
-              </h3>
-              <time
-                dateTime={post.frontmatter.date}
-                className="text-[11px] text-muted-foreground font-mono shrink-0"
-              >
-                {post.frontmatter.date}
-              </time>
-            </div>
-
-            {post.frontmatter.description && (
-              <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5 leading-relaxed">
-                {post.frontmatter.description}
-              </p>
-            )}
-          </div>
-        </article>
-      </Link>
-    </li>
+        ))}
+      </motion.nav>
+    </motion.div>
   );
 }

@@ -1,36 +1,29 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import { SiGithub, SiX, SiZenn, SiQiita } from "react-icons/si";
 import { Archive } from "lucide-react";
 
 const socialLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com/yuu-1230",
-    icon: <SiGithub className="w-4 h-4" />,
-  },
-  {
-    label: "X",
-    href: "https://x.com/DarkmochaJP",
-    icon: <SiX className="w-4 h-4" />,
-  },
-  {
-    label: "Zenn",
-    href: "https://zenn.dev/darkmocha",
-    icon: <SiZenn className="w-4 h-4" />,
-  },
-  {
-    label: "Qiita",
-    href: "https://qiita.com/darkmocha",
-    icon: <SiQiita className="w-4 h-4" />,
-  },
+  { label: "GitHub", href: "https://github.com/yuu-1230", icon: <SiGithub className="w-4 h-4" /> },
+  { label: "X", href: "https://x.com/DarkmochaJP", icon: <SiX className="w-4 h-4" /> },
+  { label: "Zenn", href: "https://zenn.dev/darkmocha", icon: <SiZenn className="w-4 h-4" /> },
+  { label: "Qiita", href: "https://qiita.com/darkmocha", icon: <SiQiita className="w-4 h-4" /> },
 ];
 
 export const SiteFooter = () => {
   return (
-    <footer className="border-t border-border mt-20">
-      <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        {/* Left: Copyright + Archive */}
-        <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-muted-foreground">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="border-t border-border mt-16"
+    >
+      <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        {/* Left */}
+        <div className="flex flex-col md:flex-row items-center gap-4">
           <span>© Yuto Nagata 2026</span>
           <Link
             href="https://v1.darkmocha.dev"
@@ -43,7 +36,7 @@ export const SiteFooter = () => {
           </Link>
         </div>
 
-        {/* Right: Social icons */}
+        {/* Right: Social */}
         <nav className="flex items-center gap-4" aria-label="Social links">
           {socialLinks.map((link) => (
             <Link
@@ -52,13 +45,13 @@ export const SiteFooter = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.label}
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               {link.icon}
             </Link>
           ))}
         </nav>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
