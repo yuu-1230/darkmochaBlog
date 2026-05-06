@@ -12,11 +12,14 @@ const yomogi = Yomogi({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-geist-sans",
+  display: "swap",   // フォント未読み込み中はフォールバックフォントで表示
+  preload: false,    // 日本語フォントは巨大なので preload しない
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
