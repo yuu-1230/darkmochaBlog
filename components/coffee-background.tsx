@@ -2,107 +2,127 @@
 
 import { motion } from "motion/react";
 
-// ブロブの定義: 位置・サイズ・アニメーションをすべてここで管理
-const blobs = [
-  {
-    // エスプレッソ: 左上コーナーから流れ込む
-    colorVar: "var(--coffee-blob-1)",
-    style: { width: 700, height: 700, top: "-25%", left: "-25%" },
-    animate: {
-      scale: [1, 1.35, 1.1, 1.5, 1],
-      x: [0, 120, 60, 180, 0],
-      y: [0, 80, 160, 40, 0],
-    },
-    transition: { duration: 22, repeat: Infinity, ease: "easeInOut" as const },
-  },
-  {
-    // スチームミルク: 右下コーナーから混ざり合う
-    colorVar: "var(--coffee-blob-2)",
-    style: { width: 600, height: 600, bottom: "-20%", right: "-20%" },
-    animate: {
-      scale: [1, 1.4, 0.9, 1.2, 1],
-      x: [0, -100, -180, -60, 0],
-      y: [0, -60, -130, -30, 0],
-    },
-    transition: { duration: 25, repeat: Infinity, ease: "easeInOut" as const, delay: 3 },
-  },
-  {
-    // ミディアムロースト: 右上に非対称に配置
-    colorVar: "var(--coffee-blob-3)",
-    style: { width: 450, height: 450, top: "10%", right: "-15%" },
-    animate: {
-      scale: [1, 1.5, 1.2, 0.9, 1],
-      x: [0, -80, -40, -120, 0],
-      y: [0, 100, 200, 80, 0],
-    },
-    transition: { duration: 18, repeat: Infinity, ease: "easeInOut" as const, delay: 6 },
-  },
-  {
-    // ミルクの滴: 左下にアクセント
-    colorVar: "var(--coffee-blob-2)",
-    style: { width: 350, height: 350, bottom: "5%", left: "-10%" },
-    animate: {
-      scale: [1, 1.6, 1.1, 1.4, 1],
-      x: [0, 60, 120, 30, 0],
-      y: [0, -80, -30, -120, 0],
-    },
-    transition: { duration: 20, repeat: Infinity, ease: "easeInOut" as const, delay: 10 },
-  },
-];
+// ─────────────────────────────────────────────
+// SVG パス定義 (viewBox: 0 0 600 600)
+// 全て M + 8×C + Z で統一 → motion/react が滑らかにモーフィング
+// ─────────────────────────────────────────────
 
+/** 注ぎたてのミルクが広がる、抽象的な液体ブロブ */
+const blobPath =
+  "M 300,80 " +
+  "C 380,60 460,100 500,170 " +
+  "C 540,240 535,330 510,400 " +
+  "C 485,470 430,510 370,520 " +
+  "C 310,530 240,515 185,480 " +
+  "C 130,445 85,385 75,315 " +
+  "C 65,245 95,165 150,120 " +
+  "C 195,82 245,68 275,76 " +
+  "C 285,78 293,79 300,80 Z";
+
+/** ラテアートのハート ♥ */
+const heartPath =
+  "M 300,495 " +
+  "C 245,465 160,415 108,362 " +
+  "C 56,309 55,235 98,183 " +
+  "C 141,131 203,122 252,148 " +
+  "C 273,159 292,181 300,208 " +
+  "C 308,181 327,159 348,148 " +
+  "C 397,122 459,131 502,183 " +
+  "C 545,235 544,309 492,362 " +
+  "C 440,415 355,465 300,495 Z";
+
+/** ラテアートのリーフ（ロゼッタ）🍃 */
+const leafPath =
+  "M 300,95 " +
+  "C 360,108 415,152 445,215 " +
+  "C 475,278 472,350 448,410 " +
+  "C 424,470 382,505 340,515 " +
+  "C 320,520 310,520 300,518 " +
+  "C 290,520 280,520 260,515 " +
+  "C 218,505 176,470 152,410 " +
+  "C 128,350 125,278 155,215 " +
+  "C 185,152 240,108 300,95 Z";
+
+// ─────────────────────────────────────────────
+// メインコンポーネント
+// ─────────────────────────────────────────────
 export function CoffeeBackground() {
   return (
-    <>
-      {/* SVG Gooey フィルター定義（非表示） */}
+    <div
+      aria-hidden
+      className="fixed inset-0 z-[-1] pointer-events-none flex items-center justify-center overflow-hidden"
+      style={{ opacity: 0.14 }}
+    >
+      {/* ── メインのラテアートモーフィング ── */}
       <svg
-        aria-hidden
-        className="absolute w-0 h-0 overflow-hidden"
-        style={{ position: "fixed" }}
+        viewBox="0 0 600 600"
+        width={720}
+        height={720}
+        className="absolute blur-[72px]"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
-          <filter id="gooey-coffee">
-            {/* ブロブをぼかして隣接するブロブと融合させる */}
-            <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-            {/* alphaを急激に上げることで「液体が融合する」輪郭を作る */}
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      0 0 0 18 -7"
-              result="goo"
-            />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
+        {/* エスプレッソ層: primary カラー */}
+        <motion.path
+          d={blobPath}
+          className="fill-primary"
+          animate={{
+            d: [blobPath, heartPath, blobPath, leafPath, blobPath],
+          }}
+          transition={{
+            duration: 32,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       </svg>
 
-      {/* 背景コンテナ: 全体を極低opacityに抑えて可読性を確保 */}
-      <div
-        aria-hidden
-        className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none"
-        style={{ opacity: 0.15 }}
+      {/* ── ミルクフォーム層: 少しオフセットして重ね ── */}
+      <svg
+        viewBox="0 0 600 600"
+        width={520}
+        height={520}
+        className="absolute blur-[90px]"
+        style={{ transform: "translate(120px, -80px)" }}
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Gooeyフィルターが適用されるラッパー */}
-        <div
-          className="absolute inset-0"
-          style={{ filter: "url(#gooey-coffee)" }}
-        >
-          {blobs.map((blob, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                ...blob.style,
-                background: blob.colorVar,
-              }}
-              animate={blob.animate}
-              transition={blob.transition}
-            />
-          ))}
-        </div>
-      </div>
-    </>
+        <motion.path
+          d={blobPath}
+          style={{ fill: "var(--coffee-blob-2)" }}
+          animate={{
+            d: [leafPath, blobPath, heartPath, blobPath, leafPath],
+          }}
+          transition={{
+            duration: 28,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 8,
+          }}
+        />
+      </svg>
+
+      {/* ── ダークロースト層: 左下にアシンメトリー配置 ── */}
+      <svg
+        viewBox="0 0 600 600"
+        width={440}
+        height={440}
+        className="absolute blur-[80px]"
+        style={{ transform: "translate(-160px, 130px)" }}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <motion.path
+          d={heartPath}
+          style={{ fill: "var(--coffee-blob-3)" }}
+          animate={{
+            d: [heartPath, leafPath, blobPath, leafPath, heartPath],
+          }}
+          transition={{
+            duration: 36,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 14,
+          }}
+        />
+      </svg>
+    </div>
   );
 }
