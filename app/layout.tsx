@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
-// 変更点: Yomogi をインポート
 import { Yomogi, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { MainLayout } from "@/components/layout/main-layout";
-import { getAllPosts } from "@/lib/mdx";
-import { generateFileTree } from "@/lib/generate-file-tree";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
-// 変更点: Yomogiの読み込み設定
 const yomogi = Yomogi({
-  weight: "400", // Yomogiもウェイト400のみです
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-geist-sans", // Tailwindの設定を変えずに適用
+  variable: "--font-geist-sans",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -41,8 +38,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const posts = await getAllPosts();
-  const fileTree = generateFileTree(posts);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -72,17 +67,21 @@ export default async function RootLayout({
       "Game Development",
     ],
   };
+
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        // 変更点: yomogi.variable を適用
-        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
+        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
         />
-        <MainLayout tree={fileTree}>{children}</MainLayout>
+        <SiteHeader />
+        <main className="min-h-screen max-w-4xl mx-auto px-4 py-8">
+          {children}
+        </main>
+        <SiteFooter />
         <SpeedInsights />
         <Analytics />
         <GoogleAnalytics gaId="G-SFN4E61ERK" />
