@@ -67,22 +67,22 @@ export function HomeClient({ recentPosts }: Props) {
           variants={item}
           className="text-[15px] md:text-base text-foreground/85 leading-[1.9]"
         >
-          長野県で活動する学生エンジニア兼、個人事業主です。この場所は、私の技術的なアウトプット（
+          長野県でプログラミングを勉強している大学生です。この場所は、私の技術的なアウトプット（
           <InlineLink word="blog" href="/blog" />
-          ）、日々の短い思考の記録（
+          ）、日々の記録（
           <InlineLink word="notes" href="/notes-timeline" />
           ）、趣味の旅行記（
           <InlineLink word="travel" href="/travel" />
           ）、そしてこれまで開発してきたポートフォリオ（
           <InlineLink word="project" href="/projects" />
-          ）をまとめたデジタルな遊び場です。
+          ）をまとめた遊び場です。
         </motion.p>
 
         <motion.p
           variants={item}
           className="text-[15px] md:text-base text-foreground/85 leading-[1.9]"
         >
-          普段はNext.js/Reactを用いたWebフロントエンド開発や、Unityでのゲーム開発、LLMを組み込んだアプリケーション制作を行っています。小中学生向けのプログラミング講師としての顔も持っています。
+          普段はNext.js/Reactを用いたWebフロントエンド開発や、Unityでのゲーム開発、LLMを組み込んだアプリケーション制作を行っています。
         </motion.p>
 
         <motion.nav
