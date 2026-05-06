@@ -36,7 +36,7 @@ export const projects: Project[] = [
     ],
     icon: Layout,
     learned:
-      "AtomicDesignの設計思想を学び各コンポーネントを作成しました。親から子へのPropsバケツリレーや、useContextを用いたデータ共有（グローバルなテーマ設定など）を理解しました。また、LocalStorageを使ってブラウザにデータを永続化する実装も行いました。",
+      "Atomic Designの設計思想をもとに各コンポーネントを実装しました。親から子へのPropsのバケツリレーや、useContextを用いたグローバルなデータ共有を理解し、LocalStorageによるデータの永続化も実践しました。",
   },
   {
     id: "talk-one",
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     image: "/images/projects/TalkOne.png",
     description:
       "Zenn主催 AI Agent Hackathon 提出作品。AIともマッチングする匿名通話アプリ。",
-    techStack: ["Flutter", "Dart", "Firebase", "AI Agent"],
+    techStack: ["Flutter", "Dart", "Firebase", "Gemini", "Google Cloud", "Agora"],
     links: [
       {
         label: "AppStore",
@@ -58,29 +58,29 @@ export const projects: Project[] = [
     ],
     icon: MessageCircle,
     learned:
-      "Flutter/Dartに初挑戦し、Cursorを用いたバイブコーディング開発を実践。デザイン実装の難しさや、チーム開発（2人）でのスケジュール調整の重要性と楽しさを学びました。",
+      "Flutter/Dartに初挑戦し、Cursorを活用したバイブコーディングで開発を加速させました。レーティングシステムやAIエージェント連携など複雑な機能を2人チームで実装する中で、スコープの切り分けやスケジュール管理の重要性を実感しました。",
   },
   {
     id: "kindly-sns",
     title: "kindly-sns",
     image: "/images/projects/Kindly-sns.png",
     description:
-      "チクチク言葉を柔らかい言葉に変換してくれる、優しい世界を目指すSNS。",
-    techStack: ["Next.js", "OpenAI API"],
+      "チクチク言葉をDeepSeek APIで優しい言葉に変換してくれる、穏やかな投稿を促すSNS。",
+    techStack: ["Next.js", "TypeScript", "DeepSeek API"],
     links: [
       { label: "GitHub", url: "https://github.com/luck-tech/kindly-sns" },
     ],
     icon: Heart,
     learned:
-      "生成AIをSNSの投稿フローに組み込むUXを設計。ネガティブな感情をポジティブに変換するアルゴリズムの調整に注力しました。",
+      "５人でのチーム開発で、GitHubを使ったブランチ管理やプルリクエストによるコードレビューを実践しました。ログイン・サインアップ画面の実装やAPI連携、ホーム画面（タイムライン）を担当し、先輩からのレビューを通じて実務に近い開発フローを経験できました。",
   },
   {
     id: "progate-hackathon",
     title: "Todo Bingo",
     image: "/images/projects/Bingo.png",
     description:
-      "夏休み暇になった時に、夏らしいやることを提案してくれるビンゴ形式のタスクアプリ。",
-    techStack: ["React", "Go", "Hackathon"],
+      "夏休みの暇つぶしに、AIが夏らしいお題を生成してくれるビンゴ形式のタスクアプリ。",
+    techStack: ["Next.js", "TypeScript", "React", "PostgreSQL", "DeepSeek API"],
     links: [
       {
         label: "Project Page",
@@ -89,14 +89,14 @@ export const projects: Project[] = [
     ],
     icon: Calendar,
     learned:
-      "ハッカソンという短期間での開発において、MVP（Minimum Viable Product）を定義し、優先順位をつけて実装するプロセスを経験しました。",
+      "ハッカソンという短期間の開発で、MVPを定義して優先順位をつけながら実装するプロセスを経験しました。DeepSeek APIで自然言語からビンゴカードを生成するなど、AIをプロダクトに組み込む設計も学びました。",
   },
   {
     id: "nasa-spaceapps",
     title: "BloomWatch (FioreSakura)",
     image: "/images/projects/NASA-SpaceAppsChallenge.png",
     description:
-      "NASA Space Apps Challenge 2025 提出作品。気候データを用いた桜の開花予測アプリケーション。",
+      "NASA Space Apps Challenge 2025 提出作品・最優秀賞受賞。NDVIや全天日射量などの気候データを用いた桜の開花予測アプリケーション。",
     techStack: ["Python", "Data Analysis", "NASA API"],
     links: [
       {
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     ],
     icon: Satellite,
     learned:
-      "オープンデータの活用方法と、データを可視化してユーザーに伝えるUI/UXの重要性を学びました。英語でのプレゼンテーション資料作成にも挑戦しました。",
+      "5人チームで実質2人での開発となる中、お互いにカバーし合いながら最優秀賞を獲得できました。NASAのオープンデータ活用や気候データの可視化、英語でのプレゼン資料作成など、幅広いスキルに挑戦した経験になりました。",
   },
   {
     id: "bsky-bot",
@@ -123,17 +123,17 @@ export const projects: Project[] = [
     links: [{ label: "GitHub(private)", url: "https://github.com/yuu-1230" }],
     icon: Bot,
     learned:
-      "APIの呼び出し処理やデータ取得の実装だけでなく、GitHub Actionsを用いたサーバーレス運用の構築に苦戦しました。特にリポジトリ認識までのラグ（約3日）や、Cron実行の時間の誤差（±20分）など、運用して初めて分かる知見を得ました。",
+      "APIの呼び出しやデータ取得の実装だけでなく、GitHub Actionsを用いたサーバーレス運用の構築に苦戦しました。リポジトリ認識までのラグ（約3日）やCronの時間誤差（±20分）など、実際に運用して初めてわかる知見を得ました。",
   },
   {
     id: "blog",
     title: "darkmochaBlog",
     image: "/images/projects/Blog.png",
-    description: "現在閲覧中のこのポートフォリオブログ。VS CodeのUIを再現。",
-    techStack: ["Next.js 16", "Tailwind CSS", "MDX"],
+    description: "フロントエンド・Unity・旅行記を記録するブログ。",
+    techStack: ["Next.js 15", "Tailwind CSS", "MDX"],
     links: [{ label: "GitHub(private)", url: "https://github.com/yuu-1230" }],
     icon: PenTool,
     learned:
-      "Next.js App Routerの深い理解と、コンポーネント設計、そして「遊び心」を形にするCSS力が向上中です。",
+      "microCMSなどのヘッドレスCMSを使わず、MDXから直接記事を取得する仕組みを自前で構築しました。柔軟なカスタマイズ性を活かしつつ、効率的なコンポーネント設計やApp Routerの深い理解につながりました。",
   },
 ];

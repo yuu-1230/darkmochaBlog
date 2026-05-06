@@ -1,109 +1,110 @@
-import React from "react";
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
-import { Download, Globe } from "lucide-react";
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
+};
 
 export default function ProjectsPage() {
   return (
-    <div className="h-full w-full bg-[#1e1e1e] text-[#cccccc] font-sans overflow-y-auto p-6 md:p-12 select-none scrollbar-thin scrollbar-thumb-[#424242] scrollbar-track-transparent">
-      {/* Header */}
-      <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-4 relative z-0">
-        <div>
-          <h1 className="text-2xl font-medium text-white mb-1">Projects</h1>
-          <p className="text-sm text-[#858585]">
-            A collection of {projects.length} works.
-          </p>
-        </div>
-      </div>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className="py-12 max-w-3xl mx-auto space-y-16"
+    >
+      {/* Page Header */}
+      <motion.header variants={item} className="space-y-2 border-b border-border pb-8">
+        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+          // projects
+        </p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Projects</h1>
+        <p className="text-muted-foreground text-sm">
+          {projects.length}件の制作物と、そこで得た学び。
+        </p>
+      </motion.header>
 
-      {/* Projects List (Grid) */}
-      <div className="flex flex-col gap-6 relative z-0">
+      {/* Projects List */}
+      <ul className="space-y-12">
         {projects.map((project) => (
-          <div
+          <motion.li
             key={project.id}
-            // ホバー時にカード全体を少し手前に、影を強調
-            className="bg-[#252526] hover:bg-[#2a2d2e] border border-white/5 hover:border-white/10 rounded-xl flex flex-col md:flex-row gap-0 transition-all duration-300 group relative h-auto hover:z-10 hover:shadow-md"
+            variants={item}
+            className="group border-b border-border pb-12 last:border-0 last:pb-0"
           >
-            {/* --- Left: Image Area --- */}
-            <div
-              // カードの角丸に合わせて調整
-              className="w-full md:w-80 h-64 md:h-auto shrink-0 bg-[#1e1e1e] relative flex items-center justify-center border-b md:border-b-0 md:border-r border-white/5 p-4 rounded-t-xl md:rounded-l-xl md:rounded-tr-none group-hover:z-20 transition-all"
-            >
-              {project.image ?
-                // 画像がある場合
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain transition-transform duration-500 group-hover:scale-105 rounded-t-xl md:rounded-l-xl md:rounded-tr-none group-hover:shadow-md"
-                />
-              : <project.icon className="w-16 h-16 text-[#cccccc] opacity-50 group-hover:scale-105 transition-transform duration-500" />
-              }
-            </div>
+            {/* Thumbnail + Content */}
+            <div className="flex flex-col sm:flex-row gap-5 items-start">
+              {/* Thumbnail */}
+              <div className="w-full sm:w-40 shrink-0 aspect-video relative rounded-lg overflow-hidden border border-border bg-muted">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 160px"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                    <project.icon className="w-8 h-8 opacity-40" />
+                  </div>
+                )}
+              </div>
 
-            {/* --- Right: Content Area --- */}
-            <div className="flex-1 min-w-0 flex flex-col p-4 md:p-6 bg-[#252526] group-hover:bg-[#2a2d2e] transition-colors rounded-b-xl md:rounded-r-xl md:rounded-bl-none relative z-0">
-              {/* Header: Title & Links */}
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-3">
-                <div>
-                  <h2 className="text-lg md:text-xl font-bold text-white group-hover:text-[#3794ff] transition-colors leading-tight">
+              {/* Text */}
+              <div className="flex-1 min-w-0 space-y-2">
+                {/* Title + Links */}
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                  <h2 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
                     {project.title}
                   </h2>
-                  <p className="text-xs text-[#858585] font-mono mt-1">
-                    {project.id}
+                  <div className="flex items-center gap-3 shrink-0 flex-wrap">
+                    {project.links.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Tech stack */}
+                <p className="text-xs text-muted-foreground font-mono">
+                  {project.techStack.join("  ·  ")}
+                </p>
+
+                {/* Learned */}
+                {project.learned && (
+                  <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-border pl-3 italic">
+                    {project.learned}
                   </p>
-                </div>
-
-                {/* Links (Buttons) */}
-                <div className="flex flex-wrap gap-2 shrink-0 relative z-10">
-                  {project.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 bg-[#0e639c] hover:bg-[#1177bb] text-white text-xs font-medium flex items-center gap-1.5 transition-colors rounded-sm shadow-sm hover:shadow-md"
-                    >
-                      {link.label === "GitHub" || link.label === "AppStore" ?
-                        <Download className="w-3.5 h-3.5" />
-                      : <Globe className="w-3.5 h-3.5" />}
-                      <span>{link.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm text-[#cccccc] leading-relaxed mb-4">
-                {project.description}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mb-4 mt-auto">
-                {project.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-0.5 bg-[#3c3c3c] text-[#ce9178] text-[11px] font-mono rounded-sm border border-white/5"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* "What I Learned" Section */}
-              <div className="pt-3 border-t border-white/5 -mx-4 -mb-4 md:-mx-6 md:-mb-6 px-4 md:px-6 pb-4 mt-auto bg-[#252526] group-hover:bg-[#2a2d2e] transition-colors rounded-b-xl md:rounded-br-xl">
-                <p className="text-[11px] text-[#858585] font-mono mb-1.5">
-                  <span className="text-[#4ec9b0]">const</span>{" "}
-                  <span className="text-[#9cdcfe]">learned</span> =
-                </p>
-                <p className="text-xs text-[#a0a0a0] pl-3 border-l-2 border-[#4ec9b0]/30 italic leading-relaxed">
-                  &quot;{project.learned}&quot;
-                </p>
+                )}
               </div>
             </div>
-          </div>
+          </motion.li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </motion.div>
   );
 }

@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-// 変更点: Yomogi をインポート
-import { Yomogi, JetBrains_Mono } from "next/font/google";
+import { Yomogi, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { MainLayout } from "@/components/layout/main-layout";
-import { getAllPosts } from "@/lib/mdx";
-import { generateFileTree } from "@/lib/generate-file-tree";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { Providers } from "@/components/providers";
 
-// 変更点: Yomogiの読み込み設定
 const yomogi = Yomogi({
-  weight: "400", // Yomogiもウェイト400のみです
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-geist-sans", // Tailwindの設定を変えずに適用
+  variable: "--font-geist-sans",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -21,13 +19,17 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev",
   ),
-  alternates: {
-    canonical: "./",
-  },
+  alternates: { canonical: "./" },
   title: "Darkmocha Blog",
   description: "Engineer and Everyday life Blog by Yuto Nagata",
   icons: {
@@ -41,8 +43,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const posts = await getAllPosts();
-  const fileTree = generateFileTree(posts);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -50,39 +50,34 @@ export default async function RootLayout({
     url: "https://www.darkmocha.dev",
     image: "https://www.darkmocha.dev/images/About/profile.jpg",
     jobTitle: "Student Engineer",
-    worksFor: {
-      "@type": "Organization",
-      name: "Suwa Univ. of science",
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: "Nagano",
-      addressCountry: "JP",
-    },
+    worksFor: { "@type": "Organization", name: "Suwa Univ. of science" },
+    address: { "@type": "PostalAddress", addressRegion: "Nagano", addressCountry: "JP" },
     sameAs: [
       "https://github.com/yuu-1230",
       "https://twitter.com/DarkmochaJP",
       "https://bsky.app/profile/darkmochajapan.bsky.social",
     ],
-    knowsAbout: [
-      "Next.js",
-      "React",
-      "Unity",
-      "Web Development",
-      "Game Development",
-    ],
+    knowsAbout: ["Next.js", "React", "Unity", "Web Development", "Game Development"],
   };
+
   return (
     <html lang="ja" suppressHydrationWarning>
       <body
-        // 変更点: yomogi.variable を適用
-        className={`${yomogi.variable} ${jetbrainsMono.variable} antialiased h-screen w-screen overflow-hidden bg-background text-foreground flex flex-col`}
+        className={`${yomogi.variable} ${jetbrainsMono.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
-        <MainLayout tree={fileTree}>{children}</MainLayout>
+        <Providers>
+          <SiteHeader />
+          <main className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+            {children}
+          </main>
+          <SiteFooter />
+        </Providers>
         <SpeedInsights />
         <Analytics />
         <GoogleAnalytics gaId="G-SFN4E61ERK" />

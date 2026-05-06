@@ -1,98 +1,175 @@
+"use client";
+
 import Link from "next/link";
-import { SiGithub, SiX } from "react-icons/si";
-import { Search } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Typewriter } from "./typewriter";
-export const SiteHeader = () => {
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { Sun, Moon, Coffee, X, Menu } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { SearchDialog } from "@/components/search-dialog";
+
+const navItems = [
+  { label: "blog",    href: "/blog" },
+  { label: "notes",  href: "/notes-timeline" },
+  { label: "travel", href: "/travel" },
+  { label: "project",href: "/projects" },
+  { label: "about",  href: "/about" },
+];
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="w-8 h-8" />;
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center mx-auto px-6 max-w-5xl">
-        <div className="mr-4 flex">
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+    >
+      {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+    </button>
+  );
+}
+
+export const SiteHeader = () => {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  // パス変更でメニューを閉じる
+  useEffect(() => setOpen(false), [pathname]);
+
+  // メニュー開閉中は body スクロールをロック
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  return (
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-sm"
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+          {/* Logo */}
           <Link
             href="/"
-            className="group mr-6 flex items-center space-x-2 font-bold text-lg tracking-tight"
+            className="flex items-center gap-2 font-bold text-base text-foreground hover:text-primary transition-colors"
           >
-            <span className="font-mono text-xl font-bold text-primary flex items-center">
-              <Typewriter />
-            </span>
+            <Coffee className="w-4 h-4 text-primary" />
+            darkmocha.dev
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/blog"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+
+          <div className="flex items-center gap-1">
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-0 mr-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-2 py-1 text-sm font-mono transition-colors ${
+                    pathname === item.href
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  [{item.label}]
+                </Link>
+              ))}
+            </nav>
+
+            <SearchDialog />
+            <ThemeToggle />
+
+            {/* Hamburger button (mobile only) */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+              aria-expanded={open}
+              className="md:hidden ml-1 p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
-              Blog
-            </Link>
-            <Link
-              href="/about"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              About
-            </Link>
-            <Link
-              href="/projects"
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Projects
-            </Link>
-          </nav>
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-2">
-          <nav className="flex items-center gap-1">
-            <Link
-              href="https://github.com/yuu-1230"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+      </motion.header>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm md:hidden"
+            />
+
+            {/* Drawer panel */}
+            <motion.nav
+              key="drawer"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 z-50 h-full w-64 bg-background border-l border-border shadow-xl md:hidden flex flex-col"
+              aria-label="モバイルナビゲーション"
             >
-              <div
-                className={cn(
-                  buttonVariants({
-                    variant: "ghost",
-                    size: "icon",
-                  }),
-                  "h-8 w-8 px-0",
-                )}
-              >
-                <SiGithub className="h-4 w-4" />
-                <span className="sr-only">GitHub</span>
+              {/* Drawer header */}
+              <div className="h-14 flex items-center justify-between px-5 border-b border-border">
+                <span className="font-bold text-sm flex items-center gap-2 text-foreground">
+                  <Coffee className="w-4 h-4 text-primary" />
+                  darkmocha.dev
+                </span>
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="メニューを閉じる"
+                  className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
               </div>
-            </Link>
-            <Link
-              href="https://x.com/DarkmochaJP"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <div
-                className={cn(
-                  buttonVariants({
-                    variant: "ghost",
-                    size: "icon",
-                  }),
-                  "h-8 w-8 px-0",
-                )}
-              >
-                <SiX className="h-4 w-4" />
-                <span className="sr-only">X</span>
+
+              {/* Nav links */}
+              <ul className="flex flex-col py-4 px-3 gap-1 flex-1">
+                {navItems.map((item, i) => (
+                  <motion.li
+                    key={item.href}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 + 0.05, duration: 0.2 }}
+                  >
+                    <Link
+                      href={item.href}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg font-mono text-sm transition-colors ${
+                        pathname === item.href
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      }`}
+                    >
+                      <span className="text-primary/50 text-xs">//</span>
+                      {item.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Drawer footer */}
+              <div className="px-5 py-4 border-t border-border text-xs font-mono text-muted-foreground">
+                © Yuto Nagata 2026
               </div>
-            </Link>
-            <div
-              className={cn(
-                buttonVariants({
-                  variant: "ghost",
-                  size: "icon",
-                }),
-                "h-8 w-8 px-0",
-              )}
-            >
-              <Search className="h-4 w-4 text-muted-foreground transition-colors hover:text-foreground" />
-              <span className="sr-only">Search</span>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </header>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };

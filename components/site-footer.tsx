@@ -1,56 +1,55 @@
+"use client";
+
 import Link from "next/link";
-import { SiInstagram, SiBluesky, SiX, SiGithub } from "react-icons/si";
+import { motion } from "motion/react";
+import { SiGithub, SiX, SiZenn, SiQiita } from "react-icons/si";
+import { Archive } from "lucide-react";
+
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/yuu-1230", icon: <SiGithub className="w-4 h-4" /> },
+  { label: "X", href: "https://x.com/DarkmochaJP", icon: <SiX className="w-4 h-4" /> },
+  { label: "Zenn", href: "https://zenn.dev/darkmocha", icon: <SiZenn className="w-4 h-4" /> },
+  { label: "Qiita", href: "https://qiita.com/darkmocha", icon: <SiQiita className="w-4 h-4" /> },
+];
 
 export const SiteFooter = () => {
   return (
-    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0 mx-auto px-6 max-w-5xl">
-        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} Yuto Nagata. All rights reserved.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-4">
+    <motion.footer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="border-t border-border mt-16"
+    >
+      <div className="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <span>© Yuto Nagata 2026</span>
           <Link
-            href="https://github.com/yuu-1230"
+            href="https://v1.darkmocha.dev"
             target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 font-mono text-xs hover:text-foreground transition-colors group"
           >
-            <SiGithub className="h-5 w-5" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link
-            href="https://www.instagram.com/darkmocha_jp"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <SiInstagram className="h-5 w-5" />
-            <span className="sr-only">Instagram</span>
-          </Link>
-          <Link
-            href="https://x.com/DarkmochaJP"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <SiX className="h-5 w-5" />
-            <span className="sr-only">X (Twitter)</span>
-          </Link>
-
-          <Link
-            href="https://bsky.app/profile/darkmochajapan.bsky.social"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <SiBluesky className="h-5 w-5" />
-            <span className="sr-only">Bluesky</span>
+            <Archive className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+            Go back in time (v1)
           </Link>
         </div>
+
+        <nav className="flex items-center gap-4" aria-label="Social links">
+          {socialLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="hover:text-foreground transition-colors"
+            >
+              {link.icon}
+            </Link>
+          ))}
+        </nav>
       </div>
-    </footer>
+    </motion.footer>
   );
 };

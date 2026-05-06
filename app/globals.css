@@ -4,30 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* --- VS Code Default Dark+ Colors --- */
-  --ide-bg: #1e1e1e; /* エディタ背景 (標準) */
-  --ide-sidebar: #252526; /* サイドバー (指定色) */
-  --ide-activity: #333333; /* アクティビティバー (左端) */
-  --ide-tab-active: #1e1e1e; /* アクティブタブ (背景と同じ) */
-  --ide-tab-inactive: #2d2d2d; /* 非アクティブタブ (指定色) */
-  --ide-status: #007acc; /* ステータスバー (指定色:青) */
-  --ide-border: #3c3c3c; /* 境界線 (指定色) */
-  --ide-text: #d4d4d4; /* 文字色 (指定色) */
-
-  /* Syntax Highlighting Colors */
-  --ide-comment: #6a9955; /* コメント (緑) */
-  --ide-accent: #007acc; /* アクセント (青) */
-  --ide-string: #ce9178; /* 文字列 (オレンジ) */
-  --ide-keyword: #569cd6; /* キーワード (水色) */
-
-  /* --- Animations --- */
-  --animate-blink: blink 1s step-end infinite;
-
   /* --- Base Mappings --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -49,124 +31,98 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Charts */
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-
-  /* Sidebar */
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-
-  @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
 }
 
+/* ============================================
+   Light Mode
+   温かみのあるクリームベージュ × テラコッタ
+   ============================================ */
 :root {
-  /* VS Code Default Dark+ Mapping */
-  --background: var(--ide-bg);
-  --foreground: var(--ide-text);
+  --background: #F3EAD3;
+  --foreground: #2D2D2D;
 
-  /* Cards (Using Inactive Tab color for slight contrast) */
-  --card: var(--ide-tab-inactive);
-  --card-foreground: var(--ide-text);
-  --popover: var(--ide-sidebar);
-  --popover-foreground: var(--ide-text);
+  --card: #EDE3CA;
+  --card-foreground: #2D2D2D;
 
-  /* Primary: Accent Blue */
-  --primary: var(--ide-accent);
-  --primary-foreground: #ffffff; /* 青背景なので白文字 */
+  --popover: #EDE3CA;
+  --popover-foreground: #2D2D2D;
 
-  /* Secondary: Status Bar Blue (Footer use) */
-  --secondary: var(--ide-status);
-  --secondary-foreground: #ffffff; /* 青背景なので白文字 */
+  /* Primary: テラコッタ */
+  --primary: #C05C20;
+  --primary-foreground: #ffffff;
 
-  /* Muted: Sidebar Color */
-  --muted: var(--ide-sidebar);
-  --muted-foreground: #858585; /* 少し暗めのグレー */
+  /* Secondary: 薄いベージュ */
+  --secondary: #E5DABF;
+  --secondary-foreground: #2D2D2D;
 
-  /* Accent: Hover Color (List highlight) */
-  --accent: #2a2d2e; /* List hover color in VS Code */
-  --accent-foreground: var(--ide-text);
+  /* Muted: ウォームグレー背景 */
+  --muted: #E5DABF;
+  --muted-foreground: #8C8577;
 
-  --destructive: #f14c4c; /* Error Red */
+  /* Accent: ホバー用のほんのり暗いベージュ */
+  --accent: #E0D5BC;
+  --accent-foreground: #2D2D2D;
 
-  --border: var(--ide-border);
-  --input: var(--ide-border);
-  --ring: var(--ide-border); /* Focus ring usually blue border in VS Code */
+  --destructive: #c0392b;
 
-  --radius: 0rem;
+  /* Coffee background blobs */
+  --coffee-blob-1: #C8893A; /* caramel espresso */
+  --coffee-blob-2: #F0DEB4; /* steamed milk */
+  --coffee-blob-3: #A0622A; /* dark roast */
 
-  /* Charts */
-  --chart-1: var(--ide-accent);
-  --chart-2: var(--ide-string);
-  --chart-3: var(--ide-keyword);
-  --chart-4: #f14c4c;
-  --chart-5: #dcdcaa;
+  --border: #E5DABF;
+  --input: #E5DABF;
+  --ring: #C05C20;
 
-  /* Sidebar Variables */
-  --sidebar: var(--ide-sidebar);
-  --sidebar-foreground: var(--ide-text);
-  --sidebar-primary: var(--ide-accent);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2a2d2e;
-  --sidebar-accent-foreground: var(--ide-text);
-  --sidebar-border: var(--ide-border);
-  --sidebar-ring: var(--ide-accent);
+  --radius: 0.5rem;
 }
 
+/* ============================================
+   Dark Mode
+   深みのあるウォームダークグレー × ブライトオレンジ
+   ============================================ */
 .dark {
-  /* .dark も root と同じ設定を適用（常時ダークモード） */
-  --background: var(--ide-bg);
-  --foreground: var(--ide-text);
-  --card: var(--ide-tab-inactive);
-  --card-foreground: var(--ide-text);
-  --popover: var(--ide-sidebar);
-  --popover-foreground: var(--ide-text);
-  --primary: var(--ide-accent);
-  --primary-foreground: #ffffff;
-  --secondary: var(--ide-status);
-  --secondary-foreground: #ffffff;
-  --muted: var(--ide-sidebar);
-  --muted-foreground: #858585;
-  --accent: #2a2d2e;
-  --accent-foreground: var(--ide-text);
-  --destructive: #f14c4c;
-  --border: var(--ide-border);
-  --input: var(--ide-border);
-  --ring: var(--ide-border);
-  --sidebar: var(--ide-sidebar);
-  --sidebar-foreground: var(--ide-text);
-  --sidebar-primary: var(--ide-accent);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2a2d2e;
-  --sidebar-accent-foreground: var(--ide-text);
-  --sidebar-border: var(--ide-border);
-  --sidebar-ring: var(--ide-accent);
+  --background: #2B2B2B;
+  --foreground: #F4F0E6;
+
+  --card: #333333;
+  --card-foreground: #F4F0E6;
+
+  --popover: #333333;
+  --popover-foreground: #F4F0E6;
+
+  /* Primary: ブライトオレンジ */
+  --primary: #F29C38;
+  --primary-foreground: #2B2B2B;
+
+  /* Secondary */
+  --secondary: #3D3D3D;
+  --secondary-foreground: #F4F0E6;
+
+  /* Muted */
+  --muted: #363636;
+  --muted-foreground: #A39E93;
+
+  /* Accent */
+  --accent: #383838;
+  --accent-foreground: #F4F0E6;
+
+  --destructive: #e74c3c;
+
+  /* Coffee background blobs */
+  --coffee-blob-1: #3E2723; /* deep espresso */
+  --coffee-blob-2: #D7CCC8; /* milk foam */
+  --coffee-blob-3: #6D4C41; /* medium roast */
+
+  --border: #363636;
+  --input: #363636;
+  --ring: #F29C38;
 }
 
 @layer base {
@@ -174,43 +130,38 @@
     @apply border-border outline-ring/50;
   }
   body {
-    /* フォントを等幅にし、背景色を適用 */
-    @apply bg-background text-foreground font-mono antialiased selection:bg-[#264F78] selection:text-white;
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
   }
-}
-
-.animate-blink {
-  animation: blink 1s step-end infinite;
 }
 
 @layer utilities {
-  /* Chrome, Edge, Safari */
   ::-webkit-scrollbar {
-    width: 12px; /* 縦スクロールバーの幅 */
-    height: 12px; /* 横スクロールバーの高さ */
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent; /* 背景は透過 (エディタ色に馴染ませる) */
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #424242; /* つまみの色 (ダークグレー) */
-    border: 3px solid transparent; /* つまみの周りに余白を作るテクニック */
-    background-clip: content-box; /* 余白部分は透過させる */
-    border-radius: 99px; /* 丸みをつける (VS Code風なら 0px でもOK) */
+    background-color: var(--border);
+    border: 2px solid transparent;
+    background-clip: content-box;
+    border-radius: 99px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #4f4f4f; /* ホバー時に少し明るく */
+    background-color: var(--muted-foreground);
   }
 
-  /* Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #424242 transparent;
+    scrollbar-color: var(--border) transparent;
   }
+
   html {
     scroll-behavior: smooth;
   }
+
 }
