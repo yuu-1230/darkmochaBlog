@@ -18,6 +18,7 @@ import remarkGfm from "remark-gfm";
 import { mdxComponents, generateTOC } from "@/components/mdx-components";
 import { TableOfContents } from "@/components/TableOfContents";
 import { AnchorScroll } from "@/components/anchor-scroll";
+import { GiscusComments } from "@/components/giscus-comments";
 
 export async function generateMetadata({
   params,
@@ -232,6 +233,10 @@ export default async function BlogPost({
         <div className="mt-8 pt-6 border-t flex justify-between items-center">
           <span className="text-sm text-muted-foreground">Thanks for reading.</span>
           <div className="flex gap-4" />
+        </div>
+
+        <div className="mt-12">
+          <GiscusComments />
         </div>
       </article>
     </div>

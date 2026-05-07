@@ -164,4 +164,8 @@
     scroll-behavior: smooth;
   }
 
+  .giscus,
+  .giscus-frame {
+    width: 100%;
+  }
 }
