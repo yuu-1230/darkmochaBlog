@@ -38,7 +38,7 @@ export function NoteTimeline({
       {/* Section label (preview mode only) */}
       {!isFull && (
         <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
-          <span className="text-primary/60">//</span>
+          <span className="text-primary/60">{"//"}</span>
           notes
           <span className="text-muted-foreground/50 font-normal normal-case tracking-normal">
             ({notes.length})

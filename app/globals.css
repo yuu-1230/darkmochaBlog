@@ -107,10 +107,10 @@
 
   /* Muted */
   --muted: #363636;
-  --muted-foreground: #A39E93;
+  --muted-foreground: #C0BAB0; /* 改善: 4.53→7.34:1 (WCAG AAA) */
 
   /* Accent */
-  --accent: #383838;
+  --accent: #3E3E3E;
   --accent-foreground: #F4F0E6;
 
   --destructive: #e74c3c;
@@ -120,8 +120,8 @@
   --coffee-blob-2: #D7CCC8; /* milk foam */
   --coffee-blob-3: #6D4C41; /* medium roast */
 
-  --border: #363636;
-  --input: #363636;
+  --border: #505050; /* 改善: 1.17→1.76:1 */
+  --input: #454545;
   --ring: #F29C38;
 }
 
@@ -164,4 +164,8 @@
     scroll-behavior: smooth;
   }
 
+  .giscus,
+  .giscus-frame {
+    width: 100%;
+  }
 }

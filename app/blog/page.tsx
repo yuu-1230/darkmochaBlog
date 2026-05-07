@@ -36,7 +36,7 @@ export default async function BlogPage() {
       {/* Page header */}
       <header className="space-y-2 border-b border-border pb-8">
         <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          // blog
+          {"// blog"}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Blog</h1>
         <p className="text-sm text-muted-foreground">
@@ -54,7 +54,7 @@ export default async function BlogPage() {
       {sections.map((section) => (
         <section key={section.title} aria-label={section.title}>
           <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
-            <span className="text-primary/60">//</span>
+            <span className="text-primary/60">{"//"}</span>
             {section.title}
             <span className="text-muted-foreground/50 font-normal normal-case tracking-normal">
               ({section.posts.length})

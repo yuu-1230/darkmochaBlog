@@ -26,7 +26,7 @@ export default function ProjectsPage() {
       {/* Page Header */}
       <motion.header variants={item} className="space-y-2 border-b border-border pb-8">
         <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          // projects
+          {"// projects"}
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Projects</h1>
         <p className="text-muted-foreground text-sm">

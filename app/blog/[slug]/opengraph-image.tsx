@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
 import { getPost } from "@/lib/mdx";
 export const dynamic = "force-dynamic";
