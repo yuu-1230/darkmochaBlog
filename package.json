@@ -35,6 +35,9 @@
     "swiper": "^12.1.2",
     "tailwind-merge": "^3.4.0"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "unrs-resolver"]
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
