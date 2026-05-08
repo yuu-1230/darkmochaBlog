@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Note } from "@/lib/notes";
+import { OgpCard } from "@/components/ogp-card";
+import { extractUrls } from "@/lib/ogp";
 
 const PREVIEW_LIMIT = 2;
 
@@ -94,7 +96,7 @@ function resolveImageSrc(image: string): string {
 }
 
 function NoteContent({ content }: { content: string }) {
-  const parts = content.split(/(#[\wぁ-鿿゠-ヿ一-鿿]+)/g);
+  const parts = content.split(/(#[\wぁ-鿿゠-ヿ一-鿿]+|https?:\/\/[^\s]+)/g);
   return (
     <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
       {parts.map((part, i) => {
@@ -110,13 +112,26 @@ function NoteContent({ content }: { content: string }) {
             </Link>
           );
         }
+        if (/^https?:\/\//.test(part)) {
+          return (
+            <a
+              key={i}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary/80 hover:text-primary text-xs hover:underline underline-offset-2 transition-colors break-all"
+            >
+              {part}
+            </a>
+          );
+        }
         return <span key={i}>{part}</span>;
       })}
     </p>
   );
 }
 
-function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
+async function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
   const dateStr = new Date(note.createdAt).toLocaleString("ja-JP", {
     year: "numeric",
     month: "2-digit",
@@ -125,6 +140,8 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
     minute: "2-digit",
     timeZone: "Asia/Tokyo",
   });
+
+  const urls = extractUrls(note.content);
 
   return (
     <article className="flex gap-4 group" style={{ contentVisibility: "auto", containIntrinsicSize: "0 120px" }}>
@@ -145,6 +162,9 @@ function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
           {dateStr}
         </time>
         <NoteContent content={note.content} />
+        {urls.map((url) => (
+          <OgpCard key={url} url={url} />
+        ))}
         {note.image && (
           <div className="mt-3 max-w-sm w-full rounded-lg overflow-hidden border border-border relative"
             style={{ aspectRatio: "4/3" }}>
