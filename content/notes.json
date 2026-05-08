@@ -1,33 +1,38 @@
 [
   {
     "id": "1",
-    "content": "今、２ヶ月でUnityゲーム５本作成にチャレンジ中　#Unity #GameDev",
+    "content": "今、2ヶ月でUnityゲーム5本作成にチャレンジ中 \n #Unity #GameDev",
     "createdAt": "2026-04-19T14:48:23"
   },
   {
     "id": "2",
-    "content": "Reactをもう一度学びなおします。 #Nextjs #WebDev",
+    "content": "Reactをもう一度学びなおします。\n #Nextjs #WebDev",
     "createdAt": "2026-04-19T14:51:37"
   },
   {
     "id": "3",
-    "content": "成人式だった。久しぶりにみんなと会えたし、同窓会楽しかった。 #Life",
+    "content": "成人式だった。久しぶりにみんなと会えたし、同窓会楽しかった。 \n#Life",
     "createdAt": "2026-05-05T12:20:00"
   },
   {
     "id": "4",
-    "content": "ブログデザイン刷新中 #Nextjs #WebDev",
+    "content": "ブログデザイン刷新中 \n#Nextjs #WebDev",
     "createdAt": "2026-05-06T06:05:00"
   },
   {
     "id": "5",
-    "content": "ブログデザイン刷新完了！ #Nextjs #WebDev",
+    "content": "ブログデザイン刷新完了！ \n #Nextjs #WebDev",
     "createdAt": "2026-05-06T18:20:00"
   },
   {
     "id": "6",
-    "content": "まだ、ゲーム6本目しか作れてない。あと1ヶ月で4本...厳しい #Unity #GameDev",
+    "content": "まだ、ゲーム6本目しか作れてない。あと1ヶ月で4本...厳しい \n #Unity #GameDev",
     "createdAt": "2026-05-06T18:24:00",
     "image": "MeteorFrontierRunner.png"
+  },
+  {
+    "id": "7",
+    "content": "Reactって複雑でよくわからんって思ってた。\n でもjQuery時代に『他人のコードが全く読めない』という問題があって、それを構造ごと解決したのがReactだと知ったら、なんで今の書き方になってるか全部腑に落ちた。技術って歴史から学ぶと急に優しくなる。（全然わかってない😭）\n https://blog.shinonome.io/react-and-frontend-philosophy/ \n #WebDev",
+    "createdAt": "2026-05-08T18:23:53"
   }
 ]
