@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { ImageLightbox } from "@/components/image-lightbox";
 
 const container = {
   hidden: {},
@@ -16,6 +18,8 @@ const item = {
 };
 
 export default function ProjectsPage() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   return (
     <motion.div
       variants={container}
@@ -45,7 +49,10 @@ export default function ProjectsPage() {
             {/* Thumbnail + Content */}
             <div className="flex flex-col sm:flex-row gap-5 items-start">
               {/* Thumbnail */}
-              <div className="w-full sm:w-40 shrink-0 aspect-video relative rounded-lg overflow-hidden border border-border bg-muted">
+              <div
+                className={`w-full sm:w-40 shrink-0 aspect-video relative rounded-lg overflow-hidden border border-border bg-muted ${project.image ? "cursor-zoom-in" : ""}`}
+                onClick={() => project.image && setLightbox({ src: project.image, alt: project.title })}
+              >
                 {project.image ? (
                   <Image
                     src={project.image}
@@ -105,6 +112,14 @@ export default function ProjectsPage() {
           </motion.li>
         ))}
       </ul>
+
+      {lightbox && (
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </motion.div>
   );
 }
