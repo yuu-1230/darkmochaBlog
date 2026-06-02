@@ -68,18 +68,24 @@ export const SiteHeader = () => {
 
           <div className="flex items-center gap-1">
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-0 mr-2">
+            <nav className="hidden md:flex items-center gap-6 mr-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-2 py-1 text-sm font-mono transition-colors ${
+                  className={`relative inline-block font-mono text-xs transition-colors pb-0.5 ${
                     pathname === item.href
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  [{item.label}]
+                  {item.label}
+                  {pathname === item.href && (
+                    <span
+                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                      aria-hidden
+                    />
+                  )}
                 </Link>
               ))}
             </nav>

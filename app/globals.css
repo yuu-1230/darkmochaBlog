@@ -85,44 +85,44 @@
 
 /* ============================================
    Dark Mode
-   深みのあるウォームダークグレー × ブライトオレンジ
+   ターミナルブラック × テラコッタ
    ============================================ */
 .dark {
-  --background: #2B2B2B;
-  --foreground: #F4F0E6;
+  --background: #0e0e0e;
+  --foreground: #e5e2e1;
 
-  --card: #333333;
-  --card-foreground: #F4F0E6;
+  --card: #121212;
+  --card-foreground: #e5e2e1;
 
-  --popover: #333333;
-  --popover-foreground: #F4F0E6;
+  --popover: #121212;
+  --popover-foreground: #e5e2e1;
 
-  /* Primary: ブライトオレンジ */
-  --primary: #F29C38;
-  --primary-foreground: #2B2B2B;
+  /* Primary: テラコッタ (ライトモードと統一) */
+  --primary: #C05C20;
+  --primary-foreground: #ffffff;
 
   /* Secondary */
-  --secondary: #3D3D3D;
-  --secondary-foreground: #F4F0E6;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #e5e2e1;
 
   /* Muted */
-  --muted: #363636;
-  --muted-foreground: #C0BAB0; /* 改善: 4.53→7.34:1 (WCAG AAA) */
+  --muted: #1a1a1a;
+  --muted-foreground: #a09488;
 
   /* Accent */
-  --accent: #3E3E3E;
-  --accent-foreground: #F4F0E6;
+  --accent: #1c1b1b;
+  --accent-foreground: #e5e2e1;
 
   --destructive: #e74c3c;
 
   /* Coffee background blobs */
-  --coffee-blob-1: #3E2723; /* deep espresso */
-  --coffee-blob-2: #D7CCC8; /* milk foam */
-  --coffee-blob-3: #6D4C41; /* medium roast */
+  --coffee-blob-1: #3E2723;
+  --coffee-blob-2: #D7CCC8;
+  --coffee-blob-3: #6D4C41;
 
-  --border: #505050; /* 改善: 1.17→1.76:1 */
-  --input: #454545;
-  --ring: #F29C38;
+  --border: #262626;
+  --input: #1a1a1a;
+  --ring: #C05C20;
 }
 
 @layer base {
