@@ -49,7 +49,7 @@ export const TableOfContents = ({ toc, className }: TableOfContentsProps) => {
       )}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 text-foreground font-semibold mb-4 border-b pb-3">
+      <div className="flex items-center gap-2 text-foreground font-semibold mb-4 pb-3" style={{ borderBottom: "1px solid var(--toc-line)" }}>
         <List className="w-4 h-4 text-primary" />
         目次
       </div>

@@ -147,9 +147,17 @@ export default async function BlogPost({
               {frontmatter.date}
             </span>
             {frontmatter.tags && (
-              <span className="flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5" />
-                {frontmatter.tags.join(", ")}
+              <span className="flex items-center gap-1.5 flex-wrap">
+                <Tag className="w-3.5 h-3.5 shrink-0" />
+                {frontmatter.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-1.5 py-0.5 rounded text-[10px] font-mono"
+                    style={{ background: "var(--tag-bg)", color: "var(--tag-fg)" }}
+                  >
+                    {tag}
+                  </span>
+                ))}
               </span>
             )}
             {frontmatter.readTime && (

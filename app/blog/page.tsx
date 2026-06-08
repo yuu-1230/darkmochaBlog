@@ -100,9 +100,17 @@ export default async function BlogPage() {
                       </p>
                     )}
                     {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-                      <p className="text-[10px] text-muted-foreground/70 font-mono mt-1">
-                        {post.frontmatter.tags.join("  ·  ")}
-                      </p>
+                      <div className="flex flex-wrap gap-1 mt-1.5">
+                        {post.frontmatter.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-mono px-1.5 py-0.5 rounded"
+                            style={{ background: "var(--tag-bg)", color: "var(--tag-fg)" }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </Link>

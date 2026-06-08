@@ -31,6 +31,10 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-fg: var(--tag-fg);
+  --color-toc-line: var(--toc-line);
+
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -40,89 +44,77 @@
 }
 
 /* ============================================
-   Light Mode
-   温かみのあるクリームベージュ × テラコッタ
+   Light Mode — Solarized Light
    ============================================ */
 :root {
-  --background: #F3EAD3;
-  --foreground: #2D2D2D;
+  --background: #fdf6e3;
+  --foreground: #586e75;
 
-  --card: #EDE3CA;
-  --card-foreground: #2D2D2D;
+  --card: #eee8d5;
+  --card-foreground: #586e75;
 
-  --popover: #EDE3CA;
-  --popover-foreground: #2D2D2D;
+  --popover: #eee8d5;
+  --popover-foreground: #586e75;
 
-  /* Primary: テラコッタ */
-  --primary: #C05C20;
+  --primary: #268bd2;
   --primary-foreground: #ffffff;
 
-  /* Secondary: 薄いベージュ */
-  --secondary: #E5DABF;
-  --secondary-foreground: #2D2D2D;
+  --secondary: #eee8d5;
+  --secondary-foreground: #586e75;
 
-  /* Muted: ウォームグレー背景 */
-  --muted: #E5DABF;
-  --muted-foreground: #8C8577;
+  --muted: #eee8d5;
+  --muted-foreground: #93a1a1;
 
-  /* Accent: ホバー用のほんのり暗いベージュ */
-  --accent: #E0D5BC;
-  --accent-foreground: #2D2D2D;
+  --accent: #eee8d5;
+  --accent-foreground: #586e75;
 
-  --destructive: #c0392b;
+  --destructive: #dc322f;
 
-  /* Coffee background blobs */
-  --coffee-blob-1: #C8893A; /* caramel espresso */
-  --coffee-blob-2: #F0DEB4; /* steamed milk */
-  --coffee-blob-3: #A0622A; /* dark roast */
+  --border: #d5cebd;
+  --input: #eee8d5;
+  --ring: #268bd2;
 
-  --border: #E5DABF;
-  --input: #E5DABF;
-  --ring: #C05C20;
+  --tag-bg: #eee8d5;
+  --tag-fg: #268bd2;
+  --toc-line: #d5cebd;
 
   --radius: 0.5rem;
 }
 
 /* ============================================
-   Dark Mode
-   ターミナルブラック × テラコッタ
+   Dark Mode — Everforest Dark
    ============================================ */
 .dark {
-  --background: #0e0e0e;
-  --foreground: #e5e2e1;
+  --background: #2d353b;
+  --foreground: #d3c6aa;
 
-  --card: #121212;
-  --card-foreground: #e5e2e1;
+  --card: #343f44;
+  --card-foreground: #d3c6aa;
 
-  --popover: #121212;
-  --popover-foreground: #e5e2e1;
+  --popover: #343f44;
+  --popover-foreground: #d3c6aa;
 
-  /* Primary: テラコッタ (ライトモードと統一) */
-  --primary: #C05C20;
-  --primary-foreground: #ffffff;
+  --primary: #a7c080;
+  --primary-foreground: #2d353b;
 
-  /* Secondary */
-  --secondary: #1a1a1a;
-  --secondary-foreground: #e5e2e1;
+  --secondary: #343f44;
+  --secondary-foreground: #d3c6aa;
 
-  /* Muted */
-  --muted: #1a1a1a;
-  --muted-foreground: #a09488;
+  --muted: #343f44;
+  --muted-foreground: #7a8478;
 
-  /* Accent */
-  --accent: #1c1b1b;
-  --accent-foreground: #e5e2e1;
+  --accent: #343f44;
+  --accent-foreground: #d3c6aa;
 
-  --destructive: #e74c3c;
+  --destructive: #e67e80;
 
-  /* Coffee background blobs */
-  --coffee-blob-1: #3E2723;
-  --coffee-blob-2: #D7CCC8;
-  --coffee-blob-3: #6D4C41;
+  --border: #475258;
+  --input: #343f44;
+  --ring: #a7c080;
 
-  --border: #262626;
-  --input: #1a1a1a;
-  --ring: #C05C20;
+  --tag-bg: #3d4841;
+  --tag-fg: #a7c080;
+  --toc-line: #475258;
 }
 
 @layer base {
