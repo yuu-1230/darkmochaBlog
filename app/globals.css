@@ -129,80 +129,78 @@
 }
 
 /* ============================================
-   Dark Mode — Catppuccin Mocha
+   Dark Mode — Everforest Dark
    ============================================ */
 .dark {
-  --background:             #1e1e2e;
-  --foreground:             #cdd6f4;
+  --background:             #2d353b;
+  --foreground:             #d3c6aa;
 
-  --card:                   #2a2a3a;
-  --card-foreground:        #cdd6f4;
-  --popover:                #2a2a3a;
-  --popover-foreground:     #cdd6f4;
+  --card:                   #343f44;
+  --card-foreground:        #d3c6aa;
+  --popover:                #343f44;
+  --popover-foreground:     #d3c6aa;
 
-  --primary:                #cba6f7;
-  --primary-foreground:     #1e1e2e;
+  --primary:                #a7c080;
+  --primary-foreground:     #2d353b;
 
-  --secondary:              #2a2a3a;
-  --secondary-foreground:   #cdd6f4;
+  --secondary:              #343f44;
+  --secondary-foreground:   #d3c6aa;
 
-  --muted:                  #2a2a3a;
-  --muted-foreground:       #6c7086;
+  --muted:                  #343f44;
+  --muted-foreground:       #859289;
 
-  --accent:                 #2a2a3a;
-  --accent-foreground:      #cdd6f4;
+  --accent:                 #3d484d;
+  --accent-foreground:      #d3c6aa;
 
-  --destructive:            #f38ba8;
+  --destructive:            #e67e80;
 
-  --border:                 #45475a;
-  --input:                  #2a2a3a;
-  --ring:                   #cba6f7;
+  --border:                 #475258;
+  --input:                  #343f44;
+  --ring:                   #a7c080;
 
-  --toc-line:               #45475a;
+  --toc-line:               #475258;
 
-  --tag-bg:                 #45475a;
-  --tag-fg:                 #cba6f7;
-  --tag-bg-default:         #45475a;
-  --tag-fg-default:         #cba6f7;
-  --accent-default:         #cba6f7;
+  --tag-bg:                 #3d484d;
+  --tag-fg:                 #a7c080;
+  --tag-bg-default:         #3d484d;
+  --tag-fg-default:         #a7c080;
+  --accent-default:         #a7c080;
 
-  --tag-bg-life:            #504945;
-  --tag-fg-life:            #fabd2f;
-  --accent-life:            #fabd2f;
+  --tag-bg-life:            #425047;
+  --tag-fg-life:            #83c092;
+  --accent-life:            #83c092;
 
-  --tag-bg-tech:            #3d4841;
-  --tag-fg-tech:            #a7c080;
-  --accent-tech:            #a7c080;
+  --tag-bg-tech:            #243250;
+  --tag-fg-tech:            #7aa2f7;
+  --accent-tech:            #7aa2f7;
 
-  --traffic-close:          #8a9a88;
-  --traffic-minimize:       #8a9a88;
-  --traffic-maximize:       #8a9a88;
+  --traffic-close:          #e67e80;
+  --traffic-minimize:       #dbbc7f;
+  --traffic-maximize:       #a7c080;
 
-  /* Tech: Everforest Dark (darker bg) */
-  /* tech カテゴリ — Everforest ベース */
+  /* Tech カテゴリ — 背景はデフォルトのまま、深夜ブルーをワンポイントに */
+  --bg-tech:                #2d353b;
+  --card-tech:              #343f44;
+  --foreground-tech:        #d3c6aa;
+  --muted-tech:             #343f44;
+  --muted-foreground-tech:  #859289;
+  --accent-tech:            #7aa2f7;
+  --border-tech:            #475258;
+  --toc-line-tech:          #3a4a5c;
+  --tag-bg-tech:            #243250;
+  --tag-fg-tech:            #7aa2f7;
 
---bg-tech:               #0d0f1a;
---card-tech:             #151929;
---foreground-tech:       #c8d3f5;
---muted-tech:            #1e2336;
---muted-foreground-tech: #545c7e;
---accent-tech:           #82aaff;
---border-tech:           #2a2f45;
---toc-line-tech:         #2a2f45;
---tag-bg-tech:           #1e2336;
---tag-fg-tech:           #82aaff;
-
-  /* Life: Ayu Mirage */
---bg-life:               #1a1520;
---card-life:             #241c2e;
---foreground-life:       #e0cfa8;
---muted-life:            #2e2038;
---muted-foreground-life: #8b7a9e;
---accent-life:           #e0a070;
---border-life:           #3d2e4a;
---toc-line-life:         #3d2e4a;
---tag-bg-life:           #2e2038;
---tag-fg-life:           #e0a070;
+  /* Life カテゴリ — 背景はデフォルトのまま、森のアクアグリーンをワンポイントに */
+  --bg-life:                #2d353b;
+  --card-life:              #343f44;
+  --foreground-life:        #d3c6aa;
+  --muted-life:             #343f44;
+  --muted-foreground-life:  #859289;
+  --accent-life:            #83c092;
+  --border-life:            #475258;
+  --toc-line-life:          #425047;
+  --tag-bg-life:            #425047;
+  --tag-fg-life:            #83c092;
 }
 
 /* ============================================
