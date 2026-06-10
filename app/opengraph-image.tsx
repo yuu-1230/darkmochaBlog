@@ -1,5 +1,8 @@
 import { ImageResponse } from "next/og";
-import { loadPublicImageAsDataUri } from "@/lib/og-image";
+import {
+  loadPublicImageAsDataUri,
+  loadJapaneseFontSubset,
+} from "@/lib/og-image";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -9,6 +12,7 @@ export default async function Image() {
 
   const title = "Darkmocha Blog";
   const description = "Engineer and Everyday life Blog by Yuto Nagata";
+  const fontData = await loadJapaneseFontSubset(`${title}${description}`);
 
   return new ImageResponse(
     <div
@@ -80,6 +84,14 @@ export default async function Image() {
     </div>,
     {
       ...size,
+      fonts: [
+        {
+          name: "Noto Sans JP",
+          data: fontData,
+          style: "normal",
+          weight: 700,
+        },
+      ],
     },
   );
 }
