@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/lib/constants";
 export const dynamic = "force-dynamic";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
   const isDev = process.env.NODE_ENV === "development";
-  const baseUrl = isDev ? "http://localhost:3000" : "https://www.darkmocha.dev";
+  const baseUrl = isDev ? "http://localhost:3000" : SITE_URL;
 
   // サイト全体用の背景画像（プロフ画像や風景など）
   const bgImageUrl = `${baseUrl}/images/OG.jpg`;

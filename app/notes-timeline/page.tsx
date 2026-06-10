@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { getAllNotes, getAllTags } from "@/lib/notes";
 import { NoteTimeline } from "@/components/note-timeline";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Notes",
   description: "短文ログ（Daily Notes）の一覧",
-  alternates: { canonical: "https://www.darkmocha.dev/notes-timeline" },
+  alternates: { canonical: `${SITE_URL}/notes-timeline` },
   openGraph: {
     title: "Notes | Darkmocha",
     description: "短文ログ（Daily Notes）の一覧",
-    url: "https://www.darkmocha.dev/notes-timeline",
+    url: `${SITE_URL}/notes-timeline`,
   },
 };
 
