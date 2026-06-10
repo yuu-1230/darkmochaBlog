@@ -58,6 +58,7 @@ export default async function TravelPage() {
                       src={post.frontmatter.image}
                       alt={post.frontmatter.title}
                       fill
+                      sizes="80px"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>

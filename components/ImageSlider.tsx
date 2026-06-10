@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -7,7 +8,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export default function ImageSlider({ images = "" }: { images?: string }) {
+export default function ImageSlider({
+  images = "",
+  alt,
+}: {
+  images?: string;
+  alt?: string;
+}) {
   // カンマ区切りの文字列を配列に変換
   const imageArray =
     typeof images === "string" ?
@@ -30,8 +37,14 @@ export default function ImageSlider({ images = "" }: { images?: string }) {
   if (imageArray.length === 1) {
     return (
       <div className={frameClass}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageArray[0]} alt="ブログ画像" className={imgClass} />
+        <Image
+          src={imageArray[0]}
+          alt={alt || "ブログ画像"}
+          width={600}
+          height={450}
+          sizes="300px"
+          className={imgClass}
+        />
       </div>
     );
   }
@@ -63,10 +76,12 @@ export default function ImageSlider({ images = "" }: { images?: string }) {
         >
           {imageArray.map((src, index) => (
             <SwiperSlide key={index}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={src}
-                alt={`スライド画像 ${index + 1}`}
+                alt={alt ? `${alt} ${index + 1}` : `スライド画像 ${index + 1}`}
+                width={600}
+                height={450}
+                sizes="300px"
                 className={imgClass}
               />
             </SwiperSlide>

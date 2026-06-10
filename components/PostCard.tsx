@@ -14,6 +14,7 @@ export function PostCard({ post }: { post: PostData }) {
               src={post.frontmatter.image}
               alt={post.frontmatter.title}
               fill
+              sizes="64px"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
