@@ -5,6 +5,16 @@ import { SITE_URL } from "@/lib/constants";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
+  const posts = await getAllPosts();
+
+  const lastModifiedOf = (post: (typeof posts)[number]) =>
+    new Date(post.frontmatter.update ?? post.frontmatter.date).toISOString();
+
+  const siteLastModified = posts
+    .map(lastModifiedOf)
+    .sort()
+    .at(-1) ?? new Date().toISOString();
+
   const staticRoutes = [
     { route: "",               priority: 1.0 },
     { route: "/blog",          priority: 0.9 },
@@ -14,16 +24,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { route: "/notes-timeline",priority: 0.75 },
   ].map(({ route, priority }) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString(),
+    lastModified: siteLastModified,
     changeFrequency: "weekly" as const,
     priority,
   }));
 
   // MDX記事から動的ページ(ブログ記事)を生成
-  const posts = await getAllPosts();
   const dynamicRoutes = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.frontmatter.date).toISOString(),
+    lastModified: lastModifiedOf(post),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
