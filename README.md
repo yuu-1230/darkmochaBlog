@@ -25,9 +25,12 @@
 - **ブログ** — MDX による記事管理。カテゴリ（Tech / Unity / Life）別表示
 - **Daily Notes** — 短文ログ。ハッシュタグフィルタリング対応
 - **サイト内検索** — `Cmd+K` で起動。記事本文・Notes・Projects を横断検索し、マッチしたセクションへ直接ジャンプ
+- **コメント** — Giscus（GitHub Discussions 連携）
 - **モバイル対応** — ハンバーガーメニュー、スライドドロワー
 - **目次（TOC）** — 記事内の見出しから自動生成
-- **ダークモード** — システム設定に連動
+- **ダークモード** — システム設定に連動（Solarized Light / Everforest Dark）
+- **RSS フィード** — `/feed.xml` を自動生成
+- **SEO** — JSON-LD 構造化データ（BlogPosting・パンくず）、sitemap、記事ごとの OG 画像自動生成
 
 ---
 
@@ -37,30 +40,45 @@
 .
 ├── app/
 │   ├── api/search/         # 全文検索 API
-│   ├── blog/[slug]/        # 記事詳細ページ
+│   ├── blog/[slug]/        # 記事詳細ページ（OG 画像自動生成付き）
 │   ├── notes-timeline/     # Daily Notes
 │   ├── projects/           # 制作物一覧
 │   ├── travel/             # 旅行記
 │   ├── about/              # プロフィール
+│   ├── feed.xml/           # RSS フィード
 │   ├── sitemap.ts          # サイトマップ自動生成
 │   └── robots.txt/         # robots.txt
 ├── components/
+│   ├── mdx/                # MDX カスタムコンポーネント
+│   │   ├── typography.tsx  #   見出し・段落・リスト・テーブル
+│   │   ├── code.tsx        #   コードブロック
+│   │   ├── media.tsx       #   画像（ImageSlider 連携）
+│   │   ├── callouts.tsx    #   Tip / Warning / Info
+│   │   └── links.tsx       #   リンク・InstagramLink
 │   ├── site-header.tsx     # ヘッダー & ハンバーガーメニュー
 │   ├── search-dialog.tsx   # 検索ダイアログ（Cmd+K）
 │   ├── note-timeline.tsx   # Notes タイムライン
-│   ├── anchor-scroll.tsx   # アンカージャンプ（画面中央スクロール）
+│   ├── PostCard.tsx        # 記事一覧カード
+│   ├── HeroImage.tsx       # 記事ヒーロー画像
+│   ├── MacWindowBar.tsx    # macOS 風ウィンドウバー
+│   ├── PostNavigation.tsx  # 前後記事ナビゲーション
+│   ├── ImageSlider.tsx     # 記事内画像スライダー（Swiper）
 │   ├── TableOfContents.tsx # 目次コンポーネント
-│   └── mdx-components.tsx  # MDX カスタムコンポーネント
+│   └── giscus-comments.tsx # コメント欄（Giscus）
 ├── content/
 │   ├── posts/              # ブログ記事（.mdx）
 │   └── notes.json          # Daily Notes データ
 ├── lib/
 │   ├── mdx.ts              # 記事取得・readTime 自動計算
+│   ├── constants.ts        # サイト URL・著者・カテゴリ定数
+│   ├── blog-sections.ts    # カテゴリ別セクション生成
+│   ├── toc.ts              # 目次の自動生成
+│   ├── jsonld.ts           # JSON-LD（BlogPosting / パンくず）生成
 │   ├── notes.ts            # Notes 取得・タグ抽出・JST 日付処理
 │   ├── projects.ts         # プロジェクトデータ
 │   └── search-utils.ts     # 検索ユーティリティ（セクション分割・スニペット生成）
 └── public/
-    └── images/             # 画像アセット（圧縮済み）
+    └── images/             # 画像アセット
 ```
 
 ---
@@ -91,6 +109,7 @@ pnpm dev
 ---
 title: "記事タイトル"
 date: "2026-05-07"
+update: "2026-05-10"    # 更新日（任意。sitemap / JSON-LD の dateModified に反映）
 category: "Tech"        # Tech | Unity | Life
 tags: ["Next.js", "React"]
 description: "記事の説明"
