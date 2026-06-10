@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { cache } from "react";
 
-type Frontmatter = {
+export interface Frontmatter {
   title: string;
   date: string;
   tags?: string[];
@@ -12,28 +12,35 @@ type Frontmatter = {
   readTime?: string;
   category?: string;
   draft?: boolean;
-};
+}
 
-export type PostData = {
+export interface PostData {
   slug: string;
   content: string;
   frontmatter: Frontmatter & { readTime: string };
-};
+}
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
 /** 本文から読了時間を自動計算（日本語: 400文字/分、英語: 200語/分） */
 function calcReadTime(content: string): string {
-  const japanese = (content.match(/[　-鿿豈-﫿]/g) ?? []).length;
+  const japanese = (content.match(/[　-鿿豈-﫿]/g) ?? []).length;
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(japanese / 400 + words / 200);
   return `${minutes} min read`;
 }
 
-export const getPost = cache(async (slug: string): Promise<PostData> => {
+export const getPost = cache(async (slug: string): Promise<PostData | null> => {
   const safeSlug = path.basename(slug);
   const fullPath = path.join(postsDirectory, safeSlug + ".mdx");
-  const fileContents = await fs.promises.readFile(fullPath, "utf-8");
+
+  let fileContents: string;
+  try {
+    fileContents = await fs.promises.readFile(fullPath, "utf-8");
+  } catch {
+    return null;
+  }
+
   const matterResult = matter(fileContents);
   const frontmatter = matterResult.data as Frontmatter;
 
@@ -48,15 +55,22 @@ export const getPost = cache(async (slug: string): Promise<PostData> => {
 });
 
 export const getAllPosts = cache(async (): Promise<PostData[]> => {
-  const files = await fs.promises.readdir(postsDirectory);
+  let files: string[];
+  try {
+    files = await fs.promises.readdir(postsDirectory);
+  } catch {
+    return [];
+  }
+
   const isProd = process.env.NODE_ENV === "production";
 
   const posts = await Promise.all(
     files.map((fileName) => getPost(path.parse(fileName).name)),
   );
 
-  const visiblePosts = posts.filter((post) =>
-    isProd ? !post.frontmatter.draft : true,
+  const visiblePosts = posts.filter(
+    (post): post is PostData =>
+      post !== null && (isProd ? !post.frontmatter.draft : true),
   );
 
   return visiblePosts.sort((a, b) =>

@@ -54,38 +54,44 @@ export const TableOfContents = ({ toc, className }: TableOfContentsProps) => {
         目次
       </div>
 
-      <ul className="space-y-2">
-        {toc.map((heading, index) => {
-          const isActive = activeId === heading.id;
+      <div className="flex gap-3">
+        {/* 縦ライン */}
+        <div className="w-px shrink-0 rounded-full" style={{ background: "var(--toc-line)" }} />
 
-          return (
-            <li
-              key={index}
-              className={cn(
-                "transition-all",
-                heading.level === 3 ? "ml-4" : "font-medium",
-              )}
-            >
-              <a
-                href={`#${heading.id}`}
-                className={cn(
-                  "flex items-start gap-2 text-sm transition-colors duration-200 py-0.5",
-                  isActive
-                    ? "text-primary font-semibold"
-                    : "text-muted-foreground hover:text-foreground",
-                )}
+        <ul className="space-y-2 flex-1">
+          {toc.map((heading, index) => {
+            const isActive = activeId === heading.id;
+
+            return (
+              <li
+                key={index}
+                className={cn("flex items-start gap-2.5 transition-all", heading.level === 3 && "ml-3")}
               >
-                <span className="font-mono shrink-0 text-xs pt-0.5 text-muted-foreground">
-                  {heading.numberLabel} |
-                </span>
-                <span className="line-clamp-2 leading-snug">
+                {/* ドット */}
+                <span
+                  className="shrink-0 rounded-full mt-1.5 transition-all duration-200"
+                  style={{
+                    width:  isActive ? "9px" : "7px",
+                    height: isActive ? "9px" : "7px",
+                    background: isActive ? "var(--primary)" : "var(--toc-line)",
+                    marginLeft: isActive ? "-1px" : "0",
+                  }}
+                />
+                <a
+                  href={`#${heading.id}`}
+                  className="text-sm leading-snug line-clamp-2 transition-colors duration-200 py-0.5"
+                  style={{
+                    color:      isActive ? "var(--foreground)" : "var(--muted-foreground)",
+                    fontWeight: isActive ? "700" : "400",
+                  }}
+                >
                   {heading.text}
-                </span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
