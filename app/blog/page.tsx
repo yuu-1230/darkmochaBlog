@@ -2,6 +2,7 @@ import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { getTagStyle } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -61,10 +62,10 @@ export default async function BlogPage() {
             </span>
           </h2>
 
-          <ul className="space-y-0 divide-y divide-border">
+          <ul className="space-y-3">
             {section.posts.map((post) => (
-              <li key={post.slug}>
-                <Link href={`/blog/${post.slug}`} className="group flex items-start gap-4 py-4 hover:bg-accent/40 -mx-2 px-2 rounded-lg transition-colors">
+              <li key={post.slug} className="bg-card border border-border rounded-lg overflow-hidden">
+                <Link href={`/blog/${post.slug}`} className="group flex items-start gap-4 py-4 px-4 hover:bg-accent/40 transition-colors">
                   {/* Thumbnail */}
                   {post.frontmatter.image ? (
                     <div className="w-16 h-12 shrink-0 relative rounded-md overflow-hidden border border-border bg-muted">
@@ -105,7 +106,7 @@ export default async function BlogPage() {
                           <span
                             key={tag}
                             className="text-[10px] font-mono px-1.5 py-0.5 rounded"
-                            style={{ background: "var(--tag-bg)", color: "var(--tag-fg)" }}
+                            style={getTagStyle(post.frontmatter.category, post.frontmatter.tags)}
                           >
                             {tag}
                           </span>

@@ -116,7 +116,7 @@ export const mdxComponents = {
     <tbody className="divide-y divide-border" {...props} />
   ),
   tr: (props: ComponentPropsWithoutRef<"tr">) => (
-    <tr className="hover:bg-accent transition-colors" {...props} />
+    <tr className="hover:bg-muted transition-colors" {...props} />
   ),
   th: (props: ComponentPropsWithoutRef<"th">) => (
     <th
@@ -231,25 +231,23 @@ export const mdxComponents = {
     type?: "tip" | "warning" | "info";
     title?: string;
   }) => {
-    const config = {
+    const config: Record<string, {
+      accentVar: string;
+      icon: React.ReactNode;
+      defaultTitle: string;
+    }> = {
       tip: {
-        color: "text-amber-600 dark:text-amber-400",
-        border: "border-amber-400",
-        bg: "bg-amber-50 dark:bg-amber-950/30",
+        accentVar: "var(--primary)",
         icon: <Lightbulb className="w-5 h-5 shrink-0" />,
         defaultTitle: "TIPS",
       },
       warning: {
-        color: "text-orange-600 dark:text-orange-400",
-        border: "border-orange-400",
-        bg: "bg-orange-50 dark:bg-orange-950/30",
+        accentVar: "var(--destructive)",
         icon: <AlertTriangle className="w-5 h-5 shrink-0" />,
         defaultTitle: "WARNING",
       },
       info: {
-        color: "text-blue-600 dark:text-blue-400",
-        border: "border-blue-400",
-        bg: "bg-blue-50 dark:bg-blue-950/30",
+        accentVar: "var(--muted-foreground)",
         icon: <Info className="w-5 h-5 shrink-0" />,
         defaultTitle: "INFO",
       },
@@ -259,10 +257,15 @@ export const mdxComponents = {
 
     return (
       <details
-        className={`my-8 border-l-4 ${style.border} ${style.bg} rounded-r-lg shadow-sm group cursor-pointer`}
+        className="my-8 rounded-r-lg shadow-sm group cursor-pointer"
+        style={{
+          borderLeft: `4px solid ${style.accentVar}`,
+          background: "var(--card)",
+        }}
       >
         <summary
-          className={`flex items-center gap-2 font-bold ${style.color} p-4 md:p-5 outline-none list-none [&::-webkit-details-marker]:hidden`}
+          className="flex items-center gap-2 font-bold p-4 md:p-5 outline-none list-none [&::-webkit-details-marker]:hidden"
+          style={{ color: style.accentVar }}
         >
           <ChevronRight className="w-4 h-4 transition-transform duration-200 group-open:rotate-90 shrink-0" />
           {style.icon}

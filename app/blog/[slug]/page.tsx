@@ -19,6 +19,8 @@ import { mdxComponents, generateTOC } from "@/components/mdx-components";
 import { TableOfContents } from "@/components/TableOfContents";
 import { AnchorScroll } from "@/components/anchor-scroll";
 import { GiscusComments } from "@/components/giscus-comments";
+import { CategoryThemeApplier } from "@/components/category-theme-applier";
+import { getTagStyle } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -109,6 +111,7 @@ export default async function BlogPost({
 
   return (
     <div className="pb-20">
+      <CategoryThemeApplier category={frontmatter.category} />
       <AnchorScroll />
       <script
         type="application/ld+json"
@@ -129,7 +132,21 @@ export default async function BlogPost({
         </div>
       )}
 
-      <article className="max-w-3xl mx-auto">
+      <article
+        className="max-w-3xl mx-auto bg-card border border-border rounded-xl overflow-hidden"
+        data-category={frontmatter.category?.toLowerCase()}
+      >
+        {/* macOS window titlebar */}
+        <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border bg-muted/50">
+          <span className="w-3 h-3 rounded-full bg-traffic-close" />
+          <span className="w-3 h-3 rounded-full bg-traffic-minimize" />
+          <span className="w-3 h-3 rounded-full bg-traffic-maximize" />
+          <span className="flex-1 text-center text-[11px] font-mono text-muted-foreground -ml-9 truncate px-12">
+            {frontmatter.title}
+          </span>
+        </div>
+
+        <div className="p-6 md:p-10">
         {/* Back link */}
         <Link
           href="/"
@@ -153,7 +170,7 @@ export default async function BlogPost({
                   <span
                     key={tag}
                     className="px-1.5 py-0.5 rounded text-[10px] font-mono"
-                    style={{ background: "var(--tag-bg)", color: "var(--tag-fg)" }}
+                    style={getTagStyle(frontmatter.category, frontmatter.tags)}
                   >
                     {tag}
                   </span>
@@ -245,6 +262,7 @@ export default async function BlogPost({
 
         <div className="mt-12">
           <GiscusComments />
+        </div>
         </div>
       </article>
     </div>
