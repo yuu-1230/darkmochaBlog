@@ -167,8 +167,8 @@
   --accent-default:         #a7c080;
 
   --tag-bg-life:            #425047;
-  --tag-fg-life:            #a7c080;
-  --accent-life:            #a7c080;
+  --tag-fg-life:            #83c092;
+  --accent-life:            #83c092;
 
   --tag-bg-tech:            #243250;
   --tag-fg-tech:            #7aa2f7;
@@ -178,29 +178,29 @@
   --traffic-minimize:       #dbbc7f;
   --traffic-maximize:       #a7c080;
 
-  /* Tech カテゴリ — 深夜のミッドナイトブルー */
-  --bg-tech:                #18202e;
-  --card-tech:              #212c3d;
-  --foreground-tech:        #c8d3e3;
-  --muted-tech:             #212c3d;
-  --muted-foreground-tech:  #6b7d9c;
+  /* Tech カテゴリ — 背景はデフォルトのまま、深夜ブルーをワンポイントに */
+  --bg-tech:                #2d353b;
+  --card-tech:              #343f44;
+  --foreground-tech:        #d3c6aa;
+  --muted-tech:             #343f44;
+  --muted-foreground-tech:  #859289;
   --accent-tech:            #7aa2f7;
-  --border-tech:            #2c3a50;
-  --toc-line-tech:          #2c3a50;
+  --border-tech:            #475258;
+  --toc-line-tech:          #3a4a5c;
   --tag-bg-tech:            #243250;
   --tag-fg-tech:            #7aa2f7;
 
-  /* Life カテゴリ — 落ち着いた森のグリーン */
-  --bg-life:                #1e271f;
-  --card-life:              #283528;
+  /* Life カテゴリ — 背景はデフォルトのまま、森のアクアグリーンをワンポイントに */
+  --bg-life:                #2d353b;
+  --card-life:              #343f44;
   --foreground-life:        #d3c6aa;
-  --muted-life:             #283528;
-  --muted-foreground-life:  #889684;
-  --accent-life:            #a7c080;
-  --border-life:            #39483a;
-  --toc-line-life:          #39483a;
+  --muted-life:             #343f44;
+  --muted-foreground-life:  #859289;
+  --accent-life:            #83c092;
+  --border-life:            #475258;
+  --toc-line-life:          #425047;
   --tag-bg-life:            #425047;
-  --tag-fg-life:            #a7c080;
+  --tag-fg-life:            #83c092;
 }
 
 /* ============================================
