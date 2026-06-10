@@ -6,6 +6,7 @@ import { cache } from "react";
 export interface Frontmatter {
   title: string;
   date: string;
+  update?: string;
   tags?: string[];
   description?: string;
   image?: string;

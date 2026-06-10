@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     template: "%s | Darkmocha",
   },
   description: "Engineer and Everyday life Blog by Yuto Nagata",
+  alternates: {
+    types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
+  },
   icons: {
     icon: "/images/icon.png",
     apple: "/images/icon.png",

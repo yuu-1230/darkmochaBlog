@@ -17,7 +17,7 @@ import { MacWindowBar } from "@/components/MacWindowBar";
 import { HeroImage } from "@/components/HeroImage";
 import { PostNavigation } from "@/components/PostNavigation";
 import { getTagStyle } from "@/lib/utils";
-import { getBlogPostJsonLd } from "@/lib/jsonld";
+import { getBlogPostJsonLd, getBreadcrumbJsonLd } from "@/lib/jsonld";
 import { SITE_URL } from "@/lib/constants";
 
 export async function generateMetadata({
@@ -89,6 +89,7 @@ export default async function BlogPost({
 
   const toc = generateTOC(content);
   const jsonLd = getBlogPostJsonLd(frontmatter, slug);
+  const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug);
 
   return (
     <div className="pb-20">
@@ -97,6 +98,10 @@ export default async function BlogPost({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
       />
 
       {frontmatter.image && (
