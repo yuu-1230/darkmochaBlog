@@ -84,6 +84,7 @@
   --accent-foreground:      #586e75;
 
   --destructive:            #dc322f;
+  --info:                   #268bd2;
 
   --border:                 #d5cebd;
   --input:                  #eee8d5;
@@ -153,6 +154,7 @@
   --accent-foreground:      #d3c6aa;
 
   --destructive:            #e67e80;
+  --info:                   #7fbbb3;
 
   --border:                 #475258;
   --input:                  #343f44;

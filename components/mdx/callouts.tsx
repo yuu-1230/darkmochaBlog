@@ -18,7 +18,7 @@ const tipConfig: Record<
     defaultTitle: "WARNING",
   },
   info: {
-    accentVar: "var(--muted-foreground)",
+    accentVar: "var(--info)",
     icon: <Info className="w-5 h-5 shrink-0" />,
     defaultTitle: "INFO",
   },
@@ -37,10 +37,11 @@ export const Tip = ({
 
   return (
     <details
-      className="my-8 rounded-r-lg shadow-sm group cursor-pointer"
+      className="my-8 rounded-lg overflow-hidden shadow-sm group cursor-pointer"
       style={{
+        border: `1px solid color-mix(in srgb, ${style.accentVar} 30%, transparent)`,
         borderLeft: `4px solid ${style.accentVar}`,
-        background: "var(--card)",
+        background: `color-mix(in srgb, ${style.accentVar} 8%, var(--card))`,
       }}
     >
       <summary
@@ -51,7 +52,12 @@ export const Tip = ({
         {style.icon}
         <span>{title || style.defaultTitle}</span>
       </summary>
-      <div className="text-foreground/90 text-sm md:text-base leading-relaxed px-4 pb-4 md:px-5 md:pb-5 pt-0 mt-2">
+      <div
+        className="text-foreground/90 text-sm md:text-base leading-relaxed px-4 py-4 md:px-5 md:py-5"
+        style={{
+          borderTop: `1px solid color-mix(in srgb, ${style.accentVar} 20%, transparent)`,
+        }}
+      >
         {children}
       </div>
     </details>
