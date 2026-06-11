@@ -120,13 +120,16 @@ export default async function BlogPost({
         <HeroImage src={frontmatter.image} alt={frontmatter.title} />
       )}
 
-      {toc.length > 0 && (
-        <aside className="hidden min-[1440px]:block fixed top-32 left-[calc(50%+26rem)] w-64 max-h-[70vh] overflow-y-auto">
-          <TableOfContents toc={toc} />
-        </aside>
-      )}
+      <div className="relative">
+        {toc.length > 0 && (
+          <aside className="hidden min-[1440px]:block absolute inset-y-0 left-[calc(50%+26rem)] w-64">
+            <div className="sticky top-32 max-h-[70vh] overflow-y-auto">
+              <TableOfContents toc={toc} />
+            </div>
+          </aside>
+        )}
 
-      <article
+        <article
         className="max-w-3xl mx-auto bg-card border border-border rounded-xl overflow-hidden"
         data-category={frontmatter.category?.toLowerCase()}
       >
@@ -227,7 +230,8 @@ export default async function BlogPost({
           <GiscusComments />
         </div>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }
