@@ -6,7 +6,7 @@
   },
   {
     "id": "2",
-    "content": "Reactをもう一度学びなおします。\n #Nextjs #WebDev",
+    "content": "Reactをもう一度学びなおします。基礎を固め直してNext.jsをちゃんと使えるようになりたい。\n #Nextjs #WebDev",
     "createdAt": "2026-04-19T14:51:37"
   },
   {
@@ -34,5 +34,10 @@
     "id": "7",
     "content": "Reactって複雑でよくわからんって思ってた。\n でもjQuery時代に『他人のコードが全く読めない』という問題があって、それを構造ごと解決したのがReactだと知ったら、なんで今の書き方になってるか全部腑に落ちた。技術って歴史から学ぶと急に優しくなる。（全然わかってない😭）\n https://blog.shinonome.io/react-and-frontend-philosophy/ \n #WebDev",
     "createdAt": "2026-05-08T18:23:53"
+  },
+  {
+    "id": "8",
+    "content": "今日は基礎的な学習モデルの「perceptron」「ADALINE」とKNN・決定木・ランダムフォレスト・ロジスティック回帰を学んだ。\n数式は結構読み飛ばした部分多いから次回は深く学んでいく。\n ランダムフォレストいいね。\n #ML",
+    "createdAt": "2026-06-11T19:02:00"
   }
 ]
