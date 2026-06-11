@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Tag, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, Tag, Clock, RefreshCw } from "lucide-react";
 import React from "react";
 import rehypeSlug from "rehype-slug";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdx";
 import { generateTOC } from "@/lib/toc";
@@ -18,7 +19,14 @@ import { HeroImage } from "@/components/HeroImage";
 import { PostNavigation } from "@/components/PostNavigation";
 import { getTagStyle } from "@/lib/utils";
 import { getBlogPostJsonLd, getBreadcrumbJsonLd } from "@/lib/jsonld";
+import { ShareButtons } from "@/components/ShareButtons";
 import { SITE_URL } from "@/lib/constants";
+
+const prettyCodeOptions: Options = {
+  theme: { light: "solarized-light", dark: "everforest-dark" },
+  keepBackground: false,
+  defaultLang: "plaintext",
+};
 
 export async function generateMetadata({
   params,
@@ -131,6 +139,12 @@ export default async function BlogPost({
               <Calendar className="w-3.5 h-3.5" />
               {frontmatter.date}
             </span>
+            {frontmatter.update && frontmatter.update !== frontmatter.date && (
+              <span className="flex items-center gap-1.5">
+                <RefreshCw className="w-3.5 h-3.5" />
+                更新 {frontmatter.update}
+              </span>
+            )}
             {frontmatter.tags && (
               <span className="flex items-center gap-1.5 flex-wrap">
                 <Tag className="w-3.5 h-3.5 shrink-0" />
@@ -177,7 +191,10 @@ export default async function BlogPost({
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkGfm],
-                rehypePlugins: [rehypeSlug],
+                rehypePlugins: [
+                  rehypeSlug,
+                  [rehypePrettyCode, prettyCodeOptions],
+                ],
               },
             }}
           />
@@ -187,7 +204,10 @@ export default async function BlogPost({
 
         <div className="mt-8 pt-6 border-t flex justify-between items-center">
           <span className="text-sm text-muted-foreground">Thanks for reading.</span>
-          <div className="flex gap-4" />
+          <ShareButtons
+            url={`${SITE_URL}/blog/${slug}`}
+            title={frontmatter.title}
+          />
         </div>
 
         <div className="mt-12">

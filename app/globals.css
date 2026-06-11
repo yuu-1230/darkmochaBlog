@@ -288,3 +288,44 @@ html[data-category="life"] {
     width: 100%;
   }
 }
+
+/* ============================================
+   Code Blocks — shiki (rehype-pretty-code)
+   ============================================ */
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+}
+
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+}
+
+[data-rehype-pretty-code-figure] pre [data-line] {
+  padding-inline: 1rem;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+}
+
+[data-rehype-pretty-code-title] {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-geist-mono);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+[data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
