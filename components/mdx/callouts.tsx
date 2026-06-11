@@ -34,12 +34,15 @@ export const Tip = ({
   title?: string;
 }) => {
   const style = tipConfig[type];
+  const edgeBorder = `1px solid color-mix(in srgb, ${style.accentVar} 30%, transparent)`;
 
   return (
     <details
       className="my-8 rounded-lg overflow-hidden shadow-sm group cursor-pointer"
       style={{
-        border: `1px solid color-mix(in srgb, ${style.accentVar} 30%, transparent)`,
+        borderTop: edgeBorder,
+        borderRight: edgeBorder,
+        borderBottom: edgeBorder,
         borderLeft: `4px solid ${style.accentVar}`,
         background: `color-mix(in srgb, ${style.accentVar} 8%, var(--card))`,
       }}
