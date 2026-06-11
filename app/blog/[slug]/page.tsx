@@ -1,26 +1,35 @@
-// app/blog/[slug]/page.tsx
 import { getPost, getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import Image from "next/image";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Calendar,
-  Tag,
-  Clock,
-} from "lucide-react";
+import { ArrowLeft, Calendar, Tag, Clock, RefreshCw } from "lucide-react";
 import React from "react";
 import rehypeSlug from "rehype-slug";
+import rehypePrettyCode, { type Options } from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
-import { mdxComponents, generateTOC } from "@/components/mdx-components";
+import { mdxComponents } from "@/components/mdx";
+import { generateTOC } from "@/lib/toc";
 import { TableOfContents } from "@/components/TableOfContents";
 import { AnchorScroll } from "@/components/anchor-scroll";
 import { GiscusComments } from "@/components/giscus-comments";
 import { CategoryThemeApplier } from "@/components/category-theme-applier";
+import { MacWindowBar } from "@/components/MacWindowBar";
+import { HeroImage } from "@/components/HeroImage";
+import { PostNavigation } from "@/components/PostNavigation";
 import { getTagStyle } from "@/lib/utils";
+import { getBlogPostJsonLd, getBreadcrumbJsonLd } from "@/lib/jsonld";
+import { ShareButtons } from "@/components/ShareButtons";
+import { RelatedPosts } from "@/components/RelatedPosts";
+import { getRelatedPosts } from "@/lib/related-posts";
+import { tagHref } from "@/lib/tags";
+import { SITE_URL } from "@/lib/constants";
+
+const prettyCodeOptions: Options = {
+  theme: { light: "solarized-light", dark: "everforest-dark" },
+  keepBackground: false,
+  defaultLang: "plaintext",
+};
 
 export async function generateMetadata({
   params,
@@ -29,38 +38,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  try {
-    const post = await getPost(slug);
-    const { title, description, image, date } = post.frontmatter;
-    const canonical = `https://www.darkmocha.dev/blog/${slug}`;
-    const ogImage = image
-      ? [{ url: image, width: 1200, height: 630, alt: title }]
-      : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
-
-    return {
-      title,
-      description: description || "Darkmocha Blog",
-      alternates: { canonical },
-      openGraph: {
-        title,
-        description: description ?? "",
-        type: "article",
-        url: canonical,
-        publishedTime: date,
-        images: ogImage,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description: description ?? "",
-        images: ogImage.map((img) => img.url),
-      },
-    };
-  } catch {
-    return {
-      title: "Not Found",
-    };
+  const post = await getPost(slug);
+  if (!post) {
+    return { title: "Not Found" };
   }
+
+  const { title, description, image, date } = post.frontmatter;
+  const canonical = `${SITE_URL}/blog/${slug}`;
+  const ogImage = image
+    ? [{ url: image, width: 1200, height: 630, alt: title }]
+    : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
+
+  return {
+    title,
+    description: description || "Darkmocha Blog",
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description: description ?? "",
+      type: "article",
+      url: canonical,
+      publishedTime: date,
+      images: ogImage,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: description ?? "",
+      images: ogImage.map((img) => img.url),
+    },
+  };
 }
 
 export async function generateStaticParams() {
@@ -92,22 +99,9 @@ export default async function BlogPost({
     currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   const toc = generateTOC(content);
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: frontmatter.title,
-    description: frontmatter.description,
-    image:
-      frontmatter.image ? [`https://darkmocha.dev${frontmatter.image}`] : [],
-    datePublished: frontmatter.date,
-    author: {
-      "@type": "Person",
-      name: "Yuto Nagata",
-      url: "https://darkmocha.dev",
-    },
-    keywords: frontmatter.tags,
-  };
+  const relatedPosts = getRelatedPosts(allPosts, post);
+  const jsonLd = getBlogPostJsonLd(frontmatter, slug);
+  const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug);
 
   return (
     <div className="pb-20">
@@ -117,34 +111,29 @@ export default async function BlogPost({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
 
-      {/* Hero image */}
       {frontmatter.image && (
-        <div className="w-full h-56 md:h-72 relative rounded-xl overflow-hidden mb-8 -mx-4 md:mx-0" style={{ width: "calc(100% + 2rem)" }}>
-          <Image
-            src={frontmatter.image}
-            alt={frontmatter.title}
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-        </div>
+        <HeroImage src={frontmatter.image} alt={frontmatter.title} />
       )}
 
-      <article
+      <div className="relative">
+        {toc.length > 0 && (
+          <aside className="hidden min-[1440px]:block absolute inset-y-0 left-[calc(50%+26rem)] w-64">
+            <div className="sticky top-32 max-h-[70vh] overflow-y-auto">
+              <TableOfContents toc={toc} />
+            </div>
+          </aside>
+        )}
+
+        <article
         className="max-w-3xl mx-auto bg-card border border-border rounded-xl overflow-hidden"
         data-category={frontmatter.category?.toLowerCase()}
       >
-        {/* macOS window titlebar */}
-        <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border bg-muted/50">
-          <span className="w-3 h-3 rounded-full bg-traffic-close" />
-          <span className="w-3 h-3 rounded-full bg-traffic-minimize" />
-          <span className="w-3 h-3 rounded-full bg-traffic-maximize" />
-          <span className="flex-1 text-center text-[11px] font-mono text-muted-foreground -ml-9 truncate px-12">
-            {frontmatter.title}
-          </span>
-        </div>
+        <MacWindowBar title={frontmatter.title} />
 
         <div className="p-6 md:p-10">
         {/* Back link */}
@@ -163,17 +152,24 @@ export default async function BlogPost({
               <Calendar className="w-3.5 h-3.5" />
               {frontmatter.date}
             </span>
+            {frontmatter.update && frontmatter.update !== frontmatter.date && (
+              <span className="flex items-center gap-1.5">
+                <RefreshCw className="w-3.5 h-3.5" />
+                更新 {frontmatter.update}
+              </span>
+            )}
             {frontmatter.tags && (
               <span className="flex items-center gap-1.5 flex-wrap">
                 <Tag className="w-3.5 h-3.5 shrink-0" />
                 {frontmatter.tags.map((tag) => (
-                  <span
+                  <Link
                     key={tag}
-                    className="px-1.5 py-0.5 rounded text-[10px] font-mono"
-                    style={getTagStyle(frontmatter.category, frontmatter.tags)}
+                    href={tagHref(tag)}
+                    className="px-1.5 py-0.5 rounded text-[10px] font-mono hover:opacity-75 transition-opacity"
+                    style={getTagStyle(frontmatter.category)}
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </span>
             )}
@@ -196,9 +192,9 @@ export default async function BlogPost({
           )}
         </div>
 
-        {/* Table of Contents (記事上部に表示) */}
+        {/* Table of Contents (記事上部に表示、ワイド画面ではサイドバーに切替) */}
         {toc.length > 0 && (
-          <TableOfContents toc={toc} className="mb-10" />
+          <TableOfContents toc={toc} className="mb-10 min-[1440px]:hidden" />
         )}
 
         {/* MDX content */}
@@ -209,62 +205,33 @@ export default async function BlogPost({
             options={{
               mdxOptions: {
                 remarkPlugins: [remarkGfm],
-                rehypePlugins: [rehypeSlug],
+                rehypePlugins: [
+                  rehypeSlug,
+                  [rehypePrettyCode, prettyCodeOptions],
+                ],
               },
             }}
           />
         </div>
 
-        {/* Prev / Next navigation */}
-        <nav
-          aria-label="Post navigation"
-          className="mt-20 pt-10 border-t flex flex-col md:flex-row justify-between gap-4"
-        >
-          {prevPost ? (
-            <Link
-              href={`/blog/${prevPost.slug}`}
-              className="group flex-1 flex flex-col p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
-            >
-              <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                Previous Post
-              </span>
-              <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">
-                {prevPost.frontmatter.title}
-              </span>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
+        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
 
-          {nextPost ? (
-            <Link
-              href={`/blog/${nextPost.slug}`}
-              className="group flex-1 flex flex-col items-end text-right p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
-            >
-              <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                Next Post
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </span>
-              <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">
-                {nextPost.frontmatter.title}
-              </span>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
-        </nav>
+        <RelatedPosts posts={relatedPosts} />
 
         <div className="mt-8 pt-6 border-t flex justify-between items-center">
           <span className="text-sm text-muted-foreground">Thanks for reading.</span>
-          <div className="flex gap-4" />
+          <ShareButtons
+            url={`${SITE_URL}/blog/${slug}`}
+            title={frontmatter.title}
+          />
         </div>
 
         <div className="mt-12">
           <GiscusComments />
         </div>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   );
 }

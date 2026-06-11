@@ -1,8 +1,17 @@
 import { ImageResponse } from "next/og";
-import { getPost } from "@/lib/mdx";
-export const dynamic = "force-dynamic";
+import { notFound } from "next/navigation";
+import { getPost, getAllPosts } from "@/lib/mdx";
+import {
+  loadPublicImageAsDataUri,
+  loadJapaneseFontSubset,
+} from "@/lib/og-image";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export default async function Image({
   params,
@@ -11,14 +20,14 @@ export default async function Image({
 }) {
   const { slug } = await params;
   const post = await getPost(slug);
+  if (!post) {
+    notFound();
+  }
   const { title, description, image } = post.frontmatter;
 
-  const isDev = process.env.NODE_ENV === "development";
-  const baseUrl =
-    isDev ? "http://localhost:3000" : "https://www.darkmocha.dev/";
-
   // 記事の画像があればそれを使用、なければデフォルト画像
-  const bgImageUrl = image ? `${baseUrl}${image}` : `${baseUrl}/images/OG.jpg`;
+  const bgImageUrl = await loadPublicImageAsDataUri(image ?? "/images/OG.jpg");
+  const fontData = await loadJapaneseFontSubset(`${title}${description ?? ""}`);
 
   return new ImageResponse(
     <div
@@ -99,6 +108,14 @@ export default async function Image({
     </div>,
     {
       ...size,
+      fonts: [
+        {
+          name: "Noto Sans JP",
+          data: fontData,
+          style: "normal",
+          weight: 700,
+        },
+      ],
     },
   );
 }

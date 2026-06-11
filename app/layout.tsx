@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Providers } from "@/components/providers";
+import { SITE_URL, AUTHOR_NAME, AUTHOR_URL } from "@/lib/constants";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -29,14 +30,15 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://www.darkmocha.dev",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || SITE_URL),
   title: {
     default: "Darkmocha Blog",
     template: "%s | Darkmocha",
   },
   description: "Engineer and Everyday life Blog by Yuto Nagata",
+  alternates: {
+    types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
+  },
   icons: {
     icon: "/images/icon.png",
     apple: "/images/icon.png",
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    url: "https://www.darkmocha.dev",
+    url: SITE_URL,
     siteName: "Darkmocha Blog",
     title: "Darkmocha Blog",
     description: "Engineer and Everyday life Blog by Yuto Nagata",
@@ -68,9 +70,9 @@ export default async function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Yuto Nagata",
-    url: "https://www.darkmocha.dev",
-    image: "https://www.darkmocha.dev/images/About/profile.jpg",
+    name: AUTHOR_NAME,
+    url: AUTHOR_URL,
+    image: `${SITE_URL}/images/About/profile.jpg`,
     jobTitle: "Student Engineer",
     worksFor: { "@type": "Organization", name: "Suwa Univ. of science" },
     address: { "@type": "PostalAddress", addressRegion: "Nagano", addressCountry: "JP" },

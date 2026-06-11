@@ -1,25 +1,23 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import type React from "react"
+import type { Category } from "@/lib/constants"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const LIFE_KEYWORDS = ["life", "travel", "diary"];
-const TECH_KEYWORDS = ["tech", "ai", "programming"];
+const DEFAULT_TAG_STYLE: React.CSSProperties = {
+  background: "var(--tag-bg)",
+  color: "var(--tag-fg)",
+};
 
-export function getTagStyle(category?: string, tags?: string[]): React.CSSProperties {
-  const targets = [
-    category?.toLowerCase() ?? "",
-    ...(tags ?? []).map((t) => t.toLowerCase()),
-  ];
+const CATEGORY_TAG_STYLES: Record<Category, React.CSSProperties> = {
+  Tech: { background: "var(--tag-bg-tech)", color: "var(--tag-fg-tech)" },
+  Life: { background: "var(--tag-bg-life)", color: "var(--tag-fg-life)" },
+  Unity: DEFAULT_TAG_STYLE,
+};
 
-  if (targets.some((t) => LIFE_KEYWORDS.some((k) => t.includes(k)))) {
-    return { background: "var(--tag-bg-life)", color: "var(--tag-fg-life)" };
-  }
-  if (targets.some((t) => TECH_KEYWORDS.some((k) => t.includes(k)))) {
-    return { background: "var(--tag-bg-tech)", color: "var(--tag-fg-tech)" };
-  }
-  return { background: "var(--tag-bg)", color: "var(--tag-fg)" };
+export function getTagStyle(category?: string): React.CSSProperties {
+  return CATEGORY_TAG_STYLES[category as Category] ?? DEFAULT_TAG_STYLE;
 }

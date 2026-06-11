@@ -2,15 +2,16 @@ import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Travel",
   description: "旅行記録・日常の記録",
-  alternates: { canonical: "https://www.darkmocha.dev/travel" },
+  alternates: { canonical: `${SITE_URL}/travel` },
   openGraph: {
     title: "Travel | Darkmocha",
     description: "旅行記録・日常の記録",
-    url: "https://www.darkmocha.dev/travel",
+    url: `${SITE_URL}/travel`,
   },
 };
 
@@ -57,6 +58,7 @@ export default async function TravelPage() {
                       src={post.frontmatter.image}
                       alt={post.frontmatter.title}
                       fill
+                      sizes="80px"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
