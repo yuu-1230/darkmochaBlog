@@ -20,6 +20,9 @@ import { PostNavigation } from "@/components/PostNavigation";
 import { getTagStyle } from "@/lib/utils";
 import { getBlogPostJsonLd, getBreadcrumbJsonLd } from "@/lib/jsonld";
 import { ShareButtons } from "@/components/ShareButtons";
+import { RelatedPosts } from "@/components/RelatedPosts";
+import { getRelatedPosts } from "@/lib/related-posts";
+import { tagHref } from "@/lib/tags";
 import { SITE_URL } from "@/lib/constants";
 
 const prettyCodeOptions: Options = {
@@ -96,6 +99,7 @@ export default async function BlogPost({
     currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   const toc = generateTOC(content);
+  const relatedPosts = getRelatedPosts(allPosts, post);
   const jsonLd = getBlogPostJsonLd(frontmatter, slug);
   const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug);
 
@@ -114,6 +118,12 @@ export default async function BlogPost({
 
       {frontmatter.image && (
         <HeroImage src={frontmatter.image} alt={frontmatter.title} />
+      )}
+
+      {toc.length > 0 && (
+        <aside className="hidden min-[1440px]:block fixed top-32 left-[calc(50%+26rem)] w-64 max-h-[70vh] overflow-y-auto">
+          <TableOfContents toc={toc} />
+        </aside>
       )}
 
       <article
@@ -149,13 +159,14 @@ export default async function BlogPost({
               <span className="flex items-center gap-1.5 flex-wrap">
                 <Tag className="w-3.5 h-3.5 shrink-0" />
                 {frontmatter.tags.map((tag) => (
-                  <span
+                  <Link
                     key={tag}
-                    className="px-1.5 py-0.5 rounded text-[10px] font-mono"
+                    href={tagHref(tag)}
+                    className="px-1.5 py-0.5 rounded text-[10px] font-mono hover:opacity-75 transition-opacity"
                     style={getTagStyle(frontmatter.category)}
                   >
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </span>
             )}
@@ -178,9 +189,9 @@ export default async function BlogPost({
           )}
         </div>
 
-        {/* Table of Contents (記事上部に表示) */}
+        {/* Table of Contents (記事上部に表示、ワイド画面ではサイドバーに切替) */}
         {toc.length > 0 && (
-          <TableOfContents toc={toc} className="mb-10" />
+          <TableOfContents toc={toc} className="mb-10 min-[1440px]:hidden" />
         )}
 
         {/* MDX content */}
@@ -201,6 +212,8 @@ export default async function BlogPost({
         </div>
 
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+
+        <RelatedPosts posts={relatedPosts} />
 
         <div className="mt-8 pt-6 border-t flex justify-between items-center">
           <span className="text-sm text-muted-foreground">Thanks for reading.</span>
