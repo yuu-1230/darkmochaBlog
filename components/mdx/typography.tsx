@@ -38,12 +38,12 @@ export const typographyComponents = {
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3
-      className="text-xl font-medium text-foreground mt-6 mb-3"
+      className="text-xl font-semibold text-foreground mt-6 mb-3"
       {...props}
     />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <div className="text-foreground/90 leading-8 mb-6 text-base" {...props} />
+    <div className="text-foreground/90 leading-[1.75] mb-6 text-base" {...props} />
   ),
   table: (props: ComponentPropsWithoutRef<"table">) => (
     <div className="overflow-x-auto mb-8">
