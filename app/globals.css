@@ -66,45 +66,45 @@
   --background:             #f8f8f8;
   --foreground:             #586e75;
 
-  --card:                   #eee8d5;
+  --card:                   #efefef;
   --card-foreground:        #586e75;
-  --popover:                #eee8d5;
+  --popover:                #efefef;
   --popover-foreground:     #a1b2b8;
 
   --primary:                #268bd2;
   --primary-foreground:     #ffffff;
 
-  --secondary:              #eee8d5;
+  --secondary:              #efefef;
   --secondary-foreground:   #586e75;
 
-  --muted:                  #eee8d5;
+  --muted:                  #efefef;
   --muted-foreground:       #93a1a1;
 
-  --accent:                 #eee8d5;
+  --accent:                 #efefef;
   --accent-foreground:      #586e75;
 
   --destructive:            #dc322f;
   --info:                   #268bd2;
 
-  --border:                 #d5cebd;
-  --input:                  #eee8d5;
+  --border:                 #e0e0e0;
+  --input:                  #efefef;
   --ring:                   #268bd2;
 
-  --toc-line:               #d5cebd;
+  --toc-line:               #e0e0e0;
 
-  --tag-bg:                 #eee8d5;
+  --tag-bg:                 #efefef;
   --tag-fg:                 #268bd2;
-  --tag-bg-default:         #eee8d5;
+  --tag-bg-default:         #efefef;
   --tag-fg-default:         #268bd2;
   --accent-default:         #268bd2;
 
   --tag-bg-life:            #ebe0d0;
-  --tag-fg-life:            #edb58aa9;
+  --tag-fg-life:            #b07a4e;
   --accent-life:            #bd7e4e;
 
-  --tag-bg-tech:            #e6fed689;
-  --tag-fg-tech:            #b1bcc0;
-  --accent-tech:            #b5d6b3;
+  --tag-bg-tech:            #ddf0c4;
+  --tag-fg-tech:            #7a9e78;
+  --accent-tech:            #7ab87a;
 
   --traffic-close:          #c2baa4;
   --traffic-minimize:       #75726e;
@@ -118,13 +118,13 @@
   --border-tech:            #c8d8b8;
   --toc-line-tech:          #e8f0d8;
 
-  --bg-life:                #f8ffec;
-  --card-life:              #ede5d4;
+  --bg-life:                #fdf5ee;
+  --card-life:              #f0e6d8;
   --foreground-life:        #586e75;
-  --muted-life:             #eee8d5;
+  --muted-life:             #f0e6d8;
   --muted-foreground-life:  #93a1a1;
-  --border-life:            #d5c0b0;
-  --toc-line-life:          #ebe0d0;
+  --border-life:            #ddc8b5;
+  --toc-line-life:          #ead6c4;
 
   --radius: 0.5rem;
 }
