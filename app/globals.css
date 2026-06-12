@@ -63,13 +63,13 @@
    Light Mode — Solarized Light
    ============================================ */
 :root {
-  --background:             #fdf6e3;
+  --background:             #f8f8f8;
   --foreground:             #586e75;
 
   --card:                   #eee8d5;
   --card-foreground:        #586e75;
   --popover:                #eee8d5;
-  --popover-foreground:     #586e75;
+  --popover-foreground:     #a1b2b8;
 
   --primary:                #268bd2;
   --primary-foreground:     #ffffff;
@@ -99,27 +99,27 @@
   --accent-default:         #268bd2;
 
   --tag-bg-life:            #ebe0d0;
-  --tag-fg-life:            #8b5e3c;
-  --accent-life:            #8b5e3c;
+  --tag-fg-life:            #edb58aa9;
+  --accent-life:            #bd7e4e;
 
-  --tag-bg-tech:            #e8f0d8;
-  --tag-fg-tech:            #8da101;
-  --accent-tech:            #8da101;
+  --tag-bg-tech:            #e6fed689;
+  --tag-fg-tech:            #b1bcc0;
+  --accent-tech:            #b5d6b3;
 
-  --traffic-close:          #c2a882;
-  --traffic-minimize:       #c2a882;
-  --traffic-maximize:       #c2a882;
+  --traffic-close:          #c2baa4;
+  --traffic-minimize:       #75726e;
+  --traffic-maximize:       #a8b6a5;
 
   --bg-tech:                #f0f5e4;
-  --card-tech:              #e2ebc8;
+  --card-tech:              #ebf0db;
   --foreground-tech:        #586e75;
   --muted-tech:             #eee8d5;
   --muted-foreground-tech:  #93a1a1;
   --border-tech:            #c8d8b8;
   --toc-line-tech:          #e8f0d8;
 
-  --bg-life:                #fdf0e4;
-  --card-life:              #eeddd0;
+  --bg-life:                #f8ffec;
+  --card-life:              #ede5d4;
   --foreground-life:        #586e75;
   --muted-life:             #eee8d5;
   --muted-foreground-life:  #93a1a1;
@@ -134,10 +134,10 @@
    ============================================ */
 .dark {
   --background:             #2d353b;
-  --foreground:             #d3c6aa;
+  --foreground:             #d1cccc;
 
   --card:                   #343f44;
-  --card-foreground:        #d3c6aa;
+  --card-foreground:        #e1e1e1;
   --popover:                #343f44;
   --popover-foreground:     #d3c6aa;
 
@@ -148,7 +148,7 @@
   --secondary-foreground:   #d3c6aa;
 
   --muted:                  #343f44;
-  --muted-foreground:       #859289;
+  --muted-foreground:       #adc9b5;
 
   --accent:                 #3d484d;
   --accent-foreground:      #d3c6aa;
@@ -183,9 +183,9 @@
   /* Tech カテゴリ — 背景はデフォルトのまま、深夜ブルーをワンポイントに */
   --bg-tech:                #2d353b;
   --card-tech:              #343f44;
-  --foreground-tech:        #d3c6aa;
+  --foreground-tech:        #d1cccc;
   --muted-tech:             #343f44;
-  --muted-foreground-tech:  #859289;
+  --muted-foreground-tech:  #b3c8b9;
   --accent-tech:            #7aa2f7;
   --border-tech:            #475258;
   --toc-line-tech:          #3a4a5c;
@@ -195,9 +195,9 @@
   /* Life カテゴリ — 背景はデフォルトのまま、森のアクアグリーンをワンポイントに */
   --bg-life:                #2d353b;
   --card-life:              #343f44;
-  --foreground-life:        #d3c6aa;
+  --foreground-life:        #d1cccc;
   --muted-life:             #343f44;
-  --muted-foreground-life:  #859289;
+  --muted-foreground-life:  #b3c8b9;
   --accent-life:            #83c092;
   --border-life:            #475258;
   --toc-line-life:          #425047;
