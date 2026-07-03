@@ -96,8 +96,14 @@ export default async function RootLayout({
           }}
         />
         <Providers>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-background focus:text-foreground focus:px-4 focus:py-2 focus:rounded-md focus:border focus:border-border"
+          >
+            本文へスキップ
+          </a>
           <SiteHeader />
-          <main className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <main id="main-content" className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             {children}
           </main>
           <SiteFooter />

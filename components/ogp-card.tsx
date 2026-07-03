@@ -31,7 +31,7 @@ export async function OgpCard({ url }: { url: string }) {
             {ogp.description}
           </p>
         )}
-        <p className="text-[11px] text-muted-foreground/60 font-mono truncate mt-1">
+        <p className="text-[11px] text-muted-foreground font-mono truncate mt-1">
           {domain}
         </p>
       </div>

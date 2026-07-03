@@ -44,7 +44,7 @@ export default async function BlogPage() {
           <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
             <span className="text-primary/60">{"//"}</span>
             {section.title}
-            <span className="text-muted-foreground/50 font-normal normal-case tracking-normal">
+            <span className="text-muted-foreground font-normal normal-case tracking-normal">
               ({section.posts.length})
             </span>
           </h2>

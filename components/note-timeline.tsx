@@ -42,7 +42,7 @@ export function NoteTimeline({
         <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
           <span className="text-primary/60">{"//"}</span>
           notes
-          <span className="text-muted-foreground/50 font-normal normal-case tracking-normal">
+          <span className="text-muted-foreground font-normal normal-case tracking-normal">
             ({notes.length})
           </span>
         </h2>
@@ -170,7 +170,7 @@ async function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
             style={{ aspectRatio: "4/3" }}>
             <Image
               src={resolveImageSrc(note.image)}
-              alt=""
+              alt="ノートの添付画像"
               fill
               sizes="(max-width: 768px) 100vw, 24rem"
               className="object-contain"

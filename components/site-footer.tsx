@@ -6,10 +6,10 @@ import { SiGithub, SiX, SiZenn, SiQiita } from "react-icons/si";
 import { Archive } from "lucide-react";
 
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com/yuu-1230", icon: <SiGithub className="w-4 h-4" /> },
-  { label: "X", href: "https://x.com/DarkmochaJP", icon: <SiX className="w-4 h-4" /> },
-  { label: "Zenn", href: "https://zenn.dev/darkmocha", icon: <SiZenn className="w-4 h-4" /> },
-  { label: "Qiita", href: "https://qiita.com/darkmocha", icon: <SiQiita className="w-4 h-4" /> },
+  { label: "GitHub", href: "https://github.com/yuu-1230", icon: <SiGithub className="w-4 h-4" aria-hidden /> },
+  { label: "X", href: "https://x.com/DarkmochaJP", icon: <SiX className="w-4 h-4" aria-hidden /> },
+  { label: "Zenn", href: "https://zenn.dev/darkmocha", icon: <SiZenn className="w-4 h-4" aria-hidden /> },
+  { label: "Qiita", href: "https://qiita.com/darkmocha", icon: <SiQiita className="w-4 h-4" aria-hidden /> },
 ];
 
 export const SiteFooter = () => {

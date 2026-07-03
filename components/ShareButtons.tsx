@@ -28,7 +28,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
         aria-label="Xでシェア"
         className={buttonClass}
       >
-        <SiX className="w-4 h-4" />
+        <SiX className="w-4 h-4" aria-hidden />
       </a>
       <a
         href={`https://bsky.app/intent/compose?text=${shareText}%20${shareUrl}`}
@@ -37,7 +37,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
         aria-label="Blueskyでシェア"
         className={buttonClass}
       >
-        <SiBluesky className="w-4 h-4" />
+        <SiBluesky className="w-4 h-4" aria-hidden />
       </a>
       <button
         onClick={copyUrl}

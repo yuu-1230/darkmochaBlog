@@ -7,6 +7,7 @@ import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight, Hash } from "l
 import { AnimatePresence, motion } from "motion/react";
 import type { SearchItem } from "@/app/api/search/route";
 import { extractSnippet, findMatchedSection } from "@/lib/search-utils";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 // ──────────────────────────────────────────
 // Helpers
@@ -123,7 +124,7 @@ function ResultCard({ item, query, isActive, idx, onClose, onHover }: CardProps)
 
           {/* マッチしたセクションのバッジ */}
           {matchedSection?.heading && (
-            <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-mono text-primary/70 bg-primary/10 rounded px-1.5 py-0.5">
+            <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-mono text-primary bg-primary/10 rounded px-1.5 py-0.5">
               <Hash className="w-2.5 h-2.5" />
               {matchedSection.heading}
             </span>
@@ -146,7 +147,7 @@ function ResultCard({ item, query, isActive, idx, onClose, onHover }: CardProps)
               {item.tags.slice(0, 4).map((t) => (
                 <span
                   key={t}
-                  className="text-[10px] font-mono text-muted-foreground/70 bg-muted rounded px-1"
+                  className="text-[10px] font-mono text-muted-foreground bg-muted rounded px-1"
                 >
                   {highlight(t, query)}
                 </span>
@@ -174,6 +175,7 @@ export function SearchDialog() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const panelRef = useFocusTrap<HTMLDivElement>(open);
 
   // fetch index once on first open
   const loadIndex = useCallback(async () => {
@@ -285,6 +287,10 @@ export function SearchDialog() {
             {/* Panel */}
             <motion.div
               key="search-panel"
+              ref={panelRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="サイト内検索"
               initial={{ opacity: 0, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
@@ -293,7 +299,7 @@ export function SearchDialog() {
             >
               <div className="rounded-xl border border-border bg-background shadow-2xl overflow-hidden">
                 {/* Input */}
-                <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+                <div className="flex items-center gap-3 px-4 py-3 border-b border-border focus-within:border-primary transition-colors">
                   <Search className="w-4 h-4 text-muted-foreground shrink-0" />
                   <input
                     ref={inputRef}
@@ -301,7 +307,7 @@ export function SearchDialog() {
                     onChange={(e) => { setQuery(e.target.value); setActiveIdx(0); }}
                     onKeyDown={handleKeyDown}
                     placeholder="記事・ノート・プロジェクトを検索..."
-                    className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 outline-none"
+                    className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
                   />
                   {query && (
                     <button onClick={() => setQuery("")} aria-label="クリア"
