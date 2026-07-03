@@ -43,7 +43,7 @@ export const typographyComponents = {
     />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <div className="text-foreground/90 leading-[1.75] mb-6 text-base" {...props} />
+    <div className="text-foreground leading-[1.75] mb-6 text-base" {...props} />
   ),
   table: (props: ComponentPropsWithoutRef<"table">) => (
     <div className="overflow-x-auto mb-8">

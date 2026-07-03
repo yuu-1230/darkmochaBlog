@@ -17,7 +17,7 @@ export function PostNavigation({
       {prevPost ? (
         <Link
           href={`/blog/${prevPost.slug}`}
-          className="group flex-1 flex flex-col p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
+          className="group flex-1 flex flex-col p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all"
         >
           <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -34,7 +34,7 @@ export function PostNavigation({
       {nextPost ? (
         <Link
           href={`/blog/${nextPost.slug}`}
-          className="group flex-1 flex flex-col items-end text-right p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all outline-none"
+          className="group flex-1 flex flex-col items-end text-right p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all"
         >
           <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
             Next Post

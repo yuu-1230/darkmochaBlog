@@ -64,47 +64,47 @@
    ============================================ */
 :root {
   --background:             #f8f8f8;
-  --foreground:             #586e75;
+  --foreground:             #52666c;
 
   --card:                   #efefef;
   --card-foreground:        #586e75;
   --popover:                #efefef;
   --popover-foreground:     #a1b2b8;
 
-  --primary:                #268bd2;
+  --primary:                #1a6b9f;
   --primary-foreground:     #ffffff;
 
   --secondary:              #efefef;
   --secondary-foreground:   #586e75;
 
   --muted:                  #efefef;
-  --muted-foreground:       #93a1a1;
+  --muted-foreground:       #546669;
 
   --accent:                 #efefef;
   --accent-foreground:      #586e75;
 
   --destructive:            #dc322f;
-  --info:                   #268bd2;
+  --info:                   #1a6b9f;
 
   --border:                 #e0e0e0;
   --input:                  #efefef;
-  --ring:                   #268bd2;
+  --ring:                   #1a6b9f;
 
   --toc-line:               #e0e0e0;
 
   --tag-bg:                 #efefef;
-  --tag-fg:                 #268bd2;
+  --tag-fg:                 #1a6b9f;
   --tag-bg-default:         #efefef;
-  --tag-fg-default:         #268bd2;
-  --accent-default:         #268bd2;
+  --tag-fg-default:         #1a6b9f;
+  --accent-default:         #1a6b9f;
 
   --tag-bg-life:            #ebe0d0;
-  --tag-fg-life:            #b07a4e;
-  --accent-life:            #bd7e4e;
+  --tag-fg-life:            #815330;
+  --accent-life:            #8a5a32;
 
   --tag-bg-tech:            #ddf0c4;
-  --tag-fg-tech:            #7a9e78;
-  --accent-tech:            #7ab87a;
+  --tag-fg-tech:            #47684a;
+  --accent-tech:            #4e7050;
 
   --traffic-close:          #c2baa4;
   --traffic-minimize:       #75726e;
@@ -112,17 +112,17 @@
 
   --bg-tech:                #f0f5e4;
   --card-tech:              #ebf0db;
-  --foreground-tech:        #586e75;
+  --foreground-tech:        #4a5d63;
   --muted-tech:             #eee8d5;
-  --muted-foreground-tech:  #93a1a1;
+  --muted-foreground-tech:  #546669;
   --border-tech:            #c8d8b8;
   --toc-line-tech:          #e8f0d8;
 
   --bg-life:                #fdf5ee;
   --card-life:              #f0e6d8;
-  --foreground-life:        #586e75;
+  --foreground-life:        #4a5d63;
   --muted-life:             #f0e6d8;
-  --muted-foreground-life:  #93a1a1;
+  --muted-foreground-life:  #546669;
   --border-life:            #ddc8b5;
   --toc-line-life:          #ead6c4;
 
@@ -169,7 +169,7 @@
   --accent-default:         #a7c080;
 
   --tag-bg-life:            #425047;
-  --tag-fg-life:            #83c092;
+  --tag-fg-life:            #98d2a6;
   --accent-life:            #83c092;
 
   --tag-bg-tech:            #243250;
@@ -202,7 +202,7 @@
   --border-life:            #475258;
   --toc-line-life:          #425047;
   --tag-bg-life:            #425047;
-  --tag-fg-life:            #83c092;
+  --tag-fg-life:            #98d2a6;
 }
 
 /* ============================================
@@ -250,6 +250,10 @@ html[data-category="life"] {
   }
   body {
     @apply bg-background text-foreground antialiased transition-colors duration-300;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 

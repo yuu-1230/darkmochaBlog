@@ -7,6 +7,7 @@ import { Sun, Moon, Coffee, X, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { SearchDialog } from "@/components/search-dialog";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 const navItems = [
   { label: "blog",    href: "/blog" },
@@ -37,6 +38,7 @@ function ThemeToggle() {
 export const SiteHeader = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const drawerRef = useFocusTrap<HTMLElement>(open);
 
   // パス変更でメニューを閉じる
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -46,6 +48,16 @@ export const SiteHeader = () => {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Escape でメニューを閉じる
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, [open]);
 
   return (
@@ -124,6 +136,9 @@ export const SiteHeader = () => {
             {/* Drawer panel */}
             <motion.nav
               key="drawer"
+              ref={drawerRef}
+              role="dialog"
+              aria-modal="true"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

@@ -54,7 +54,7 @@ export function HomeClient({ recentPosts }: Props) {
           <span>whoami</span>
         </div>
 
-        <p className="text-[15px] text-foreground/90 leading-relaxed mb-8">
+        <p className="text-[15px] text-foreground leading-relaxed mb-8">
           I&apos;m a university student based in Japan, studying web application development.
           My hobbies include travelling, tennis, and running.
           I also work with local government on digital transformation initiatives.
@@ -85,7 +85,7 @@ export function HomeClient({ recentPosts }: Props) {
         className="relative flex items-center justify-center my-12"
       >
         <div className="w-full h-px bg-border" />
-        <span className="absolute bg-background px-4 font-mono text-[11px] text-muted-foreground/50 tracking-[0.25em] select-none">
+        <span className="absolute bg-background px-4 font-mono text-[11px] text-muted-foreground tracking-[0.25em] select-none">
           ~ / ROOT / DATA
         </span>
       </motion.div>
@@ -110,7 +110,7 @@ export function HomeClient({ recentPosts }: Props) {
           {/* Terminal table */}
           <div className="border border-border bg-card rounded-sm overflow-hidden font-mono">
             {/* Table header */}
-            <div className="grid grid-cols-12 gap-4 px-5 py-2.5 border-b border-border bg-black/10 dark:bg-black/40 text-[11px] text-muted-foreground uppercase tracking-wider">
+            <div className="grid grid-cols-12 gap-4 px-5 py-2.5 border-b border-border bg-muted dark:bg-black/40 text-[11px] text-muted-foreground uppercase tracking-wider">
               <div className="col-span-3 md:col-span-2">TIMESTAMP</div>
               <div className="col-span-9 md:col-span-8">FILE_NAME</div>
               <div className="hidden md:block col-span-2 text-right">TAG</div>
