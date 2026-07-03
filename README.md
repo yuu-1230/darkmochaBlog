@@ -125,7 +125,7 @@ draft: false            # true にすると本番環境で非表示
 
 ## 作者
 
-**Yuto Nagata** — 諏訪公立大学 在学中
+**Yuto Nagata** — 公立諏訪東京理科大学 在学中
 
 [![GitHub](https://img.shields.io/badge/GitHub-yuu--1230-181717?logo=github)](https://github.com/yuu-1230)
 [![X](https://img.shields.io/badge/X-@DarkmochaJP-000?logo=x)](https://x.com/DarkmochaJP)
