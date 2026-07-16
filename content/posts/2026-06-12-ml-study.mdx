@@ -1,199 +1,154 @@
 ---
-title: "scikit-learnの推定器APIを理解する"
+title: "scikit-learnの推定器APIをfit・predict・transformから理解する"
 date: "2026-06-12"
 category: "Tech"
 tags: ["機械学習", "Machine Learning", "scikit-learn"]
-description: "機械学習でよく利用されるライブラリ「scikit-learn」の推定器（Estimator）について学習した。"
+description: "scikit-learnで繰り返し登場するfit・predict・transformの役割を、Irisデータセットを動かしながら整理した。"
 draft: false
 ---
 
-機械学習初学者による絶望アウトプット記録
+機械学習初学者による、絶望のアウトプット記録。
 
----
+scikit-learnのサンプルコードを読んでいると、どのモデルにも同じように `fit()` が登場する。ロジスティック回帰とデータの標準化では役割が違うはずなのに、なぜ同じメソッドを使うのか。
 
-## scikit-learnとは？
+調べてみると、その理由は「推定器」という共通設計にあった。今回は `fit()`、`predict()`、`transform()` の3つに絞って、自分なりに整理する。
 
-まず、簡単にscikit-learnについておさらい。  
-scikit-learnは機械学習をする際にとても便利なPythonライブラリだ。  
-様々なモデルで学習するためのツールが揃っており、「とりあえずscikit-learnを入れておけば機械学習はだいたい戦える」くらいの立ち位置にある。
+## scikit-learnでできること
 
-具体的には以下の6つの主要モジュールで構成されている。
+scikit-learnは、機械学習を試すためのPythonライブラリだ。分類・回帰・クラスタリング・次元削減に加えて、前処理やモデル評価の道具も揃っている。
 
-### 分類（Classification）
+最初は機能の多さに圧倒されたが、基本的な使い方はかなり統一されている。モデルが変わっても、データを渡して学習し、予測または変換するという流れは大きく変わらない。
 
-与えられたデータがどのカテゴリーに属するかを予測する。
+## 推定器という共通の入口
 
-**用途：** 迷惑メールの判定、画像認識、顧客の離脱予測  
-**主なアルゴリズム：** ロジスティック回帰、SVM（サポートベクターマシン）、ランダムフォレスト、k最近傍法（KNN）
+scikit-learnでは、データから何かを学ぶオブジェクトを推定器（Estimator）と呼ぶ。推定器は基本的に `fit()` を持ち、役割に応じて別のメソッドも実装する。
 
-### 回帰（Regression）
+| 役割 | 主なメソッド | 例 |
+| :--- | :--- | :--- |
+| 推定器 | `fit()` | `LogisticRegression`、`StandardScaler` |
+| 予測器 | `predict()` | 分類器、回帰器 |
+| 変換器 | `transform()` | `StandardScaler`、`PCA` |
 
-連続する数値を予測する。
+ひとつのクラスが複数の役割を持つこともある。`LogisticRegression` は学習と予測を行い、`StandardScaler` はデータから平均・標準偏差を学んでから値を変換する。
 
-**用途：** 株価予測、住宅価格の予測、売り上げ予測  
-**主なアルゴリズム：** 線形回帰、リッジ回帰、Lasso、決定木、グラディエントブースティング（GBDT）
+「どれも同じ書き方で使える」という設計が、scikit-learnの扱いやすさにつながっている。
 
-### クラスタリング（Clustering）
+## fit()でデータから学ぶ
 
-正解ラベルのないデータを、似たもの同士のグループに自動で分ける。
+`fit()` は、渡されたデータから必要な値を学ぶメソッドだ。
 
-**用途：** 顧客のセグメンテーション（購買履歴など）、異常検知、文書の自動グループ分け  
-**主なアルゴリズム：** K-Means、DBSCAN、階層的クラスタリング
-
-### 次元削減（Dimensionality Reduction）
-
-大量の特徴量を持つデータから、情報を保ちつつ次元数を減らす。余分なノイズを取り除いてデータをスリムにするイメージ。
-
-**用途：** データの可視化（2D・3Dに圧縮してプロット）、学習の高速化、過学習の抑制  
-**主なアルゴリズム：** PCA（主成分分析）、t-SNE、LDA
-
-### モデル評価・選択（Model Selection）
-
-どのモデルが一番良いかを公平に評価するためのツール群。
-
-**用途：** 交差検証（クロスバリデーション）、ハイパーパラメータのチューニング  
-**主な機能：** `cross_val_score`、`GridSearchCV`、`train_test_split`
-
-### 前処理（Preprocessing）
-
-生データをモデルが学習しやすい形に整える。これをサボると精度がガタ落ちになることも。
-
-**用途：** 特徴量のスケール統一、カテゴリ変数の数値化、欠損値の補完  
-**主な機能：** `StandardScaler`、`MinMaxScaler`、`LabelEncoder`、`OneHotEncoder`
-
----
-
-## scikit-learnの推定器（Estimator）について
-
-scikit-learnを使う上で一番重要な概念が **推定器（Estimator）** だ。
-
-推定器とは「学習・変換・予測」を行うオブジェクトの総称で、scikit-learnのほぼすべてのクラスがこれにあたる。分類器・回帰器・前処理器・次元削減器、どれも推定器として統一されたインターフェースで扱える。
-
-| 推定器の種類 | 代表例 |
-| :--- | :--- |
-| 分類・回帰の推定器 | `LogisticRegression`、`RandomForestClassifier`、`LinearRegression` |
-| 前処理・次元削減の推定器 | `StandardScaler`、`PCA`、`LabelEncoder` |
-
-この「どれも同じ書き方で使える」という設計が、scikit-learnの一番の強みだ。
-
-### fit()：学習する
-
-`fit()` はモデルにデータを学習させるメソッドだ。訓練データを渡してパラメータを調整する。
+ロジスティック回帰なら、特徴量と正解ラベルから分類に使う係数を学習する。
 
 ```python
 from sklearn.linear_model import LogisticRegression
 
 model = LogisticRegression()
-model.fit(X_train, y_train)  # X_train：特徴量、y_train：正解ラベル
+model.fit(X_train, y_train)
 ```
 
-前処理器の場合は、`fit()` によって「このデータの平均・分散はいくつか」を覚えさせる。
+`StandardScaler` の場合は、訓練データの平均と標準偏差を記憶する。
 
 ```python
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
-scaler.fit(X_train)  # 訓練データの平均・標準偏差を記憶
+scaler.fit(X_train)
 ```
 
-<Tip type="warning" title="fit()は訓練データだけに使う">
-  テストデータに対して `fit()` を呼んではいけない。テストデータの情報がモデルに漏れてしまい（**データリーク**）、正確な評価ができなくなる。`fit()` は必ず訓練データだけに使うこと。
+同じ `fit()` でも、何を学ぶかは推定器によって違う。
+
+<Tip type="warning" title="fit()にテストデータを渡さない">
+  テストデータを使って平均や係数を学ぶと、本来は未知であるはずの情報がモデルに漏れてしまう。これをデータリークという。`fit()` は訓練データだけに使う。
 </Tip>
 
-### predict()：予測する
+## predict()で未知データを予測する
 
-`predict()` は学習済みのモデルを使って、新しいデータのクラスや数値を予測するメソッドだ。分類モデルではクラスラベルを、回帰モデルでは数値を返す。
+`predict()` は、学習済みのモデルへ新しいデータを渡し、クラスや数値を予測するメソッドだ。
 
 ```python
 y_pred = model.predict(X_test)
 print(y_pred)
-# → [0 1 2 1 0 ...] ← クラスラベルの配列
 ```
 
-分類モデルでは `predict_proba()` を使うと、各クラスに属する**確率**まで出力できる。
+分類器ならクラスラベル、回帰器なら連続した数値が返る。確率出力に対応している分類器では、`predict_proba()` を使って各クラスに属する確率も取得できる。
 
 ```python
 proba = model.predict_proba(X_test)
 print(proba)
-# → [[0.85 0.10 0.05]   ← クラス0に85%、クラス1に10%、クラス2に5%
-#    [0.03 0.91 0.06]    ← クラス1に91%の確率
-#    ...]
 ```
 
-### transform()：変換する
+すべての分類器が `predict_proba()` を持つわけではない点には注意が必要だ。
 
-`transform()` は主に前処理・次元削減の推定器で使うメソッドで、データを変換する。
+## transform()でデータを変換する
+
+`transform()` は、学習済みの変換器を使ってデータを別の表現へ変えるメソッドだ。
+
+標準化では、訓練データで覚えた平均と標準偏差を使い、訓練データとテストデータを同じ基準で変換する。
 
 ```python
 scaler = StandardScaler()
-scaler.fit(X_train)             # 訓練データで平均・標準偏差を学習
-X_train_scaled = scaler.transform(X_train)  # 訓練データを変換
-X_test_scaled  = scaler.transform(X_test)   # テストデータも同じスケールで変換
+scaler.fit(X_train)
+
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 ```
 
-`fit()` と `transform()` をまとめて呼べる `fit_transform()` も便利だ。
+訓練データに対しては、`fit()` と `transform()` を続けて呼ぶ `fit_transform()` も使える。
 
 ```python
-X_train_scaled = scaler.fit_transform(X_train)  # fit() + transform() を一度に
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 ```
 
-<Tip type="tip" title="fit_transform()はfit()した後のtransform()と同じ">
-  `fit_transform(X_train)` は `fit(X_train)` してから `transform(X_train)` するのと全く同じ結果になる。訓練データに対してだけ使うと覚えておけばOK。テストデータには `transform()` のみを使う。
+<Tip type="info" title="fit_transform()を一般化しすぎない">
+  `StandardScaler` では `fit_transform(X_train)` と `fit(X_train)` 後の `transform(X_train)` は同じ結果になる。ただし、すべての変換器で同じとは限らない。まずは使うクラスのドキュメントを確認する。
 </Tip>
 
-### 3つのメソッドの使い分けまとめ
+## Irisデータセットで一連の流れを試す
 
-| メソッド | 誰が使う | 何をする |
-| :--- | :--- | :--- |
-| `fit(X, y)` | 全推定器 | データから学習してパラメータを記憶する |
-| `predict(X)` | 分類・回帰の推定器 | 学習済みモデルでクラス・数値を予測する |
-| `transform(X)` | 前処理・次元削減の推定器 | データを別の表現に変換する |
-
----
-
-## 実際に動かしてみる
-
-アヤメ（Iris）データセットを使って、ロジスティック回帰で分類する例を見てみよう。
+アヤメのIrisデータセットを使い、標準化してからロジスティック回帰で分類してみる。
 
 ```python
 from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
-# データの読み込み
+# データを読み込む
 iris = load_iris()
 X, y = iris.data, iris.target
 
-# 訓練データとテストデータに分割（8:2）
+# 訓練用とテスト用に分ける
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y,
 )
 
-# 前処理：スケーリング（fit は訓練データのみ！）
+# 訓練データで基準を学び、両方を同じ基準で変換する
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled  = scaler.transform(X_test)
+X_test_scaled = scaler.transform(X_test)
 
-# モデルの学習
+# モデルを学習する
 model = LogisticRegression()
 model.fit(X_train_scaled, y_train)
 
-# 予測と評価
+# 未知データを予測して評価する
 y_pred = model.predict(X_test_scaled)
-print(f"正解率: {model.score(X_test_scaled, y_test):.3f}")
-# → 正解率: 1.000
+print(f"正解率: {accuracy_score(y_test, y_pred):.3f}")
 ```
 
-どのアルゴリズムを使っても `fit()` → `predict()` という流れは変わらない。これがscikit-learnのシンプルさの本質だ。
+コードを追うと、処理の役割がきれいに分かれている。
 
----
+1. `scaler.fit_transform()` で訓練データの基準を学びながら変換する
+2. `scaler.transform()` でテストデータを同じ基準に揃える
+3. `model.fit()` で分類モデルを学習する
+4. `model.predict()` で未知データを予測する
 
-## まとめ
+最初は `fit()`、`predict()`、`transform()` が別々の呪文に見えていた。実際には、学ぶ・予測する・変換するという役割を揃えた共通インターフェースだった。
 
-- scikit-learnは分類・回帰・クラスタリング・次元削減・モデル評価・前処理の6モジュールで構成されている
-- scikit-learnのすべての学習・変換器は **推定器（Estimator）** として統一されたAPIで扱える
-- `fit()` で学習、`predict()` で予測、`transform()` で変換、この3つを覚えればだいたい使える
-- `fit()` は**必ず訓練データだけ**に使う（テストデータに使うとデータリーク）
-
-「どのモデルも同じ書き方で使える」というのは最初は当たり前に感じるが、実際に複数のアルゴリズムを比較するときにこの設計のありがたさが身にしみる。
+モデルを別のアルゴリズムへ差し替えても、基本の流れはほとんど変わらない。次は前処理とモデルを `Pipeline` にまとめる方法を試してみたい。
