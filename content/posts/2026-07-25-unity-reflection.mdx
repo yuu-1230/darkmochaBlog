@@ -1,0 +1,133 @@
+---
+title: "これまで作ってきたUnity作品を振り返ってみる"
+date: "2026-07-25"
+category: "Unity"
+tags: ["Unity"]
+description: "Unity作品を振り返って今後の糧とする。"
+draft: false
+---
+
+こんにちは！Darkmochaです。  
+前回の記事から少し間が空いてしまいましたが、今回は私がこれまで作ってきたUnityの作品たちを振り返ってみようと思います。
+
+というのも、これまでWebGL形式を中心に作成してきたのですが、とうとうiOS向けのゲームを作ることにしたので、このタイミングでBlogを書いてみました。
+
+これまで作ってきた作品の数はなんと **7本！！！**  
+notesでは「1ヶ月で4本作って10本目指すぞ！！」とか意気込んでいたのですが...  
+思っていたより時間をかけてしまって有言不実行になってしまいました。
+
+まあ、これらも含めてなんでこうなったかも振り返りをしてみようと思います。
+
+<Tip type="tip" title="私のゲームの命名について">
+  このゲームたちの名前を見ればわかると思いますが、名前を付けるのに結構こだわってきました笑  
+  理由は以下の2つです。
+
+  1. SEOで検索上位を獲得し、ゲームの認知度を最大化するため
+  2. 公式アカウントのIDやドメインを綺麗に確保し、独自のブランドとして確立するため
+
+  今の自分にはまだ恩恵が少ないものの、いざApp Storeなどのストアに出すときにじわじわ効いてくるはず...と思っています。
+</Tip>
+
+## 1作品目「スライムバスタークマリオン」
+
+<ImageSlider images="/images/Articles/Unity/SlimeBuster/SlimeBusterTitle.png, /images/Articles/Unity/SlimeBuster/SlimeBusterGameScene1.png, /images/Articles/Unity/SlimeBuster/SlimeBusterGameScene2.png" />
+
+この作品は初めてUnityで作成した作品になります。
+
+Unityの右も左もわからない中、YouTubeのハンズオン動画を見ながら作成しました。  
+特に **ゲーム制作ch. ニコリ** さんのUnity教材が素晴らしくて、とても丁寧に説明されていて初心者にはとてもわかりやすかった記憶があります。  
+一緒にゲームを作って躓いてしまっても大体コメント欄に同じ悩みを持った人がいて、解決策とかも書いてくれていたので初学者にはおすすめの教材です。
+
+<YoutubeLink href="https://www.youtube.com/@nikori_ch" title="ゲーム制作ch. ニコリ" />
+
+今思い返してみると、2枚目の画像のようにスライムのコライダーが大きくて浮いていたり、少し雑だなと思う部分もありますが...初めてにしては頑張った作品なのではないでしょうか。
+
+### 苦戦した「接地判定」
+
+一番苦戦して覚えていることは、 **接地判定** の部分です。  
+プレイヤーが空中にいる時にジャンプができないようにするのですが、これが思った以上に難しいのです。
+
+プレイヤーの足の部分にBoxRaycastをつけて接地判定を取っていたのですが、スクリプトベースの判定なのでプレイヤーの大きさを計算しないとうまく接地判定が取れないのです。  
+さらに、boxの調整をしないと壁に当たった時に壁に引っかかってしまったり、不自然な挙動を取ってしまいます。
+
+今の私ならボックスコライダーを使って接地判定を取ってしまいますが、空中判定・接地判定のプログラムを理解するいい経験になりました。
+
+### 学んだこと：ガード節
+
+あとは、このゲームでガード節の書き方を学びました。
+
+```csharp
+if (Input.GetButtonDown("Jump"))
+    return;
+```
+
+以降の制作でもガード節はよく使っていて、バグを防いだり処理を確実に行ったりするための大切なテクニックになっています。
+
+以上！！
+
+## 2作品目「賢者の遊戯リバーシ」
+
+<ImageSlider images="/images/Articles/Unity/SageReversi/sageReversiTitle.png, /images/Articles/Unity/SageReversi/sageReversiSelectScene.png, /images/Articles/Unity/SageReversi/sageReversiGameScene.png, /images/Articles/Unity/sageReversi/sageReversiResult.png" />
+
+次に作成した作品はみんな大好きリバーシ（オセロ）です。  
+この作品も途中までYouTubeのハンズオンを見ながら作成しました。
+
+<YoutubeLink href="https://www.youtube.com/watch?v=FGugGSuVZ4g" title="オセロハンズオン動画" />
+
+ここで得られた知見は、次の2つです。
+
+- Blenderを使ってオセロの盤を作る方法
+- ルールベースAIをどうやって作成するのか
+
+### Blenderでのオセロ盤づくり
+
+Blenderの操作が難しくて苦戦したのが懐かしいです。  
+動画の中では操作時の入力コマンドとかも表示してくれてるので、ぜひチャレンジしてみてください。
+
+### ルールベースAIの実装
+
+擬似AIの作成については、下記の3段階でレベルを分けて作成しました。
+
+**Lv1：貪欲法**  
+次の一手で、最も多くの石を取れる手を選ぶ。先の展開は考慮せず、その時点で最も利益の大きい手を選択する。
+
+**Lv2：重み付き盤面評価**  
+オセロ盤の各マスに重みを設定し、手を打った後の盤面を評価する。単純に取れる石の数だけでなく、角などの有利なマスや、角の周辺などの不利になりやすいマスも考慮し、評価値が最も高くなる手を選ぶ。
+
+**Lv3：重み付き盤面評価＋ミニマックス法／αβ法**  
+相手も最善の手を選ぶことを想定し、3手先までの展開を探索する。そのうえで、将来的に自分の盤面評価が最も高くなると予測される手を選ぶ。また、探索処理を効率化するために、αβ法による枝刈りを行った。
+
+実際の重み付き盤面評価は以下のような感じです。
+
+```
+ 100 -20  10   5   5  10 -20 100
+ -20 -50  -2  -2  -2  -2 -50 -20
+  10  -2   5   1   1   5  -2  10
+   5  -2   1   0   0   1  -2   5
+   5  -2   1   0   0   1  -2   5
+  10  -2   5   1   1   5  -2  10
+ -20 -50  -2  -2  -2  -2 -50 -20
+ 100 -20  10   5   5  10 -20 100
+```
+
+角を取るのが一番強く、辺の部分も強いことが分かります。
+
+## 3作品目「勇者ジャックの小さな試練」
+
+<ImageSlider images="/images/Articles/Unity/JacknoAdventure/JacknoAdventureTitle.png, /images/Articles/Unity/JacknoAdventure/JacknoAdventureGameScene1.png, /images/Articles/Unity/JacknoAdventure/JacknoAdventureGameScene2.png" />
+
+## 4作品目「アーマーブレイカーズ」
+
+<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" />
+
+## 5作品目「Can Cracher」
+
+<ImageSlider images="/images/Articles/Unity/CanCracher/CanCracherTitle.png, /images/Articles/Unity/CanCracher/CanCracherGameScene1.png, /images/Articles/Unity/CanCracher/CanCracherGameScene2.png" />
+
+## 6作品目「Meteor Frontier Runner」
+
+<ImageSlider images="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" />
+
+## 7作品目「Monster & Panzer」
+
+<ImageSlider images="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" />

@@ -30,8 +30,9 @@ export default function ImageSlider({
 
   // 全ての画像に共通で使う「美しい枠」と「横幅固定・高さ自動」のクラス
   const frameClass =
-    "my-8 w-full max-w-[300px] mx-auto rounded-2xl overflow-hidden border border-[#333] shadow-md bg-[#1e1e1e]";
+    "my-8 w-full max-w-[300px] sm:max-w-[420px] lg:max-w-[560px] mx-auto rounded-2xl overflow-hidden border border-[#333] shadow-md bg-[#1e1e1e]";
   const imgClass = "block w-full h-auto object-cover";
+  const imgSizes = "(min-width: 1024px) 560px, (min-width: 640px) 420px, 300px";
 
   // パターン1：画像が「1枚」だけの場合（スライダー機能はオフにして枠だけ統一！）
   if (imageArray.length === 1) {
@@ -42,7 +43,7 @@ export default function ImageSlider({
           alt={alt || "ブログ画像"}
           width={600}
           height={450}
-          sizes="300px"
+          sizes={imgSizes}
           className={imgClass}
         />
       </div>
@@ -81,7 +82,7 @@ export default function ImageSlider({
                 alt={alt ? `${alt} ${index + 1}` : `スライド画像 ${index + 1}`}
                 width={600}
                 height={450}
-                sizes="300px"
+                sizes={imgSizes}
                 className={imgClass}
               />
             </SwiperSlide>
