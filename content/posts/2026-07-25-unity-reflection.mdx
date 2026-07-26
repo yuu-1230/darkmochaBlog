@@ -1,10 +1,10 @@
 ---
-title: "これまで作ってきたUnity作品を振り返ってみる"
+title: "これまで作ってきたUnity作品を振り返ってみる【後編】"
 date: "2026-07-25"
 category: "Unity"
 tags: ["Unity"]
 description: "Unity作品を振り返って今後の糧とする。"
-draft: true
+draft: false
 ---
 
 こんにちは！Darkmochaです。  
@@ -116,18 +116,51 @@ Blenderの操作が難しくて苦戦したのが懐かしいです。
 
 <ImageSlider images="/images/Articles/Unity/JacknoAdventure/JacknoAdventureTitle.png, /images/Articles/Unity/JacknoAdventure/JacknoAdventureGameScene1.png, /images/Articles/Unity/JacknoAdventure/JacknoAdventureGameScene2.png" />
 
-## 4作品目「アーマーブレイカーズ」
+3作目の「勇者ジャックの小さな試練」は、アセット制作とゲームの面白さの両方で苦戦した作品です。
 
-<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" />
+### AIを使ったアセット制作
 
-## 5作品目「Can Cracher」
+この作品では新しい試みとして、スライムのアセット制作にGeminiのNano Banana Proを使用しました。
 
-<ImageSlider images="/images/Articles/Unity/CanCracher/CanCracherTitle.png, /images/Articles/Unity/CanCracher/CanCracherGameScene1.png, /images/Articles/Unity/CanCracher/CanCracherGameScene2.png" />
+画像そのものはきれいに生成できたのですが、アニメーションに必要な差分を作るのには苦戦しました。同じキャラクターの見た目を保ったまま、少しずつ動きだけを変える調整が難しかったためです。
 
-## 6作品目「Meteor Frontier Runner」
+背景透過もうまくいかなかったので、ピンク色の背景で画像を生成し、最後に[透過画像作成ツール（バナー工房）](https://www.bannerkoubou.com/photoeditor/transparent/)を使って手作業で透過していました。
 
-<ImageSlider images="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" />
+AIを使えば簡単にアセットを作れると思っていましたが、ゲームで使える状態に仕上げるには、生成後の調整も必要だと実感しました。
 
-## 7作品目「Monster & Panzer」
+### ゲームの面白さを作る難しさ
 
-<ImageSlider images="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" />
+このゲームは、障害物を動かして道を作り、ゴールを目指すゲームです。
+
+ルール自体はシンプルなのですが、ステージの展開が単調になりやすく、遊びの幅を作るのが思った以上に難しかったです。
+
+実装面でも、2つの障害物ブロックの間にプレイヤーが挟まり、接地判定がうまく取れなくなる問題が発生しました。面白いステージを考えるだけでなく、それを正しく動かすための実装力も必要だと痛感した作品です。
+
+### この作品から学んだこと
+
+この作品から得た学びは、大きく2つあります。
+
+1. 自分以外の人にもゲームを遊んでもらう
+2. ゲームの内容を一言で説明できるようにする
+
+同じゲームを何度もテストプレイしていると、操作の分かりにくさやUIの違和感に自分では気づきにくくなります。だからこそ、一緒にゲームを作っている仲間に遊んでもらい、客観的な意見をもらうことが大切だと感じました。
+
+もう1つは、ゲームの核を見失わないことです。
+
+この作品は、一言で表すと「障害物を動かして道を作り、ゴールを目指すゲーム」です。しかし、制作途中で面白さが足りないと感じ、弓矢が飛んでくるギミックやプレイヤーのローリングなど、さまざまな要素を追加しました。
+
+結果としてゲームの核が大きく変わることはありませんでしたが、後から機能を増やすほどどんなゲームか分かりにくくなり世界観も崩れてしまいます。
+
+すべてを最初から決め切る必要はありませんが、少なくとも「どんなゲームなのか」と「どこまで作るのか」は先に決めておくべきでした。新しい要素を追加するときも、それがゲームの核を本当に面白くするものなのか、一度立ち止まって考えることが大切だと学びました。
+
+ゲームの核について考えるうえでは、こちらのチャンネルも参考にしています。
+
+<YoutubeLink href="https://www.youtube.com/@sora_sakurai_jp" title="桜井政博のゲームを作るには" />
+
+### 振り返ってみて
+
+この3作品を通して、最初はハンズオンで基礎を学び、そこから少しずつ自分なりの工夫を加えられるようになりました。  
+また、ゲーム制作を続けるには、相談やレビューができる仲間の存在と、「自分が作りたいゲームを最後まで作り切る」という気持ちが大切だと改めて感じました。  
+一方で、作品を重ねるほど「ゲームを完成させること」だけでなく、「どうすれば面白くなるのか」を考える時間も増えていきました。  
+
+後編では、4作品目以降の制作を振り返りながら、ゲームの面白さやオリジナリティとどのように向き合ってきたのかを書いていこうと思います。
