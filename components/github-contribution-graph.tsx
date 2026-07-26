@@ -126,33 +126,34 @@ export async function GithubContributionGraph() {
           件の Contribution
         </p>
 
-        <div className="overflow-x-auto">
-          <div className="inline-flex gap-2" style={{ minWidth: data.weeks.length * (CELL_SIZE + CELL_GAP) }}>
-            {/* Weekday labels */}
-            <div
-              className="grid shrink-0"
-              style={{
-                gridTemplateRows: `${CELL_SIZE}px repeat(7, ${CELL_SIZE}px)`,
-                rowGap: CELL_GAP,
-              }}
-            >
-              <span aria-hidden />
-              {Array.from({ length: 7 }, (_, weekday) => (
-                <span
-                  key={weekday}
-                  className="text-[9px] leading-none text-muted-foreground font-mono flex items-center"
-                  aria-hidden
-                >
-                  {WEEKDAY_LABELS[weekday] ?? ""}
-                </span>
-              ))}
-            </div>
+        <div className="flex gap-2">
+          {/* Weekday labels (fixed, not part of the horizontal scroll) */}
+          <div
+            className="grid shrink-0"
+            style={{
+              gridTemplateRows: `${CELL_SIZE}px repeat(7, ${CELL_SIZE}px)`,
+              rowGap: CELL_GAP,
+            }}
+          >
+            <span aria-hidden />
+            {Array.from({ length: 7 }, (_, weekday) => (
+              <span
+                key={weekday}
+                className="text-[9px] leading-none text-muted-foreground font-mono flex items-center"
+                aria-hidden
+              >
+                {WEEKDAY_LABELS[weekday] ?? ""}
+              </span>
+            ))}
+          </div>
 
-            <div>
+          {/* Scrollable area — defaults to showing the most recent weeks first */}
+          <div className="overflow-x-auto pb-7" dir="rtl">
+            <div dir="ltr" style={{ minWidth: data.weeks.length * (CELL_SIZE + CELL_GAP) }}>
               {/* Month labels */}
               <div
                 className="grid mb-0.75"
-                style={{ gridTemplateColumns: columnTemplate, height: CELL_SIZE }}
+                style={{ gridTemplateColumns: columnTemplate, gap: CELL_GAP, height: CELL_SIZE }}
               >
                 {data.weeks.map((_, index) => {
                   const label = monthLabels.find((m) => m.weekIndex === index);
@@ -183,14 +184,27 @@ export async function GithubContributionGraph() {
                       return <span key={`${weekIndex}-${dayIndex}`} aria-hidden />;
                     }
                     const label = `${formatDateLabel(day.date)}: ${day.count}件の Contribution`;
+                    const edgeMargin = Math.min(6, Math.floor(data.weeks.length / 2));
+                    const tooltipAlignClass =
+                      weekIndex < edgeMargin
+                        ? "left-0"
+                        : weekIndex >= data.weeks.length - edgeMargin
+                          ? "right-0"
+                          : "left-1/2 -translate-x-1/2";
                     return (
                       <span
                         key={day.date}
                         role="img"
                         aria-label={label}
-                        title={label}
-                        className={`rounded-sm border border-border/60 ${LEVEL_BG_CLASS[day.level]}`}
-                      />
+                        className={`group relative rounded-sm border border-border/60 ${LEVEL_BG_CLASS[day.level]}`}
+                      >
+                        <span
+                          role="tooltip"
+                          className={`pointer-events-none absolute top-full z-10 mt-1.5 whitespace-nowrap rounded-md border border-border bg-popover px-2 py-1 text-[10px] text-popover-foreground opacity-0 shadow-md group-hover:opacity-100 ${tooltipAlignClass}`}
+                        >
+                          {label}
+                        </span>
+                      </span>
                     );
                   })
                 )}
