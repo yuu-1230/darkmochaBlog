@@ -28,6 +28,21 @@
 - **モバイル対応** — ハンバーガーメニュー、スライドドロワー
 - **目次（TOC）** — 記事内の見出しから自動生成
 - **ダークモード** — システム設定に連動
+- **GitHub Contribution Graph** — `/about` にて GitHub の年間コントリビューションを表示
+
+---
+
+## 環境変数
+
+`.env.example` を参考に `.env.local`（ローカル）または Vercel の **Project Settings → Environment Variables**（本番）へ設定してください。
+
+| 変数名 | 用途 |
+|---|---|
+| `GITHUB_TOKEN` | GitHub Contribution Graph 取得用（GraphQL API, read-only スコープ推奨） |
+| `GITHUB_USERNAME` | Contribution Graph を表示する GitHub ユーザー名 |
+| `NEXT_PUBLIC_GISCUS_*` | コメント機能（Giscus）の設定値。詳細は `.env.local.example` 参照 |
+
+⚠️ **`GITHUB_TOKEN` は絶対に Public リポジトリへコミットしないでください。** サーバー側（Server Component / サーバー専用モジュール）でのみ使用され、クライアントには一切送信されません。`.env*` は `.gitignore` で除外済みです。
 
 ---
 

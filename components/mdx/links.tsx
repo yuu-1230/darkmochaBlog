@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
-import { Instagram, ExternalLink } from "lucide-react";
+import { Instagram, Youtube, ExternalLink } from "lucide-react";
 
 export const linkComponents = {
   Link: ({
@@ -65,6 +65,28 @@ export const linkComponents = {
       <div className="flex-1 min-w-0">
         <div className="text-sm md:text-base font-medium text-foreground group-hover:text-foreground transition-colors truncate">
           {title || "Instagramで動画を見る"}
+        </div>
+        <div className="text-[10px] md:text-xs text-muted-foreground truncate mt-1 font-mono">
+          {href}
+        </div>
+      </div>
+      <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+    </a>
+  ),
+
+  YoutubeLink: ({ href, title }: { href: string; title?: string }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="my-8 flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:bg-accent hover:border-primary/40 transition-all group no-underline shadow-sm"
+    >
+      <div className="bg-[#FF0000] p-2 rounded-full shrink-0">
+        <Youtube className="w-5 h-5 text-white" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="text-sm md:text-base font-medium text-foreground group-hover:text-foreground transition-colors truncate">
+          {title || "YouTubeで動画を見る"}
         </div>
         <div className="text-[10px] md:text-xs text-muted-foreground truncate mt-1 font-mono">
           {href}
