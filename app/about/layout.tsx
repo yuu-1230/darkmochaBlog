@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL, AUTHOR_NAME } from "@/lib/constants";
+import { GithubContributionGraph } from "@/components/github-contribution-graph";
 
 export const metadata: Metadata = {
   title: "About",
@@ -13,5 +14,12 @@ export const metadata: Metadata = {
 };
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <div className="max-w-3xl mx-auto pb-12">
+        <GithubContributionGraph />
+      </div>
+    </>
+  );
 }
