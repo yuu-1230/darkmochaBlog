@@ -13,12 +13,18 @@ export interface Frontmatter {
   readTime?: string;
   category?: string;
   draft?: boolean;
+  pinned?: boolean;
+}
+
+export interface Progress {
+  done: number;
+  total: number;
 }
 
 export interface PostData {
   slug: string;
   content: string;
-  frontmatter: Frontmatter & { readTime: string };
+  frontmatter: Frontmatter & { readTime: string; progress: Progress | null };
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -29,6 +35,14 @@ function calcReadTime(content: string): string {
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(japanese / 400 + words / 200);
   return `${minutes} min read`;
+}
+
+/** 本文中のMarkdownチェックリスト（- [ ] / - [x]）から進捗を自動算出 */
+function calcProgress(content: string): Progress | null {
+  const matches = [...content.matchAll(/^\s*[-*+]\s+\[([ xX])\]/gm)];
+  if (matches.length === 0) return null;
+  const done = matches.filter((m) => m[1].toLowerCase() === "x").length;
+  return { done, total: matches.length };
 }
 
 export const getPost = cache(async (slug: string): Promise<PostData | null> => {
@@ -51,6 +65,7 @@ export const getPost = cache(async (slug: string): Promise<PostData | null> => {
     frontmatter: {
       ...frontmatter,
       readTime: frontmatter.readTime ?? calcReadTime(matterResult.content),
+      progress: calcProgress(matterResult.content),
     },
   };
 });
