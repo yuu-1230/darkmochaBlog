@@ -1,21 +1,35 @@
 import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { SITE_URL } from "@/lib/constants";
+import { localeUrl } from "@/lib/locale-url";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Travel",
-  description: "旅行記録・日常の記録",
-  alternates: { canonical: `${SITE_URL}/travel` },
-  openGraph: {
-    title: "Travel | Darkmocha",
-    description: "旅行記録・日常の記録",
-    url: `${SITE_URL}/travel`,
-  },
-};
+type Props = { params: Promise<{ locale: Locale }> };
 
-export default async function TravelPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "travel" });
+  const canonical = localeUrl(locale, "/travel");
+
+  return {
+    title: "Travel",
+    description: t("metaDescription"),
+    alternates: { canonical },
+    openGraph: {
+      title: "Travel | Darkmocha",
+      description: t("metaDescription"),
+      url: canonical,
+    },
+  };
+}
+
+export default async function TravelPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("travel");
   const allPosts = await getAllPosts();
   const travelPosts = allPosts.filter((p) => p.frontmatter.category === "Life");
 
@@ -28,19 +42,21 @@ export default async function TravelPage() {
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Travel</h1>
         <p className="text-sm text-muted-foreground">
-          旅行記録と日常の記録。{travelPosts.length > 0 ? `${travelPosts.length}件` : ""}
+          {travelPosts.length > 0
+            ? t("descriptionWithCount", { count: travelPosts.length })
+            : t("description")}
         </p>
       </header>
 
       {travelPosts.length === 0 ? (
         <div className="py-16 text-center space-y-3">
           <p className="text-4xl">✈️</p>
-          <p className="text-muted-foreground text-sm">旅行記事は準備中です。</p>
+          <p className="text-muted-foreground text-sm">{t("empty")}</p>
           <Link
             href="/blog"
             className="text-xs font-mono text-primary hover:underline underline-offset-4"
           >
-            ← すべての記事を見る
+            {t("backToAll")}
           </Link>
         </div>
       ) : (

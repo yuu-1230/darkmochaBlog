@@ -1,8 +1,11 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Home } from "lucide-react";
 import { MacWindowBar } from "@/components/MacWindowBar";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("notFound");
+
   return (
     <div className="py-24 max-w-2xl mx-auto">
       <div className="bg-card border border-border rounded-xl overflow-hidden shadow-sm">
@@ -21,10 +24,10 @@ export default function NotFound() {
 
           <div className="pt-10 space-y-4">
             <h1 className="text-2xl font-bold text-foreground tracking-tight font-sans">
-              404 — Page Not Found
+              {t("title")}
             </h1>
             <p className="text-muted-foreground font-sans leading-relaxed">
-              お探しのページは移動したか、削除された可能性があります。
+              {t("message")}
             </p>
             <Link
               href="/"

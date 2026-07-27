@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Note } from "@/lib/notes";
 import { OgpCard } from "@/components/ogp-card";
 import { extractUrls } from "@/lib/ogp";
+import { BCP47, type Locale } from "@/i18n/routing";
 
 const PREVIEW_LIMIT = 2;
 
@@ -13,16 +15,18 @@ type NoteTimelineProps = {
   activeTag?: string;
 };
 
-export function NoteTimeline({
+export async function NoteTimeline({
   notes,
   mode = "preview",
   limit = PREVIEW_LIMIT,
   activeTag,
 }: NoteTimelineProps) {
+  const t = await getTranslations("notes");
+
   if (notes.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        {activeTag ? `#${activeTag} のノートはありません。` : "ノートはまだありません。"}
+        {activeTag ? t("emptyTag", { tag: activeTag }) : t("empty")}
       </p>
     );
   }
@@ -34,7 +38,7 @@ export function NoteTimeline({
   return (
     <section
       id={isFull ? "notes-timeline" : "daily-notes"}
-      aria-label="Daily notes"
+      aria-label={t("sectionLabel")}
       className="select-text"
     >
       {/* Section label (preview mode only) */}
@@ -51,7 +55,7 @@ export function NoteTimeline({
       {/* Active tag filter indicator */}
       {isFull && activeTag && (
         <div className="mb-8 flex items-center gap-2">
-          <span className="text-xs font-mono text-muted-foreground">フィルター中:</span>
+          <span className="text-xs font-mono text-muted-foreground">{t("filtering")}</span>
           <span className="inline-flex items-center gap-1 text-xs font-mono bg-primary/10 text-primary px-2 py-0.5 rounded-full">
             #{activeTag}
           </span>
@@ -59,7 +63,7 @@ export function NoteTimeline({
             href="/notes-timeline"
             className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
           >
-            クリア
+            {t("clear")}
           </Link>
         </div>
       )}
@@ -82,7 +86,7 @@ export function NoteTimeline({
             href="/notes-timeline"
             className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
           >
-            ほか {hiddenCount} 件 →
+            {t("more", { count: hiddenCount })}
           </Link>
         </div>
       )}
@@ -132,7 +136,10 @@ function NoteContent({ content }: { content: string }) {
 }
 
 async function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
-  const dateStr = new Date(note.createdAt).toLocaleString("ja-JP", {
+  const t = await getTranslations("notes");
+  const locale = (await getLocale()) as Locale;
+
+  const dateStr = new Date(note.createdAt).toLocaleString(BCP47[locale], {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -170,7 +177,7 @@ async function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
             style={{ aspectRatio: "4/3" }}>
             <Image
               src={resolveImageSrc(note.image)}
-              alt="ノートの添付画像"
+              alt={t("imageAlt")}
               fill
               sizes="(max-width: 768px) 100vw, 24rem"
               className="object-contain"

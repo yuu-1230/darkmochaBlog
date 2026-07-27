@@ -2,7 +2,8 @@ import { getPost, getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { ArrowLeft, Calendar, Tag, Clock, RefreshCw } from "lucide-react";
 import React from "react";
 import rehypeSlug from "rehype-slug";
@@ -23,7 +24,8 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { getRelatedPosts } from "@/lib/related-posts";
 import { tagHref } from "@/lib/tags";
-import { SITE_URL } from "@/lib/constants";
+import { localeUrl } from "@/lib/locale-url";
+import type { Locale } from "@/i18n/routing";
 
 const prettyCodeOptions: Options = {
   theme: { light: "solarized-light", dark: "everforest-dark" },
@@ -31,12 +33,10 @@ const prettyCodeOptions: Options = {
   defaultLang: "plaintext",
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
+type Props = { params: Promise<{ slug: string; locale: Locale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
 
   const post = await getPost(slug);
   if (!post) {
@@ -44,7 +44,7 @@ export async function generateMetadata({
   }
 
   const { title, description, image, date } = post.frontmatter;
-  const canonical = `${SITE_URL}/blog/${slug}`;
+  const canonical = localeUrl(locale, `/blog/${slug}`);
   const ogImage = image
     ? [{ url: image, width: 1200, height: 630, alt: title }]
     : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
@@ -77,13 +77,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+export default async function BlogPost({ params }: Props) {
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
 
+  const t = await getTranslations("post");
   const allPosts = await getAllPosts();
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
 
@@ -142,7 +140,7 @@ export default async function BlogPost({
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Home
+          {t("backToHome")}
         </Link>
 
         {/* Article header */}
@@ -155,7 +153,7 @@ export default async function BlogPost({
             {frontmatter.update && frontmatter.update !== frontmatter.date && (
               <span className="flex items-center gap-1.5">
                 <RefreshCw className="w-3.5 h-3.5" />
-                更新 {frontmatter.update}
+                {t("updated")} {frontmatter.update}
               </span>
             )}
             {frontmatter.tags && (
@@ -219,9 +217,9 @@ export default async function BlogPost({
         <RelatedPosts posts={relatedPosts} />
 
         <div className="mt-8 pt-6 border-t flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">Thanks for reading.</span>
+          <span className="text-sm text-muted-foreground">{t("thanks")}</span>
           <ShareButtons
-            url={`${SITE_URL}/blog/${slug}`}
+            url={localeUrl(locale, `/blog/${slug}`)}
             title={frontmatter.title}
           />
         </div>

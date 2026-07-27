@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Github, AlertCircle } from "lucide-react";
 import {
   getGithubContributions,
@@ -6,6 +7,7 @@ import {
   type ContributionLevel,
   type ContributionWeek,
 } from "@/lib/github-contributions";
+import { BCP47, type Locale } from "@/i18n/routing";
 
 const CELL_SIZE = 11;
 const CELL_GAP = 3;
@@ -29,9 +31,14 @@ const MONTH_LABELS = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
-function formatDateLabel(date: string): string {
+function formatDateLabel(date: string, locale: Locale): string {
   const [year, month, day] = date.split("-").map(Number);
-  return `${year}年${month}月${day}日`;
+  return new Intl.DateTimeFormat(BCP47[locale], {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(Date.UTC(year, month - 1, day)));
 }
 
 function toWeekSlots(week: ContributionWeek): (ContributionDay | null)[] {
@@ -82,14 +89,16 @@ function FallbackNotice({ message }: { message: string }) {
 
 export async function GithubContributionGraph() {
   const result = await getGithubContributions();
+  const t = await getTranslations("github");
+  const locale = (await getLocale()) as Locale;
 
   if (!result.ok) {
     const message =
       result.reason === "missing_env"
-        ? "GitHub Activity は現在準備中です。"
+        ? t("missingEnv")
         : result.reason === "user_not_found"
-          ? "指定された GitHub ユーザーが見つかりませんでした。"
-          : "GitHub の Contribution データを取得できませんでした。";
+          ? t("userNotFound")
+          : t("fetchFailed");
     return (
       <section className="space-y-6">
         <GraphSectionHeader />
@@ -119,11 +128,14 @@ export async function GithubContributionGraph() {
 
       <div className="bg-card border border-border rounded-lg p-4">
         <p className="text-sm text-foreground/85 mb-4">
-          過去1年間で
-          <span className="font-mono font-medium text-foreground mx-1">
-            {data.totalContributions.toLocaleString()}
-          </span>
-          件の Contribution
+          {t.rich("total", {
+            count: data.totalContributions,
+            num: (chunks) => (
+              <span className="font-mono font-medium text-foreground mx-1">
+                {chunks}
+              </span>
+            ),
+          })}
         </p>
 
         <div className="flex gap-2">
@@ -183,7 +195,10 @@ export async function GithubContributionGraph() {
                     if (!day) {
                       return <span key={`${weekIndex}-${dayIndex}`} aria-hidden />;
                     }
-                    const label = `${formatDateLabel(day.date)}: ${day.count}件の Contribution`;
+                    const label = t("cellLabel", {
+                      date: formatDateLabel(day.date, locale),
+                      count: day.count,
+                    });
                     const edgeMargin = Math.min(6, Math.floor(data.weeks.length / 2));
                     const tooltipAlignClass =
                       weekIndex < edgeMargin

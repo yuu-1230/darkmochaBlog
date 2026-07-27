@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
@@ -12,6 +13,8 @@ interface ImageLightboxProps {
 }
 
 export function ImageLightbox({ src, alt, onClose }: ImageLightboxProps) {
+  const t = useTranslations("mdx");
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -37,7 +40,7 @@ export function ImageLightbox({ src, alt, onClose }: ImageLightboxProps) {
         <button
           className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
           onClick={onClose}
-          aria-label="閉じる"
+          aria-label={t("closeLightbox")}
         >
           <X className="w-6 h-6" />
         </button>

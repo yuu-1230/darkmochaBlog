@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { List } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,7 @@ type TableOfContentsProps = {
 };
 
 export const TableOfContents = ({ toc, className }: TableOfContentsProps) => {
+  const t = useTranslations("toc");
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export const TableOfContents = ({ toc, className }: TableOfContentsProps) => {
       {/* Header */}
       <div className="flex items-center gap-2 text-foreground font-semibold mb-4 pb-3" style={{ borderBottom: "1px solid var(--toc-line)" }}>
         <List className="w-4 h-4 text-primary" />
-        目次
+        {t("title")}
       </div>
 
       <div className="flex gap-3">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import {
   MapPin,
@@ -65,6 +66,8 @@ const socialLinks = [
 ];
 
 export default function AboutPage() {
+  const t = useTranslations("about");
+
   return (
     <motion.div
       variants={container}
@@ -117,15 +120,9 @@ export default function AboutPage() {
           Bio
         </h2>
         <div className="space-y-4 text-foreground/85 leading-8 text-[15px]">
-          <p>
-            長野（Nagano）出身の大学生。主にWebフロントエンド（Next.js、Reactなど）とUnityを勉強しています。
-          </p>
-          <p>
-            学生ITコミュニティ・PlayGroundや、ハッカソンなどで開発経験を積んでいます。小中学生向けのプログラミング講師としての活動も行っています。
-          </p>
-          <p>
-            趣味は音楽・アニメ・ゲーム・テニス・旅行。
-          </p>
+          <p>{t("bio1")}</p>
+          <p>{t("bio2")}</p>
+          <p>{t("bio3")}</p>
         </div>
       </motion.section>
 

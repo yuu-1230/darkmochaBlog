@@ -1,9 +1,18 @@
+import { setRequestLocale } from "next-intl/server";
 import { getAllPosts } from "@/lib/mdx";
 import { HomeClient } from "@/components/home-client";
+import type { Locale } from "@/i18n/routing";
 
 const RECENT_COUNT = 5;
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const allPosts = await getAllPosts();
 
   const pinnedPosts = allPosts

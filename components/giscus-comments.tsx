@@ -2,10 +2,12 @@
 
 import Giscus from "@giscus/react";
 import { useTheme } from "next-themes";
+import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function GiscusComments() {
   const { resolvedTheme } = useTheme();
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -36,7 +38,7 @@ export function GiscusComments() {
           emitMetadata="0"
           inputPosition="top"
           theme={theme}
-          lang="ja"
+          lang={locale}
           loading="lazy"
         />
       </div>

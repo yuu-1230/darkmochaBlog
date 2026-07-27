@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { Sun, Moon, Coffee, X, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { SearchDialog } from "@/components/search-dialog";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 const navItems = [
@@ -19,6 +20,7 @@ const navItems = [
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("common");
   const [mounted, setMounted] = useState(false);
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true); }, []);
@@ -27,7 +29,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle theme"
+      aria-label={t("toggleTheme")}
       className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
     >
       {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -37,6 +39,7 @@ function ThemeToggle() {
 
 export const SiteHeader = () => {
   const pathname = usePathname();
+  const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const drawerRef = useFocusTrap<HTMLElement>(open);
 
@@ -104,11 +107,12 @@ export const SiteHeader = () => {
 
             <SearchDialog />
             <ThemeToggle />
+            <LanguageSwitcher className="hidden md:inline-flex ml-1" />
 
             {/* Hamburger button (mobile only) */}
             <button
               onClick={() => setOpen((v) => !v)}
-              aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+              aria-label={open ? t("closeMenu") : t("openMenu")}
               aria-expanded={open}
               className="md:hidden ml-1 p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
@@ -144,7 +148,7 @@ export const SiteHeader = () => {
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="fixed top-0 right-0 z-50 h-full w-64 bg-background border-l border-border shadow-xl md:hidden flex flex-col"
-              aria-label="モバイルナビゲーション"
+              aria-label={t("mobileNav")}
             >
               {/* Drawer header */}
               <div className="h-14 flex items-center justify-between px-5 border-b border-border">
@@ -154,7 +158,7 @@ export const SiteHeader = () => {
                 </span>
                 <button
                   onClick={() => setOpen(false)}
-                  aria-label="メニューを閉じる"
+                  aria-label={t("closeMenu")}
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                 >
                   <X className="w-4 h-4" />
@@ -186,8 +190,11 @@ export const SiteHeader = () => {
               </ul>
 
               {/* Drawer footer */}
-              <div className="px-5 py-4 border-t border-border text-xs font-mono text-muted-foreground">
-                © Yuto Nagata 2026
+              <div className="px-5 py-4 border-t border-border space-y-3">
+                <LanguageSwitcher size="md" className="w-full justify-center" />
+                <p className="text-xs font-mono text-muted-foreground">
+                  © Yuto Nagata 2026
+                </p>
               </div>
             </motion.nav>
           </>

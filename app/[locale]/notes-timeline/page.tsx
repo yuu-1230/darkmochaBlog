@@ -1,25 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAllNotes, getAllTags } from "@/lib/notes";
 import { NoteTimeline } from "@/components/note-timeline";
-import Link from "next/link";
-import { SITE_URL } from "@/lib/constants";
-
-export const metadata: Metadata = {
-  title: "Notes",
-  description: "短文ログ（Daily Notes）の一覧",
-  alternates: { canonical: `${SITE_URL}/notes-timeline` },
-  openGraph: {
-    title: "Notes | Darkmocha",
-    description: "短文ログ（Daily Notes）の一覧",
-    url: `${SITE_URL}/notes-timeline`,
-  },
-};
+import { Link } from "@/i18n/navigation";
+import { localeUrl } from "@/lib/locale-url";
+import type { Locale } from "@/i18n/routing";
 
 type Props = {
+  params: Promise<{ locale: Locale }>;
   searchParams: Promise<{ tag?: string }>;
 };
 
-export default async function NotesTimelinePage({ searchParams }: Props) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "notes" });
+  const canonical = localeUrl(locale, "/notes-timeline");
+
+  return {
+    title: "Notes",
+    description: t("metaDescription"),
+    alternates: { canonical },
+    openGraph: {
+      title: "Notes | Darkmocha",
+      description: t("metaDescription"),
+      url: canonical,
+    },
+  };
+}
+
+export default async function NotesTimelinePage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("notes");
   const { tag } = await searchParams;
   const allNotes = getAllNotes();
   const allTags = getAllTags(allNotes);
@@ -35,7 +52,7 @@ export default async function NotesTimelinePage({ searchParams }: Props) {
           Daily Notes
         </h1>
         <p className="text-sm text-muted-foreground">
-          日々の短い思考・メモのログ。
+          {t("description")}
         </p>
       </header>
 

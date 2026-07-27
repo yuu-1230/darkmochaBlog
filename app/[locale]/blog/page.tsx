@@ -1,21 +1,35 @@
 import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildBlogSections } from "@/lib/blog-sections";
 import { PostCard } from "@/components/PostCard";
-import { SITE_URL } from "@/lib/constants";
+import { localeUrl } from "@/lib/locale-url";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "技術記事・Web開発・Unity・旅行記録",
-  alternates: { canonical: `${SITE_URL}/blog` },
-  openGraph: {
-    title: "Blog | Darkmocha",
-    description: "技術記事・Web開発・Unity・旅行記録",
-    url: `${SITE_URL}/blog`,
-  },
-};
+type Props = { params: Promise<{ locale: Locale }> };
 
-export default async function BlogPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const canonical = localeUrl(locale, "/blog");
+
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical },
+    openGraph: {
+      title: `${t("metaTitle")} | Darkmocha`,
+      description: t("metaDescription"),
+      url: canonical,
+    },
+  };
+}
+
+export default async function BlogPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("blog");
   const allPosts = await getAllPosts();
   const sections = buildBlogSections(allPosts);
 
@@ -28,13 +42,13 @@ export default async function BlogPage() {
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Blog</h1>
         <p className="text-sm text-muted-foreground">
-          {allPosts.length}件の記事
+          {t("postCount", { count: allPosts.length })}
         </p>
       </header>
 
       {allPosts.length === 0 && (
         <p className="text-muted-foreground text-sm italic py-8 text-center">
-          No posts yet.
+          {t("empty")}
         </p>
       )}
 

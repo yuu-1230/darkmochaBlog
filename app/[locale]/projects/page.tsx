@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
@@ -18,6 +19,7 @@ const item = {
 };
 
 export default function ProjectsPage() {
+  const t = useTranslations("projects");
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
@@ -34,7 +36,7 @@ export default function ProjectsPage() {
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Projects</h1>
         <p className="text-muted-foreground text-sm">
-          {projects.length}件の制作物と、そこで得た学び。
+          {t("count", { count: projects.length })}
         </p>
       </motion.header>
 
