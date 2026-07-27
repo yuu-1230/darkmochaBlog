@@ -36,9 +36,9 @@ const socialLinks = [
   { label: "qiita",  href: "https://qiita.com/darkmocha" },
 ];
 
-type Props = { recentPosts: PostData[] };
+type Props = { pinnedPosts: PostData[]; recentPosts: PostData[] };
 
-export function HomeClient({ recentPosts }: Props) {
+export function HomeClient({ pinnedPosts, recentPosts }: Props) {
   return (
     <motion.div
       variants={container}
@@ -89,6 +89,53 @@ export function HomeClient({ recentPosts }: Props) {
           ~ / ROOT / DATA
         </span>
       </motion.div>
+
+      {/* ── Pinned ── */}
+      {pinnedPosts.length > 0 && (
+        <motion.section variants={item} className="mb-12">
+          {/* Section header */}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-mono text-sm text-foreground flex items-center gap-1.5">
+              <span className="text-primary">./</span>
+              pinned
+            </h2>
+          </div>
+
+          {/* Terminal table */}
+          <div className="border border-border bg-card rounded-sm overflow-hidden font-mono">
+            {/* Table header */}
+            <div className="grid grid-cols-12 gap-4 px-5 py-2.5 border-b border-border bg-muted dark:bg-black/40 text-[11px] text-muted-foreground uppercase tracking-wider">
+              <div className="col-span-3 md:col-span-2">TIMESTAMP</div>
+              <div className="col-span-9 md:col-span-8">FILE_NAME</div>
+              <div className="hidden md:block col-span-2 text-right">PROGRESS</div>
+            </div>
+
+            {/* Post rows */}
+            {pinnedPosts.map((post, index) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className={`grid grid-cols-12 gap-4 px-5 py-3.5 border-l-2 border-l-transparent hover:bg-accent hover:border-l-primary group transition-all duration-150 ${
+                  index < pinnedPosts.length - 1 ? "border-b border-border" : ""
+                }`}
+              >
+                <div className="col-span-3 md:col-span-2 text-xs text-muted-foreground group-hover:text-primary transition-colors self-center">
+                  {post.frontmatter.update ?? post.frontmatter.date}
+                </div>
+                <div className="col-span-9 md:col-span-8 flex items-center gap-1.5 text-sm text-foreground group-hover:text-primary transition-colors truncate self-center">
+                  <span aria-hidden="true">📌</span>
+                  <span className="truncate">{post.frontmatter.title}</span>
+                </div>
+                <div className="hidden md:block col-span-2 text-right text-xs text-primary/60 self-center">
+                  {post.frontmatter.progress
+                    ? `${post.frontmatter.progress.done}/${post.frontmatter.progress.total}`
+                    : "[pinned]"}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </motion.section>
+      )}
 
       {/* ── Recent Writing ── */}
       {recentPosts.length > 0 && (
