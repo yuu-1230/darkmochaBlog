@@ -1,5 +1,6 @@
 import { getAllPosts } from "@/lib/mdx";
 import { SITE_URL, SITE_NAME, AUTHOR_NAME } from "@/lib/constants";
+import { routing } from "@/i18n/routing";
 
 export const dynamic = "force-static";
 
@@ -13,7 +14,8 @@ function escapeXml(text: string): string {
 }
 
 export async function GET() {
-  const posts = await getAllPosts();
+  // ロケール別フィードは Phase 4。現状は日本語版のみを従来どおり出力する
+  const posts = await getAllPosts(routing.defaultLocale);
 
   const items = posts
     .map((post) => {

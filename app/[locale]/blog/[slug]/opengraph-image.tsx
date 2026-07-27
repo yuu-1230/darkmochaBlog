@@ -5,21 +5,29 @@ import {
   loadPublicImageAsDataUri,
   loadJapaneseFontSubset,
 } from "@/lib/og-image";
+import { routing, type Locale } from "@/i18n/routing";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  const params: { locale: Locale; slug: string }[] = [];
+  for (const locale of routing.locales) {
+    const posts = await getAllPosts(locale);
+    params.push(...posts.map((post) => ({ locale, slug: post.slug })));
+  }
+  return params;
 }
 
 export default async function Image({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: Locale }>;
 }) {
-  const { slug } = await params;
-  const post = await getPost(slug);
+  const { slug, locale } = await params;
+  // 未訳ロケールでは存在する言語版のOG画像にフォールバックする
+  const post =
+    (await getPost(slug, locale)) ??
+    (await getPost(slug, routing.defaultLocale));
   if (!post) {
     notFound();
   }

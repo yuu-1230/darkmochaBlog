@@ -13,7 +13,7 @@ export default async function Home({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(locale);
 
   const pinnedPosts = allPosts
     .filter((post) => post.frontmatter.pinned)

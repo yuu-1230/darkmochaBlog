@@ -30,7 +30,7 @@ export default async function TravelPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("travel");
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(locale);
   const travelPosts = allPosts.filter((p) => p.frontmatter.category === "Life");
 
   return (

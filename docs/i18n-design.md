@@ -223,7 +223,7 @@ notFound    404 文言
 | 0 | next-intl 導入、`i18n/`・`proxy.ts` 作成、`app/[locale]/` へ移設、`<html lang>` 対応 | 0.5〜1日 | ✅ 完了 |
 | 1 | `messages/{ja,en}.json` を作り、約85箇所のUI文言を差し替え | 0.5〜1日 | ✅ 完了 |
 | 2 | 言語スイッチャー実装（ヘッダー＋モバイルドロワー） | 0.25日 | ✅ 完了 |
-| 3 | `content/posts/{ja,en}/` へ移行、`lib/mdx.ts` の locale 対応、未訳記事のフォールバック | 0.5日 | 未着手 |
+| 3 | `content/posts/{ja,en}/` へ移行、`lib/mdx.ts` の locale 対応、未訳記事のフォールバック | 0.5日 | ✅ 完了（記事の英訳自体は未着手） |
 | 4 | hreflang / sitemap / feed / OG画像 / 検索API / JSON-LD | 0.5日 | 未着手 |
 | 5 | `lib/projects.ts` の多言語化、英語版ナビから notes を除外 | 0.25日 | 未着手 |
 | — | **記事の英訳**（継続） | 1本あたり0.5〜1時間 | 未着手 |
@@ -235,6 +235,14 @@ notFound    404 文言
 - **canonical はスコープ外だったが対応した。** 各ページの `alternates.canonical` が `${SITE_URL}/about` 固定のままだと、`/en/about` が「正規URLは日本語版」と宣言してしまい Google に英語版を無視される。Phase 4 を待たずに壊れるため、`lib/locale-url.ts` を追加して locale 込みの canonical を返すようにした。**hreflang（`alternates.languages`）は Phase 4 のまま未対応。**
 - **辞書化の線引き**: UIラベル・ボタン・見出し・aria-label・ページ説明文は英訳した。一方、about ページの Bio 3段落と [lib/projects.ts](../lib/projects.ts) の説明文は**日本語のまま** `en.json` に入れてある（本人の紹介文なので後で推敲する前提）。
 - **未対応で残っている日本語**: `lib/projects.ts`（Phase 5）、`content/notes.json`、記事本文（Phase 3）。それ以外のソース中の日本語はコメントと正規表現の文字クラスのみ。
+
+### Phase 3 実装時の補足
+
+- **cookie による言語の記憶は proxy.ts で自前実装した。** next-intl は `localeDetection: false` にすると Accept-Language だけでなく **cookie も読まなくなる**（[resolveLocale.js](../node_modules/next-intl/dist/esm/development/middleware/resolveLocale.js) で両方が同じフラグでガードされている）。「自動判定はしないが、ユーザーが自分で選んだ言語は覚える」を満たすため、[proxy.ts](../proxy.ts) でプレフィックス無しURL + `NEXT_LOCALE` cookie の組み合わせのときだけ `/en` へリダイレクトしている。Accept-Language は一切参照しない。
+- **未訳ページからの「日本語版を読む」リンクは意図的に `/ja/blog/...`。** プレフィックス無しの `/blog/...` にすると上記の cookie リダイレクトで `/en` に戻されてしまう。`/ja` 付きなら next-intl がサーバー側で cookie を `ja` に戻したうえで `/blog/...` に正規化するため、JS 無しでも確実に日本語へ抜けられる。
+- **未訳ページは 200 + `noindex, follow`。** 指示どおり 404 にはしないが、ソフト404として検索エンジンに拾われないよう `robots` を付け、canonical は存在する言語版に向けている。
+- **`generateStaticParams` はロケール実在分のみ列挙**。`/en/blog/{未訳slug}` は事前生成せず、オンデマンドで案内ページを返す。
+- **`NextIntlClientProvider` は辞書全体をクライアントに送っている。** 現状 数KB で問題ないが、増えたら namespace を絞る余地がある。
 
 ## 11. 決めておきたいこと
 

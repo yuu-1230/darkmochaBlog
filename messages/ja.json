@@ -32,7 +32,17 @@
     "thanks": "読んでいただきありがとうございます。",
     "prevPost": "前の記事",
     "nextPost": "次の記事",
-    "navLabel": "記事ナビゲーション"
+    "navLabel": "記事ナビゲーション",
+    "untranslated": {
+      "title": "この記事の日本語版はまだありません",
+      "body": "この記事は現在ほかの言語でのみ公開されています。翻訳が用意でき次第、こちらでも読めるようになります。",
+      "readInOtherLanguage": "{language}版を読む",
+      "backToList": "記事一覧へ",
+      "languages": {
+        "ja": "日本語",
+        "en": "英語"
+      }
+    }
   },
   "toc": {
     "title": "目次"

@@ -32,7 +32,17 @@
     "thanks": "Thanks for reading.",
     "prevPost": "Previous Post",
     "nextPost": "Next Post",
-    "navLabel": "Post navigation"
+    "navLabel": "Post navigation",
+    "untranslated": {
+      "title": "This post isn't available in English yet",
+      "body": "This post has only been published in another language so far. It will appear here once a translation is ready.",
+      "readInOtherLanguage": "Read the {language} version",
+      "backToList": "Back to all posts",
+      "languages": {
+        "ja": "Japanese",
+        "en": "English"
+      }
+    }
   },
   "toc": {
     "title": "Contents"

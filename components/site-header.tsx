@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { SearchDialog } from "@/components/search-dialog";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
+import type { Locale } from "@/i18n/routing";
 
 const navItems = [
   { label: "blog",    href: "/blog" },
@@ -37,7 +38,12 @@ function ThemeToggle() {
   );
 }
 
-export const SiteHeader = () => {
+type SiteHeaderProps = {
+  /** ロケールごとに存在する記事 slug（言語スイッチャーのフォールバック判定用） */
+  postSlugsByLocale: Partial<Record<Locale, string[]>>;
+};
+
+export const SiteHeader = ({ postSlugsByLocale }: SiteHeaderProps) => {
   const pathname = usePathname();
   const t = useTranslations("common");
   const [open, setOpen] = useState(false);
@@ -107,7 +113,10 @@ export const SiteHeader = () => {
 
             <SearchDialog />
             <ThemeToggle />
-            <LanguageSwitcher className="hidden md:inline-flex ml-1" />
+            <LanguageSwitcher
+              className="hidden md:inline-flex ml-1"
+              postSlugsByLocale={postSlugsByLocale}
+            />
 
             {/* Hamburger button (mobile only) */}
             <button
@@ -191,7 +200,11 @@ export const SiteHeader = () => {
 
               {/* Drawer footer */}
               <div className="px-5 py-4 border-t border-border space-y-3">
-                <LanguageSwitcher size="md" className="w-full justify-center" />
+                <LanguageSwitcher
+                  size="md"
+                  className="w-full justify-center"
+                  postSlugsByLocale={postSlugsByLocale}
+                />
                 <p className="text-xs font-mono text-muted-foreground">
                   © Yuto Nagata 2026
                 </p>

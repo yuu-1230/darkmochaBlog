@@ -30,7 +30,7 @@ export default async function BlogPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("blog");
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(locale);
   const sections = buildBlogSections(allPosts);
 
   return (

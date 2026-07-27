@@ -1,4 +1,4 @@
-import { getPost, getAllPosts } from "@/lib/mdx";
+import { getPost, getAllPosts, hasTranslation } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -25,7 +25,8 @@ import { RelatedPosts } from "@/components/RelatedPosts";
 import { getRelatedPosts } from "@/lib/related-posts";
 import { tagHref } from "@/lib/tags";
 import { localeUrl } from "@/lib/locale-url";
-import type { Locale } from "@/i18n/routing";
+import { TranslationUnavailable } from "@/components/translation-unavailable";
+import { routing, type Locale } from "@/i18n/routing";
 
 const prettyCodeOptions: Options = {
   theme: { light: "solarized-light", dark: "everforest-dark" },
@@ -35,12 +36,34 @@ const prettyCodeOptions: Options = {
 
 type Props = { params: Promise<{ slug: string; locale: Locale }> };
 
+/** slug の記事が存在する他ロケールを返す（未訳フォールバック用） */
+async function findAvailableLocale(
+  slug: string,
+  exclude: Locale,
+): Promise<Locale | null> {
+  for (const candidate of routing.locales) {
+    if (candidate === exclude) continue;
+    if (await hasTranslation(slug, candidate)) return candidate;
+  }
+  return null;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
 
-  const post = await getPost(slug);
+  const post = await getPost(slug, locale);
   if (!post) {
-    return { title: "Not Found" };
+    const availableLocale = await findAvailableLocale(slug, locale);
+    if (!availableLocale) {
+      return { title: "Not Found" };
+    }
+    // 未訳の案内ページは実質ソフト404なので、検索エンジンには拾わせない
+    const other = await getPost(slug, availableLocale);
+    return {
+      title: other?.frontmatter.title ?? "Not Found",
+      robots: { index: false, follow: true },
+      alternates: { canonical: localeUrl(availableLocale, `/blog/${slug}`) },
+    };
   }
 
   const { title, description, image, date } = post.frontmatter;
@@ -71,10 +94,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  // ロケールごとに、そのロケールに実在する記事だけを事前生成する。
+  // 未訳の /en/blog/{slug} は事前生成せず、オンデマンドで案内ページを返す。
+  const params: { locale: Locale; slug: string }[] = [];
+  for (const locale of routing.locales) {
+    const posts = await getAllPosts(locale);
+    params.push(...posts.map((post) => ({ locale, slug: post.slug })));
+  }
+  return params;
 }
 
 export default async function BlogPost({ params }: Props) {
@@ -82,11 +109,27 @@ export default async function BlogPost({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("post");
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(locale);
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
 
   if (currentIndex === -1) {
-    notFound();
+    // このロケールには無いが他ロケールにはある → 404 にせず案内を出す
+    const availableLocale = await findAvailableLocale(slug, locale);
+    const other = availableLocale
+      ? await getPost(slug, availableLocale)
+      : null;
+
+    if (!availableLocale || !other) {
+      notFound();
+    }
+
+    return (
+      <TranslationUnavailable
+        availableLocale={availableLocale}
+        slug={slug}
+        title={other.frontmatter.title}
+      />
+    );
   }
 
   const post = allPosts[currentIndex];

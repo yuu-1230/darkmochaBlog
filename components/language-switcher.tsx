@@ -14,14 +14,39 @@ const SIZE_CLASS = {
 type Props = {
   size?: keyof typeof SIZE_CLASS;
   className?: string;
+  /** ロケールごとに存在する記事 slug。未訳記事で一覧にフォールバックするために使う */
+  postSlugsByLocale?: Partial<Record<Locale, string[]>>;
 };
+
+/**
+ * 切り替え先のパスを決める。
+ * 記事詳細で切り替え先に翻訳が無い場合は、記事一覧にフォールバックする。
+ */
+function resolveTargetPath(
+  pathname: string,
+  target: Locale,
+  postSlugsByLocale?: Partial<Record<Locale, string[]>>,
+): string {
+  if (!postSlugsByLocale) return pathname;
+
+  // /blog/{slug} だけを対象にする（/blog/tags/{tag} は2セグメントなので一致しない）
+  const match = pathname.match(/^\/blog\/([^/]+)$/);
+  if (!match) return pathname;
+
+  const slug = decodeURIComponent(match[1]);
+  return postSlugsByLocale[target]?.includes(slug) ? pathname : "/blog";
+}
 
 /**
  * JA / EN のセグメントトグル。
  * next-intl の usePathname はロケールを除いたパスを返すため、
  * 同じページのまま言語だけを切り替えられる。
  */
-export function LanguageSwitcher({ size = "sm", className }: Props) {
+export function LanguageSwitcher({
+  size = "sm",
+  className,
+  postSlugsByLocale,
+}: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations("common.language");
   const router = useRouter();
@@ -30,8 +55,9 @@ export function LanguageSwitcher({ size = "sm", className }: Props) {
 
   const switchTo = (next: Locale) => {
     if (next === locale) return;
+    const target = resolveTargetPath(pathname, next, postSlugsByLocale);
     startTransition(() => {
-      router.replace(pathname, { locale: next });
+      router.replace(target, { locale: next });
     });
   };
 

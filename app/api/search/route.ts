@@ -3,6 +3,7 @@ import { getAllPosts } from "@/lib/mdx";
 import { getAllNotes } from "@/lib/notes";
 import { projects } from "@/lib/projects";
 import { parseSections, stripMdx, type Section } from "@/lib/search-utils";
+import { routing } from "@/i18n/routing";
 
 export type SearchItem = {
   type: "blog" | "note" | "project";
@@ -17,8 +18,9 @@ export type SearchItem = {
 };
 
 export async function GET() {
+  // ロケール別インデックスは Phase 4。現状は日本語記事のみを索引する
   const [posts, notes] = await Promise.all([
-    getAllPosts(),
+    getAllPosts(routing.defaultLocale),
     Promise.resolve(getAllNotes()),
   ]);
 

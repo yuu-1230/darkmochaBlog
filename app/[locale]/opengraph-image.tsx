@@ -3,8 +3,14 @@ import {
   loadPublicImageAsDataUri,
   loadJapaneseFontSubset,
 } from "@/lib/og-image";
+import { routing } from "@/i18n/routing";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// [locale] 配下のメタデータルートは自前で params を列挙しないと動的レンダリングになる
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function Image() {
   // サイト全体用の背景画像（プロフ画像や風景など）

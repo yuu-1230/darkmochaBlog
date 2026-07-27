@@ -7,11 +7,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowLeft, Tag as TagIcon } from "lucide-react";
 import { localeUrl } from "@/lib/locale-url";
-import type { Locale } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return getAllTags(posts).map((tag) => ({ tag }));
+  const params: { locale: Locale; tag: string }[] = [];
+  for (const locale of routing.locales) {
+    const posts = await getAllPosts(locale);
+    params.push(...getAllTags(posts).map((tag) => ({ locale, tag })));
+  }
+  return params;
 }
 
 type Props = { params: Promise<{ tag: string; locale: Locale }> };
@@ -43,7 +47,7 @@ export default async function TagPage({ params }: Props) {
 
   const t = await getTranslations("tags");
   const decoded = decodeURIComponent(tag);
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(locale);
   const posts = getPostsByTag(allPosts, decoded);
 
   if (posts.length === 0) {

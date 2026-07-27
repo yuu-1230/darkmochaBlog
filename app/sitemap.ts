@@ -1,11 +1,13 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/mdx";
 import { SITE_URL } from "@/lib/constants";
+import { routing } from "@/i18n/routing";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
-  const posts = await getAllPosts();
+  // ロケール対応は Phase 4。現状は日本語版のみを従来どおり出力する
+  const posts = await getAllPosts(routing.defaultLocale);
 
   const lastModifiedOf = (post: (typeof posts)[number]) =>
     new Date(post.frontmatter.update ?? post.frontmatter.date).toISOString();

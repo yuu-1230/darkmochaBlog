@@ -13,6 +13,7 @@ import { Providers } from "@/components/providers";
 import { SITE_URL, AUTHOR_NAME, AUTHOR_URL } from "@/lib/constants";
 import { routing, BCP47, type Locale } from "@/i18n/routing";
 import { localeUrl } from "@/lib/locale-url";
+import { getAllPosts } from "@/lib/mdx";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -96,6 +97,16 @@ export default async function LocaleLayout({
 
   const t = await getTranslations("common");
 
+  // 言語スイッチャーが「切り替え先に翻訳があるか」を判定するための一覧（記事数本ぶんの slug のみ）
+  const postSlugsByLocale = Object.fromEntries(
+    await Promise.all(
+      routing.locales.map(async (l) => [
+        l,
+        (await getAllPosts(l)).map((post) => post.slug),
+      ]),
+    ),
+  ) as Record<Locale, string[]>;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -132,7 +143,7 @@ export default async function LocaleLayout({
             >
               {t("skipToContent")}
             </a>
-            <SiteHeader />
+            <SiteHeader postSlugsByLocale={postSlugsByLocale} />
             <main id="main-content" className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
               {children}
             </main>
