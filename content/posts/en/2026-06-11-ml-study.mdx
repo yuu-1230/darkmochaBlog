@@ -1,0 +1,116 @@
+---
+title: "I Started Studying Machine Learning: First, Getting the Big Picture"
+date: "2026-06-11"
+category: "Tech"
+tags: ["Machine Learning"]
+description: "A complete beginner's attempt to understand the basics of machine learning, including supervised, unsupervised, and reinforcement learning, as well as the process of building and evaluating a model."
+draft: false
+image: "/images/Articles/ML/20260611/ Thumbnail20260611.png"
+---
+
+A machine learning beginner's desperate attempt to document what I'm learning.
+
+Whenever advances in generative AI make the news, I find myself wondering, "What will I still be able to create in the future?" Thinking too deeply about whether I will have any value left tends to stop me from doing anything at all, so for now, I have decided to study.
+
+My goal is to understand how AI works and become someone who uses it, rather than someone who is simply used by it. Mentally, I want to approach this with something like, "I'm going to be on the side that controls AI!"
+
+In this post, I will organize the overall picture of machine learning that I picked up at the beginning, using my own words. There are still many parts I do not understand mathematically, so this is not a finished explanation. It is a record of where I was when I started learning.
+
+## Machine Learning in One Sentence
+
+In conventional programming, humans examine data, identify patterns, and write those rules into code. In machine learning, we provide data and an algorithm, then let the model learn the part that would otherwise be written as rules.
+
+For spam detection, instead of having a person decide that "an email is spam if it contains the word free," we provide the model with many examples of spam and regular emails. The model then looks for patterns that may help it distinguish between them.
+
+Put very roughly, I understand the difference as this: do humans write the rules directly, or does a model discover them from data?
+
+## Three Main Ways of Learning
+
+The first distinction I learned in machine learning was what kind of information a model uses as a guide during training.
+
+| Type | What Guides the Learning | Common Uses |
+| :--- | :--- | :--- |
+| Supervised learning | Correct labels | Classification and regression |
+| Unsupervised learning | Structures hidden within the data | Clustering and dimensionality reduction |
+| Reinforcement learning | Rewards received as a result of actions | Game AI and robot control |
+
+### Supervised Learning
+
+Supervised learning is a method in which the model is trained using input data paired with the correct answers.
+
+With flower data, for example, measurements such as petal and sepal lengths are provided as inputs, while the name of the flower species is provided as the correct label. After training, the model can predict the species of an unfamiliar flower from its features.
+
+The problems handled by supervised learning can be broadly divided into classification and regression.
+
+- Classification predicts a class, such as whether an email is spam or which digit appears in an image.
+- Regression predicts a continuous numerical value, such as a house price or temperature.
+
+At first, the word "regression" made me imagine going back into the past, but apparently, in this context, it refers to predicting numerical values. It seems I still have a long way to go just learning the terminology.
+
+<Tip type="info" title="What is a label?">
+  A label is the correct answer assigned to each piece of data in supervised learning. In flower classification, the species name is the label. In spam detection, the labels might be "spam" and "not spam."
+</Tip>
+
+### Unsupervised Learning
+
+In unsupervised learning, the model is not given correct labels. Instead, it searches for similarities, patterns, and groups within the data.
+
+Examples include clustering, which can divide customers into groups based on similar purchasing histories, and dimensionality reduction, which condenses a large number of features into a smaller number of axes. Rather than trying to find the correct answer, it felt closer to organizing data into a form that is easier to understand.
+
+### Reinforcement Learning
+
+In reinforcement learning, an AI takes actions within an environment and learns from the rewards it receives as a result. Common examples include chess and Go programs, as well as robot control.
+
+When I previously made an Othello game in Unity, I implemented a system that awarded points for capturing pieces and awarded even more points for taking a corner. At the time, I thought it was similar to reinforcement learning. However, that AI did not update its policy by learning from experience.
+
+Looking back, it was a search algorithm that used scores resembling rewards, rather than reinforcement learning itself.
+
+Realizing that "having a score does not necessarily mean learning is taking place" was one of the things I discovered for the first time while researching this topic.
+
+## The Process of Building a Model
+
+Machine learning does not end with choosing an algorithm. In practice, preparing the data accounts for a significant part of the work.
+
+```text
+Collect raw data
+  ↓
+Handle missing values and inconsistent formats
+  ↓
+Split the data into training and test sets
+  ↓
+Transform the features when necessary
+  ↓
+Train the model
+  ↓
+Evaluate it using unseen data
+```
+
+### Choose Preprocessing Based on the Model
+
+One form of preprocessing is feature scaling. When features have very different numerical ranges, such as age and annual income, using them directly in distance calculations or optimization can cause features with larger values to have a stronger influence on the result.
+
+Standardization transforms values so that they have a mean of 0 and a variance of 1. Normalization scales values into a fixed range. However, these operations are not necessary for every model.
+
+Scaling is important for algorithms such as K-nearest neighbors (KNN) and logistic regression, while decision trees and random forests are relatively unaffected by differences in scale.
+
+Rather than simply standardizing everything when using machine learning, it is necessary to make that decision based on the algorithm being used.
+
+### Do Not Mix Evaluation Data into Training
+
+Overfitting occurs when a model fits the training data too closely and can no longer make accurate predictions on unfamiliar data. It is similar to memorizing every question in a textbook but being unable to solve a question you have never seen before.
+
+For that reason, test data that has not been used during training must be kept aside for the model's final evaluation. When comparing models or hyperparameters, the standard approach is to perform cross-validation using only the training data and leave the test data untouched until the very end.
+
+<Tip type="warning" title="Keep the test data untouched until the end">
+  If you adjust a model while looking at the test data, information from that data influences your choices. This prevents you from accurately measuring how well the model performs on genuinely unseen data.
+</Tip>
+
+## What I Will Do Next
+
+This time, I gained a rough understanding of the main types of machine learning and the process leading up to model evaluation.
+
+Honestly, I am still only at the point where I know more vocabulary. I understand almost nothing about the calculations taking place inside the models.
+
+Next, I will work with the Iris dataset and find out what scikit-learn's `fit()`, `predict()`, and `transform()` methods are actually doing.
+
+I will try not to run away from the math. Probably.
