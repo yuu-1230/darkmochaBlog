@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
+import type { Locale } from "@/i18n/routing";
 import { ImageLightbox } from "@/components/image-lightbox";
 
 const container = {
@@ -20,6 +21,7 @@ const item = {
 
 export default function ProjectsPage() {
   const t = useTranslations("projects");
+  const locale = useLocale() as Locale;
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
@@ -95,7 +97,7 @@ export default function ProjectsPage() {
 
                 {/* Description */}
                 <p className="text-sm text-foreground/80 leading-relaxed">
-                  {project.description}
+                  {project.description[locale]}
                 </p>
 
                 {/* Tech stack */}
@@ -104,9 +106,9 @@ export default function ProjectsPage() {
                 </p>
 
                 {/* Learned */}
-                {project.learned && (
+                {project.learned[locale] && (
                   <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-border pl-3 italic">
-                    {project.learned}
+                    {project.learned[locale]}
                   </p>
                 )}
               </div>

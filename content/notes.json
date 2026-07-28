@@ -1,48 +1,75 @@
 [
   {
     "id": "1",
-    "content": "今、2ヶ月でUnityゲーム5本作成にチャレンジ中 \n #Unity #GameDev",
+    "content": {
+      "ja": "今、2ヶ月でUnityゲーム5本作成にチャレンジ中 \n #Unity #GameDev",
+      "en": "Right now I'm taking on a challenge: 5 Unity games in 2 months.\n #Unity #GameDev"
+    },
     "createdAt": "2026-04-19T14:48:23"
   },
   {
     "id": "2",
-    "content": "Reactをもう一度学びなおします。基礎を固め直してNext.jsをちゃんと使えるようになりたい。\n #Nextjs #WebDev",
+    "content": {
+      "ja": "Reactをもう一度学びなおします。基礎を固め直してNext.jsをちゃんと使えるようになりたい。\n #Nextjs #WebDev",
+      "en": "Relearning React from the ground up. I want to solidify the basics so I can actually use Next.js properly.\n #Nextjs #WebDev"
+    },
     "createdAt": "2026-04-19T14:51:37"
   },
   {
     "id": "3",
-    "content": "成人式だった。久しぶりにみんなと会えたし、同窓会楽しかった。 \n#Life",
+    "content": {
+      "ja": "成人式だった。久しぶりにみんなと会えたし、同窓会楽しかった。 \n#Life",
+      "en": "Had my Coming of Age ceremony today. Got to see everyone after a long while, and the reunion was fun. \n#Life"
+    },
     "createdAt": "2026-05-05T12:20:00"
   },
   {
     "id": "4",
-    "content": "ブログデザイン刷新中 \n#Nextjs #WebDev",
+    "content": {
+      "ja": "ブログデザイン刷新中 \n#Nextjs #WebDev",
+      "en": "Redesigning the blog. \n#Nextjs #WebDev"
+    },
     "createdAt": "2026-05-06T06:05:00"
   },
   {
     "id": "5",
-    "content": "ブログデザイン刷新完了！ \n #Nextjs #WebDev",
+    "content": {
+      "ja": "ブログデザイン刷新完了！ \n #Nextjs #WebDev",
+      "en": "Blog redesign done! \n #Nextjs #WebDev"
+    },
     "createdAt": "2026-05-06T18:20:00"
   },
   {
     "id": "6",
-    "content": "まだ、ゲーム6本目しか作れてない。あと1ヶ月で4本...厳しい \n #Unity #GameDev",
+    "content": {
+      "ja": "まだ、ゲーム6本目しか作れてない。あと1ヶ月で4本...厳しい \n #Unity #GameDev",
+      "en": "Still only on my 6th game. Four more in one month... rough. \n #Unity #GameDev"
+    },
     "createdAt": "2026-05-06T18:24:00",
     "image": "MeteorFrontierRunner.png"
   },
   {
     "id": "7",
-    "content": "Reactって複雑でよくわからんって思ってた。\n でもjQuery時代に『他人のコードが全く読めない』という問題があって、それを構造ごと解決したのがReactだと知ったら、なんで今の書き方になってるか全部腑に落ちた。技術って歴史から学ぶと急に優しくなる。（全然わかってない😭）\n https://blog.shinonome.io/react-and-frontend-philosophy/ \n #WebDev",
+    "content": {
+      "ja": "Reactって複雑でよくわからんって思ってた。\n でもjQuery時代に『他人のコードが全く読めない』という問題があって、それを構造ごと解決したのがReactだと知ったら、なんで今の書き方になってるか全部腑に落ちた。技術って歴史から学ぶと急に優しくなる。（全然わかってない😭）\n https://blog.shinonome.io/react-and-frontend-philosophy/ \n #WebDev",
+      "en": "I used to think React was complicated and just didn't get it.\n But then I learned that back in the jQuery days there was this problem where you couldn't read anyone else's code at all, and React solved it at the structural level. Suddenly it all clicked why we write things the way we do now. Tech gets a lot friendlier once you learn its history. (I still don't get it at all 😭)\n https://blog.shinonome.io/react-and-frontend-philosophy/ \n #WebDev"
+    },
     "createdAt": "2026-05-08T18:23:53"
   },
   {
     "id": "8",
-    "content": "今日は基礎的な学習モデルの「perceptron」「ADALINE」とKNN・決定木・ランダムフォレスト・ロジスティック回帰を学んだ。\n数式は結構読み飛ばした部分多いから次回は深く学んでいく。\n ランダムフォレストいいね。\n #ML",
+    "content": {
+      "ja": "今日は基礎的な学習モデルの「perceptron」「ADALINE」とKNN・決定木・ランダムフォレスト・ロジスティック回帰を学んだ。\n数式は結構読み飛ばした部分多いから次回は深く学んでいく。\n ランダムフォレストいいね。\n #ML",
+      "en": "Today I studied the basic learning models, perceptron and ADALINE, plus KNN, decision trees, random forests, and logistic regression.\nI skipped over a fair amount of the math, so next time I'll go deeper.\n Random forests are nice.\n #ML"
+    },
     "createdAt": "2026-06-11T19:02:00"
   },
   {
     "id": "9",
-    "content": "今日は基礎的な学習モデルの前処理について学んだ。\n\n・欠損値の削除・補完方法(dropna、SimpleImputer)\n・カテゴリデータの処理(順序特徴量のマッピング、名義特徴量のone-hotエンコーディングとそのデメリット)\n・データセットの分割・スケーリング\n\n次回はタイタニックcsvを使って実践をしていく!\nカグルもやってみたいな。\n #ML",
+    "content": {
+      "ja": "今日は基礎的な学習モデルの前処理について学んだ。\n\n・欠損値の削除・補完方法(dropna、SimpleImputer)\n・カテゴリデータの処理(順序特徴量のマッピング、名義特徴量のone-hotエンコーディングとそのデメリット)\n・データセットの分割・スケーリング\n\n次回はタイタニックcsvを使って実践をしていく!\nカグルもやってみたいな。\n #ML",
+      "en": "Today I studied preprocessing for basic learning models.\n\n- Dropping and imputing missing values (dropna, SimpleImputer)\n- Handling categorical data (mapping ordinal features, one-hot encoding nominal features and its downsides)\n- Splitting and scaling datasets\n\nNext time I'll put it into practice with the Titanic CSV!\nI'd like to try Kaggle too.\n #ML"
+    },
     "createdAt": "2026-06-13T17:32:30"
   }
 ]

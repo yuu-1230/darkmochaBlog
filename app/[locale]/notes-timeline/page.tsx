@@ -38,7 +38,7 @@ export default async function NotesTimelinePage({ params, searchParams }: Props)
 
   const t = await getTranslations("notes");
   const { tag } = await searchParams;
-  const allNotes = getAllNotes();
+  const allNotes = getAllNotes(locale);
   const allTags = getAllTags(allNotes);
   const notes = tag ? allNotes.filter((n) => n.tags.includes(tag)) : allNotes;
 

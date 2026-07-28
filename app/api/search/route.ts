@@ -25,10 +25,9 @@ export async function GET(request: NextRequest) {
     ? requested
     : routing.defaultLocale;
 
-  // notes と projects は日本語のみのコンテンツなので、両ロケールで同じものを返す（Phase 5）
   const [posts, notes] = await Promise.all([
     getAllPosts(locale),
-    Promise.resolve(getAllNotes()),
+    Promise.resolve(getAllNotes(locale)),
   ]);
 
   const blogItems: SearchItem[] = posts.map((p) => {
@@ -57,10 +56,10 @@ export async function GET(request: NextRequest) {
   const projectItems: SearchItem[] = projects.map((p) => ({
     type: "project",
     title: p.title,
-    description: p.description,
+    description: p.description[locale],
     href: `/projects`,
     tags: p.techStack,
-    body: `${p.description} ${p.learned}`,
+    body: `${p.description[locale]} ${p.learned[locale]}`,
   }));
 
   return NextResponse.json([...blogItems, ...noteItems, ...projectItems]);
