@@ -24,7 +24,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { getRelatedPosts } from "@/lib/related-posts";
 import { tagHref } from "@/lib/tags";
-import { localeUrl } from "@/lib/locale-url";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { TranslationUnavailable } from "@/components/translation-unavailable";
 import { routing, type Locale } from "@/i18n/routing";
 
@@ -36,16 +36,22 @@ const prettyCodeOptions: Options = {
 
 type Props = { params: Promise<{ slug: string; locale: Locale }> };
 
+/** slug の記事が存在するロケールをすべて返す（hreflang 用） */
+async function localesWithPost(slug: string): Promise<Locale[]> {
+  const available: Locale[] = [];
+  for (const candidate of routing.locales) {
+    if (await hasTranslation(slug, candidate)) available.push(candidate);
+  }
+  return available;
+}
+
 /** slug の記事が存在する他ロケールを返す（未訳フォールバック用） */
 async function findAvailableLocale(
   slug: string,
   exclude: Locale,
 ): Promise<Locale | null> {
-  for (const candidate of routing.locales) {
-    if (candidate === exclude) continue;
-    if (await hasTranslation(slug, candidate)) return candidate;
-  }
-  return null;
+  const available = await localesWithPost(slug);
+  return available.find((candidate) => candidate !== exclude) ?? null;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -67,15 +73,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const { title, description, image, date } = post.frontmatter;
-  const canonical = localeUrl(locale, `/blog/${slug}`);
+  const path = `/blog/${slug}`;
+  const canonical = localeUrl(locale, path);
   const ogImage = image
     ? [{ url: image, width: 1200, height: 630, alt: title }]
     : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
 
+  // 翻訳が存在するロケールにだけ hreflang を張る（未訳に張ると翻訳漏れ扱いになる）
+  const available = await localesWithPost(slug);
+
   return {
     title,
     description: description || "Darkmocha Blog",
-    alternates: { canonical },
+    alternates: { canonical, languages: localeAlternates(path, available) },
     openGraph: {
       title,
       description: description ?? "",
@@ -141,8 +151,8 @@ export default async function BlogPost({ params }: Props) {
 
   const toc = generateTOC(content);
   const relatedPosts = getRelatedPosts(allPosts, post);
-  const jsonLd = getBlogPostJsonLd(frontmatter, slug);
-  const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug);
+  const jsonLd = getBlogPostJsonLd(frontmatter, slug, locale);
+  const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug, locale);
 
   return (
     <div className="pb-20">

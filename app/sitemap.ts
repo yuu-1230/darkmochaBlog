@@ -1,44 +1,61 @@
 import { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/mdx";
-import { SITE_URL } from "@/lib/constants";
-import { routing } from "@/i18n/routing";
+import { getAllPosts, type PostData } from "@/lib/mdx";
+import { routing, type Locale } from "@/i18n/routing";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
+
+const STATIC_ROUTES = [
+  { route: "",                priority: 1.0 },
+  { route: "/blog",           priority: 0.9 },
+  { route: "/about",          priority: 0.8 },
+  { route: "/projects",       priority: 0.8 },
+  { route: "/travel",         priority: 0.8 },
+  { route: "/notes-timeline", priority: 0.75 },
+];
+
+const lastModifiedOf = (post: PostData) =>
+  new Date(post.frontmatter.update ?? post.frontmatter.date).toISOString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = SITE_URL;
+  const postsByLocale = Object.fromEntries(
+    await Promise.all(
+      routing.locales.map(async (locale) => [
+        locale,
+        await getAllPosts(locale),
+      ] as const),
+    ),
+  ) as Record<Locale, PostData[]>;
 
-  // ロケール対応は Phase 4。現状は日本語版のみを従来どおり出力する
-  const posts = await getAllPosts(routing.defaultLocale);
+  const allPosts = Object.values(postsByLocale).flat();
+  const siteLastModified =
+    allPosts.map(lastModifiedOf).sort().at(-1) ?? new Date().toISOString();
 
-  const lastModifiedOf = (post: (typeof posts)[number]) =>
-    new Date(post.frontmatter.update ?? post.frontmatter.date).toISOString();
+  // 固定ページは全ロケールに存在するので、常に相互に hreflang を張る
+  const staticEntries = STATIC_ROUTES.flatMap(({ route, priority }) =>
+    routing.locales.map((locale) => ({
+      url: localeUrl(locale, route),
+      lastModified: siteLastModified,
+      changeFrequency: "weekly" as const,
+      priority,
+      alternates: { languages: localeAlternates(route) },
+    })),
+  );
 
-  const siteLastModified = posts
-    .map(lastModifiedOf)
-    .sort()
-    .at(-1) ?? new Date().toISOString();
+  // 記事は「翻訳が存在するロケール」だけを相互に張る
+  const postEntries = routing.locales.flatMap((locale) =>
+    postsByLocale[locale].map((post) => {
+      const path = `/blog/${post.slug}`;
+      const availableLocales = routing.locales.filter((candidate) =>
+        postsByLocale[candidate].some((p) => p.slug === post.slug),
+      );
+      return {
+        url: localeUrl(locale, path),
+        lastModified: lastModifiedOf(post),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+        alternates: { languages: localeAlternates(path, availableLocales) },
+      };
+    }),
+  );
 
-  const staticRoutes = [
-    { route: "",               priority: 1.0 },
-    { route: "/blog",          priority: 0.9 },
-    { route: "/about",         priority: 0.8 },
-    { route: "/projects",      priority: 0.8 },
-    { route: "/travel",        priority: 0.8 },
-    { route: "/notes-timeline",priority: 0.75 },
-  ].map(({ route, priority }) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: siteLastModified,
-    changeFrequency: "weekly" as const,
-    priority,
-  }));
-
-  // MDX記事から動的ページ(ブログ記事)を生成
-  const dynamicRoutes = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: lastModifiedOf(post),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  // 全てのルートを結合して返す
-  return [...staticRoutes, ...dynamicRoutes];
+  return [...staticEntries, ...postEntries];
 }

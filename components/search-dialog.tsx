@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight, Hash } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -173,6 +173,7 @@ export function SearchDialog() {
   const [index, setIndex] = useState<SearchItem[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
   const t = useTranslations("search");
+  const locale = useLocale();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -182,11 +183,11 @@ export function SearchDialog() {
   const loadIndex = useCallback(async () => {
     if (index.length > 0) return;
     try {
-      const res = await fetch("/api/search");
+      const res = await fetch(`/api/search?locale=${locale}`);
       const data: SearchItem[] = await res.json();
       setIndex(data);
     } catch { /* ignore */ }
-  }, [index.length]);
+  }, [index.length, locale]);
 
   // Cmd+K / Esc
   useEffect(() => {

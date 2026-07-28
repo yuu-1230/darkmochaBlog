@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AUTHOR_NAME } from "@/lib/constants";
-import { localeUrl } from "@/lib/locale-url";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import type { Locale } from "@/i18n/routing";
 
 export async function generateMetadata({
@@ -17,7 +17,7 @@ export async function generateMetadata({
   return {
     title: "Projects",
     description,
-    alternates: { canonical },
+    alternates: { canonical, languages: localeAlternates("/projects") },
     openGraph: {
       title: "Projects | Darkmocha",
       description,

@@ -224,7 +224,7 @@ notFound    404 文言
 | 1 | `messages/{ja,en}.json` を作り、約85箇所のUI文言を差し替え | 0.5〜1日 | ✅ 完了 |
 | 2 | 言語スイッチャー実装（ヘッダー＋モバイルドロワー） | 0.25日 | ✅ 完了 |
 | 3 | `content/posts/{ja,en}/` へ移行、`lib/mdx.ts` の locale 対応、未訳記事のフォールバック | 0.5日 | ✅ 完了（記事の英訳自体は未着手） |
-| 4 | hreflang / sitemap / feed / OG画像 / 検索API / JSON-LD | 0.5日 | 未着手 |
+| 4 | hreflang / sitemap / feed / OG画像 / 検索API / JSON-LD | 0.5日 | ✅ 完了 |
 | 5 | `lib/projects.ts` の多言語化、英語版ナビから notes を除外 | 0.25日 | 未着手 |
 | — | **記事の英訳**（継続） | 1本あたり0.5〜1時間 | 未着手 |
 
@@ -243,6 +243,14 @@ notFound    404 文言
 - **未訳ページは 200 + `noindex, follow`。** 指示どおり 404 にはしないが、ソフト404として検索エンジンに拾われないよう `robots` を付け、canonical は存在する言語版に向けている。
 - **`generateStaticParams` はロケール実在分のみ列挙**。`/en/blog/{未訳slug}` は事前生成せず、オンデマンドで案内ページを返す。
 - **`NextIntlClientProvider` は辞書全体をクライアントに送っている。** 現状 数KB で問題ないが、増えたら namespace を絞る余地がある。
+
+### Phase 4 実装時の補足
+
+- **hreflang は「実在するロケール」だけに張る。** `lib/locale-url.ts` の `localeAlternates(path, availableLocales)` に、そのパスが存在するロケールだけを渡す。未訳記事（`my-first-article`）には `en` を張らず、日本語版しか持たないタグ（`機械学習`）のページも同様。未訳の案内ページ自体には hreflang を出さず `noindex` のままにしている。
+- **`/en/feed.xml` は `app/en/feed.xml/route.ts`（静的セグメント）に置いた。** `app/[locale]/feed.xml` にすると `/ja/feed.xml` も生えて重複するため。静的セグメント `en` と動的セグメント `[locale]` は共存でき、`/en/blog` などは従来どおり `[locale]` 側で解決される。生成ロジックは `lib/feed.ts` に集約。
+- **proxy の matcher からメタデータ画像ルートを除外した。** `opengraph-image` は拡張子を持たない `/ja/opengraph-image?<hash>` の形で `og:image` に埋め込まれるため、除外しないと 307 が挟まりクエリ末尾に `=` が付いて壊れる。`twitter-image` / `icon` も同時に除外している。
+- **OG画像のフォント最適化は見送った。** 設計時は「英語タイトルなら `loadJapaneseFontSubset` は不要」と書いたが、Satori はフォント指定が必須で、省くとレンダリングできない。Noto Sans JP のサブセットはラテン文字も含むため英語タイトルでも正しく描画される（実測で 1200x630 PNG を確認）。フォント取得の往復回数も変わらないため、差し替えの実益がない。
+- **検索APIは `/api/search?locale=` で記事インデックスを切り替える。** ただし notes と projects は日本語のみのコンテンツなので、両ロケールで同じものを返している（Phase 5 の対象）。
 
 ## 11. 決めておきたいこと
 

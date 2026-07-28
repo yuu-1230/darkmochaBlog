@@ -12,8 +12,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { Providers } from "@/components/providers";
 import { SITE_URL, AUTHOR_NAME, AUTHOR_URL } from "@/lib/constants";
 import { routing, BCP47, type Locale } from "@/i18n/routing";
-import { localeUrl } from "@/lib/locale-url";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { getAllPosts } from "@/lib/mdx";
+import { feedUrl } from "@/lib/feed";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -56,7 +57,8 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: localeUrl(locale),
-      types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
+      languages: localeAlternates(""),
+      types: { "application/rss+xml": feedUrl(locale) },
     },
     icons: {
       icon: "/images/icon.png",

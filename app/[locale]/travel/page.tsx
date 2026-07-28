@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { localeUrl } from "@/lib/locale-url";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: Locale }> };
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "Travel",
     description: t("metaDescription"),
-    alternates: { canonical },
+    alternates: { canonical, languages: localeAlternates("/travel") },
     openGraph: {
       title: "Travel | Darkmocha",
       description: t("metaDescription"),

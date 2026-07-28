@@ -40,7 +40,14 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // api / _next / _vercel と、ドットを含むパス（feed.xml, robots.txt, *.png など）は除外。
+  // 除外するもの:
+  // - api / _next / _vercel
+  // - ドットを含むパス（feed.xml, robots.txt, *.png など）
+  // - Next のメタデータ画像ルート（opengraph-image / twitter-image / icon）。
+  //   これらは拡張子を持たない /ja/opengraph-image のような形で og:image に
+  //   埋め込まれるため、リライト対象にすると 307 が挟まりクエリも壊れる。
   // タグページの slug にドットは含まれないため、この除外でタグURLが漏れることはない。
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  matcher: [
+    "/((?!api|_next|_vercel|.*/(?:opengraph-image|twitter-image|icon)|.*\\..*).*)",
+  ],
 };

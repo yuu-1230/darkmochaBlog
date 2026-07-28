@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAllNotes, getAllTags } from "@/lib/notes";
 import { NoteTimeline } from "@/components/note-timeline";
 import { Link } from "@/i18n/navigation";
-import { localeUrl } from "@/lib/locale-url";
+import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import type { Locale } from "@/i18n/routing";
 
 type Props = {
@@ -23,7 +23,7 @@ export async function generateMetadata({
   return {
     title: "Notes",
     description: t("metaDescription"),
-    alternates: { canonical },
+    alternates: { canonical, languages: localeAlternates("/notes-timeline") },
     openGraph: {
       title: "Notes | Darkmocha",
       description: t("metaDescription"),
