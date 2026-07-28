@@ -1,0 +1,116 @@
+{
+  "common": {
+    "skipToContent": "本文へスキップ",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "mobileNav": "モバイルナビゲーション",
+    "toggleTheme": "テーマを切り替える",
+    "language": {
+      "label": "言語",
+      "switchTo": "{name}に切り替える",
+      "names": {
+        "ja": "日本語",
+        "en": "英語"
+      }
+    }
+  },
+  "search": {
+    "trigger": "検索",
+    "dialogLabel": "サイト内検索",
+    "placeholder": "記事・ノート・プロジェクトを検索...",
+    "clear": "クリア",
+    "emptyPrompt": "キーワードを入力してください",
+    "toggleHint": "で開閉",
+    "noResults": "「{query}」に一致する結果が見つかりませんでした",
+    "hintMove": "移動",
+    "hintOpen": "開く",
+    "hintClose": "閉じる"
+  },
+  "post": {
+    "updated": "更新",
+    "backToHome": "ホームに戻る",
+    "thanks": "読んでいただきありがとうございます。",
+    "prevPost": "前の記事",
+    "nextPost": "次の記事",
+    "navLabel": "記事ナビゲーション",
+    "untranslated": {
+      "title": "この記事の日本語版はまだありません",
+      "body": "この記事は現在ほかの言語でのみ公開されています。翻訳が用意でき次第、こちらでも読めるようになります。",
+      "readInOtherLanguage": "{language}版を読む",
+      "backToList": "記事一覧へ",
+      "languages": {
+        "ja": "日本語",
+        "en": "英語"
+      }
+    }
+  },
+  "toc": {
+    "title": "目次"
+  },
+  "share": {
+    "x": "Xでシェア",
+    "bluesky": "Blueskyでシェア",
+    "copyLink": "リンクをコピー"
+  },
+  "relatedPosts": {
+    "label": "関連記事"
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "技術記事・Web開発・Unity・旅行記録",
+    "postCount": "{count}件の記事",
+    "empty": "まだ記事がありません。"
+  },
+  "tags": {
+    "metaTitle": "#{tag} の記事一覧",
+    "metaDescription": "タグ「{tag}」が付いた記事の一覧",
+    "postCount": "{count}件の記事",
+    "backToBlog": "ブログ一覧に戻る"
+  },
+  "notes": {
+    "metaDescription": "短文ログ（Daily Notes）の一覧",
+    "description": "日々の短い思考・メモのログ。",
+    "empty": "ノートはまだありません。",
+    "emptyTag": "#{tag} のノートはありません。",
+    "filtering": "フィルター中:",
+    "clear": "クリア",
+    "more": "ほか {count} 件 →",
+    "imageAlt": "ノートの添付画像",
+    "sectionLabel": "デイリーノート"
+  },
+  "travel": {
+    "metaDescription": "旅行記録・日常の記録",
+    "description": "旅行記録と日常の記録。",
+    "descriptionWithCount": "旅行記録と日常の記録。{count}件",
+    "empty": "旅行記事は準備中です。",
+    "backToAll": "← すべての記事を見る"
+  },
+  "projects": {
+    "metaDescription": "{author} が手がけた個人・チーム開発プロジェクト一覧。Next.js・Flutter・Unity など。",
+    "count": "{count}件の制作物と、そこで得た学び。"
+  },
+  "about": {
+    "metaDescription": "長野県出身の学生エンジニア {author} のプロフィール。Web開発・Unity・旅行が好き。",
+    "bio1": "長野（Nagano）出身の大学生。主にWebフロントエンド（Next.js、Reactなど）とUnityを勉強しています。",
+    "bio2": "学生ITコミュニティ・PlayGroundや、ハッカソンなどで開発経験を積んでいます。小中学生向けのプログラミング講師としての活動も行っています。",
+    "bio3": "趣味は音楽・アニメ・ゲーム・テニス・旅行。"
+  },
+  "github": {
+    "missingEnv": "GitHub Activity は現在準備中です。",
+    "userNotFound": "指定された GitHub ユーザーが見つかりませんでした。",
+    "fetchFailed": "GitHub の Contribution データを取得できませんでした。",
+    "total": "過去1年間で<num>{count, number}</num>件の Contribution",
+    "cellLabel": "{date}: {count}件の Contribution"
+  },
+  "mdx": {
+    "watchOnInstagram": "Instagramで動画を見る",
+    "watchOnYoutube": "YouTubeで動画を見る",
+    "blogImage": "ブログ画像",
+    "slideImage": "スライド画像 {index}",
+    "closeLightbox": "閉じる"
+  },
+  "notFound": {
+    "title": "404 — ページが見つかりません",
+    "message": "お探しのページは移動したか、削除された可能性があります。"
+  }
+}

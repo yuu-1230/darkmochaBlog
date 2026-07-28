@@ -1,0 +1,156 @@
+---
+title: "Understanding scikit-learn's Estimator API Through fit, predict, and transform"
+date: "2026-06-12"
+category: "Tech"
+tags: ["Machine Learning", "scikit-learn"]
+description: "An exploration of the roles of fit, predict, and transform—the methods that appear repeatedly in scikit-learn—using the Iris dataset."
+draft: false
+image: "/images/Articles/ML/20260612/ Thumbnail20260612.png"
+---
+
+A machine learning beginner's desperate attempt to document what I'm learning.
+
+When reading scikit-learn sample code, I noticed that the same `fit()` method appears across many different models. Logistic regression and data standardization must be doing different things, so why do they use the same method?
+
+After looking into it, I discovered that the reason lies in a shared design built around something called an estimator. In this post, I will focus on `fit()`, `predict()`, and `transform()` and organize what I have learned in my own words.
+
+## What You Can Do with scikit-learn
+
+scikit-learn is a Python library for machine learning. In addition to classification, regression, clustering, and dimensionality reduction, it provides tools for preprocessing data and evaluating models.
+
+At first, the number of available features felt overwhelming. However, the basic way they are used is remarkably consistent. Even when the model changes, the overall process remains largely the same: provide data, learn from it, and then make a prediction or transformation.
+
+## Estimators as a Common Starting Point
+
+In scikit-learn, an object that learns something from data is called an estimator. Estimators generally provide a `fit()` method and implement additional methods depending on their role.
+
+| Role | Main Method | Examples |
+| :--- | :--- | :--- |
+| Estimator | `fit()` | `LogisticRegression`, `StandardScaler` |
+| Predictor | `predict()` | Classifiers and regressors |
+| Transformer | `transform()` | `StandardScaler`, `PCA` |
+
+A single class can have more than one role. `LogisticRegression` learns from data and makes predictions, while `StandardScaler` learns the mean and standard deviation of the data before transforming its values.
+
+This design, in which different tools can be used in a consistent way, is one of the reasons scikit-learn is so approachable.
+
+## Learning from Data with fit()
+
+`fit()` is the method that learns the necessary values from the data it receives.
+
+In logistic regression, it learns the coefficients used for classification from the features and their correct labels.
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+```
+
+With `StandardScaler`, it stores the mean and standard deviation of the training data.
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+scaler.fit(X_train)
+```
+
+Although both use the same `fit()` method, what they learn depends on the estimator.
+
+<Tip type="warning" title="Do not pass test data to fit()">
+  If the test data is used to learn values such as means or coefficients, information that should remain unknown leaks into the model. This is called data leakage. Use `fit()` only with the training data.
+</Tip>
+
+## Predicting Unseen Data with predict()
+
+`predict()` passes new data to a trained model and returns a predicted class or numerical value.
+
+```python
+y_pred = model.predict(X_test)
+print(y_pred)
+```
+
+A classifier returns class labels, while a regressor returns continuous numerical values. Classifiers that support probability estimates can also use `predict_proba()` to return the probability that each sample belongs to each class.
+
+```python
+proba = model.predict_proba(X_test)
+print(proba)
+```
+
+It is important to remember that not every classifier provides `predict_proba()`.
+
+## Transforming Data with transform()
+
+`transform()` uses a fitted transformer to convert data into a different representation.
+
+When standardizing data, the mean and standard deviation learned from the training data are used to transform both the training and test data according to the same 기준.
+
+```python
+scaler = StandardScaler()
+scaler.fit(X_train)
+
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```
+
+For the training data, we can also use `fit_transform()`, which calls `fit()` and `transform()` in sequence.
+
+```python
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+```
+
+<Tip type="info" title="Do not overgeneralize fit_transform()">
+  With `StandardScaler`, `fit_transform(X_train)` produces the same result as calling `fit(X_train)` followed by `transform(X_train)`. However, this is not guaranteed for every transformer. Check the documentation for the class you are using.
+</Tip>
+
+## Trying the Full Process with the Iris Dataset
+
+Using the Iris flower dataset, I will standardize the features and then classify the samples with logistic regression.
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+# Load the data
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y,
+)
+
+# Learn the scaling parameters from the training data
+# and transform both datasets using the same parameters
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Train the model
+model = LogisticRegression()
+model.fit(X_train_scaled, y_train)
+
+# Predict unseen data and evaluate the result
+y_pred = model.predict(X_test_scaled)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")
+```
+
+Following the code makes the role of each step much clearer.
+
+1. `scaler.fit_transform()` learns the scaling parameters from the training data while transforming it.
+2. `scaler.transform()` applies the same scaling parameters to the test data.
+3. `model.fit()` trains the classification model.
+4. `model.predict()` predicts the labels of unseen data.
+
+At first, `fit()`, `predict()`, and `transform()` looked like three unrelated spells. In reality, they form a shared interface built around three clear roles: learning, predicting, and transforming.
+
+Even if the model is replaced with a different algorithm, the basic process remains almost unchanged. Next, I want to try combining the preprocessing steps and the model into a `Pipeline`.

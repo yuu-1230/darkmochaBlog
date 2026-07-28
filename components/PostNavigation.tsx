@@ -1,17 +1,20 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { PostData } from "@/lib/mdx";
 
-export function PostNavigation({
+export async function PostNavigation({
   prevPost,
   nextPost,
 }: {
   prevPost: PostData | null;
   nextPost: PostData | null;
 }) {
+  const t = await getTranslations("post");
+
   return (
     <nav
-      aria-label="Post navigation"
+      aria-label={t("navLabel")}
       className="mt-20 pt-10 border-t flex flex-col md:flex-row justify-between gap-4"
     >
       {prevPost ? (
@@ -21,7 +24,7 @@ export function PostNavigation({
         >
           <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Previous Post
+            {t("prevPost")}
           </span>
           <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">
             {prevPost.frontmatter.title}
@@ -37,7 +40,7 @@ export function PostNavigation({
           className="group flex-1 flex flex-col items-end text-right p-4 border border-border hover:border-primary/40 rounded-xl bg-card hover:bg-accent transition-all"
         >
           <span className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-            Next Post
+            {t("nextPost")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
           <span className="text-sm text-primary font-medium line-clamp-2 transition-colors">

@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { hasLocale } from "next-intl";
 import { getAllPosts } from "@/lib/mdx";
 import { getAllNotes } from "@/lib/notes";
 import { projects } from "@/lib/projects";
 import { parseSections, stripMdx, type Section } from "@/lib/search-utils";
+import { routing } from "@/i18n/routing";
 
 export type SearchItem = {
   type: "blog" | "note" | "project";
@@ -16,10 +18,16 @@ export type SearchItem = {
   sections?: Section[];
 };
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // ?locale=en で英語インデックスを返す。未指定・不正値は日本語にフォールバック
+  const requested = request.nextUrl.searchParams.get("locale");
+  const locale = hasLocale(routing.locales, requested)
+    ? requested
+    : routing.defaultLocale;
+
   const [posts, notes] = await Promise.all([
-    getAllPosts(),
-    Promise.resolve(getAllNotes()),
+    getAllPosts(locale),
+    Promise.resolve(getAllNotes(locale)),
   ]);
 
   const blogItems: SearchItem[] = posts.map((p) => {
@@ -48,10 +56,10 @@ export async function GET() {
   const projectItems: SearchItem[] = projects.map((p) => ({
     type: "project",
     title: p.title,
-    description: p.description,
+    description: p.description[locale],
     href: `/projects`,
     tags: p.techStack,
-    body: `${p.description} ${p.learned}`,
+    body: `${p.description[locale]} ${p.learned[locale]}`,
   }));
 
   return NextResponse.json([...blogItems, ...noteItems, ...projectItems]);

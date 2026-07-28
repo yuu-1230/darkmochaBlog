@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -15,6 +16,8 @@ export default function ImageSlider({
   images?: string;
   alt?: string;
 }) {
+  const t = useTranslations("mdx");
+
   // カンマ区切りの文字列を配列に変換
   const imageArray =
     typeof images === "string" ?
@@ -40,7 +43,7 @@ export default function ImageSlider({
       <div className={frameClass}>
         <Image
           src={imageArray[0]}
-          alt={alt || "ブログ画像"}
+          alt={alt || t("blogImage")}
           width={600}
           height={450}
           sizes={imgSizes}
@@ -79,7 +82,7 @@ export default function ImageSlider({
             <SwiperSlide key={index}>
               <Image
                 src={src}
-                alt={alt ? `${alt} ${index + 1}` : `スライド画像 ${index + 1}`}
+                alt={alt ? `${alt} ${index + 1}` : t("slideImage", { index: index + 1 })}
                 width={600}
                 height={450}
                 sizes={imgSizes}

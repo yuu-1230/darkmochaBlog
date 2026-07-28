@@ -1,0 +1,116 @@
+{
+  "common": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mobileNav": "Mobile navigation",
+    "toggleTheme": "Toggle theme",
+    "language": {
+      "label": "Language",
+      "switchTo": "Switch to {name}",
+      "names": {
+        "ja": "Japanese",
+        "en": "English"
+      }
+    }
+  },
+  "search": {
+    "trigger": "Search",
+    "dialogLabel": "Site search",
+    "placeholder": "Search posts, notes and projects...",
+    "clear": "Clear",
+    "emptyPrompt": "Type a keyword to start searching",
+    "toggleHint": "to toggle",
+    "noResults": "No results found for “{query}”",
+    "hintMove": "Navigate",
+    "hintOpen": "Open",
+    "hintClose": "Close"
+  },
+  "post": {
+    "updated": "Updated",
+    "backToHome": "Back to Home",
+    "thanks": "Thanks for reading.",
+    "prevPost": "Previous Post",
+    "nextPost": "Next Post",
+    "navLabel": "Post navigation",
+    "untranslated": {
+      "title": "This post isn't available in English yet",
+      "body": "This post has only been published in another language so far. It will appear here once a translation is ready.",
+      "readInOtherLanguage": "Read the {language} version",
+      "backToList": "Back to all posts",
+      "languages": {
+        "ja": "Japanese",
+        "en": "English"
+      }
+    }
+  },
+  "toc": {
+    "title": "Contents"
+  },
+  "share": {
+    "x": "Share on X",
+    "bluesky": "Share on Bluesky",
+    "copyLink": "Copy link"
+  },
+  "relatedPosts": {
+    "label": "Related posts"
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Tech articles, web development, Unity and travel notes",
+    "postCount": "{count, plural, one {# post} other {# posts}}",
+    "empty": "No posts yet."
+  },
+  "tags": {
+    "metaTitle": "Posts tagged #{tag}",
+    "metaDescription": "All posts tagged “{tag}”",
+    "postCount": "{count, plural, one {# post} other {# posts}}",
+    "backToBlog": "Back to Blog"
+  },
+  "notes": {
+    "metaDescription": "A log of short daily notes",
+    "description": "A log of short thoughts and notes.",
+    "empty": "No notes yet.",
+    "emptyTag": "No notes tagged #{tag}.",
+    "filtering": "Filtering:",
+    "clear": "Clear",
+    "more": "{count} more →",
+    "imageAlt": "Note attachment",
+    "sectionLabel": "Daily notes"
+  },
+  "travel": {
+    "metaDescription": "Travel logs and everyday notes",
+    "description": "Travel logs and everyday notes.",
+    "descriptionWithCount": "Travel logs and everyday notes. {count, plural, one {# post} other {# posts}}",
+    "empty": "Travel posts are coming soon.",
+    "backToAll": "← View all posts"
+  },
+  "projects": {
+    "metaDescription": "Personal and team projects built by {author} — Next.js, Flutter, Unity and more.",
+    "count": "{count, plural, one {# project} other {# projects}} and what I learned building them."
+  },
+  "about": {
+    "metaDescription": "長野県出身の学生エンジニア {author} のプロフィール。Web開発・Unity・旅行が好き。",
+    "bio1": "長野（Nagano）出身の大学生。主にWebフロントエンド（Next.js、Reactなど）とUnityを勉強しています。",
+    "bio2": "学生ITコミュニティ・PlayGroundや、ハッカソンなどで開発経験を積んでいます。小中学生向けのプログラミング講師としての活動も行っています。",
+    "bio3": "趣味は音楽・アニメ・ゲーム・テニス・旅行。"
+  },
+  "github": {
+    "missingEnv": "GitHub Activity is not set up yet.",
+    "userNotFound": "The specified GitHub user could not be found.",
+    "fetchFailed": "Could not load contribution data from GitHub.",
+    "total": "<num>{count, number}</num> contributions in the last year",
+    "cellLabel": "{date}: {count, plural, one {# contribution} other {# contributions}}"
+  },
+  "mdx": {
+    "watchOnInstagram": "Watch on Instagram",
+    "watchOnYoutube": "Watch on YouTube",
+    "blogImage": "Blog image",
+    "slideImage": "Slide {index}",
+    "closeLightbox": "Close"
+  },
+  "notFound": {
+    "title": "404 — Page Not Found",
+    "message": "The page you are looking for may have been moved or deleted."
+  }
+}

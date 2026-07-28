@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Search, X, FileText, StickyNote, FolderOpen, ArrowRight, Hash } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { SearchItem } from "@/app/api/search/route";
@@ -172,6 +172,8 @@ export function SearchDialog() {
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState<SearchItem[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
+  const t = useTranslations("search");
+  const locale = useLocale();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -181,11 +183,11 @@ export function SearchDialog() {
   const loadIndex = useCallback(async () => {
     if (index.length > 0) return;
     try {
-      const res = await fetch("/api/search");
+      const res = await fetch(`/api/search?locale=${locale}`);
       const data: SearchItem[] = await res.json();
       setIndex(data);
     } catch { /* ignore */ }
-  }, [index.length]);
+  }, [index.length, locale]);
 
   // Cmd+K / Esc
   useEffect(() => {
@@ -264,7 +266,7 @@ export function SearchDialog() {
       {/* Trigger */}
       <button
         onClick={() => setOpen(true)}
-        aria-label="検索"
+        aria-label={t("trigger")}
         className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
       >
         <Search className="w-4 h-4" />
@@ -290,7 +292,7 @@ export function SearchDialog() {
               ref={panelRef}
               role="dialog"
               aria-modal="true"
-              aria-label="サイト内検索"
+              aria-label={t("dialogLabel")}
               initial={{ opacity: 0, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
@@ -306,11 +308,11 @@ export function SearchDialog() {
                     value={query}
                     onChange={(e) => { setQuery(e.target.value); setActiveIdx(0); }}
                     onKeyDown={handleKeyDown}
-                    placeholder="記事・ノート・プロジェクトを検索..."
+                    placeholder={t("placeholder")}
                     className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
                   />
                   {query && (
-                    <button onClick={() => setQuery("")} aria-label="クリア"
+                    <button onClick={() => setQuery("")} aria-label={t("clear")}
                       className="text-muted-foreground hover:text-foreground transition-colors">
                       <X className="w-4 h-4" />
                     </button>
@@ -324,18 +326,18 @@ export function SearchDialog() {
                 <div className="max-h-[60vh] overflow-y-auto">
                   {!query.trim() && (
                     <div className="px-5 py-10 text-center text-xs text-muted-foreground">
-                      キーワードを入力してください
+                      {t("emptyPrompt")}
                       <div className="mt-2 flex items-center justify-center gap-1 opacity-50">
                         <kbd className="text-[10px] border border-border rounded px-1.5 py-0.5 font-mono">⌘</kbd>
                         <kbd className="text-[10px] border border-border rounded px-1.5 py-0.5 font-mono">K</kbd>
-                        <span className="ml-1">で開閉</span>
+                        <span className="ml-1">{t("toggleHint")}</span>
                       </div>
                     </div>
                   )}
 
                   {query.trim() && flat.length === 0 && (
                     <div className="px-5 py-10 text-center text-xs text-muted-foreground">
-                      「{query}」に一致する結果が見つかりませんでした
+                      {t("noResults", { query })}
                     </div>
                   )}
 
@@ -380,13 +382,13 @@ export function SearchDialog() {
                 {flat.length > 0 && (
                   <div className="px-4 py-2 border-t border-border flex items-center gap-3 text-[10px] font-mono text-muted-foreground">
                     <span className="flex items-center gap-1">
-                      <kbd className="border border-border rounded px-1 py-0.5">↑↓</kbd> 移動
+                      <kbd className="border border-border rounded px-1 py-0.5">↑↓</kbd> {t("hintMove")}
                     </span>
                     <span className="flex items-center gap-1">
-                      <kbd className="border border-border rounded px-1 py-0.5">Enter</kbd> 開く
+                      <kbd className="border border-border rounded px-1 py-0.5">Enter</kbd> {t("hintOpen")}
                     </span>
                     <span className="flex items-center gap-1">
-                      <kbd className="border border-border rounded px-1 py-0.5">Esc</kbd> 閉じる
+                      <kbd className="border border-border rounded px-1 py-0.5">Esc</kbd> {t("hintClose")}
                     </span>
                   </div>
                 )}
