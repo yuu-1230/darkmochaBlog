@@ -250,7 +250,12 @@ notFound    404 文言
 - **hreflang は「実在するロケール」だけに張る。** `lib/locale-url.ts` の `localeAlternates(path, availableLocales)` に、そのパスが存在するロケールだけを渡す。未訳記事（`my-first-article`）には `en` を張らず、日本語版しか持たないタグ（`機械学習`）のページも同様。未訳の案内ページ自体には hreflang を出さず `noindex` のままにしている。
 - **`/en/feed.xml` は `app/en/feed.xml/route.ts`（静的セグメント）に置いた。** `app/[locale]/feed.xml` にすると `/ja/feed.xml` も生えて重複するため。静的セグメント `en` と動的セグメント `[locale]` は共存でき、`/en/blog` などは従来どおり `[locale]` 側で解決される。生成ロジックは `lib/feed.ts` に集約。
 - **proxy の matcher からメタデータ画像ルートを除外した。** `opengraph-image` は拡張子を持たない `/ja/opengraph-image?<hash>` の形で `og:image` に埋め込まれるため、除外しないと 307 が挟まりクエリ末尾に `=` が付いて壊れる。`twitter-image` / `icon` も同時に除外している。
-- **OG画像のフォント最適化は見送った。** 設計時は「英語タイトルなら `loadJapaneseFontSubset` は不要」と書いたが、Satori はフォント指定が必須で、省くとレンダリングできない。Noto Sans JP のサブセットはラテン文字も含むため英語タイトルでも正しく描画される（実測で 1200x630 PNG を確認）。フォント取得の往復回数も変わらないため、差し替えの実益がない。
+- **OG画像のフォント取得はビルドを落とす単一障害点だった（Phase 4 で一度判断を誤り、後から修正）。** 当初は「英語タイトルならフォント取得を省ける」という設計時のメモを *性能改善* と解釈し、実益が薄いとして見送った。しかし本質は性能ではなく **ビルドの外部依存** で、英訳6本を足してOG画像が8枚→15枚になった結果、Google Fonts への往復が30回に増えて Vercel 上で `ETIMEDOUT` によりデプロイが失敗した。次の3段構えに作り直してある（[lib/og-image.ts](../lib/og-image.ts)）:
+  1. CJKを含まないテキストは共通のASCIIサブセットに集約し、全英語ページで1回にまとめる（往復 30回 → 16回）
+  2. 文字集合をキーにプロセス内キャッシュし、15秒タイムアウト + 3回リトライ
+  3. それでも失敗したら `null` を返し、`fonts` を省略して `@vercel/og` 同梱の Noto Sans (latin) で描画する。**フォント取得が全滅してもビルドは通る**（取得先を到達不能ホストに差し替えて exit 0 を確認済み）
+
+  degraded 時は日本語タイトルが tofu になるため、`console.warn` を残して検知できるようにしている。
 - **検索APIは `/api/search?locale=` で記事インデックスを切り替える。** ただし notes と projects は日本語のみのコンテンツなので、両ロケールで同じものを返している（Phase 5 の対象）。
 
 ## 11. 決めておきたいこと

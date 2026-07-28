@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { getPost, getAllPosts } from "@/lib/mdx";
 import {
   loadPublicImageAsDataUri,
-  loadJapaneseFontSubset,
+  loadOgFontSubset,
+  ogFontOptions,
 } from "@/lib/og-image";
 import { routing, type Locale } from "@/i18n/routing";
 export const size = { width: 1200, height: 630 };
@@ -35,7 +36,7 @@ export default async function Image({
 
   // 記事の画像があればそれを使用、なければデフォルト画像
   const bgImageUrl = await loadPublicImageAsDataUri(image ?? "/images/OG.jpg");
-  const fontData = await loadJapaneseFontSubset(`${title}${description ?? ""}`);
+  const fontData = await loadOgFontSubset(`${title}${description ?? ""}`);
 
   return new ImageResponse(
     <div
@@ -116,14 +117,7 @@ export default async function Image({
     </div>,
     {
       ...size,
-      fonts: [
-        {
-          name: "Noto Sans JP",
-          data: fontData,
-          style: "normal",
-          weight: 700,
-        },
-      ],
+      ...ogFontOptions(fontData),
     },
   );
 }
