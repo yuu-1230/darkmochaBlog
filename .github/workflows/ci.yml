@@ -8,8 +8,15 @@ on:
 
 jobs:
   check:
-    name: Type Check & Lint
+    name: Lint, Type Check, Test & Build
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    concurrency:
+      group: ci-${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
@@ -18,7 +25,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 11.13.1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -30,7 +37,22 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Type check
-        run: pnpm tsc --noEmit
+        run: pnpm typecheck
 
       - name: Lint
         run: pnpm lint
+
+      - name: Test with coverage
+        run: pnpm test:ci
+
+      - name: Production build
+        run: pnpm build
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          if-no-files-found: ignore
+          retention-days: 14
