@@ -26,6 +26,7 @@ import { getRelatedPosts } from "@/lib/related-posts";
 import { tagHref } from "@/lib/tags";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { TranslationUnavailable } from "@/components/translation-unavailable";
+import { ArticleEngagement } from "@/components/blog/ArticleEngagement";
 import { routing, type Locale } from "@/i18n/routing";
 
 const prettyCodeOptions: Options = {
@@ -242,6 +243,17 @@ export default async function BlogPost({ params }: Props) {
             </p>
           )}
         </div>
+
+        <ArticleEngagement
+          postId={slug}
+          authorBio={t("engagement.authorBio")}
+          authorLinkLabel={t("engagement.authorLinkLabel")}
+          likeLabels={{
+            like: t("engagement.like"),
+            unlike: t("engagement.unlike"),
+            unavailable: t("engagement.unavailable"),
+          }}
+        />
 
         {/* Table of Contents (記事上部に表示、ワイド画面ではサイドバーに切替) */}
         {toc.length > 0 && (

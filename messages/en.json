@@ -33,6 +33,13 @@
     "prevPost": "Previous Post",
     "nextPost": "Next Post",
     "navLabel": "Post navigation",
+    "engagement": {
+      "authorBio": "Student developer from Nagano writing about web development, Unity, and travel.",
+      "authorLinkLabel": "View the author profile",
+      "like": "Like this post",
+      "unlike": "Remove your like",
+      "unavailable": "Likes are currently unavailable"
+    },
     "untranslated": {
       "title": "This post isn't available in English yet",
       "body": "This post has only been published in another language so far. It will appear here once a translation is ready.",

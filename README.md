@@ -41,6 +41,8 @@
 | `GITHUB_TOKEN` | GitHub Contribution Graph 取得用（GraphQL API, read-only スコープ推奨） |
 | `GITHUB_USERNAME` | Contribution Graph を表示する GitHub ユーザー名 |
 | `NEXT_PUBLIC_GISCUS_*` | コメント機能（Giscus）の設定値。詳細は `.env.local.example` 参照 |
+| `DATABASE_URL` | 記事の匿名いいねを保存する Neon PostgreSQL 接続文字列 |
+| `LIKE_HASH_SECRET` | 匿名訪問者IDをHMAC化する秘密鍵（`openssl rand -base64 32` などで生成） |
 
 ⚠️ **`GITHUB_TOKEN` は絶対に Public リポジトリへコミットしないでください。** サーバー側（Server Component / サーバー専用モジュール）でのみ使用され、クライアントには一切送信されません。`.env*` は `.gitignore` で除外済みです。
 

@@ -33,6 +33,13 @@
     "prevPost": "前の記事",
     "nextPost": "次の記事",
     "navLabel": "記事ナビゲーション",
+    "engagement": {
+      "authorBio": "長野県出身の学生エンジニア。Web開発・Unity・旅行について書いています。",
+      "authorLinkLabel": "著者プロフィールを見る",
+      "like": "この記事にいいねする",
+      "unlike": "いいねを取り消す",
+      "unavailable": "現在いいね機能を利用できません"
+    },
     "untranslated": {
       "title": "この記事の日本語版はまだありません",
       "body": "この記事は現在ほかの言語でのみ公開されています。翻訳が用意でき次第、こちらでも読めるようになります。",
