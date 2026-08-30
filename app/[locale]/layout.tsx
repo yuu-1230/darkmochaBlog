@@ -145,7 +145,10 @@ export default async function LocaleLayout({
             >
               {t("skipToContent")}
             </a>
-            <SiteHeader postSlugsByLocale={postSlugsByLocale} />
+            <SiteHeader
+              postSlugsByLocale={postSlugsByLocale}
+              showLocalDocs={process.env.NODE_ENV !== "production"}
+            />
             <main id="main-content" className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
               {children}
             </main>

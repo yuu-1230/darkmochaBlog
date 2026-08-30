@@ -7,6 +7,16 @@ const handleI18n = createMiddleware(routing);
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
+function isLocalDocsPath(pathname: string): boolean {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] === "docs") return true;
+  return (
+    segments.length >= 2 &&
+    (routing.locales as readonly string[]).includes(segments[0]) &&
+    segments[1] === "docs"
+  );
+}
+
 function hasLocalePrefix(pathname: string): boolean {
   return routing.locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
@@ -15,6 +25,15 @@ function hasLocalePrefix(pathname: string): boolean {
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // ローカル資料はページ側でもnotFoundにするが、productionではproxyでも遮断する。
+  // 既定ロケールの404をnext-intlが正規URLへ戻す際のリダイレクトループも防ぐ。
+  if (process.env.NODE_ENV === "production" && isLocalDocsPath(pathname)) {
+    return new NextResponse("Not Found", {
+      status: 404,
+      headers: { "X-Robots-Tag": "noindex, noarchive" },
+    });
+  }
 
   // routing.localeDetection は false のまま（Accept-Language による自動振り分けはしない）。
   // ただし next-intl は localeDetection: false だと cookie も読まなくなるため、

@@ -1,15 +1,10 @@
 import { getPost, getAllPosts, hasTranslation } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowLeft, Calendar, Tag, Clock, RefreshCw } from "lucide-react";
 import React from "react";
-import rehypeSlug from "rehype-slug";
-import rehypePrettyCode, { type Options } from "rehype-pretty-code";
-import remarkGfm from "remark-gfm";
-import { mdxComponents } from "@/components/mdx";
 import { generateTOC } from "@/lib/toc";
 import { TableOfContents } from "@/components/TableOfContents";
 import { AnchorScroll } from "@/components/anchor-scroll";
@@ -27,13 +22,8 @@ import { tagHref } from "@/lib/tags";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { TranslationUnavailable } from "@/components/translation-unavailable";
 import { ArticleEngagement } from "@/components/blog/ArticleEngagement";
+import { MdxDocument } from "@/components/mdx-document";
 import { routing, type Locale } from "@/i18n/routing";
-
-const prettyCodeOptions: Options = {
-  theme: { light: "solarized-light", dark: "everforest-dark" },
-  keepBackground: false,
-  defaultLang: "plaintext",
-};
 
 type Props = { params: Promise<{ slug: string; locale: Locale }> };
 
@@ -262,19 +252,7 @@ export default async function BlogPost({ params }: Props) {
 
         {/* MDX content */}
         <div className="min-h-[200px]">
-          <MDXRemote
-            source={content}
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [
-                  rehypeSlug,
-                  [rehypePrettyCode, prettyCodeOptions],
-                ],
-              },
-            }}
-          />
+          <MdxDocument source={content} />
         </div>
 
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />

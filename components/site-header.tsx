@@ -41,13 +41,21 @@ function ThemeToggle() {
 type SiteHeaderProps = {
   /** ロケールごとに存在する記事 slug（言語スイッチャーのフォールバック判定用） */
   postSlugsByLocale: Partial<Record<Locale, string[]>>;
+  /** 開発環境だけでローカル資料への導線を表示する */
+  showLocalDocs?: boolean;
 };
 
-export const SiteHeader = ({ postSlugsByLocale }: SiteHeaderProps) => {
+export const SiteHeader = ({
+  postSlugsByLocale,
+  showLocalDocs = false,
+}: SiteHeaderProps) => {
   const pathname = usePathname();
   const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const drawerRef = useFocusTrap<HTMLElement>(open);
+  const visibleNavItems = showLocalDocs
+    ? [...navItems, { label: "docs", href: "/docs" }]
+    : navItems;
 
   // パス変更でメニューを閉じる
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -90,7 +98,7 @@ export const SiteHeader = ({ postSlugsByLocale }: SiteHeaderProps) => {
           <div className="flex items-center gap-1">
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-6 mr-2">
-              {navItems.map((item) => (
+              {visibleNavItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -176,7 +184,7 @@ export const SiteHeader = ({ postSlugsByLocale }: SiteHeaderProps) => {
 
               {/* Nav links */}
               <ul className="flex flex-col py-4 px-3 gap-1 flex-1">
-                {navItems.map((item, i) => (
+                {visibleNavItems.map((item, i) => (
                   <motion.li
                     key={item.href}
                     initial={{ opacity: 0, x: 16 }}
