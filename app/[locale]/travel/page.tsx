@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import type { Locale } from "@/i18n/routing";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -71,7 +72,7 @@ export default async function TravelPage({ params }: Props) {
                 {post.frontmatter.image ? (
                   <div className="w-20 h-14 shrink-0 relative rounded-md overflow-hidden border border-border bg-muted">
                     <Image
-                      src={post.frontmatter.image}
+                      src={resolveImageUrl(post.frontmatter.image)}
                       alt={post.frontmatter.title}
                       fill
                       sizes="80px"

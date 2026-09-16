@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { resolveImageUrl } from "@/lib/image-url";
 
 const MIME_TYPES: Record<string, string> = {
   ".png": "image/png",
@@ -9,14 +10,56 @@ const MIME_TYPES: Record<string, string> = {
   ".gif": "image/gif",
 };
 
-export async function loadPublicImageAsDataUri(
-  publicPath: string,
-): Promise<string> {
+async function loadLocalImageAsDataUri(publicPath: string): Promise<string> {
   const filePath = path.join(process.cwd(), "public", publicPath);
   const ext = path.extname(filePath).toLowerCase();
   const mimeType = MIME_TYPES[ext] ?? "image/jpeg";
   const data = await fs.readFile(filePath);
   return `data:${mimeType};base64,${data.toString("base64")}`;
+}
+
+async function loadRemoteImageAsDataUri(imageUrl: string): Promise<string> {
+  const response = await fetch(imageUrl, {
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
+  if (!response.ok) {
+    throw new Error(`Image server responded with ${response.status}`);
+  }
+
+  const pathname = new URL(imageUrl).pathname;
+  const ext = path.extname(pathname).toLowerCase();
+  const mimeType =
+    response.headers.get("content-type")?.split(";")[0] ||
+    MIME_TYPES[ext] ||
+    "image/jpeg";
+  const data = Buffer.from(await response.arrayBuffer());
+  return `data:${mimeType};base64,${data.toString("base64")}`;
+}
+
+/**
+ * OG画像用にローカル画像またはR2画像をData URIへ変換する。
+ * 画像を取得できない場合はnullを返し、呼び出し側が背景色だけで描画できるようにする。
+ */
+export async function loadImageAsDataUri(
+  imagePath: string,
+  fallbackPublicPath?: string,
+): Promise<string | null> {
+  const candidates = [...new Set([imagePath, fallbackPublicPath])].filter(
+    (candidate): candidate is string => Boolean(candidate),
+  );
+
+  for (const candidate of candidates) {
+    const resolved = resolveImageUrl(candidate);
+    try {
+      return /^https?:\/\//i.test(resolved)
+        ? await loadRemoteImageAsDataUri(resolved)
+        : await loadLocalImageAsDataUri(resolved);
+    } catch (error) {
+      console.warn(`[og-image] ${resolved} の取得に失敗しました:`, error);
+    }
+  }
+
+  return null;
 }
 
 // ── OG画像用フォント ────────────────────────────────────────────

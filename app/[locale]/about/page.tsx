@@ -12,6 +12,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { FaBluesky } from "react-icons/fa6";
+import { resolveImageUrl } from "@/lib/image-url";
 
 const container = {
   hidden: {},
@@ -80,7 +81,7 @@ export default function AboutPage() {
         {/* Profile image */}
         <div className="shrink-0 w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border border-border bg-muted">
           <Image
-            src="/images/About/profile.jpg"
+            src={resolveImageUrl("/images/About/profile.jpg")}
             alt="Yuto Nagata"
             width={112}
             height={112}

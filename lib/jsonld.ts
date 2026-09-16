@@ -1,7 +1,8 @@
 import type { Frontmatter } from "@/lib/mdx";
-import { SITE_URL, AUTHOR_NAME, AUTHOR_URL } from "@/lib/constants";
+import { AUTHOR_NAME, AUTHOR_URL } from "@/lib/constants";
 import { localeUrl } from "@/lib/locale-url";
 import { BCP47, type Locale } from "@/i18n/routing";
+import { resolveAbsoluteImageUrl } from "@/lib/image-url";
 
 export function getBlogPostJsonLd(
   frontmatter: Frontmatter,
@@ -13,7 +14,9 @@ export function getBlogPostJsonLd(
     "@type": "BlogPosting",
     headline: frontmatter.title,
     description: frontmatter.description,
-    image: frontmatter.image ? [`${SITE_URL}${frontmatter.image}`] : [],
+    image: frontmatter.image
+      ? [resolveAbsoluteImageUrl(frontmatter.image)]
+      : [],
     datePublished: frontmatter.date,
     dateModified: frontmatter.update ?? frontmatter.date,
     mainEntityOfPage: localeUrl(locale, `/blog/${slug}`),

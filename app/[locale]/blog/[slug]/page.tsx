@@ -24,6 +24,7 @@ import { TranslationUnavailable } from "@/components/translation-unavailable";
 import { ArticleEngagement } from "@/components/blog/ArticleEngagement";
 import { MdxDocument } from "@/components/mdx-document";
 import { routing, type Locale } from "@/i18n/routing";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type Props = { params: Promise<{ slug: string; locale: Locale }> };
 
@@ -67,8 +68,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const path = `/blog/${slug}`;
   const canonical = localeUrl(locale, path);
   const ogImage = image
-    ? [{ url: image, width: 1200, height: 630, alt: title }]
-    : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
+    ? [{ url: resolveImageUrl(image), width: 1200, height: 630, alt: title }]
+    : [
+        {
+          url: resolveImageUrl("/images/OG.jpg"),
+          width: 1200,
+          height: 630,
+        },
+      ];
 
   // 翻訳が存在するロケールにだけ hreflang を張る（未訳に張ると翻訳漏れ扱いになる）
   const available = await localesWithPost(slug);

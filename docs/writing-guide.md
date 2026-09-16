@@ -30,7 +30,7 @@ content/posts/your-article-slug.mdx
 
 - ファイル名がそのまま URL の slug になる（例: `thai-travel.mdx` → `/blog/thai-travel`）
 - ケバブケース（小文字 + ハイフン）推奨
-- 画像は `public/images/Articles/記事名/` に置く
+- 画像はCloudflare R2の `images/Articles/記事名/` にアップロードする
 
 ---
 
@@ -145,7 +145,7 @@ draft: false
 
 ## 5. 画像（ImageSlider）
 
-画像は必ず `public/images/Articles/記事名/` に置き、MDX 内では `/images/Articles/記事名/` から始まるパスで参照します。
+画像はCloudflare R2の `images/Articles/記事名/` にアップロードし、MDX内では `/images/Articles/記事名/` から始まるパスで参照します。MDXのパスは表示時に `https://images.darkmocha.dev` のURLへ変換されます。
 
 ### 1枚表示
 
@@ -165,7 +165,9 @@ draft: false
 - 複数枚の場合はナビゲーションボタンとページドットが付く
 - 対応拡張子：`.jpg` / `.jpeg` / `.png` / `.gif` / `.webp`
 
-> **推奨**: 画像はあらかじめ圧縮してからアップロードする。目安は 1 枚あたり 300KB 以下。
+> **推奨**: 画像はあらかじめ圧縮してからアップロードする。目安は 1 枚あたり 300KB 以下。faviconの `public/images/icon.png` だけはリポジトリで管理する。
+
+> **更新時**: 画像は30日キャッシュされるため、同じR2キーを上書きせず、`hero-v2.jpg`のようにファイル名を変えてMDXの参照も更新する。
 
 ---
 
@@ -379,8 +381,8 @@ draft: true
 
 ### 画像の置き場所
 
-```
-public/
+```text
+Cloudflare R2 bucket
 └── images/
     └── Articles/
         └── your-article/      ← 記事名フォルダを作る
@@ -388,3 +390,5 @@ public/
             ├── photo1.jpg
             └── photo2.png
 ```
+
+公開URLは `https://images.darkmocha.dev/images/Articles/your-article/hero.jpg` になる。ローカル開発でも同じR2画像を使用する。

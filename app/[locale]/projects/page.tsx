@@ -8,6 +8,7 @@ import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
 import type { Locale } from "@/i18n/routing";
 import { ImageLightbox } from "@/components/image-lightbox";
+import { resolveImageUrl } from "@/lib/image-url";
 
 const container = {
   hidden: {},
@@ -59,7 +60,7 @@ export default function ProjectsPage() {
               >
                 {project.image ? (
                   <Image
-                    src={project.image}
+                    src={resolveImageUrl(project.image)}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { resolveImageUrl } from "@/lib/image-url";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -42,7 +43,7 @@ export default function ImageSlider({
     return (
       <div className={frameClass}>
         <Image
-          src={imageArray[0]}
+          src={resolveImageUrl(imageArray[0])}
           alt={alt || t("blogImage")}
           width={600}
           height={450}
@@ -81,7 +82,7 @@ export default function ImageSlider({
           {imageArray.map((src, index) => (
             <SwiperSlide key={index}>
               <Image
-                src={src}
+                src={resolveImageUrl(src)}
                 alt={alt ? `${alt} ${index + 1}` : t("slideImage", { index: index + 1 })}
                 width={600}
                 height={450}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { resolveImageUrl } from "@/lib/image-url";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Note } from "@/lib/notes";
@@ -95,8 +96,10 @@ export async function NoteTimeline({
 }
 
 function resolveImageSrc(image: string): string {
-  if (image.startsWith("http") || image.startsWith("/")) return image;
-  return `/images/Notes/${image}`;
+  if (image.startsWith("http")) return image;
+  return resolveImageUrl(
+    image.startsWith("/") ? image : `/images/Notes/${image}`,
+  );
 }
 
 function NoteContent({ content }: { content: string }) {

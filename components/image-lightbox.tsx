@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
+import { resolveImageUrl } from "@/lib/image-url";
 
 interface ImageLightboxProps {
   src: string;
@@ -53,7 +54,7 @@ export function ImageLightbox({ src, alt, onClose }: ImageLightboxProps) {
           onClick={(e) => e.stopPropagation()}
         >
           <Image
-            src={src}
+            src={resolveImageUrl(src)}
             alt={alt}
             width={900}
             height={506}

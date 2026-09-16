@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import {
-  loadPublicImageAsDataUri,
+  loadImageAsDataUri,
   loadOgFontSubset,
   ogFontOptions,
 } from "@/lib/og-image";
@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export default async function Image() {
   // サイト全体用の背景画像（プロフ画像や風景など）
-  const bgImageUrl = await loadPublicImageAsDataUri("/images/OG.jpg");
+  const bgImageUrl = await loadImageAsDataUri("/images/OG.jpg");
 
   const title = "Darkmocha Blog";
   const description = "Engineer and Everyday life Blog by Yuto Nagata";
@@ -32,18 +32,20 @@ export default async function Image() {
       }}
     >
       {/* 第1層: 背景画像 */}
-      <img
-        src={bgImageUrl}
-        alt="Background"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: 1200,
-          height: 630,
-          objectFit: "cover",
-        }}
-      />
+      {bgImageUrl && (
+        <img
+          src={bgImageUrl}
+          alt="Background"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 1200,
+            height: 630,
+            objectFit: "cover",
+          }}
+        />
+      )}
 
       {/* 第2層: 黒グラデーション */}
       <div
