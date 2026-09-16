@@ -8,7 +8,7 @@ export function HeroImage({ src, alt }: { src: string; alt: string }) {
         src={resolveImageUrl(src)}
         alt={alt}
         fill
-        priority
+        preload
         sizes="(max-width: 768px) 100vw, 768px"
         className="object-cover"
       />

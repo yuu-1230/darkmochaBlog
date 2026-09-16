@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 768, 1080, 1280],
+    // R2画像はファイル名を変えて更新し、変換済み画像を30日キャッシュする。
+    minimumCacheTTL: 2_592_000,
   },
   async headers() {
     return [
