@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { resolveImageUrl } from "@/lib/image-url";
 
 export function HeroImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="w-full h-56 md:h-72 relative rounded-xl overflow-hidden mb-8 -mx-4 md:mx-0" style={{ width: "calc(100% + 2rem)" }}>
       <Image
-        src={src}
+        src={resolveImageUrl(src)}
         alt={alt}
         fill
         priority

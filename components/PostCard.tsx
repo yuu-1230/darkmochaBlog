@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import type { PostData } from "@/lib/mdx";
 import { getTagStyle } from "@/lib/utils";
+import { resolveImageUrl } from "@/lib/image-url";
 
 export function PostCard({ post }: { post: PostData }) {
   return (
@@ -11,7 +12,7 @@ export function PostCard({ post }: { post: PostData }) {
         {post.frontmatter.image ? (
           <div className="w-16 h-12 shrink-0 relative rounded-md overflow-hidden border border-border bg-muted">
             <Image
-              src={post.frontmatter.image}
+              src={resolveImageUrl(post.frontmatter.image)}
               alt={post.frontmatter.title}
               fill
               sizes="64px"

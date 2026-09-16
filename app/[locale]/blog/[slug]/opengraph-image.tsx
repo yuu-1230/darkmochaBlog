@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { notFound } from "next/navigation";
 import { getPost, getAllPosts } from "@/lib/mdx";
 import {
-  loadPublicImageAsDataUri,
+  loadImageAsDataUri,
   loadOgFontSubset,
   ogFontOptions,
 } from "@/lib/og-image";
@@ -35,7 +35,10 @@ export default async function Image({
   const { title, description, image } = post.frontmatter;
 
   // 記事の画像があればそれを使用、なければデフォルト画像
-  const bgImageUrl = await loadPublicImageAsDataUri(image ?? "/images/OG.jpg");
+  const bgImageUrl = await loadImageAsDataUri(
+    image ?? "/images/OG.jpg",
+    "/images/OG.jpg",
+  );
   const fontData = await loadOgFontSubset(`${title}${description ?? ""}`);
 
   return new ImageResponse(

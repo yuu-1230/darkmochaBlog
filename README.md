@@ -120,6 +120,10 @@ draft: false            # true にすると本番環境で非表示
 
 `readTime` は省略可（本文から自動計算）。
 
+記事画像はCloudflare R2の`images/Articles/`へアップロードする。MDXでは従来どおり
+`/images/Articles/...`を指定し、表示時に`https://images.darkmocha.dev`へ解決される。
+アイコンと既定OG画像は`public/images/`で管理する。
+
 ---
 
 ## Notes の書き方
