@@ -120,9 +120,9 @@ draft: false            # true にすると本番環境で非表示
 
 `readTime` は省略可（本文から自動計算）。
 
-記事画像はCloudflare R2の`images/Articles/`へアップロードする。MDXでは従来どおり
+画像はCloudflare R2の`images/`へアップロードする。記事のMDXでは従来どおり
 `/images/Articles/...`を指定し、表示時に`https://images.darkmocha.dev`へ解決される。
-アイコンと既定OG画像は`public/images/`で管理する。
+faviconの`public/images/icon.png`だけはリポジトリで管理する。
 
 ---
 
@@ -140,7 +140,7 @@ draft: false            # true にすると本番環境で非表示
 ```
 
 - `createdAt` はタイムゾーン省略で JST として扱われる
-- `image` は `public/images/Notes/` 配下のファイル名のみ指定
+- `image` はR2の `images/Notes/` 配下のファイル名のみ指定
 
 ---
 

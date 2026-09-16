@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { AUTHOR_NAME } from "@/lib/constants";
 import { LikeButton } from "@/components/blog/LikeButton";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type ArticleEngagementProps = {
   postId: string;
@@ -30,7 +31,7 @@ export function ArticleEngagement({
         aria-label={authorLinkLabel}
       >
         <Image
-          src="/images/About/Icon.png"
+          src={resolveImageUrl("/images/About/Icon.png")}
           alt=""
           width={48}
           height={48}

@@ -15,6 +15,7 @@ import { routing, BCP47, type Locale } from "@/i18n/routing";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { getAllPosts } from "@/lib/mdx";
 import { feedUrl } from "@/lib/feed";
+import { resolveAbsoluteImageUrl, resolveImageUrl } from "@/lib/image-url";
 
 const yomogi = Yomogi({
   weight: "400",
@@ -71,7 +72,9 @@ export async function generateMetadata({
       siteName: "Darkmocha Blog",
       title: "Darkmocha Blog",
       description,
-      images: [{ url: "/images/OG.jpg", width: 1200, height: 630 }],
+      images: [
+        { url: resolveImageUrl("/images/OG.jpg"), width: 1200, height: 630 },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -79,7 +82,7 @@ export async function generateMetadata({
       creator: "@DarkmochaJP",
       title: "Darkmocha Blog",
       description,
-      images: ["/images/OG.jpg"],
+      images: [resolveImageUrl("/images/OG.jpg")],
     },
   };
 }
@@ -114,7 +117,7 @@ export default async function LocaleLayout({
     "@type": "Person",
     name: AUTHOR_NAME,
     url: AUTHOR_URL,
-    image: `${SITE_URL}/images/About/profile.jpg`,
+    image: resolveAbsoluteImageUrl("/images/About/profile.jpg"),
     jobTitle: "Student Engineer",
     worksFor: { "@type": "Organization", name: "Suwa Univ. of science" },
     address: { "@type": "PostalAddress", addressRegion: "Nagano", addressCountry: "JP" },

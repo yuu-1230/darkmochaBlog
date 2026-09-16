@@ -3,7 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
-const articleImageBaseUrl = new URL(
+const imageBaseUrl = new URL(
   process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? "https://images.darkmocha.dev",
 );
 
@@ -12,10 +12,10 @@ const nextConfig: NextConfig = {
     localPatterns: [{ pathname: "/images/**" }],
     remotePatterns: [
       {
-        protocol: articleImageBaseUrl.protocol.replace(":", "") as "https",
-        hostname: articleImageBaseUrl.hostname,
-        port: articleImageBaseUrl.port,
-        pathname: "/images/Articles/**",
+        protocol: imageBaseUrl.protocol.replace(":", "") as "https",
+        hostname: imageBaseUrl.hostname,
+        port: imageBaseUrl.port,
+        pathname: "/images/**",
         search: "",
       },
     ],

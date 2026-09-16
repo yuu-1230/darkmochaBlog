@@ -19,7 +19,7 @@ export type Project = {
   description: LocalizedText;
   techStack: string[];
   links: { label: string; url: string }[];
-  image?: string; // 画像パス (public/images/projects/...)
+  image?: string; // 画像パス (R2: images/projects/...)
   icon: LucideIcon; // プロジェクトを表すアイコン
   learned: LocalizedText; // 学んだこと
 };

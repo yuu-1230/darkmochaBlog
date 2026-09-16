@@ -1,24 +1,25 @@
 import { SITE_URL } from "@/lib/constants";
 
-const DEFAULT_ARTICLE_IMAGE_BASE_URL = "https://images.darkmocha.dev";
-const ARTICLE_IMAGE_PATH_PREFIX = "/images/Articles/";
+const DEFAULT_IMAGE_BASE_URL = "https://images.darkmocha.dev";
+const IMAGE_PATH_PREFIX = "/images/";
+const LOCAL_FAVICON_PATH = "/images/icon.png";
 
-function articleImageBaseUrl(): string {
+function imageBaseUrl(): string {
   return (
-    process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? DEFAULT_ARTICLE_IMAGE_BASE_URL
+    process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? DEFAULT_IMAGE_BASE_URL
   ).replace(/\/+$/, "");
 }
 
 /**
- * MDXでは従来の /images/Articles/... を維持し、表示時だけR2へ向ける。
- * アイコン、既定OG画像、プロフィール、Projects、Notesはローカルのままにする。
+ * 既存の /images/... パスを維持し、表示時だけR2へ向ける。
+ * faviconだけはデプロイと同時に必ず配信できるようローカルに残す。
  */
 export function resolveImageUrl(src: string): string {
-  if (!src.startsWith(ARTICLE_IMAGE_PATH_PREFIX)) {
+  if (!src.startsWith(IMAGE_PATH_PREFIX) || src === LOCAL_FAVICON_PATH) {
     return src;
   }
 
-  return `${articleImageBaseUrl()}${src}`;
+  return `${imageBaseUrl()}${src}`;
 }
 
 /** JSON-LDなど、絶対URLが必要な箇所向け。 */

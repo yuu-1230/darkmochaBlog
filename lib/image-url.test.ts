@@ -1,20 +1,25 @@
 import { resolveAbsoluteImageUrl, resolveImageUrl } from "@/lib/image-url";
 
 describe("resolveImageUrl", () => {
-  it("記事画像だけをR2 URLへ変換する", () => {
+  it("記事画像をR2 URLへ変換する", () => {
     expect(resolveImageUrl("/images/Articles/Hello/Autumn.jpg")).toBe(
       "https://images.darkmocha.dev/images/Articles/Hello/Autumn.jpg",
     );
   });
 
-  it("既定OG画像はローカル参照を維持する", () => {
-    expect(resolveImageUrl("/images/OG.jpg")).toBe("/images/OG.jpg");
+  it("既定OG画像をR2 URLへ変換する", () => {
+    expect(resolveImageUrl("/images/OG.jpg")).toBe(
+      "https://images.darkmocha.dev/images/OG.jpg",
+    );
   });
 
-  it("アイコンやプロフィール画像はローカル参照を維持する", () => {
+  it("faviconだけはローカル参照を維持する", () => {
     expect(resolveImageUrl("/images/icon.png")).toBe("/images/icon.png");
+  });
+
+  it("プロフィール画像をR2 URLへ変換する", () => {
     expect(resolveImageUrl("/images/About/profile.jpg")).toBe(
-      "/images/About/profile.jpg",
+      "https://images.darkmocha.dev/images/About/profile.jpg",
     );
   });
 
@@ -34,9 +39,15 @@ describe("resolveAbsoluteImageUrl", () => {
     );
   });
 
-  it("ローカル画像はサイトの絶対URLを返す", () => {
+  it("faviconはサイトの絶対URLを返す", () => {
+    expect(resolveAbsoluteImageUrl("/images/icon.png")).toBe(
+      "https://www.darkmocha.dev/images/icon.png",
+    );
+  });
+
+  it("既定OG画像はR2の絶対URLを返す", () => {
     expect(resolveAbsoluteImageUrl("/images/OG.jpg")).toBe(
-      "https://www.darkmocha.dev/images/OG.jpg",
+      "https://images.darkmocha.dev/images/OG.jpg",
     );
   });
 });

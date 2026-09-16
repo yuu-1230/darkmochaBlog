@@ -45,7 +45,7 @@ describe("ArticleEngagement", () => {
     expect(screen.getByText("長野県出身の学生エンジニア")).toBeInTheDocument();
     expect(screen.getByRole("presentation")).toHaveAttribute(
       "src",
-      "/images/About/Icon.png",
+      "https://images.darkmocha.dev/images/About/Icon.png",
     );
   });
 });

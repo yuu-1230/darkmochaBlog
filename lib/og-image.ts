@@ -59,7 +59,10 @@ export async function loadImageAsDataUri(
       `[og-image] ${resolved} の取得に失敗したため ${fallbackPublicPath} を使用します:`,
       error,
     );
-    return loadLocalImageAsDataUri(fallbackPublicPath);
+    const resolvedFallback = resolveImageUrl(fallbackPublicPath);
+    return /^https?:\/\//i.test(resolvedFallback)
+      ? loadRemoteImageAsDataUri(resolvedFallback)
+      : loadLocalImageAsDataUri(resolvedFallback);
   }
 }
 

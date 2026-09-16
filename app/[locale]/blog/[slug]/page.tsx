@@ -69,7 +69,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = localeUrl(locale, path);
   const ogImage = image
     ? [{ url: resolveImageUrl(image), width: 1200, height: 630, alt: title }]
-    : [{ url: "/images/OG.jpg", width: 1200, height: 630 }];
+    : [
+        {
+          url: resolveImageUrl("/images/OG.jpg"),
+          width: 1200,
+          height: 630,
+        },
+      ];
 
   // 翻訳が存在するロケールにだけ hreflang を張る（未訳に張ると翻訳漏れ扱いになる）
   const available = await localesWithPost(slug);
