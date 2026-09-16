@@ -38,32 +38,28 @@ async function loadRemoteImageAsDataUri(imageUrl: string): Promise<string> {
 
 /**
  * OG画像用にローカル画像またはR2画像をData URIへ変換する。
- * R2取得に失敗した場合は、指定されたローカル画像へフォールバックする。
+ * 画像を取得できない場合はnullを返し、呼び出し側が背景色だけで描画できるようにする。
  */
 export async function loadImageAsDataUri(
   imagePath: string,
   fallbackPublicPath?: string,
-): Promise<string> {
-  const resolved = resolveImageUrl(imagePath);
+): Promise<string | null> {
+  const candidates = [...new Set([imagePath, fallbackPublicPath])].filter(
+    (candidate): candidate is string => Boolean(candidate),
+  );
 
-  try {
-    return /^https?:\/\//i.test(resolved)
-      ? await loadRemoteImageAsDataUri(resolved)
-      : await loadLocalImageAsDataUri(resolved);
-  } catch (error) {
-    if (!fallbackPublicPath || fallbackPublicPath === imagePath) {
-      throw error;
+  for (const candidate of candidates) {
+    const resolved = resolveImageUrl(candidate);
+    try {
+      return /^https?:\/\//i.test(resolved)
+        ? await loadRemoteImageAsDataUri(resolved)
+        : await loadLocalImageAsDataUri(resolved);
+    } catch (error) {
+      console.warn(`[og-image] ${resolved} の取得に失敗しました:`, error);
     }
-
-    console.warn(
-      `[og-image] ${resolved} の取得に失敗したため ${fallbackPublicPath} を使用します:`,
-      error,
-    );
-    const resolvedFallback = resolveImageUrl(fallbackPublicPath);
-    return /^https?:\/\//i.test(resolvedFallback)
-      ? loadRemoteImageAsDataUri(resolvedFallback)
-      : loadLocalImageAsDataUri(resolvedFallback);
   }
+
+  return null;
 }
 
 // ── OG画像用フォント ────────────────────────────────────────────

@@ -32,18 +32,20 @@ export default async function Image() {
       }}
     >
       {/* 第1層: 背景画像 */}
-      <img
-        src={bgImageUrl}
-        alt="Background"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: 1200,
-          height: 630,
-          objectFit: "cover",
-        }}
-      />
+      {bgImageUrl && (
+        <img
+          src={bgImageUrl}
+          alt="Background"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 1200,
+            height: 630,
+            objectFit: "cover",
+          }}
+        />
+      )}
 
       {/* 第2層: 黒グラデーション */}
       <div

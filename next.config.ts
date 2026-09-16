@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const imageBaseUrl = new URL(
   process.env.NEXT_PUBLIC_IMAGE_BASE_URL ?? "https://images.darkmocha.dev",
 );
+const imageOrigin = imageBaseUrl.origin;
 
 const nextConfig: NextConfig = {
   images: {
@@ -23,6 +24,35 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 768, 1080, 1280],
     // R2画像はファイル名を変えて更新し、変換済み画像を30日キャッシュする。
     minimumCacheTTL: 2_592_000,
+  },
+  async redirects() {
+    return [
+      {
+        source: "/images/Articles/:path*",
+        destination: `${imageOrigin}/images/Articles/:path*`,
+        permanent: true,
+      },
+      {
+        source: "/images/About/:path*",
+        destination: `${imageOrigin}/images/About/:path*`,
+        permanent: true,
+      },
+      {
+        source: "/images/Notes/:path*",
+        destination: `${imageOrigin}/images/Notes/:path*`,
+        permanent: true,
+      },
+      {
+        source: "/images/projects/:path*",
+        destination: `${imageOrigin}/images/projects/:path*`,
+        permanent: true,
+      },
+      {
+        source: "/images/OG.jpg",
+        destination: `${imageOrigin}/images/OG.jpg`,
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [
