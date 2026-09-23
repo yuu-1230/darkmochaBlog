@@ -1,7 +1,13 @@
+> 誌面を編集する場合は [誌面エディター v2](./magazine-editor-v2.md) を参照。本文はMDXに残し、配置だけを保存します。
+
 # ブログ執筆ガイド
 
-`content/posts/` に `.mdx` ファイルを作成すればブログ記事として公開されます。  
+> 更新：誌面の正式な執筆仕様は [マガジンMDX仕様](./magazine-mdx-spec.md)。旧テンプレート名を含む説明より新仕様を優先します。
+
+`content/posts/ja/` または `content/posts/en/` に `.mdx` ファイルを作成して記事を管理します。公開には通常のデプロイが必要です。
 このドキュメントでは、フロントマターの書き方からカスタムコンポーネントまで、使える構文・機能を網羅しています。
+
+表紙グリッドと見開き記事の試作では、[誌面の執筆方法](./magazine-prototype.md#執筆方法)も参照してください。既存の記事は通常の縦スクロールで表示できます。
 
 ---
 
@@ -25,10 +31,12 @@
 ## 1. ファイルの作成
 
 ```
-content/posts/your-article-slug.mdx
+content/posts/ja/your-article-slug.mdx
+content/posts/en/your-article-slug.mdx
 ```
 
 - ファイル名がそのまま URL の slug になる（例: `thai-travel.mdx` → `/blog/thai-travel`）
+- 英語は同じslugのファイルを`en/`に置く。URLは`/en/blog/thai-travel`になる。
 - ケバブケース（小文字 + ハイフン）推奨
 - 画像はCloudflare R2の `images/Articles/記事名/` にアップロードする
 
@@ -91,7 +99,7 @@ draft: false
 行末にバックスラッシュ `\` で強制改行。\
 こんな感じ。
 
-行末に半角スペース2つでも改行できます。  
+行末に半角スペース2つでも改行できます。
 こんな感じ。
 ```
 

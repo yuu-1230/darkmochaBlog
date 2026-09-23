@@ -1,3 +1,8 @@
+import { MagazineReader } from "@/components/magazine/MagazineReader";
+import { magazineMdxComponents } from "@/components/magazine/parts";
+import { ArticleCoverCard } from "@/components/magazine/ArticleCoverCard";
+import { getPost } from "@/lib/mdx";
+import type { CoverSettings } from "@/lib/magazine";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
@@ -34,6 +39,27 @@ export default async function LocalDocPage({ params }: Props) {
   if (!doc) notFound();
 
   const toc = generateTOC(doc.content);
+  if (slug === "magazine-layouts") {
+    const post = await getPost("thai-travel", locale);
+    if (!post) notFound();
+    const variants: CoverSettings[] = [
+      {template:"overlay",title:"初めての、\nタイ。",overlay:"local"},
+      {template:"vertical",title:"ひとりで、旅に出る。",placement:"top-right",overlay:"local"},
+      {template:"split",title:"初めての、タイ。",titleSize:"small",background:"sand"},
+      {template:"typographic",title:"初めての、タイ。",background:"rust"},
+      {template:"overlay",title:"初めての、タイ。",placement:"bottom-right",overlay:"local",titleSize:"large"},
+      {mode:"image",image:post.frontmatter.image},
+    ];
+    return <article className="magazine-article">
+      <MagazineReader toc={toc}><MdxDocument source={doc.content} components={magazineMdxComponents(post.frontmatter,locale)} /></MagazineReader>
+      <section id="article-end" className="magazine-home" style={{marginTop:48}}>
+        <h2>表紙テンプレートの比較</h2>
+        <p>同じ旅行記の素材で配置を比較。最後の表紙は画像のみの表示確認です。</p>
+        <div className="journal-grid">{variants.map((cover,i)=><ArticleCoverCard key={i} post={{...post,frontmatter:{...post.frontmatter,cover}}} />)}</div>
+      </section>
+    </article>;
+  }
+
 
   return (
     <div className="pb-20">
