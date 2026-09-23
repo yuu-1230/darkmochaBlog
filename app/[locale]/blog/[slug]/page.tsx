@@ -1,19 +1,21 @@
+import { headers } from "next/headers";
+import { localEditorHost, localEditorEnabled } from "@/lib/cover-editor";
+import { CompositionProvider } from "@/components/magazine/CompositionContext";
+import { LiveLayoutEditor } from "@/components/magazine/LiveLayoutEditor";
+import { ArticleLayoutEditor } from "@/components/magazine/ArticleLayoutEditor";
+import { hasMagazinePages } from "@/lib/magazine";
 import { getPost, getAllPosts, hasTranslation } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { ArrowLeft, Calendar, Tag, Clock, RefreshCw } from "lucide-react";
 import React from "react";
 import { generateTOC } from "@/lib/toc";
 import { TableOfContents } from "@/components/TableOfContents";
 import { AnchorScroll } from "@/components/anchor-scroll";
 import { GiscusComments } from "@/components/giscus-comments";
-import { CategoryThemeApplier } from "@/components/category-theme-applier";
-import { MacWindowBar } from "@/components/MacWindowBar";
-import { HeroImage } from "@/components/HeroImage";
+import { EditorialImage } from "@/components/magazine/EditorialImage";
 import { PostNavigation } from "@/components/PostNavigation";
-import { getTagStyle } from "@/lib/utils";
 import { getBlogPostJsonLd, getBreadcrumbJsonLd } from "@/lib/jsonld";
 import { ShareButtons } from "@/components/ShareButtons";
 import { RelatedPosts } from "@/components/RelatedPosts";
@@ -22,6 +24,8 @@ import { tagHref } from "@/lib/tags";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { TranslationUnavailable } from "@/components/translation-unavailable";
 import { ArticleEngagement } from "@/components/blog/ArticleEngagement";
+import { MagazineReader } from "@/components/magazine/MagazineReader";
+import { magazineMdxComponents } from "@/components/magazine/parts";
 import { MdxDocument } from "@/components/mdx-document";
 import { routing, type Locale } from "@/i18n/routing";
 import { resolveImageUrl } from "@/lib/image-url";
@@ -152,134 +156,48 @@ export default async function BlogPost({ params }: Props) {
   const jsonLd = getBlogPostJsonLd(frontmatter, slug, locale);
   const breadcrumbJsonLd = getBreadcrumbJsonLd(frontmatter.title, slug, locale);
 
+  const layoutEditor = localEditorEnabled() && frontmatter.reader?.pages && localEditorHost((await headers()).get("host"));
+  const magazine = frontmatter.reader?.mode === "magazine" || hasMagazinePages(content);
+  const engagement = <ArticleEngagement postId={slug} authorBio={t("engagement.authorBio")}
+    authorLinkLabel={t("engagement.authorLinkLabel")} likeLabels={{ like: t("engagement.like"), unlike: t("engagement.unlike"), unavailable: t("engagement.unavailable") }} />;
+
   return (
-    <div className="pb-20">
-      <CategoryThemeApplier category={frontmatter.category} />
-      <AnchorScroll />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
-      />
-
-      {frontmatter.image && (
-        <HeroImage src={frontmatter.image} alt={frontmatter.title} />
+    <article className={`magazine-article ${magazine ? "magazine-paginated" : "magazine-standard"}`}>
+      {!magazine && <AnchorScroll />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }} />
+      {magazine ? (
+        <CompositionProvider>
+        <MagazineReader toc={toc} initialMode={frontmatter.reader?.mode ?? "flow"}>
+          <MdxDocument source={content} plan={frontmatter.reader?.pages} components={magazineMdxComponents(frontmatter, locale)} />
+        </MagazineReader>
+        {layoutEditor && <><LiveLayoutEditor locale={locale} slug={slug}/><ArticleLayoutEditor locale={locale} slug={slug}/></>}
+        </CompositionProvider>
+      ) : (
+        <div className="magazine-continuous">
+          <header className="continuous-heading">
+            <p className="journal-meta">{frontmatter.category} / <time dateTime={frontmatter.date}>{frontmatter.date}</time></p>
+            <h1>{frontmatter.title}</h1>
+            <p>{frontmatter.description}</p>
+            {frontmatter.image && <EditorialImage src={frontmatter.image} alt="" fit="contain" priority />}
+          </header>
+          {toc.length > 0 && <details className="continuous-toc"><summary>{locale === "ja" ? "目次" : "Contents"}</summary><TableOfContents toc={toc} /></details>}
+          <div className="magazine-prose"><MdxDocument source={content} /></div>
+        </div>
       )}
-
-      <div className="relative">
-        {toc.length > 0 && (
-          <aside className="hidden min-[1440px]:block absolute inset-y-0 left-[calc(50%+26rem)] w-64">
-            <div className="sticky top-32 max-h-[70vh] overflow-y-auto">
-              <TableOfContents toc={toc} />
-            </div>
-          </aside>
-        )}
-
-        <article
-        className="max-w-3xl mx-auto bg-card border border-border rounded-xl overflow-hidden"
-        data-category={frontmatter.category?.toLowerCase()}
-      >
-        <MacWindowBar title={frontmatter.title} />
-
-        <div className="p-6 md:p-10">
-        {/* Back link */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          {t("backToHome")}
-        </Link>
-
-        {/* Article header */}
-        <div className="mb-8 border-b pb-8">
-          <div className="flex flex-wrap gap-3 text-xs font-mono text-muted-foreground mb-4">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5" />
-              {frontmatter.date}
-            </span>
-            {frontmatter.update && frontmatter.update !== frontmatter.date && (
-              <span className="flex items-center gap-1.5">
-                <RefreshCw className="w-3.5 h-3.5" />
-                {t("updated")} {frontmatter.update}
-              </span>
-            )}
-            {frontmatter.tags && (
-              <span className="flex items-center gap-1.5 flex-wrap">
-                <Tag className="w-3.5 h-3.5 shrink-0" />
-                {frontmatter.tags.map((tag) => (
-                  <Link
-                    key={tag}
-                    href={tagHref(tag)}
-                    className="px-1.5 py-0.5 rounded text-[10px] font-mono hover:opacity-75 transition-opacity"
-                    style={getTagStyle(frontmatter.category)}
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </span>
-            )}
-            {frontmatter.readTime && (
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" />
-                {frontmatter.readTime}
-              </span>
-            )}
-          </div>
-
-          <h1 className="text-2xl md:text-4xl font-bold text-foreground tracking-tight leading-tight mb-4">
-            {frontmatter.title}
-          </h1>
-
-          {frontmatter.description && (
-            <p className="text-base text-muted-foreground leading-relaxed">
-              {frontmatter.description}
-            </p>
-          )}
+      <section id="article-end" className="magazine-end" aria-label={locale === "ja" ? "記事を読み終えて" : "After reading"}>
+        <p className="article-formal-title">{frontmatter.title}</p>
+        <div className="journal-meta"><time dateTime={frontmatter.date}>{frontmatter.date}</time>
+          {frontmatter.update && frontmatter.update !== frontmatter.date && <span>{t("updated")} {frontmatter.update}</span>}
+          <span>{frontmatter.readTime}</span>
+          {frontmatter.tags?.map(tag => <Link key={tag} href={tagHref(tag)}>{tag}</Link>)}
         </div>
-
-        <ArticleEngagement
-          postId={slug}
-          authorBio={t("engagement.authorBio")}
-          authorLinkLabel={t("engagement.authorLinkLabel")}
-          likeLabels={{
-            like: t("engagement.like"),
-            unlike: t("engagement.unlike"),
-            unavailable: t("engagement.unavailable"),
-          }}
-        />
-
-        {/* Table of Contents (記事上部に表示、ワイド画面ではサイドバーに切替) */}
-        {toc.length > 0 && (
-          <TableOfContents toc={toc} className="mb-10 min-[1440px]:hidden" />
-        )}
-
-        {/* MDX content */}
-        <div className="min-h-[200px]">
-          <MdxDocument source={content} />
-        </div>
-
+        {engagement}
+        <div className="magazine-share"><span>{t("thanks")}</span><ShareButtons url={localeUrl(locale, `/blog/${slug}`)} title={frontmatter.title} /></div>
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-
         <RelatedPosts posts={relatedPosts} />
-
-        <div className="mt-8 pt-6 border-t flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">{t("thanks")}</span>
-          <ShareButtons
-            url={localeUrl(locale, `/blog/${slug}`)}
-            title={frontmatter.title}
-          />
-        </div>
-
-        <div className="mt-12">
-          <GiscusComments />
-        </div>
-        </div>
-        </article>
-      </div>
-    </div>
+        <div id="comments"><GiscusComments /></div>
+      </section>
+    </article>
   );
 }
