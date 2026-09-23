@@ -110,6 +110,7 @@ function ResultCard({ item, query, isActive, idx, onClose, onHover }: CardProps)
     <li data-idx={idx}>
       <Link
         href={href}
+        scroll={!(item.readerMode === "magazine" && href.includes("#"))}
         onClick={onClose}
         onMouseEnter={() => onHover(idx)}
         className={`flex items-start gap-3 px-4 py-2.5 transition-colors ${
@@ -202,15 +203,19 @@ export function SearchDialog() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // focus & reset on open
+  useEffect(() => {
+    if (open) loadIndex();
+  }, [open, loadIndex]);
+
+  // Reset only when opening, not when the first index request completes.
   useEffect(() => {
     if (open) {
-      loadIndex();
-      setTimeout(() => inputRef.current?.focus(), 50);
+      const timer = setTimeout(() => inputRef.current?.focus(), 50);
       setQuery("");
       setActiveIdx(0);
+      return () => clearTimeout(timer);
     }
-  }, [open, loadIndex]);
+  }, [open]);
 
   // filter & sort
   const results = useMemo(() => {
@@ -247,7 +252,9 @@ export function SearchDialog() {
       e.preventDefault();
       setActiveIdx((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter" && flat[activeIdx]) {
-      router.push(resolveHref(flat[activeIdx], query));
+      const item = flat[activeIdx];
+      const href = resolveHref(item, query);
+      router.push(href, { scroll: !(item.readerMode === "magazine" && href.includes("#")) });
       setOpen(false);
     }
   };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Yomogi, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Yomogi, JetBrains_Mono, Playfair_Display, Noto_Serif_JP } from "next/font/google";
 import "../globals.css";
+import "../magazine.css";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -16,6 +17,10 @@ import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import { getAllPosts } from "@/lib/mdx";
 import { feedUrl } from "@/lib/feed";
 import { resolveAbsoluteImageUrl, resolveImageUrl } from "@/lib/image-url";
+
+const editorialSerif = Noto_Serif_JP({
+  weight: ["400", "500"], subsets: ["latin"], variable: "--font-editorial", display: "swap", preload: false,
+});
 
 const yomogi = Yomogi({
   weight: "400",
@@ -132,7 +137,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${yomogi.variable} ${jetbrainsMono.variable} ${playfair.variable} antialiased bg-background text-foreground`}
+        className={`${yomogi.variable} ${jetbrainsMono.variable} ${playfair.variable} ${editorialSerif.variable} antialiased bg-background text-foreground`}
       >
         <script
           type="application/ld+json"
@@ -152,7 +157,7 @@ export default async function LocaleLayout({
               postSlugsByLocale={postSlugsByLocale}
               showLocalDocs={process.env.NODE_ENV !== "production"}
             />
-            <main id="main-content" className="min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+            <main id="main-content" className="site-main min-h-screen max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
               {children}
             </main>
             <SiteFooter />

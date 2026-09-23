@@ -1,7 +1,9 @@
 import fs from "fs";
+import { validateCover } from "./magazine-validation";
 import path from "path";
 import matter from "gray-matter";
 import { cache } from "react";
+import type { CoverSettings, ReaderSettings } from "@/lib/magazine";
 import type { Locale } from "@/i18n/routing";
 
 export interface Frontmatter {
@@ -15,6 +17,11 @@ export interface Frontmatter {
   category?: string;
   draft?: boolean;
   pinned?: boolean;
+  displayTitle?: string;
+  cardSummary?: string;
+  homeOrder?: number;
+  cover?: CoverSettings;
+  reader?: ReaderSettings;
 }
 
 export interface Progress {
@@ -37,6 +44,7 @@ function localeDirectory(locale: Locale): string {
 
 /** 本文から読了時間を自動計算（日本語: 400文字/分、英語: 200語/分） */
 function calcReadTime(content: string): string {
+  content=content.replace(/\{\/\*\s*@layout-id\s+t-[a-f0-9-]+\s*\*\/\}\s*/g,'').replace(/ assetId="[^"]+"/g,'');
   const japanese = (content.match(/[　-鿿豈-﫿]/g) ?? []).length;
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(japanese / 400 + words / 200);
@@ -65,6 +73,10 @@ export const getPost = cache(
 
     const matterResult = matter(fileContents);
     const frontmatter = matterResult.data as Frontmatter;
+    try {
+      if (frontmatter.cover) validateCover(frontmatter.cover, frontmatter.image);
+      if (frontmatter.reader?.mode && !["magazine", "flow"].includes(frontmatter.reader.mode)) throw new Error("reader.mode: magazine / flowから選択してください");
+    } catch (error) { throw new Error(`${locale}/${slug}: ${error instanceof Error ? error.message : error}`); }
 
     return {
       slug,

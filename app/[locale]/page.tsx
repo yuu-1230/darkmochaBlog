@@ -1,31 +1,25 @@
+import { CoverEditor } from "@/components/magazine/CoverEditor";
+import { headers } from "next/headers";
+import { localEditorHost, localEditorEnabled } from "@/lib/cover-editor";
 import { setRequestLocale } from "next-intl/server";
 import { getAllPosts } from "@/lib/mdx";
-import { HomeClient } from "@/components/home-client";
+import { homePosts } from "@/lib/magazine";
+import { ArticleCoverCard } from "@/components/magazine/ArticleCoverCard";
 import type { Locale } from "@/i18n/routing";
 
-const RECENT_COUNT = 5;
-
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const allPosts = await getAllPosts(locale);
-
-  const pinnedPosts = allPosts
-    .filter((post) => post.frontmatter.pinned)
-    .sort((a, b) => {
-      const aDate = a.frontmatter.update ?? a.frontmatter.date;
-      const bDate = b.frontmatter.update ?? b.frontmatter.date;
-      return aDate < bDate ? 1 : -1;
-    });
-
-  const recentPosts = allPosts
-    .filter((post) => !post.frontmatter.pinned)
-    .slice(0, RECENT_COUNT);
-
-  return <HomeClient pinnedPosts={pinnedPosts} recentPosts={recentPosts} />;
+  const posts = homePosts(await getAllPosts(locale));
+  const editor = localEditorEnabled() && localEditorHost((await headers()).get("host"));
+  return (
+    <section className="magazine-home" aria-label={locale === "ja" ? "記事を読む" : "The journal"}>
+      {editor ? <CoverEditor posts={posts} locale={locale} /> : <>
+      <h1 className="sr-only">Darkmocha Journal</h1>
+      <div className="journal-grid">
+        {posts.map((post, index) => <ArticleCoverCard key={post.slug} post={post} priority={index === 0} />)}
+      </div>
+      </>}
+    </section>
+  );
 }

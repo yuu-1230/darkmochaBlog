@@ -13,6 +13,7 @@ export type SearchItem = {
   href: string;
   tags: string[];
   category?: string;
+  readerMode?: "magazine";
   body?: string;
   /** ブログ記事のみ: 見出し単位で分割したセクション */
   sections?: Section[];
@@ -39,6 +40,7 @@ export async function GET(request: NextRequest) {
       href: `/blog/${p.slug}`,
       tags: p.frontmatter.tags ?? [],
       category: p.frontmatter.category,
+      readerMode: p.frontmatter.reader?.mode === "magazine" ? "magazine" : undefined,
       body: stripMdx(p.content),
       sections,
     };

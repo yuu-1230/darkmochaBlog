@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { SiGithub, SiX, SiZenn, SiQiita } from "react-icons/si";
+import { usePathname } from "@/i18n/navigation";
+import { MagazineFooter } from "@/components/magazine/MagazineChrome";
+import { isMagazineRoute } from "@/lib/magazine";
 import { Archive } from "lucide-react";
 
 const socialLinks = [
@@ -13,6 +16,8 @@ const socialLinks = [
 ];
 
 export const SiteFooter = () => {
+  const pathname = usePathname();
+  if (isMagazineRoute(pathname)) return <MagazineFooter />;
   return (
     <motion.footer
       initial={{ opacity: 0 }}

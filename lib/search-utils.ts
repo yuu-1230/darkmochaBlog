@@ -1,3 +1,4 @@
+import { expandMagazineText } from "./magazine-search-text";
 import GithubSlugger from "github-slugger";
 
 export type Section = {
@@ -41,7 +42,7 @@ export function parseSections(raw: string): Section[] {
 
 /** MDX・Markdown 記法をプレーンテキストに変換 */
 export function stripMdx(raw: string): string {
-  return raw
+  return expandMagazineText(raw.replace(/\{\/\*\s*@layout-id\s+t-[a-f0-9-]+\s*\*\/\}\s*/g,''))
     .replace(/<[A-Z][^>]*>[\s\S]*?<\/[A-Z][^>]*>/g, (m) =>
       m.replace(/<[^>]+>/g, ""),
     )
