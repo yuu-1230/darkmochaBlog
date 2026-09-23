@@ -6,27 +6,492 @@ tags: ["機械学習", "Machine Learning"]
 description: "機械学習を0から勉強し始めた初学者が、教師あり学習・教師なし学習・強化学習と、モデルを作るまでの流れを自分なりに整理した。"
 draft: false
 image: "/images/Articles/ML/20260611/ Thumbnail20260611.png"
+displayTitle: "機械学習、その全体像。"
+cardSummary: "学び始める前に、まず全体を見渡す。機械学習の考え方と学ぶ道筋を整理する。"
+homeOrder: 4
+cover: {"template": "split", "title": "機械学習の\n入口。", "subtitle": "Learning notes / 01", "tone": "dark", "mode": "composed", "background": "sand", "titleSize": "small", "imageFit": "contain"}
+reader:
+  mode: magazine
+  pages:
+    - id: edition-title
+      template: text
+      blocks:
+        - edition-title
+        - b-e0346ce3-4f8f-4637-9c53-13ccec5d589e
+        - b-13ce0fef-77f6-4f8c-80b1-a891f367edd3
+        - b-147811c6-cbf9-4603-a690-9e6c503c056d
+        - b-bf832d23-bf11-4853-96a0-754a7333511f
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/ML/20260611/ Thumbnail20260611.png
+            side: right
+            width: 42.818703280730894
+            ratio: 1.5
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-9c870030-75ad-4153-b9a7-aff12bcec8b5
+            anchorId: t-80d49324-1f5d-4e1a-905a-abd96ad4da17
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-c6b7e3b5-5e97-4ba6-867b-b0a018931f42
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-80d49324-1f5d-4e1a-905a-abd96ad4da17
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-20ff9e9e-c06f-4a56-b97e-28308c489a30
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 38.91710762779553
+          - id: t-a232836e-f5ce-4bb5-af76-da9f5b5f693c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 65.51579972044729
+          - id: t-25745866-f0ab-432f-9b6a-86c5ef844e23
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 82.06182607827476
+    - id: b-ef32366c-473d-4b5e-81c1-7c716716d34a
+      template: text
+      blocks:
+        - b-ef32366c-473d-4b5e-81c1-7c716716d34a
+        - b-3c1c607a-ff55-471d-b0a3-c8481b39bd17
+        - b-eb1e7719-abb3-4ea3-b861-1158d5ee6b12
+        - b-ec92e7b9-4afc-45f2-9de1-83efe7c9b610
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-6228b636-b064-4ddc-8da4-959073b3e4ad
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1d8ba455-7b38-4d67-ba98-dd116ab34387
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 9.748776956869008
+          - id: t-e70c2eaf-fab3-4e16-b74e-5c02daab86f0
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 28.02141573482428
+          - id: t-228ed317-8e15-492b-a67f-2d1778de7f6a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 47.033496405750796
+          - id: t-0dbe70d2-02b0-4975-8ead-3ec37673f314
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 62.94179313099042
+          - id: t-ba484f53-c3ee-441c-b442-f4bdc18f8fbf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 72.43597743610225
+    - id: b-cfd1acd0-c15c-4ad0-b6cd-6ddc1c01a70f
+      template: text
+      blocks:
+        - b-cfd1acd0-c15c-4ad0-b6cd-6ddc1c01a70f
+        - b-7f974518-4c20-4677-bc28-1d72bc6f2c6d
+        - b-fb672aee-1687-4173-916d-a0884001bbba
+        - b-0147c1da-7fec-42e3-b544-29a9044efe6a
+        - b-d9d45e85-48af-491a-8bce-7eb8d487a53c
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9c57b474-3dc4-4009-8d86-725993cbe52b
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 1.1169628594249201
+          - id: t-1fbe0605-a6a0-434a-8b95-accb2a4c5b8e
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 30.43380591054313
+          - id: t-66acf388-0bb8-4fdc-8d14-f92ab93d10eb
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 40.64559205271566
+          - id: t-6c65aacd-5873-4cb3-8f6e-bf624317289a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 48.72079672523962
+          - id: t-cd89c4af-f1ad-403b-9447-cfb40bfb19be
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 65.24747903354633
+          - id: t-084c148e-6b91-451b-9bc8-8af1f9df84d9
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 74.12452575878595
+    - id: b-66c1cb09-eb69-442a-88e2-f208a2b2f361
+      template: text
+      blocks:
+        - b-66c1cb09-eb69-442a-88e2-f208a2b2f361
+        - b-04afb279-e0f4-4fbd-91d5-471e5442c17f
+        - b-9612f7e6-1f01-492f-bc35-84c02dc2bddc
+        - b-9e0a3025-a1d1-41cc-b58b-2affc94df971
+        - b-2527e05d-4663-4aef-af14-3ba4e6ec9d28
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-dfce9fb8-b121-4a7a-bfd7-885c7cd64b38
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-2f288f74-e0a8-459a-98c9-e18d735442c8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 11.664461861022364
+          - id: t-dede53f0-6f26-4c65-b66b-049907b6e8c0
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 37.350863618210866
+          - id: t-4c107ebc-106f-41d6-9332-e6f4427b6684
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 46.64162340255591
+          - id: t-512dab06-340e-4a43-886e-40020f076d08
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 59.56282448083068
+          - id: t-f12a7e93-f255-4a60-b3c8-098393d43ba8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 78.48941693290735
+          - id: t-983f46b0-5308-4d1c-a397-152074d89738
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 86.89596645367412
+    - id: b-4af9ff45-ce07-49c5-86b2-5feb6db9879e
+      template: text
+      blocks:
+        - b-4af9ff45-ce07-49c5-86b2-5feb6db9879e
+        - b-f90c6752-8b5b-4371-8e89-8b553c7e1ea8
+        - b-f06d7f08-0ff4-4214-9fcb-6646ad4bc954
+        - b-2f53a4b8-5ac4-4f32-b832-503e7437101b
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-fa7d45ba-6c31-47ae-9193-da78df11f428
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 1.5400359424920127
+          - id: t-b38669c8-abed-4d55-a20a-d2e3203128fa
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 22.39978534345048
+          - id: t-1ccf7d7e-4add-4395-aebb-4424bd719988
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 34.51165634984026
+          - id: t-0ad5ef72-4d22-4273-9abf-9fc92104777f
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 47.20509684504792
+          - id: t-016fb476-d73c-47c1-a7e8-e4924d050c32
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 58.50514177316294
+    - id: b-19842bce-945d-4b0a-ac65-72cf9771a97b
+      template: text
+      blocks:
+        - b-19842bce-945d-4b0a-ac65-72cf9771a97b
+        - b-c9e19522-1f29-43f8-aa4e-c02471ddd00b
+        - b-aba5dad0-3ec0-4a2e-b68e-edfae5e72492
+        - b-32783070-4e6a-45f0-b5c2-9c1d393c1369
+        - b-92d51b6a-fab4-4201-9910-6a08a24f1451
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-93b801d0-0a54-4dd7-bb33-76a176aeaecb
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8510b9d2-ad25-45f2-bee3-d15e295f929d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 10.118185902555911
+          - id: t-5ad6c9b2-1c7d-4899-823e-94e0e325a45d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 26.91693290734824
+          - id: t-d2b99ca0-0ea6-476f-a556-e8809e2ba52d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 43.540335463258785
+          - id: t-336b3999-bbe6-42b7-9a5e-373408a7064a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 60.329722444089455
+          - id: t-d839afc9-c3c7-44b5-841b-37062fe695be
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 68.93969648562302
+          - id: t-07ca2e33-6b4d-4ed6-8331-11b0c7f16adf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 82.12672224440894
+    - id: b-d2856ba5-9f4a-42b2-af29-6bf87e7efc55
+      template: text
+      blocks:
+        - b-d2856ba5-9f4a-42b2-af29-6bf87e7efc55
+        - b-48850726-0da0-4466-b025-28a7f6936724
+        - b-dc313831-1545-4fe9-a544-a23c50ce7578
+        - b-23b38b45-7408-4b5b-be9e-abe0f7a5b8e1
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-1c25acb5-7a3c-4e38-b1e1-51a999af7762
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6d851dc6-2190-4052-8702-cec57897499d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 28.26976837060703
+          - id: t-45e93d14-8cf4-4724-a8b4-d77cb7c4ca42
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 38.41915435303515
+          - id: t-1577956f-ecf7-4d35-994b-cb606bb309cf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 47.44783346645367
+          - id: t-caf1ec3f-b606-415a-8318-84115a5086d0
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 68.4741912939297
+  schemaVersion: 2
+  articleId: article-e24d286f-2aec-4fea-afbb-6a551a477ee1
 ---
+<ArticleBlock id="edition-title">
+
+{/* @layout-id t-c6b7e3b5-5e97-4ba6-867b-b0a018931f42 */}
+
+<ArticleTitle />
+
+<Photo assetId="asset-9c870030-75ad-4153-b9a7-aff12bcec8b5" src="/images/Articles/ML/20260611/ Thumbnail20260611.png" alt="" fit="contain" kind="diagram" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e0346ce3-4f8f-4637-9c53-13ccec5d589e">
+
+{/* @layout-id t-80d49324-1f5d-4e1a-905a-abd96ad4da17 */}
 
 機械学習初学者による、絶望のアウトプット記録。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-13ce0fef-77f6-4f8c-80b1-a891f367edd3">
+
+{/* @layout-id t-20ff9e9e-c06f-4a56-b97e-28308c489a30 */}
+
 生成AIの進化が話題になるたびに、「この先、自分は何を作れるんだろう」と考えるようになった。自分の存在価値まで考え始めると何も手につかなくなるので、いったん勉強することにした。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-147811c6-cbf9-4603-a690-9e6c503c056d">
+
+{/* @layout-id t-a232836e-f5ce-4bb5-af76-da9f5b5f693c */}
 
 目標は、AIに使われる側ではなく、仕組みを理解して使う側にまわること。気持ちとしては「AIを支配する側にまわるぞ！」くらいでいきたい。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-bf832d23-bf11-4853-96a0-754a7333511f">
+
+{/* @layout-id t-25745866-f0ab-432f-9b6a-86c5ef844e23 */}
+
 今回は、最初に掴んだ機械学習の全体像を自分の言葉で整理する。まだ数式まで理解できていない部分も多いので、これは完成した解説ではなく、勉強を始めた時点の記録だ。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ef32366c-473d-4b5e-81c1-7c716716d34a">
+
+{/* @layout-id t-6228b636-b064-4ddc-8da4-959073b3e4ad */}
 
 ## 機械学習を一言でいうと
 
+{/* @layout-id t-1d8ba455-7b38-4d67-ba98-dd116ab34387 */}
+
 これまでのプログラムでは、人間がデータを見て規則性を考え、そのルールをコードにしていた。機械学習では、データとアルゴリズムを渡し、ルールにあたる部分をモデル自身に学ばせる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3c1c607a-ff55-471d-b0a3-c8481b39bd17">
+
+{/* @layout-id t-e70c2eaf-fab3-4e16-b74e-5c02daab86f0 */}
 
 スパムメール判定なら、人間が「無料という単語が入っていたらスパム」と決める代わりに、スパムと通常メールの例を大量に与える。モデルはそこから、判定に使えそうなパターンを探していく。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-eb1e7719-abb3-4ea3-b861-1158d5ee6b12">
+
+{/* @layout-id t-228ed317-8e15-492b-a67f-2d1778de7f6a */}
+
 すごく雑に言えば、「ルールを人間が直接書くか、データからモデルに見つけさせるか」の違いだと理解した。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ec92e7b9-4afc-45f2-9de1-83efe7c9b610">
+
+{/* @layout-id t-0dbe70d2-02b0-4975-8ead-3ec37673f314 */}
 
 ## 学び方は大きく3種類ある
 
+{/* @layout-id t-ba484f53-c3ee-441c-b442-f4bdc18f8fbf */}
+
 機械学習の分類で最初に押さえたのは、モデルが何を手がかりに学ぶかという違いだった。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-cfd1acd0-c15c-4ad0-b6cd-6ddc1c01a70f">
+
+{/* @layout-id t-9c57b474-3dc4-4009-8d86-725993cbe52b */}
 
 | 種類 | 学習の手がかり | 代表的な用途 |
 | :--- | :--- | :--- |
@@ -34,40 +499,126 @@ image: "/images/Articles/ML/20260611/ Thumbnail20260611.png"
 | 教師なし学習 | データに潜む構造 | クラスタリング・次元削減 |
 | 強化学習 | 行動の結果として得る報酬 | ゲームAI・ロボット制御 |
 
+</ArticleBlock>
+
+<ArticleBlock id="b-7f974518-4c20-4677-bc28-1d72bc6f2c6d">
+
+{/* @layout-id t-1fbe0605-a6a0-434a-8b95-accb2a4c5b8e */}
+
 ### 教師あり学習
+
+{/* @layout-id t-66acf388-0bb8-4fdc-8d14-f92ab93d10eb */}
 
 教師あり学習は、入力データと正解をセットで渡して学習させる方法だ。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-fb672aee-1687-4173-916d-a0884001bbba">
+
+{/* @layout-id t-6c65aacd-5873-4cb3-8f6e-bf624317289a */}
+
 花のデータなら、花びらやがくの長さを入力し、品種名を正解ラベルとして与える。学習後は、未知の花の特徴から品種を予測できるようになる。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-0147c1da-7fec-42e3-b544-29a9044efe6a">
+
+{/* @layout-id t-cd89c4af-f1ad-403b-9447-cfb40bfb19be */}
+
 扱う問題は、大きく分類と回帰に分かれる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-d9d45e85-48af-491a-8bce-7eb8d487a53c">
+
+{/* @layout-id t-084c148e-6b91-451b-9bc8-8af1f9df84d9 */}
 
 - 分類では、メールがスパムかどうか、画像に写っている数字が何か、といったクラスを予測する
 - 回帰では、住宅価格や気温のような連続した数値を予測する
 
+</ArticleBlock>
+
+<ArticleBlock id="b-66c1cb09-eb69-442a-88e2-f208a2b2f361">
+
+{/* @layout-id t-dfce9fb8-b121-4a7a-bfd7-885c7cd64b38 */}
+
 最初は「回帰」という言葉から過去へ戻るような印象を受けたが、ここでは数値予測を指すらしい。用語を覚えるだけでも先は長い。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-04afb279-e0f4-4fbd-91d5-471e5442c17f">
+
+{/* @layout-id t-2f288f74-e0a8-459a-98c9-e18d735442c8 */}
 
 <Tip type="info" title="ラベルとは">
   教師あり学習で各データに付ける正解のこと。花の分類なら品種名、スパム判定なら「スパム」「通常」がラベルになる。
 </Tip>
 
+</ArticleBlock>
+
+<ArticleBlock id="b-9612f7e6-1f01-492f-bc35-84c02dc2bddc">
+
+{/* @layout-id t-dede53f0-6f26-4c65-b66b-049907b6e8c0 */}
+
 ### 教師なし学習
+
+{/* @layout-id t-4c107ebc-106f-41d6-9332-e6f4427b6684 */}
 
 教師なし学習では、正解ラベルを与えない。モデルはデータ同士の似ている部分や、まとまりを探す。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-9e0a3025-a1d1-41cc-b58b-2affc94df971">
+
+{/* @layout-id t-512dab06-340e-4a43-886e-40020f076d08 */}
+
 たとえば購買履歴が似ている顧客をグループに分けるクラスタリングや、多数の特徴量を少ない軸にまとめる次元削減がある。正解を当てるというより、データを眺めやすい形に整理するイメージが近かった。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2527e05d-4663-4aef-af14-3ba4e6ec9d28">
+
+{/* @layout-id t-f12a7e93-f255-4a60-b3c8-098393d43ba8 */}
 
 ### 強化学習
 
+{/* @layout-id t-983f46b0-5308-4d1c-a397-152074d89738 */}
+
 強化学習では、AIが環境の中で行動し、その結果として得る報酬を手がかりに学ぶ。チェスや囲碁のAI、ロボット制御などが代表例だ。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-4af9ff45-ce07-49c5-86b2-5feb6db9879e">
+
+{/* @layout-id t-fa7d45ba-6c31-47ae-9193-da78df11f428 */}
 
 以前Unityでオセロを作ったとき、駒を取れば加点、角を取れば大きく加点する仕組みを実装したことがある。当時は強化学習に近いと思っていたが、そのAIは経験から方策を更新していない。振り返ると、報酬に似た点数を使った探索アルゴリズムであり、強化学習そのものではなかった。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f90c6752-8b5b-4371-8e89-8b553c7e1ea8">
+
+{/* @layout-id t-b38669c8-abed-4d55-a20a-d2e3203128fa */}
+
 「点数があるだけでは学習とは限らない」というのは、今回調べて初めて気づいた点だった。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f06d7f08-0ff4-4214-9fcb-6646ad4bc954">
+
+{/* @layout-id t-1ccf7d7e-4add-4395-aebb-4424bd719988 */}
 
 ## モデルを作るまでの流れ
 
+{/* @layout-id t-0ad5ef72-4d22-4273-9abf-9fc92104777f */}
+
 機械学習は、アルゴリズムを選んで終わりではない。実際にはデータを整える作業がかなり大きな割合を占める。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2f53a4b8-5ac4-4f32-b832-503e7437101b">
+
+{/* @layout-id t-016fb476-d73c-47c1-a7e8-e4924d050c32 */}
 
 ```text
 生データを集める
@@ -83,28 +634,90 @@ image: "/images/Articles/ML/20260611/ Thumbnail20260611.png"
 未知のデータで評価する
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-19842bce-945d-4b0a-ac65-72cf9771a97b">
+
+{/* @layout-id t-93b801d0-0a54-4dd7-bb33-76a176aeaecb */}
+
 ### 前処理はモデルに合わせて選ぶ
+
+{/* @layout-id t-8510b9d2-ad25-45f2-bee3-d15e295f929d */}
 
 前処理のひとつに、特徴量のスケーリングがある。年齢と年収のように値の大きさが大きく違う特徴量を、そのまま距離計算や最適化に使うと、数値の大きい特徴量が結果へ強く影響することがある。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c9e19522-1f29-43f8-aa4e-c02471ddd00b">
+
+{/* @layout-id t-5ad6c9b2-1c7d-4899-823e-94e0e325a45d */}
+
 標準化は平均0・分散1、正規化は一定の範囲に値を揃える処理だ。ただし、すべてのモデルで必要になるわけではない。KNNやロジスティック回帰などでは重要だが、決定木やランダムフォレストは比較的影響を受けにくい。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-aba5dad0-3ec0-4a2e-b68e-edfae5e72492">
+
+{/* @layout-id t-d2b99ca0-0ea6-476f-a556-e8809e2ba52d */}
 
 「機械学習ではとりあえず標準化する」のではなく、使うアルゴリズムに合わせて判断する必要がある。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-32783070-4e6a-45f0-b5c2-9c1d393c1369">
+
+{/* @layout-id t-336b3999-bbe6-42b7-9a5e-373408a7064a */}
+
 ### 評価用データを学習に混ぜない
+
+{/* @layout-id t-d839afc9-c3c7-44b5-841b-37062fe695be */}
 
 モデルが訓練データに合いすぎて、未知のデータをうまく予測できなくなる状態を過学習という。教科書の問題だけ暗記して、初見の問題が解けない状態に近い。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-92d51b6a-fab4-4201-9910-6a08a24f1451">
+
+{/* @layout-id t-07ca2e33-6b4d-4ed6-8331-11b0c7f16adf */}
+
 そのため、モデルの最終評価には学習で使っていないテストデータを残しておく。モデルやハイパーパラメータを比較するときは、訓練データの中で交差検証を行い、最後までテストデータを見ないのが基本になる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-d2856ba5-9f4a-42b2-af29-6bf87e7efc55">
+
+{/* @layout-id t-1c25acb5-7a3c-4e38-b1e1-51a999af7762 */}
 
 <Tip type="warning" title="テストデータは最後まで取っておく">
   テストデータを見ながらモデルを調整すると、その情報が選択に混ざり、未知データに対する性能を正しく測れなくなる。
 </Tip>
 
+</ArticleBlock>
+
+<ArticleBlock id="b-48850726-0da0-4466-b025-28a7f6936724">
+
+{/* @layout-id t-6d851dc6-2190-4052-8702-cec57897499d */}
+
 ## 次にやること
+
+{/* @layout-id t-45e93d14-8cf4-4724-a8b4-d77cb7c4ca42 */}
 
 今回は、機械学習の種類とモデルを評価するまでの流れを大まかに掴んだ。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-dc313831-1545-4fe9-a544-a23c50ce7578">
+
+{/* @layout-id t-1577956f-ecf7-4d35-994b-cb606bb309cf */}
+
 正直、まだ「知っている単語が増えた」くらいで、モデルが内部でどう計算しているのかはほとんどわかっていない。次はIrisデータセットを実際に触りながら、scikit-learnの `fit()`、`predict()`、`transform()` が何をしているのか確かめる。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-23b38b45-7408-4b5b-be9e-abe0f7a5b8e1">
+
+{/* @layout-id t-caf1ec3f-b606-415a-8318-84115a5086d0 */}
+
 数式から逃げないようにする（予定）。
+
+</ArticleBlock>

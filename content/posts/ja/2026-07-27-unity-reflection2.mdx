@@ -6,59 +6,1676 @@ tags: ["Unity"]
 description: "操作感や敵AI、ゲームバランスに試行錯誤した4作品を振り返り、7本のUnityゲーム制作から得た学びをまとめます。"
 draft: false
 image: "/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png"
+displayTitle: "Unity制作記・後編"
+cardSummary: "試して、直して、またつくる。画面とコードから、制作の工夫をたどる後編。"
+homeOrder: 3
+cover: {"template":"overlay","title":"つくる日々の、\n続き。","subtitle":"Unity works / 02","tone":"dark","mode":"composed","background":"sage","titleSize":"small","focal":"44% 100%","imageZoom":101}
+reader:
+  mode: magazine
+  pages:
+    - id: edition-title
+      template: text
+      blocks:
+        - edition-title
+        - b-025e6ba1-0b99-42a8-b212-640266da51b4
+        - b-b6873d44-2fa6-4b99-a83f-3018ab8fa0c2
+        - b-1fe84a20-dd4b-4b7d-b934-84604f5d51b2
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png
+            side: right
+            width: 45.272529069767444
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-cff598b6-9e87-4a31-9cbe-6d69d975d47c
+            anchorId: t-fa2abe10-2852-4523-9951-77f5a7780174
+            position: free
+            x: 44.139067691029894
+            'y': 33.329797324281145
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-5d30eaa5-c945-4d10-86fd-13006c5002ff
+            width: 99.97793812292359
+            inset: 0
+            offset: 0
+            position: free
+            x: 0.02206187707641196
+            'y': 0
+            bottomSpace: 0
+          - id: t-fa2abe10-2852-4523-9951-77f5a7780174
+            width: 36.551339285714285
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 31.29056010383386
+            bottomSpace: 0.40625
+          - id: t-9ac7976f-d4d4-4177-9ef5-28ee95632c9d
+            width: 80.93594269102991
+            inset: 0
+            offset: 0
+            position: free
+            x: 0.5385693521594677
+            'y': 67.41276457667732
+            bottomSpace: 0
+          - id: t-33b3d40d-76f3-4983-a0df-af97ca199685
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 78.67536940894568
+    - id: b-81d35abb-bbdd-435b-924a-85b0fdc30e44
+      template: text
+      blocks:
+        - b-81d35abb-bbdd-435b-924a-85b0fdc30e44
+        - b-3a77f618-a21b-49d0-872d-ecc97d8620b6
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png
+            side: block
+            width: 67.40069559800665
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-54ad8672-ee82-4c64-bec4-d177c69a746a
+            anchorId: end
+            position: free
+            x: 14.51671511627907
+            'y': 10.013353634185302
+            shape: rounded
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png
+            side: block
+            width: 73.18220514950167
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-cff598b6-9e87-4a31-9cbe-6d69d975d47c
+            anchorId: end
+            position: free
+            x: 11.219762250830563
+            'y': 54.23133897328899
+            shape: rounded
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-01341e22-57f6-4de8-9e10-6c0a275680cd
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-3a77f618-a21b-49d0-872d-ecc97d8620b6:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-9b65c61e-9257-4cd9-9663-cb9b286f30cb
+      template: text
+      blocks:
+        - b-9b65c61e-9257-4cd9-9663-cb9b286f30cb
+        - b-616f818c-c1ff-4ee7-9936-a2c160b8c831
+        - b-3afc9614-82c8-49c6-a6e6-f48648b4632c
+        - b-df8a1045-eaa5-45be-82b8-48207766206c
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png
+            side: block
+            width: 81.31359011627907
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-35478a2a-7096-44c9-a6e8-02da4c6f93fa
+            anchorId: t-9c5e35c7-8677-44b4-a1d5-042e4a9194a6
+            position: free
+            x: 9.936928986710964
+            'y': 5.720222643769969
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-9b65c61e-9257-4cd9-9663-cb9b286f30cb:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9c5e35c7-8677-44b4-a1d5-042e4a9194a6
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8828454b-2e6e-4b17-a159-f56f95dda01c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 74.74291134185303
+          - id: t-a027deb0-4b90-45ca-afb2-71de4f5824d6
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 89.72206968849841
+    - id: b-0d7cad92-2e20-4dee-a715-2c1c9c377464
+      template: text
+      blocks:
+        - b-0d7cad92-2e20-4dee-a715-2c1c9c377464
+        - b-9acff3d8-3634-4c17-988f-33e5b975eee8
+        - b-e2242512-8c2c-4e1d-ac08-c0919992a444
+        - b-a8d44181-867e-4ce3-9826-47b7edd0121b
+        - b-9fd168d0-1227-44df-b84c-b1a1e050878d
+        - b-6aeb4b26-0f72-47bb-a2c9-80bb7797d80f
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-2c2b400f-c0ee-4103-b027-25a8cbafba7d
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0941647f-3a7a-476f-8e9e-88b1a823b316
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-00ef9dd2-d3e9-44e0-aca2-47e932553870
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 16.97721146166134
+          - id: t-d410d373-e2bb-4ae0-8ea5-0c3c21de934d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 40.27431110223642
+          - id: t-a8064fe9-3d4a-41af-83ec-a0a563fa33c2
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 46.539287140575084
+          - id: t-0f49dbd3-71b9-4373-a536-1e32661dd7e1
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 63.42851437699681
+          - id: t-50200d73-beb6-4261-b42f-3c7c046b7d64
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 74.26617412140575
+          - id: t-4fbf515f-01e1-4c04-8c9a-2bcef8506574
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 88.03601737220447
+    - id: b-d9c3b69d-088f-47df-84a6-aa3c91f1574e
+      template: text
+      blocks:
+        - b-d9c3b69d-088f-47df-84a6-aa3c91f1574e
+        - b-dc5f3410-1796-4eb3-b2e6-ef19a9d6bb65
+        - b-1bd0aea0-5827-4a2c-b106-7801b86c0dfb
+        - b-92b831d6-7447-47ce-af0f-aa802bbe47cc
+        - b-84bec5d2-ac63-4dc7-b8bb-a832213d0d85
+        - b-9cce718f-067a-4166-9b2d-66def34d1d15
+        - b-2ac20d08-a58f-40c9-ab08-5eb977ce33a5
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-2e2269ad-c736-4bd6-9ece-817a62878760
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-ee50ad38-b236-4549-9451-e6eefbefc835
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 8.55256589456869
+          - id: t-811fbade-c694-4a82-80f1-a7ba075adbd6
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 18.387455071884983
+          - id: t-b8a3d559-744b-4faa-b2de-f2962699ad12
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 31.38977635782748
+          - id: t-0e51f5d0-8d17-4522-92b1-5f7fdae5020c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 43.70819189297124
+          - id: t-3988fd04-ec7a-4ee5-ab18-6cbbbb089f84
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 59.2689197284345
+          - id: t-06d202fc-9a58-4493-a4a7-d7912e7cc022
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 68.85670427316293
+          - id: t-f256838f-8872-4505-aec4-9d0e72d205fd
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 77.91783146964856
+          - id: t-3656f9e5-02b6-4090-9695-0216e7d9bc85
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 93.738767971246
+    - id: b-16b2b63a-c54f-4192-90ca-b074d45b148e
+      template: text
+      blocks:
+        - b-16b2b63a-c54f-4192-90ca-b074d45b148e
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-eb1eff30-969a-4b5c-ac18-f5cc32ca6052
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-e9f5d96d-db8e-4e9e-a039-fc6a26ce2b53
+      template: text
+      blocks:
+        - b-e9f5d96d-db8e-4e9e-a039-fc6a26ce2b53
+        - b-a65fc22b-196b-47d8-bdd0-8670316347b4
+        - b-3019a846-7674-4d0a-b1bd-50003bb868b5
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png
+            side: block
+            width: 85.40412167774086
+            ratio: 1.236923076923077
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-b763ad91-17a3-446e-9961-b4b9a5ad3054
+            anchorId: t-08aa0421-a924-4f37-bc6f-16c1613f9e95
+            position: free
+            x: 6.118926495016611
+            'y': 4.192042731629393
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-e9f5d96d-db8e-4e9e-a039-fc6a26ce2b53:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-08aa0421-a924-4f37-bc6f-16c1613f9e95
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-3e3b553f-f86e-4d0b-aef8-0e4cacaf0b6c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 84.51602436102236
+    - id: b-a6d42a20-3c7c-4bfc-8d6a-428b9b2b8af7
+      template: text
+      blocks:
+        - b-a6d42a20-3c7c-4bfc-8d6a-428b9b2b8af7
+        - b-529cee73-cbe3-4f92-ac10-ab9959a997f9
+        - b-5d0eaef8-f282-45c2-845a-3aed028a5da8
+        - b-e4be0ecf-bb57-4b15-84f0-b677a585b8c0
+        - b-b8483861-647d-4ebf-bca7-e19d410537b6
+        - b-a9f91d57-2f62-4c13-9961-dab8aa335a30
+        - b-fbd91349-fe2b-4aa3-a7e6-94da6573d7d6
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-bbf40ab8-cfb4-4930-914f-8d54c26b8084
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 2.106005391373802
+          - id: t-ba2124a1-6f7a-4b77-905b-6ada50139a7c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 13.65502695686901
+          - id: t-06b9d63d-1ad3-4a90-a419-16ae2adcd37a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 26.79400459265176
+          - id: t-8414c327-3054-471e-8748-74771edb4a19
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 39.034419928115014
+          - id: t-eca10df2-7220-469d-a4ca-a2b8227ec3e9
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 53.90312999201278
+          - id: t-c5012b98-bcaa-4fdf-b3f3-cee76bcf5ad8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 63.0079373003195
+          - id: t-05e2814f-4b86-48fb-b9a3-3b340969a69f
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 75.6851537539936
+          - id: t-8d19e5bb-9cc6-4bcf-abf0-c9cd945b4ce8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 88.19076976837061
+    - id: b-b7157f04-1e86-4992-af49-b1d72bad9db8
+      template: text
+      blocks:
+        - b-b7157f04-1e86-4992-af49-b1d72bad9db8
+        - b-442a8aee-5ae5-4c36-a310-36cf56f941f7
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/CanCracher/CanCracherTitle.png
+            side: block
+            width: 76.43931686046511
+            ratio: 1.7772397094430992
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-d24b27ee-8058-4a92-9165-462bf8729987
+            anchorId: end
+            shape: rounded
+            position: free
+            x: 12.123001453488374
+            'y': 9.056135183706068
+          - source: /images/Articles/Unity/CanCracher/CanCracherGameScene1.png
+            side: block
+            width: 73.3766092192691
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-df57af62-6617-4429-ba64-4889a864ee11
+            anchorId: end
+            position: free
+            x: 13.45904277408638
+            'y': 52.43797424121406
+            shape: rounded
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-aacd99c5-8027-4fe4-8e19-93d96844c2cd
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-442a8aee-5ae5-4c36-a310-36cf56f941f7:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-f2b62e1b-126c-46e3-bb6e-7230bd389fa3
+      template: text
+      blocks:
+        - b-f2b62e1b-126c-46e3-bb6e-7230bd389fa3
+        - b-6a24dbff-484a-4341-990e-5d48a56ecb30
+        - b-b46bc4f1-dede-46b7-9d74-e2d499ec2c2e
+        - b-0ce2ac12-43aa-4f90-8e66-a5a0c2731fc1
+        - b-5f81b2d8-cb31-4c28-84e2-ada4f8dbadbe
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/CanCracher/CanCracherGameScene2.png
+            side: block
+            width: 80.7717763704319
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-da967180-c61f-499e-a8ac-7c9b7c6ad69d
+            anchorId: t-ae1770bb-dfb6-4ea5-96f2-795fbe59e265
+            position: free
+            x: 9.709172549833887
+            'y': 4.81105231629393
+            shape: rounded
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-f2b62e1b-126c-46e3-bb6e-7230bd389fa3:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-ae1770bb-dfb6-4ea5-96f2-795fbe59e265
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-c63b980c-729d-4219-9d2f-dd008b54cb90
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 68.45047923322683
+          - id: t-ac90034f-9c76-4442-bcea-ac15f785b420
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 77.72626297923321
+          - id: t-f55aaaed-6602-47f2-930b-74ab70580228
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 89.22723642172522
+    - id: b-64bb18ca-ab7d-4931-9cb1-039dbbbef19b
+      template: text
+      blocks:
+        - b-64bb18ca-ab7d-4931-9cb1-039dbbbef19b
+        - b-8a87e82d-d152-4241-ab88-6aa62871446a
+        - b-5e289af2-127b-4e2f-88eb-d00d6626799a
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-30eb3bc3-b9af-4075-af48-2f8eaf27e7a8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 4.323083067092652
+          - id: t-b0cf8f2d-8545-4e8f-abce-01d645963dba
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 21.206070287539934
+          - id: t-4417dab0-3949-4860-818d-525a0ec7169f
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 29.412315295527158
+          - id: t-1cf8a0a8-d653-48d9-9d04-bf0051a165b6
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 37.35710363418531
+    - id: b-f26b18a3-1833-4ec4-9cad-3f7c48a79897
+      template: text
+      blocks:
+        - b-f26b18a3-1833-4ec4-9cad-3f7c48a79897
+        - b-e9545c7e-5724-4986-9e20-4c0c28c5a821
+        - b-3bae2084-772c-43ad-9e0b-8df2c6045429
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-ab4a4df8-db75-4e89-9480-0e2c13cfb3d5
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-235bc7a9-b90d-4933-8df5-cd4dad2a78f0
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 77.99146365814697
+          - id: t-8e97c6bb-d3d5-40e0-aeb4-5c4d52f165db
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 88.51649860223642
+    - id: b-1b126ac7-60fd-4822-b9fd-9ebd9f9e9050
+      template: text
+      blocks:
+        - b-1b126ac7-60fd-4822-b9fd-9ebd9f9e9050
+        - b-e97336ce-581d-4319-b10d-bead94d103c7
+        - b-665e5f0d-2fe4-44cb-a09c-255fbcdc055d
+        - b-3625508e-584a-4d8b-8ba2-da7df3b405e4
+        - b-996c96b5-7a6e-4ded-80ad-7235c2fc6291
+        - b-1fe4ba2e-31e2-4554-b1ed-975186958d1c
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-bbc088db-a8f8-4e6c-8377-601a913af9e4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 1.4401956869009584
+          - id: t-c76706a6-c4fe-46cd-8b9a-29341d15f6a4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 18.086686301916934
+          - id: t-c93968b2-83cc-4ee5-8b14-404b0ad73061
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 32.95789237220447
+          - id: t-1ba44c78-3faa-4ed4-9f60-7792cfd6e493
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 47.38418530351438
+          - id: t-040fceb1-c91c-417b-87a9-90d4ed813f0a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 54.78172424121405
+          - id: t-1b681bfb-c71b-4392-a6b3-9233fcd38ba4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 67.07081170127796
+          - id: t-d56b4574-ac05-4318-9bec-0a90fabd37c7
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 84.55783246805112
+    - id: b-209804ae-a564-48e6-adc3-b39262077ccb
+      template: text
+      blocks:
+        - b-209804ae-a564-48e6-adc3-b39262077ccb
+        - b-a6295759-e178-44fd-8c02-298716e49ba6
+        - b-452e865b-3980-4e8a-b7b5-31f11fb7ebed
+        - b-21953032-ccfd-4059-8818-6ce08d65488a
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png
+            side: left
+            width: 44
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-e46e9121-50be-41d8-9893-5689bd0f9d1b
+            anchorId: end
+            position: free
+            x: 9.766273878737541
+            'y': 29.396715255591058
+            shape: rounded
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png
+            side: right
+            width: 61.22513496677741
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-138ed099-1587-42c7-90fc-7e5a312a5089
+            anchorId: end
+            position: free
+            x: 9.660973837209312
+            'y': 60.306010383386585
+            shape: rounded
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-6b69086d-9316-4522-b159-436abd9f508c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-f477191d-77e4-4ed1-9fc7-2805afee941b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-56ae4248-dc7b-404f-aba8-f3b9cd098676
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-21953032-ccfd-4059-8818-6ce08d65488a:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-842e8f0f-fdb6-4618-9f20-84ab18c3ef7e
+      template: text
+      blocks:
+        - b-842e8f0f-fdb6-4618-9f20-84ab18c3ef7e
+        - b-68b26592-7178-4cac-bbbb-58db8fc95488
+        - b-af29f005-2599-4b42-92ca-cd6f25a1ae39
+        - b-a846932f-7b56-4d53-98fd-d019f3547bf4
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png
+            side: block
+            width: 82.57371262458472
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-15d4353c-85ad-4980-9f87-1580a25b3e49
+            anchorId: t-e67579ea-7036-4ddf-a603-af8ed45e579f
+            position: free
+            x: 8.349122715946844
+            'y': 4.311227036741214
+            shape: rounded
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-842e8f0f-fdb6-4618-9f20-84ab18c3ef7e:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e67579ea-7036-4ddf-a603-af8ed45e579f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7583fba7-c5e6-4cde-b473-dbc10dc104f5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 70.30251597444091
+          - id: t-053fdad3-f148-4856-860d-59a3a330c524
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 82.68769968051119
+    - id: b-97acfa57-befa-43e1-a2eb-636b9c6d80f2
+      template: text
+      blocks:
+        - b-97acfa57-befa-43e1-a2eb-636b9c6d80f2
+        - b-42aa52aa-b252-4b05-951a-fc7b638c7182
+        - b-4f83a957-df8f-49c4-9c64-da9008a661b1
+        - b-c48b0cc2-b4be-4053-aba9-ca971b13b64c
+        - b-84246722-18c5-426b-b9d9-e2e82c0b2436
+        - b-6c7267ed-7cb9-421e-ad55-43766f6fad96
+        - b-be2bd821-318d-482d-9526-b1c81291af01
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-f78bcf55-4075-477c-a794-b8d90c8d57a5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 1.157522963258786
+          - id: t-37dacb74-c32f-4396-a40a-6232368215e3
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 11.532173522364218
+          - id: t-cb7c6946-be66-449b-9f7c-f1193516e459
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 25.134160343450482
+          - id: t-3bc1576f-42bd-4a49-afa5-502b090ac0b7
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 33.48579772364217
+          - id: t-7d7f54f9-1258-41ca-88d3-70f36b967ff5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 43.956544528753994
+          - id: t-df0b97f1-d1c6-4e43-8256-b668ded06e40
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 57.05995407348242
+          - id: t-56e26ae6-da06-4aa8-bdf6-8afc7436245c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 73.31332368210862
+          - id: t-ec19ef5f-93aa-4c93-b2fd-aa2c2df878ee
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 83.69546226038338
+          - id: t-13183c21-a96e-4175-b37f-83d8f64bb068
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 93.45172723642173
+    - id: b-7794e920-48bc-462e-9bb9-11636cc7ad9d
+      template: text
+      blocks:
+        - b-7794e920-48bc-462e-9bb9-11636cc7ad9d
+        - b-4b9bedd3-fab5-4f1f-9937-5e714991b3e4
+        - b-ee6f840d-e94b-4ee8-aaef-59e24b079d6b
+        - b-3d9a3763-ca39-42ec-b8c3-7f63acdeac43
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-b24bd0b3-1c11-4cf6-afd4-7472c412d55e
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9b563dfe-f25f-489f-9048-54c3dd2aadaf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 15.410967452076678
+          - id: t-88aa12e4-3d3d-422a-b202-66311bca1d03
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 32.468051118210866
+          - id: t-e8dfee98-6ac1-40f6-b6c4-f320b8b36664
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 48.37884384984026
+    - id: b-42e9ca19-be50-4e9c-b20a-511fe7ebb2ad
+      template: text
+      blocks:
+        - b-42e9ca19-be50-4e9c-b20a-511fe7ebb2ad
+        - b-b2dcf99c-3ea5-4724-9fde-9819f69b2931
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-e07e46d6-fb4f-4770-bfa3-8e22bd0081c5
+            anchorId: end
+            shape: rounded
+            position: free
+            x: 17.449647009966778
+            'y': 8.550693889776358
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png
+            side: block
+            width: 76.22220203488372
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-7b88e44d-7dfe-4488-9383-fa086c897a5a
+            anchorId: end
+            position: free
+            x: 11.618173795681063
+            'y': 50.44928115015974
+            shape: rounded
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-5a06a09c-01c2-4821-9df7-01fa5a980fe6
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-b2dcf99c-3ea5-4724-9fde-9819f69b2931:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-50480aa8-dab4-482f-aa5a-b3029161f442
+      template: text
+      blocks:
+        - b-50480aa8-dab4-482f-aa5a-b3029161f442
+        - b-9acd68af-696b-438a-95df-d6d4509116b6
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png
+            side: block
+            width: 72.98689264950166
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-06f71770-2736-4172-be47-30dd72e8a296
+            anchorId: end
+            position: free
+            x: 17.317924626245848
+            'y': 4.921500599041534
+            shape: rounded
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png
+            side: block
+            width: 70.90788517441861
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-c1ac5064-0ba6-49f8-8d1e-13b5c6f10d8a
+            anchorId: end
+            position: free
+            x: 7.622378529900332
+            'y': 54.15148262779553
+            shape: rounded
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-50480aa8-dab4-482f-aa5a-b3029161f442:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-9acd68af-696b-438a-95df-d6d4509116b6:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-751c4f14-cfa5-4d21-abdb-fc4e30c13835
+      template: text
+      blocks:
+        - b-751c4f14-cfa5-4d21-abdb-fc4e30c13835
+        - b-f252ef54-90e2-4c53-9868-599cbced47c3
+        - b-29c34011-826b-416c-b3cc-ebdce58623ea
+        - b-4a7152b5-1a37-4b92-861f-bab3146d05c2
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png
+            side: block
+            width: 85.87585651993355
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-ce20c2c5-af8c-44fd-b1c2-31ce1655b297
+            anchorId: t-54d4d2a0-a0c6-4120-8557-aea75449ad42
+            position: free
+            x: 6.7600186877076425
+            'y': 3.977386182108626
+            shape: rounded
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-751c4f14-cfa5-4d21-abdb-fc4e30c13835:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-54d4d2a0-a0c6-4120-8557-aea75449ad42
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-cbf85e85-b45e-4c74-939f-cf0ec9f224b5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 71.29592651757187
+          - id: t-314378fd-b621-4c4b-a49a-89a24643a82b
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 86.72499001597444
+    - id: b-1490df84-5157-4da8-9ade-72d2846810a0
+      template: text
+      blocks:
+        - b-1490df84-5157-4da8-9ade-72d2846810a0
+        - b-009407a7-1e9f-4e56-8cfb-8690d6d96393
+        - b-b7a8f56f-0dc6-4bcd-99f5-b91aff8633ac
+        - b-71fec835-b91e-4e3b-bc03-c0f2e09f9d29
+        - b-7e547b63-d9c7-4f58-82d9-0c50e4b87dc5
+        - b-889d7c84-d7bd-41f7-99c4-40a82fe052e9
+        - b-2e28c352-72d6-4dcd-b01f-91e844d6bf47
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-ddd40be0-2138-4e51-a827-5aeb090efe4e
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 0.21964856230031948
+          - id: t-2a56617a-4cec-48e6-8331-79caec067036
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 7.222194488817892
+          - id: t-a15a27c9-2c9d-48da-ae30-a68d394391d4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 15.770392372204473
+          - id: t-a5a3a854-88ea-4238-b78b-10f879033f5d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 28.207368210862622
+          - id: t-89a98b67-3f97-4017-90b1-83a4f91bd632
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 40.430311501597444
+          - id: t-8d1d83e5-1ddc-4427-9054-d01566277a31
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 53.954922124600635
+          - id: t-cb0233a0-6e27-48fd-b0e8-424f7e2f172e
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 62.64414436900958
+          - id: t-6fee0c0a-159a-4e42-978a-b5585a6d2904
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 74.69548722044729
+          - id: t-c20117d9-9472-4cea-8c62-8833ca17d360
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 85.89506789137381
+    - id: b-2a0927ee-100a-4594-a845-0eb40c491470
+      template: text
+      blocks:
+        - b-2a0927ee-100a-4594-a845-0eb40c491470
+        - b-c2af4c98-2bf0-4001-956c-b65255ee2b93
+        - b-cdb03349-aac1-4ee1-ad98-74e0959dcab3
+        - b-24c85c83-c3fd-4f70-901c-5476ce0deabd
+        - b-d024049f-c943-4adb-ba4e-d35e96d23c7d
+        - b-b56b641e-9b0d-4e65-b6b5-568f5597f293
+        - b-06289d25-6d04-45a6-82f7-ff73b036267b
+        - b-47086439-b9dc-4cb1-8f69-b3b3738b7002
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9502d329-cb1c-4e11-ad30-2901c9efe1b4
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-c55a027a-4774-4632-b52f-cab25fe14a65
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0ea55894-dfe9-4ee1-8bcb-0c91dc91273c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 21.32525459265176
+          - id: t-af6ed1d7-7f3a-4f27-8761-8fd9cdf43ca5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 34.399960063897765
+          - id: t-9831e982-3606-4491-94ed-aa62d7b4761a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 40.97132088658147
+          - id: t-89c6035e-cb86-4b8f-8c6f-54ddb6bd0f6c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 49.76849540734824
+          - id: t-e3ee8de7-6850-4b63-8bc0-a5962800a4ab
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 65.42219948083067
+          - id: t-b9862d0d-db6b-4db1-9edc-280a4bfb775d
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 73.96228534345047
+          - id: t-9d9c50c9-00ee-47b1-b6bd-f57d9e293e70
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 85.6261232028754
+    - id: b-03aa71fa-b9f9-4f6f-869a-31a44516966c
+      template: text
+      blocks:
+        - b-03aa71fa-b9f9-4f6f-869a-31a44516966c
+        - b-2b5111e8-96ac-4e7e-bb81-c0f2ea0feab6
+        - b-8b1a4c29-5b76-4dd4-8e1b-280fd3163726
+        - b-887a242c-cb5c-4e42-8f3a-a98dd7af2866
+        - b-ca271065-e929-4fed-9d37-9dc6944c23f8
+        - b-f6385a37-001f-4818-81f3-a64d000fee5b
+        - b-0d8bc279-bd1d-4782-ad81-77e649e83791
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-6b1b8145-5967-4365-a0df-ac4e979ffb77
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8a42e675-1391-4017-83e2-75aa7916ce19
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 6.817841453674122
+          - id: t-1d63a979-53f9-4899-aa01-827929b1a96c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 14.265300519169328
+          - id: t-f62251a4-22f0-4353-a1b8-f3eb510c284e
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 21.97109624600639
+          - id: t-6b7f9549-6e68-4c07-accc-bfe38af94a92
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 36.822334265175726
+          - id: t-11cc6422-8baa-4051-81d1-f7874f146442
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 50.88171425718849
+          - id: t-36f2cecd-fd52-4e2a-bb61-74bbd347c3cf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 66.82557907348242
+          - id: t-55ae7d80-3132-404a-abfb-2912eddf1a98
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 79.07909844249201
+          - id: t-9987ac56-0354-4f74-a955-16f69ca639bf
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 88.75923522364218
+    - id: b-2059c12c-4f3e-4e4d-9bf8-f329cc2e8b09
+      template: text
+      blocks:
+        - b-2059c12c-4f3e-4e4d-9bf8-f329cc2e8b09
+        - b-aa923fc6-a1ee-47eb-a140-31314f38fef5
+        - b-9061dc22-f381-4f1a-98ec-c0eb5bf8c6dd
+        - b-1fb8f55b-11a7-4bad-9f01-fe435f63b6b1
+        - b-9086e3e3-1da9-4466-9f9d-e0b4a7bd0ad6
+        - b-c411d315-08e8-48ad-884e-6a51546b075b
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-415b35ec-5d57-45bb-ab3c-6c87bd50825c
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 1.6916683306709264
+          - id: t-6ed8bc70-492b-488d-96df-33073540d1ca
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 17.995582068690098
+          - id: t-8888041b-ac3a-4de1-b375-0c30f74472fd
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 29.978284744408946
+          - id: t-feb96ea3-99f0-4dbc-a989-3acc7691345a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 48.243435503194895
+          - id: t-86b5c137-7dbf-4909-a16a-8b68660a0be2
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 62.467551916932905
+          - id: t-0274ec0c-88d0-46bc-934e-7c5c2cd5dfae
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 76.86638877795527
+    - id: b-f3e5a57f-2a90-4ba3-961c-cd090b3f2b17
+      template: text
+      blocks:
+        - b-f3e5a57f-2a90-4ba3-961c-cd090b3f2b17
+        - b-c1bcf9d6-9524-4791-8a15-7d7ee48543a8
+        - b-129489eb-6bbb-4dc4-b833-4ebb996f26c0
+        - b-ffca4afc-366c-4a92-9123-19a3156e63d1
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-1f0c772f-c081-4936-a2d6-9b0f053c2687
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 2.9053514376996805
+          - id: t-901620de-8ee2-403f-8de9-00f7ab955028
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 19.57680211661342
+          - id: t-7e932a10-a7f9-4bd6-9f64-e1357f9b29c6
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 27.56776657348243
+          - id: t-dd28ea8f-15d5-4d11-9d57-b2855fdf23b4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 55.44441393769968
+  schemaVersion: 2
+  articleId: article-f1b4c9ce-b3ca-4a7c-8d5c-bc50cbb779b4
 ---
+<ArticleBlock id="edition-title">
+
+{/* @layout-id t-5d30eaa5-c945-4d10-86fd-13006c5002ff */}
+
+<ArticleTitle />
+
+<Photo assetId="asset-cff598b6-9e87-4a31-9cbe-6d69d975d47c" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png" alt="" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-025e6ba1-0b99-42a8-b212-640266da51b4">
+
+{/* @layout-id t-fa2abe10-2852-4523-9951-77f5a7780174 */}
 
 こんにちは！Darkmochaです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-b6873d44-2fa6-4b99-a83f-3018ab8fa0c2">
+
+{/* @layout-id t-9ac7976f-d4d4-4177-9ef5-28ee95632c9d */}
+
 前編に引き続き、これまでに作ってきたUnity作品を振り返っていきます。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1fe84a20-dd4b-4b7d-b934-84604f5d51b2">
+
+{/* @layout-id t-33b3d40d-76f3-4983-a0df-af97ca199685 */}
 
 前編では、ハンズオンを通してUnityの基礎を学んだ最初の3作品を紹介しました。後編では、少しずつオリジナルの企画や操作方法に挑戦するようになった、4作品目から7作品目までを振り返ります。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-81d35abb-bbdd-435b-924a-85b0fdc30e44">
+
+{/* @layout-id t-01341e22-57f6-4de8-9e10-6c0a275680cd */}
+
 ## 4作品目「アーマーブレイカーズ」
 
-<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" />
+<Photo assetId="asset-54ad8672-ee82-4c64-bec4-d177c69a746a" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3a77f618-a21b-49d0-872d-ecc97d8620b6">
+
+<Photo assetId="asset-cff598b6-9e87-4a31-9cbe-6d69d975d47c" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9b65c61e-9257-4cd9-9663-cb9b286f30cb">
+
+<Photo assetId="asset-35478a2a-7096-44c9-a6e8-02da4c6f93fa" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-616f818c-c1ff-4ee7-9936-a2c160b8c831">
+
+{/* @layout-id t-9c5e35c7-8677-44b4-a1d5-042e4a9194a6 */}
 
 「アーマーブレイカーズ」は、見下ろし視点で戦車を操作して敵と戦う、トップダウン型の戦車バトルゲームです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3afc9614-82c8-49c6-a6e6-f48648b4632c">
+
+{/* @layout-id t-8828454b-2e6e-4b17-a159-f56f95dda01c */}
+
 このゲームを作った理由はとてもシンプルで、私が「World of Tanks」というゲームを好きだったからです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-df8a1045-eaa5-45be-82b8-48207766206c">
+
+{/* @layout-id t-a027deb0-4b90-45ca-afb2-71de4f5824d6 */}
 
 戦車が登場するゲームを、一度自分でも作ってみたいと思い制作しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-0d7cad92-2e20-4dee-a715-2c1c9c377464">
+
+{/* @layout-id t-2c2b400f-c0ee-4103-b027-25a8cbafba7d */}
+
 ### この作品で工夫したこと
 
+{/* @layout-id t-0941647f-3a7a-476f-8e9e-88b1a823b316 */}
+
 この作品で特に工夫したのは、次の3点です。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9acff3d8-3634-4c17-988f-33e5b975eee8">
+
+{/* @layout-id t-00ef9dd2-d3e9-44e0-aca2-47e932553870 */}
 
 1. AIを使った画像生成
 2. 爆発エフェクトによる手応えの表現
 3. Raycastを使った敵戦車の行動パターン
 
+</ArticleBlock>
+
+<ArticleBlock id="b-e2242512-8c2c-4e1d-ac08-c0919992a444">
+
+{/* @layout-id t-d410d373-e2bb-4ae0-8ea5-0c3c21de934d */}
+
 ### AIを使った画像生成
+
+{/* @layout-id t-a8064fe9-3d4a-41af-83ec-a0a563fa33c2 */}
 
 今回も、ゲームのイメージに合うフリーアセットがなかなか見つからなかったため、GeminiのNano Banana Proを使って画像を生成しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-a8d44181-867e-4ce3-9826-47b7edd0121b">
+
+{/* @layout-id t-0f49dbd3-71b9-4373-a536-1e32661dd7e1 */}
+
 画像生成を使って作った主なSpriteは、**戦車と弾**です。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9fd168d0-1227-44df-b84c-b1a1e050878d">
+
+{/* @layout-id t-50200d73-beb6-4261-b42f-3c7c046b7d64 */}
 
 ゲーム全体の世界観をそろえるため、まずAIに画像生成用のプロンプトを書いてもらい、そのプロンプトをもとに全5種類の戦車と弾を作成しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-6aeb4b26-0f72-47bb-a2c9-80bb7797d80f">
+
+{/* @layout-id t-4fbf515f-01e1-4c04-8c9a-2bcef8506574 */}
+
 戦車は、車体と砲身をそれぞれ別のパーツとして生成し、Unity上で組み合わせています。パーツを分けたことで、車体の進行方向とは別に砲身を回転させられるようになりました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-d9c3b69d-088f-47df-84a6-aa3c91f1574e">
+
+{/* @layout-id t-2e2269ad-c736-4bd6-9ece-817a62878760 */}
 
 ### エフェクトの大切さ
 
+{/* @layout-id t-ee50ad38-b236-4549-9451-e6eefbefc835 */}
+
 それまでの作品では、エフェクトをあまり本格的に使っていませんでした。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-dc5f3410-1796-4eb3-b2e6-ef19a9d6bb65">
+
+{/* @layout-id t-811fbade-c694-4a82-80f1-a7ba075adbd6 */}
 
 しかし、試しに戦車の破壊時に爆発エフェクトを追加してみると、攻撃が命中したときの手応えが伝わりやすくなり、ゲームの面白さが大きく変わりました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1bd0aea0-5827-4a2c-b106-7801b86c0dfb">
+
+{/* @layout-id t-b8a3d559-744b-4faa-b2de-f2962699ad12 */}
+
 ゲームのルールやシステムが同じでも、エフェクトが加わるだけで、プレイヤーが受け取る気持ちよさや没入感は変わります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-92b831d6-7447-47ce-af0f-aa802bbe47cc">
+
+{/* @layout-id t-0e51f5d0-8d17-4522-92b1-5f7fdae5020c */}
 
 見た目を豪華にするためだけではなく、プレイヤーにゲームの状態を伝えるためにも、エフェクトは重要なのだと学びました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-84bec5d2-ac63-4dc7-b8bb-a832213d0d85">
+
+{/* @layout-id t-3988fd04-ec7a-4ee5-ab18-6cbbbb089f84 */}
+
 ### Raycastを使った敵戦車の行動パターン
+
+{/* @layout-id t-06d202fc-9a58-4493-a4a7-d7912e7cc022 */}
 
 敵戦車の移動や攻撃の自動化には、Raycastを使用しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-9cce718f-067a-4166-9b2d-66def34d1d15">
+
+{/* @layout-id t-f256838f-8872-4505-aec4-9d0e72d205fd */}
+
 仕組みとしては、1作品目の接地判定で使った `Physics2D.BoxCast` と似ています。敵戦車の前方にRayを飛ばし、壁を検知したら進行方向を変えるというものです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-2ac20d08-a58f-40c9-ab08-5eb977ce33a5">
+
+{/* @layout-id t-3656f9e5-02b6-4090-9695-0216e7d9bc85 */}
+
 簡略化すると、次のような処理です。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-16b2b63a-c54f-4192-90ca-b074d45b148e">
+
+{/* @layout-id t-eb1eff30-969a-4b5c-ac18-f5cc32ca6052 */}
 
 ```csharp
 RaycastHit2D hit = Physics2D.Raycast(
@@ -86,47 +1703,175 @@ else
 }
 ```
 
-<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png" alt="戦車ゲーム開発画面（Raycast）" />
+</ArticleBlock>
+
+<ArticleBlock id="b-e9f5d96d-db8e-4e9e-a039-fc6a26ce2b53">
+
+<Photo assetId="asset-b763ad91-17a3-446e-9961-b4b9a5ad3054" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png" alt="戦車ゲーム開発画面（Raycast）" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a65fc22b-196b-47d8-bdd0-8670316347b4">
+
+{/* @layout-id t-08aa0421-a924-4f37-bc6f-16c1613f9e95 */}
 
 上の画像には、敵戦車を中心に2つの円があります。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3019a846-7674-4d0a-b1bd-50003bb868b5">
+
+{/* @layout-id t-3e3b553f-f86e-4d0b-aef8-0e4cacaf0b6c */}
+
 内側の円が索敵範囲です。プレイヤーがこの範囲に入ると、敵戦車は巡回モードから追跡モードへ移行します。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a6d42a20-3c7c-4bfc-8d6a-428b9b2b8af7">
+
+{/* @layout-id t-bbf40ab8-cfb4-4930-914f-8d54c26b8084 */}
 
 外側の円は、プレイヤーを見失ったと判定するための範囲です。プレイヤーが外側の円から出た時点で、追跡モードから巡回モードへ戻ります。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-529cee73-cbe3-4f92-ac10-ab9959a997f9">
+
+{/* @layout-id t-ba2124a1-6f7a-4b77-905b-6ada50139a7c */}
+
 索敵を開始する範囲と見失う範囲を分けることで、境界付近で巡回と追跡が何度も切り替わるのを防いでいます。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-5d0eaef8-f282-45c2-845a-3aed028a5da8">
+
+{/* @layout-id t-06b9d63d-1ad3-4a90-a419-16ae2adcd37a */}
 
 戦車の前方から伸びている3本のRayは、障害物を避けるためのものです。ほかにも砲身からRayを飛ばし、その先にプレイヤーがいる場合に弾を発射する処理にも使用しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-e4be0ecf-bb57-4b15-84f0-b677a585b8c0">
+
+{/* @layout-id t-8414c327-3054-471e-8748-74771edb4a19 */}
+
 接地判定で初めて使ったRaycastを、敵AIの移動や攻撃に応用できたことは、自分の成長を感じられた部分です。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b8483861-647d-4ebf-bca7-e19d410537b6">
+
+{/* @layout-id t-eca10df2-7220-469d-a4ca-a2b8227ec3e9 */}
 
 ### 振り返ってみて
 
+{/* @layout-id t-c5012b98-bcaa-4fdf-b3f3-cee76bcf5ad8 */}
+
 見た目や敵の動きにはかなりこだわりましたが、ゲームを繰り返し遊ぶための目標は、もう少し作り込めたと思います。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a9f91d57-2f62-4c13-9961-dab8aa335a30">
+
+{/* @layout-id t-05e2814f-4b86-48fb-b9a3-3b340969a69f */}
 
 例えば、倒した敵戦車の数に応じて新しい戦車が解放される仕組みがあれば、戦闘を続ける目的が生まれ、より長く遊べるゲームになったかもしれません。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-fbd91349-fe2b-4aa3-a7e6-94da6573d7d6">
+
+{/* @layout-id t-8d19e5bb-9cc6-4bcf-abf0-c9cd945b4ce8 */}
+
 「戦車を操作して敵を倒す」という基本部分だけでなく、その先にどのような目標を用意するかも考える必要がありました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b7157f04-1e86-4992-af49-b1d72bad9db8">
+
+{/* @layout-id t-aacd99c5-8027-4fe4-8e19-93d96844c2cd */}
 
 ## 5作品目「Can Cracher」
 
-<ImageSlider images="/images/Articles/Unity/CanCracher/CanCracherTitle.png, /images/Articles/Unity/CanCracher/CanCracherGameScene1.png, /images/Articles/Unity/CanCracher/CanCracherGameScene2.png" />
+<Photo assetId="asset-d24b27ee-8058-4a92-9165-462bf8729987" src="/images/Articles/Unity/CanCracher/CanCracherTitle.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-442a8aee-5ae5-4c36-a310-36cf56f941f7">
+
+<Photo assetId="asset-df57af62-6617-4429-ba64-4889a864ee11" src="/images/Articles/Unity/CanCracher/CanCracherGameScene1.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f2b62e1b-126c-46e3-bb6e-7230bd389fa3">
+
+<Photo assetId="asset-da967180-c61f-499e-a8ac-7c9b7c6ad69d" src="/images/Articles/Unity/CanCracher/CanCracherGameScene2.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6a24dbff-484a-4341-990e-5d48a56ecb30">
+
+{/* @layout-id t-ae1770bb-dfb6-4ea5-96f2-795fbe59e265 */}
 
 5作品目は「Can Cracher」です。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-b46bc4f1-dede-46b7-9d74-e2d499ec2c2e">
+
+{/* @layout-id t-c63b980c-729d-4219-9d2f-dd008b54cb90 */}
+
 このゲームは、空から降ってくる空き缶をクリックで打ち上げ、ゴミ箱に入れるゲームです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-0ce2ac12-43aa-4f90-8e66-a5a0c2731fc1">
+
+{/* @layout-id t-ac90034f-9c76-4442-bcea-ac15f785b420 */}
 
 我ながら、なかなかユニークなゲームを作れたと感じています。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-5f81b2d8-cb31-4c28-84e2-ada4f8dbadbe">
+
+{/* @layout-id t-f55aaaed-6602-47f2-930b-74ab70580228 */}
+
 レベルが上がるにつれて缶を打ち上げられる高さが低くなり、少しずつゴミ箱へ入れるのが難しくなっていきます。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-64bb18ca-ab7d-4931-9cb1-039dbbbef19b">
+
+{/* @layout-id t-30eb3bc3-b9af-4075-af48-2f8eaf27e7a8 */}
 
 作っている途中は「本当に面白くなるのだろうか」と不安でしたが、完成して実際に遊んでみると、案外面白いゲームに仕上がりました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-8a87e82d-d152-4241-ab88-6aa62871446a">
+
+{/* @layout-id t-b0cf8f2d-8545-4e8f-abce-01d645963dba */}
+
 ### クリックする位置で変わる操作感
+
+{/* @layout-id t-4417dab0-3949-4860-818d-525a0ec7169f */}
 
 このゲームの肝は、空き缶をクリックしたときの操作感です。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-5e289af2-127b-4e2f-88eb-d00d6626799a">
+
+{/* @layout-id t-1cf8a0a8-d653-48d9-9d04-bf0051a165b6 */}
+
 缶のどこをクリックしても同じ方向へ飛ぶのではなく、クリックした位置によって、缶が飛ぶ方向と回転する向きが変わるようにしました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f26b18a3-1833-4ec4-9cad-3f7c48a79897">
+
+{/* @layout-id t-ab4a4df8-db75-4e89-9480-0e2c13cfb3d5 */}
 
 ```csharp
 void OnMouseDown()
@@ -153,147 +1898,567 @@ void OnMouseDown()
 }
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-e9545c7e-5724-4986-9e20-4c0c28c5a821">
+
+{/* @layout-id t-235bc7a9-b90d-4933-8df5-cd4dad2a78f0 */}
+
 缶の中心より右側をクリックすると、缶は左方向へ飛びます。反対に、左側をクリックすると右方向へ飛びます。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3bae2084-772c-43ad-9e0b-8df2c6045429">
+
+{/* @layout-id t-8e97c6bb-d3d5-40e0-aeb4-5c4d52f165db */}
+
 回転方向もクリックした位置によって変わります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1b126ac7-60fd-4822-b9fd-9ebd9f9e9050">
+
+{/* @layout-id t-bbc088db-a8f8-4e6c-8377-601a913af9e4 */}
 
 - 缶の右側をクリック：`xOffset` が負になり、時計回りに回転する
 - 缶の左側をクリック：`xOffset` が正になり、反時計回りに回転する
 
+</ArticleBlock>
+
+<ArticleBlock id="b-e97336ce-581d-4319-b10d-bead94d103c7">
+
+{/* @layout-id t-c76706a6-c4fe-46cd-8b9a-29341d15f6a4 */}
+
 クリックする位置が少しずれるだけで缶の軌道が変わるため、狙った場所へ飛ばすには微妙な調整が必要になります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-665e5f0d-2fe4-44cb-a09c-255fbcdc055d">
+
+{/* @layout-id t-c93968b2-83cc-4ee5-8b14-404b0ad73061 */}
 
 シンプルなクリック操作でも、位置や力の加え方を変えることで、ゲームらしい操作感を作れることを学びました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3625508e-584a-4d8b-8ba2-da7df3b405e4">
+
+{/* @layout-id t-1ba44c78-3faa-4ed4-9f60-7792cfd6e493 */}
+
 ### WebGLで発生した表示の問題
+
+{/* @layout-id t-040fceb1-c91c-417b-87a9-90d4ed813f0a */}
 
 反省点は、WebGL版を公開した後の表示確認です。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-996c96b5-7a6e-4ded-80ad-7235c2fc6291">
+
+{/* @layout-id t-1b681bfb-c71b-4392-a6b3-9233fcd38ba4 */}
+
 開発中はWindowsを使っていたため気づかなかったのですが、WebGL形式でビルドしたゲームをiframeでサイトに埋め込み、Macのブラウザから確認すると、画面のアスペクト比がずれて左右の端が見切れていました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1fe4ba2e-31e2-4554-b1ed-975186958d1c">
+
+{/* @layout-id t-d56b4574-ac05-4318-9bec-0a90fabd37c7 */}
 
 このゲームでは、画面端に移動した缶をクリックできないことが致命的です。端が見切れると、そこへ移動した缶を操作できなくなり、ゲームを続けられない状態になってしまいます。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-209804ae-a564-48e6-adc3-b39262077ccb">
+
+{/* @layout-id t-6b69086d-9316-4522-b159-436abd9f508c */}
+
 ゲーム本体が正常に動いていても、公開するページやブラウザの表示方法によって、プレイできなくなる可能性があります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a6295759-e178-44fd-8c02-298716e49ba6">
+
+{/* @layout-id t-f477191d-77e4-4ed1-9fc7-2805afee941b */}
 
 現在はMacも購入したので、今後は複数の環境や画面サイズで表示を確認してから公開することを意識したいです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-452e865b-3980-4e8a-b7b5-31f11fb7ebed">
+
+{/* @layout-id t-56ae4248-dc7b-404f-aba8-f3b9cd098676 */}
+
 ## 6作品目「Meteor Frontier Runner」
 
-<ImageSlider images="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" />
+<Photo assetId="asset-e46e9121-50be-41d8-9893-5689bd0f9d1b" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-21953032-ccfd-4059-8818-6ce08d65488a">
+
+<Photo assetId="asset-138ed099-1587-42c7-90fc-7e5a312a5089" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-842e8f0f-fdb6-4618-9f20-84ab18c3ef7e">
+
+<Photo assetId="asset-15d4353c-85ad-4980-9f87-1580a25b3e49" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-68b26592-7178-4cac-bbbb-58db8fc95488">
+
+{/* @layout-id t-e67579ea-7036-4ddf-a603-af8ed45e579f */}
 
 残る作品もあと2つ。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-af29f005-2599-4b42-92ca-cd6f25a1ae39">
+
+{/* @layout-id t-7583fba7-c5e6-4cde-b473-dbc10dc104f5 */}
+
 6作品目の「Meteor Frontier Runner」は、ロケットを操作して隕石を避けながら進み続ける、無限ランゲームです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a846932f-7b56-4d53-98fd-d019f3547bf4">
+
+{/* @layout-id t-053fdad3-f148-4856-860d-59a3a330c524 */}
 
 ロケットが進んだ距離に応じて隕石の数が増え、少しずつ難易度が上がっていきます。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-97acfa57-befa-43e1-a2eb-636b9c6d80f2">
+
+{/* @layout-id t-f78bcf55-4075-477c-a794-b8d90c8d57a5 */}
+
 この作品は、ゲーム用の素材を探しているときに見つけた[Kenneyの2Dアセット](https://kenney.nl/assets/category:2D/page:6)から着想を得て制作しました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-42aa52aa-b252-4b05-951a-fc7b638c7182">
+
+{/* @layout-id t-37dacb74-c32f-4396-a40a-6232368215e3 */}
 
 アセットを眺めているうちにロケットと隕石を使ったゲームのイメージが浮かび、そこから企画を考えました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-4f83a957-df8f-49c4-9c64-da9008a661b1">
+
+{/* @layout-id t-cb7c6946-be66-449b-9f7c-f1193516e459 */}
+
 ### 企画を決めずに作り始めた結果
+
+{/* @layout-id t-3bc1576f-42bd-4a49-afa5-502b090ac0b7 */}
 
 このゲームでも、最初に詳細な内容を決めないまま制作を始めてしまいました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c48b0cc2-b4be-4053-aba9-ca971b13b64c">
+
+{/* @layout-id t-7d7f54f9-1258-41ca-88d3-70f36b967ff5 */}
+
 そのため、途中でテーマを変更したり、作ったものを戻したり、別のゲーム案が没になったりしました。それでも、最終的には一つのゲームとして形にできました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-84246722-18c5-426b-b9d9-e2e82c0b2436">
+
+{/* @layout-id t-df0b97f1-d1c6-4e43-8256-b668ded06e40 */}
 
 ここまで作品を重ねると、以前と比べて実装面でつまずくことは少なくなってきました。AIを使って実装を補助している影響もありますが、自分自身もUnityの基本的な操作やコードの構成に慣れてきたのだと思います。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-6c7267ed-7cb9-421e-ad55-43766f6fad96">
+
+{/* @layout-id t-56e26ae6-da06-4aa8-bdf6-8afc7436245c */}
+
 一方で、実装できることと、迷わず遊べるゲームを作れることは別でした。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-be2bd821-318d-482d-9526-b1c81291af01">
+
+{/* @layout-id t-ec19ef5f-93aa-4c93-b2fd-aa2c2df878ee */}
 
 ### 初めて遊ぶ人への説明不足
 
+{/* @layout-id t-13183c21-a96e-4175-b37f-83d8f64bb068 */}
+
 この作品の反省点は、初めて遊ぶ人に向けた説明が不足していたことです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-7794e920-48bc-462e-9bb9-11636cc7ad9d">
+
+{/* @layout-id t-b24bd0b3-1c11-4cf6-afd4-7472c412d55e */}
 
 チュートリアルがないため、操作方法が分かりにくく、ゲーム開始直後はロケットがどちらへ進んでいるのかも伝わりにくくなっていました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-4b9bedd3-fab5-4f1f-9937-5e714991b3e4">
+
+{/* @layout-id t-9b563dfe-f25f-489f-9048-54c3dd2aadaf */}
+
 制作者は操作方法やルールをすべて知っているため、説明がなくても当たり前のように遊べます。しかし、初めて触る人にとっては、進行方向や操作方法が分からないだけでも大きなストレスになります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ee6f840d-e94b-4ee8-aaef-59e24b079d6b">
+
+{/* @layout-id t-88aa12e4-3d3d-422a-b202-66311bca1d03 */}
 
 長いチュートリアルを作らなくても、最初に操作方法を表示したり、進行方向が分かる演出を加えたりするだけで、遊びやすさは改善できたと思います。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3d9a3763-ca39-42ec-b8c3-7f63acdeac43">
+
+{/* @layout-id t-e8dfee98-6ac1-40f6-b6c4-f320b8b36664 */}
+
 ゲームを完成させるだけでなく、プレイヤーが最初の数秒でルールを理解できるかどうかも確認する必要があると感じました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-42e9ca19-be50-4e9c-b20a-511fe7ebb2ad">
+
+{/* @layout-id t-5a06a09c-01c2-4821-9df7-01fa5a980fe6 */}
 
 ## 7作品目「Monster & Panzer」
 
-<ImageSlider images="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" />
+<Photo assetId="asset-e07e46d6-fb4f-4770-bfa3-8e22bd0081c5" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b2dcf99c-3ea5-4724-9fde-9819f69b2931">
+
+<Photo assetId="asset-7b88e44d-7dfe-4488-9383-fa086c897a5a" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-50480aa8-dab4-482f-aa5a-b3029161f442">
+
+<Photo assetId="asset-06f71770-2736-4172-be47-30dd72e8a296" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9acd68af-696b-438a-95df-d6d4509116b6">
+
+<Photo assetId="asset-c1ac5064-0ba6-49f8-8d1e-13b5c6f10d8a" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 4" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-751c4f14-cfa5-4d21-abdb-fc4e30c13835">
+
+<Photo assetId="asset-ce20c2c5-af8c-44fd-b1c2-31ce1655b297" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" alt="【後編】これまで作ってきたUnity作品を振り返ってみる — 5" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f252ef54-90e2-4c53-9868-599cbced47c3">
+
+{/* @layout-id t-54d4d2a0-a0c6-4120-8557-aea75449ad42 */}
 
 7作品目は「Monster & Panzer」です。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-29c34011-826b-416c-b3cc-ebdce58623ea">
+
+{/* @layout-id t-cbf85e85-b45e-4c74-939f-cf0ec9f224b5 */}
+
 このゲームは、戦車を強化してモンスターを倒しながら、1000m地点への到達を目指す2Dクリッカーゲームです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-4a7152b5-1a37-4b92-861f-bab3146d05c2">
+
+{/* @layout-id t-314378fd-b621-4c4b-a49a-89a24643a82b */}
 
 これまでに作った作品の中では特に規模が大きく、完成までに1か月半ほどかかりました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1490df84-5157-4da8-9ade-72d2846810a0">
+
+{/* @layout-id t-ddd40be0-2138-4e51-a827-5aeb090efe4e */}
+
 ### ゲームバランスとテストプレイ
+
+{/* @layout-id t-2a56617a-4cec-48e6-8331-79caec067036 */}
 
 この作品で最も苦戦したのは、ゲームバランスの調整とテストプレイです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-009407a7-1e9f-4e56-8cfb-8690d6d96393">
+
+{/* @layout-id t-a15a27c9-2c9d-48da-ae30-a68d394391d4 */}
+
 過去の作品とは異なり、Monster & Panzerには、戦車の攻撃力や敵の体力、強化に必要な費用など、さまざまなステータスやパラメータがあります。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b7a8f56f-0dc6-4bcd-99f5-b91aff8633ac">
+
+{/* @layout-id t-a5a3a854-88ea-4238-b78b-10f879033f5d */}
 
 変数が増えるほど、それぞれの数値がゲーム全体に与える影響も大きくなります。そのため、難易度の調整にはかなり苦戦しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-71fec835-b91e-4e3b-bc03-c0f2e09f9d29">
+
+{/* @layout-id t-89a98b67-3f97-4017-90b1-83a4f91bd632 */}
+
 さらに、ゲームを最初からクリアするまでに40〜50分ほどかかるため、バランスを少し変えるたびに最後まで確認するのも大変でした。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-7e547b63-d9c7-4f58-82d9-0c50e4b87dc5">
+
+{/* @layout-id t-8d1d83e5-1ddc-4427-9054-d01566277a31 */}
 
 ### テストプレイで気づいた単調さ
 
+{/* @layout-id t-cb0233a0-6e27-48fd-b0e8-424f7e2f172e */}
+
 最初に完成させたゲームを仲間にテストプレイしてもらったところ、大きな問題が見つかりました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-889d7c84-d7bd-41f7-99c4-40a82fe052e9">
+
+{/* @layout-id t-6fee0c0a-159a-4e42-978a-b5585a6d2904 */}
 
 それは、ゲームをクリアするまで、プレイヤーがずっとクリックし続けなければならないことです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-2e28c352-72d6-4dcd-b01f-91e844d6bf47">
+
+{/* @layout-id t-c20117d9-9472-4cea-8c62-8833ca17d360 */}
+
 作っている途中は同じ操作を何度も繰り返していたため、自分の感覚が麻痺してしまい、その単調さに気づけていませんでした。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2a0927ee-100a-4594-a845-0eb40c491470">
+
+{/* @layout-id t-9502d329-cb1c-4e11-ad30-2901c9efe1b4 */}
 
 テストプレイでもらった意見をもとに、自動でゲーム内通貨を生み出す装置やセーブ機能など、さまざまな機能を追加しました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c2af4c98-2bf0-4001-956c-b65255ee2b93">
+
+{/* @layout-id t-c55a027a-4774-4632-b52f-cab25fe14a65 */}
+
 ただ、前編でも書いたように、最初の段階でゲームの内容やバランスを十分に詰め切れていなかったため、後戻りや修正が多くなってしまいました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-cdb03349-aac1-4ee1-ad98-74e0959dcab3">
+
+{/* @layout-id t-0ea55894-dfe9-4ee1-8bcb-0c91dc91273c */}
 
 機能を追加していくうちに、当初思い描いていたゲームの構想を見失い、そのまま制作を進めてしまった部分もあります。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-24c85c83-c3fd-4f70-901c-5476ce0deabd">
+
+{/* @layout-id t-af6ed1d7-7f3a-4f27-8761-8fd9cdf43ca5 */}
+
 ### 最後まで残った疑問
+
+{/* @layout-id t-9831e982-3606-4491-94ed-aa62d7b4761a */}
 
 このゲームでは、最後まで「単調さ」を解決し切れませんでした。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-d024049f-c943-4adb-ba4e-d35e96d23c7d">
+
+{/* @layout-id t-89c6035e-cb86-4b8f-8c6f-54ddb6bd0f6c */}
+
 変化を作るために、ステージの途中へさまざまなチェックポイントや機能を追加しました。しかし、完成したゲームを振り返ると、必要になった要素を後から継ぎ足していったような構成にも感じます。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b56b641e-9b0d-4e65-b6b5-568f5597f293">
+
+{/* @layout-id t-e3ee8de7-6850-4b63-8bc0-a5962800a4ab */}
 
 初めてプレイする人には、楽しく遊んでもらえるかもしれません。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-06289d25-6d04-45a6-82f7-ff73b036267b">
+
+{/* @layout-id t-b9862d0d-db6b-4db1-9edc-280a4bfb775d */}
+
 それでも自分の中には、「本当に最後まで楽しくプレイできるゲームになったのか」という疑問が残りました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-47086439-b9dc-4cb1-8f69-b3b3738b7002">
+
+{/* @layout-id t-9d9c50c9-00ee-47b1-b6bd-f57d9e293e70 */}
 
 最後まで完成させられたことは大きな成果です。しかし、完成したからといって、制作者自身が感じた問題までなくなるわけではありません。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-03aa71fa-b9f9-4f6f-869a-31a44516966c">
+
+{/* @layout-id t-6b1b8145-5967-4365-a0df-ac4e979ffb77 */}
+
 この疑問は、次にゲームを作るときにも忘れずに持っておきたいと思います。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2b5111e8-96ac-4e7e-bb81-c0f2ea0feab6">
+
+{/* @layout-id t-8a42e675-1391-4017-83e2-75aa7916ce19 */}
 
 ### Unity MCPを使ったゲーム制作
 
+{/* @layout-id t-1d63a979-53f9-4899-aa01-827929b1a96c */}
+
 この作品では、制作期間の後半からUnity MCPを利用しました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-8b1a4c29-5b76-4dd4-8e1b-280fd3163726">
+
+{/* @layout-id t-f62251a4-22f0-4353-a1b8-f3eb510c284e */}
 
 現在はCodexとClaudeの両方を使いながら、それぞれの違いを比較しています。トークン消費量の関係からCodexを使う機会が多くなっていますが、どちらにも得意な部分があると感じています。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-887a242c-cb5c-4e42-8f3a-a98dd7af2866">
+
+{/* @layout-id t-6b7f9549-6e68-4c07-accc-bfe38af94a92 */}
+
 Unity MCPを使うことで、AIからUnity Editorを操作し、GameObjectやComponentの作成、設定の変更などを行えるようになりました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ca271065-e929-4fed-9d37-9dc6944c23f8">
+
+{/* @layout-id t-11cc6422-8baa-4051-81d1-f7874f146442 */}
 
 UIやプレイヤーの細かな配置については、まだ自分で調整したほうがよいと感じる部分もあります。一方で、機能をComponent単位で作る場面では、自分だけで実装するよりも質の高いものを作れることがありました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f6385a37-001f-4818-81f3-a64d000fee5b">
+
+{/* @layout-id t-36f2cecd-fd52-4e2a-bb61-74bbd347c3cf */}
+
 AIにすべてを任せればゲームが完成するわけではありませんが、使い方次第では、ゲーム制作を助けてくれる強力な道具になると感じています。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-0d8bc279-bd1d-4782-ad81-77e649e83791">
+
+{/* @layout-id t-55ae7d80-3132-404a-abfb-2912eddf1a98 */}
 
 ## 7作品を振り返って
 
+{/* @layout-id t-9987ac56-0354-4f74-a955-16f69ca639bf */}
+
 これまでに作ったゲームは、全部で7本です。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2059c12c-4f3e-4e4d-9bf8-f329cc2e8b09">
+
+{/* @layout-id t-415b35ec-5d57-45bb-ab3c-6c87bd50825c */}
 
 「たった7本」とも言えますが、その7本を作る中で多くの失敗を経験し、自分のアウトプットと向き合う時間を重ねてきました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-aa923fc6-a1ee-47eb-a140-31314f38fef5">
+
+{/* @layout-id t-6ed8bc70-492b-488d-96df-33073540d1ca */}
+
 最初は、ハンズオン動画を見ながらUnityの操作や基本的な実装を覚えるところから始まりました。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9061dc22-f381-4f1a-98ec-c0eb5bf8c6dd">
+
+{/* @layout-id t-8888041b-ac3a-4de1-b375-0c30f74472fd */}
 
 そこから、AIを使ったアセット制作、ルールベースAI、Raycastを使った敵の行動、クリック位置によって変化する操作感、ゲームバランスの調整など、少しずつ自分で考えて作る範囲が広がっていきました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1fb8f55b-11a7-4bad-9f01-fe435f63b6b1">
+
+{/* @layout-id t-feb96ea3-99f0-4dbc-a989-3acc7691345a */}
+
 一方で、作品を重ねるたびに、実装できることと面白いゲームを作ることは別なのだと感じるようになりました。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-9086e3e3-1da9-4466-9f9d-e0b4a7bd0ad6">
+
+{/* @layout-id t-86b5c137-7dbf-4909-a16a-8b68660a0be2 */}
+
 特に大きかった学びは、次の3つです。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c411d315-08e8-48ad-884e-6a51546b075b">
+
+{/* @layout-id t-0274ec0c-88d0-46bc-934e-7c5c2cd5dfae */}
 
 1. 作り始める前に、ゲームの核と完成範囲を決める
 2. 自分以外の人に遊んでもらい、客観的な意見を受け取る
 3. 機能を増やす前に、それが本当に面白さにつながるのかを考える
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f3e5a57f-2a90-4ba3-961c-cd090b3f2b17">
+
+{/* @layout-id t-1f0c772f-c081-4936-a2d6-9b0f053c2687 */}
+
 これからiOS向けのゲームをリリースするにあたっては、ゲームそのものの面白さだけでなく、既存の市場、対象年齢、ゲームデザイン、収益の仕組みなど、考えることがさらに増えていくと思います。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c1bcf9d6-9524-4791-8a15-7d7ee48543a8">
+
+{/* @layout-id t-901620de-8ee2-403f-8de9-00f7ab955028 */}
 
 これまでの失敗が、すぐに正解を教えてくれるわけではありません。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-129489eb-6bbb-4dc4-b833-4ebb996f26c0">
+
+{/* @layout-id t-7e932a10-a7f9-4bd6-9f64-e1357f9b29c6 */}
+
 それでも、実際に7本のゲームを完成させ、うまくいかなかった部分まで振り返った経験は、次の作品を作るための糧になるはずです。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ffca4afc-366c-4a92-9123-19a3156e63d1">
+
+{/* @layout-id t-dd28ea8f-15d5-4d11-9d57-b2855fdf23b4 */}
+
 これからも試行錯誤しながら、自分が本当に面白いと思えるゲームを作っていきたいです。
+
+</ArticleBlock>

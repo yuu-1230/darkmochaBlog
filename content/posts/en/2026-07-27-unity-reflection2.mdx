@@ -6,59 +6,1349 @@ tags: ["Unity"]
 description: "Looking back at four games where I experimented with controls, enemy AI, and game balance, and summarizing what I learned from making seven Unity games."
 draft: false
 image: "/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png"
+displayTitle: "Making games with Unity, II"
+cardSummary: "More games, experiments, and lessons from the screen to the code behind it."
+homeOrder: 3
+cover: {"template": "split", "title": "Making games with Unity, II", "tone": "dark", "mode": "composed", "background": "sage", "titleSize": "small", "imageFit": "contain"}
+reader:
+  mode: magazine
+  pages:
+    - id: edition-title
+      template: text
+      blocks:
+        - edition-title
+        - b-6e9907f3-4a5c-42a8-ac82-e624ba28530f
+        - b-94830f1b-d03b-45e3-9a26-1f4d867fce0c
+        - b-17e32656-91cd-408f-b787-5374cca9bfe7
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png
+            side: right
+            width: 48
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-00b9ddba-9216-483c-bbcd-162b0fde0077
+            anchorId: t-59254f9a-a3af-40a7-8876-ffcfe7e29c90
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-4fa6f03c-e157-4500-91bf-94d96982891a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-59254f9a-a3af-40a7-8876-ffcfe7e29c90
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e6c8895a-87f3-4351-97db-4810968c867e
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-840e4c05-b9f5-4e6f-bc6d-0ab028353c63
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-aafc3092-e723-419d-9859-83fc273fa702
+      template: text
+      blocks:
+        - b-aafc3092-e723-419d-9859-83fc273fa702
+        - b-c9c78960-b728-4a77-84d7-42467f5a8c8c
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-e606552f-6f29-46f9-bbf8-6ffba29d87f4
+            anchorId: end
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-00b9ddba-9216-483c-bbcd-162b0fde0077
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-c507d928-fce6-43c3-8f7b-9368b5988397
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-c9c78960-b728-4a77-84d7-42467f5a8c8c:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-e5dbeadb-8f1e-4748-a93a-eec30f893b2a
+      template: text
+      blocks:
+        - b-e5dbeadb-8f1e-4748-a93a-eec30f893b2a
+        - b-c12d1dc4-67ef-470f-8716-73f312e5383a
+        - b-d08c0d71-e26d-4340-9c1f-c093c6b25427
+        - b-9a206b88-284c-4a2f-9dcc-88325e08d9c2
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png
+            side: block
+            width: 100
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-76d4ee01-d7de-4b1b-91e2-36a90c3fcfc9
+            anchorId: t-c65ce887-fa29-45ba-9ff6-a3bcc60631eb
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-e5dbeadb-8f1e-4748-a93a-eec30f893b2a:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-c65ce887-fa29-45ba-9ff6-a3bcc60631eb
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-dbc71841-20ce-4022-90fb-de1cf591f4fc
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-79bf1d6b-25e8-46e3-a018-d24e9f0a8006
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-457efaab-a77d-43bd-98d1-99b0b0464bc1
+      template: text
+      blocks:
+        - b-457efaab-a77d-43bd-98d1-99b0b0464bc1
+        - b-8422c133-a8c4-42bc-9efd-7b39e2685e90
+        - b-f1aef201-215c-4917-ab52-e597750a132d
+        - b-1ad46b97-0e7d-4dac-a783-6db211f9216d
+        - b-6cfe7188-74d6-4835-a6cd-d5f428a92f13
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-5591356d-a92c-4863-bc67-35a999064314
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b185f84d-076a-4374-a1ec-604691cd630f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7c7fedd6-cf69-4a18-9e78-d71df3517977
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-edbe6ad2-7d19-4f92-ad93-ad7832eb9999
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-21e56b11-f4d1-4838-b742-f2aba7cc6be1
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-136b40ab-5c1a-4155-a4dd-95642a2b238f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-c1907b66-5a53-43a5-a9c4-ce70bf4ea20f
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-33701990-aee3-4976-a0ce-0149e4694581
+      template: text
+      blocks:
+        - b-33701990-aee3-4976-a0ce-0149e4694581
+        - b-ea5bd1c1-c67d-4f1a-8c90-fd9750463c21
+        - b-1999b24c-3462-4323-810b-d33886a8de89
+        - b-4ec10985-a743-4e23-99a8-42579590e402
+        - b-b4d07bb5-02d9-49b7-b844-6f2aa0d3b26c
+        - b-c4103976-c91e-459b-8e11-9eed3c9b9212
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-80b5d08f-eaa0-4190-9156-2a1afd347a13
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-eb4b3c51-e007-4d1f-835c-274c57a4092c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-dc7f1e67-f74d-4aa3-b7be-34da6ab86424
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-eba0de0f-2c4c-4f74-bf20-e22a76b9923a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0790b578-a5cb-4c2f-a650-29e2405d8eea
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-15d2b87f-4a3c-4557-b3af-51a1eadd6817
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8c35203b-cad9-4a19-99d2-09c8ae902c81
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-705f7aa9-9110-48a4-b1cf-158ac2c56a1d
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-4cb74a10-23d5-46db-9beb-9d1be7de37c8
+      template: text
+      blocks:
+        - b-4cb74a10-23d5-46db-9beb-9d1be7de37c8
+        - b-eb0b5c3c-4d1a-4f27-b688-b5430f6b6bac
+        - b-95dd9915-35c2-451d-b2ce-09ea398132fa
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-822fac3f-6195-4aa0-b74e-bba7a0299e63
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-784dc3df-2b63-4048-b4bb-7a3a35b6b86c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7c9c2c1c-e729-4165-8d14-679320f7a177
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-a6924d09-fe80-4afb-92aa-8f8964f0f6b3
+      template: text
+      blocks:
+        - b-a6924d09-fe80-4afb-92aa-8f8964f0f6b3
+        - b-d076cce1-c4ed-452d-a1e6-161573fe7a63
+        - b-83c32089-6fcf-4f30-b145-37a2334fb281
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png
+            side: block
+            width: 100
+            ratio: 1.236923076923077
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-905a903d-9115-45a1-ba5b-334d8ba695fb
+            anchorId: t-1b0fc8f5-07c0-4cf9-8248-64b29827d466
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-a6924d09-fe80-4afb-92aa-8f8964f0f6b3:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1b0fc8f5-07c0-4cf9-8248-64b29827d466
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9390f60a-9348-41fd-bf4e-1ecfef2463af
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-10809712-17d2-40ee-b9af-6510c03d9db3
+      template: text
+      blocks:
+        - b-10809712-17d2-40ee-b9af-6510c03d9db3
+        - b-59989c6a-4b6f-45e9-b4a1-7cb7d04a5ccc
+        - b-c7c4320e-cf24-4802-a057-155c4c5dd6ff
+        - b-7d0b75fa-3815-47f5-bbf4-48a0e33e9ee2
+        - b-6f92fb44-e464-469c-ac13-72a7ebe1a302
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-ce74b881-2c01-40e8-a6c1-a459231aa317
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-f5e5d0e3-30f3-4807-8400-9205b9d51409
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e1e439e8-9a23-4db2-8b9b-0bad08644fa3
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-a07a1e1b-f5e0-4471-8237-3f91861e2b7c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-db9f0a91-3fc5-4439-a528-e941e332ae4a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d0a456e6-94ac-4ccd-b963-3576bd869be6
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-f44e55c4-1f59-4eb7-a8d9-4eba9ef0be2f
+      template: text
+      blocks:
+        - b-f44e55c4-1f59-4eb7-a8d9-4eba9ef0be2f
+        - b-f5a25fae-cd7d-4aa6-bed7-5798e2d6d389
+        - b-15766245-b711-49b4-9001-7d9c99148943
+        - b-0dfea820-7e25-44bd-b49d-2e901aa540a9
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/CanCracher/CanCracherTitle.png
+            side: left
+            width: 44
+            ratio: 1.7772397094430992
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-f973d93a-9699-4480-8f55-cc5e100aee99
+            anchorId: end
+          - source: /images/Articles/Unity/CanCracher/CanCracherGameScene1.png
+            side: right
+            width: 44
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-bbc46fa6-41b3-4e37-a9ba-ad4973830480
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-3fecbd21-7357-4bcb-8be8-4824ad8e19ec
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7fd2fb40-353a-4041-8b90-04c837f64425
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9a6a5878-8ce9-42e8-99b7-af65532a3826
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-0dfea820-7e25-44bd-b49d-2e901aa540a9:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-4c627592-1bb5-4aaf-9e83-9d93f516084c
+      template: text
+      blocks:
+        - b-4c627592-1bb5-4aaf-9e83-9d93f516084c
+        - b-3c5e2b9a-7a6a-415d-83e3-8d5db69d0315
+        - b-d83c9deb-6c27-4be0-9c48-a68e06b4d936
+        - b-9894a38a-b7dc-4715-ab51-16e7518c80e2
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/CanCracher/CanCracherGameScene2.png
+            side: block
+            width: 100
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-f7819c78-1103-470b-945f-089ab8ed6b1b
+            anchorId: t-a867e02a-ecd5-44a5-a980-d63601ddea2c
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-4c627592-1bb5-4aaf-9e83-9d93f516084c:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-a867e02a-ecd5-44a5-a980-d63601ddea2c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8754e93b-aeb3-41a2-a4ec-830c2c436868
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-52292087-0e1f-4256-8877-8c3505084778
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-81d362b8-0645-4256-9980-f5f7760c148b
+      template: text
+      blocks:
+        - b-81d362b8-0645-4256-9980-f5f7760c148b
+        - b-37ecbc98-19be-4513-8652-43f4dab02603
+        - b-80f62f36-c104-47b7-8d44-61b611234103
+        - b-ecce6078-595f-468b-930c-d242116f93ac
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9109b930-b236-4103-9492-78300614c453
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d86667c0-a268-4f2f-8aca-536712743d18
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1b15131c-6e88-4f8b-b2cc-eafde5b44767
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d2ff9f03-29db-4069-bfa0-0c47cc5d0969
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-49dfb218-990a-4f04-9c45-97f55b9c148c
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-41aa5710-be3e-490e-92e9-f08a6332c0e2
+      template: text
+      blocks:
+        - b-41aa5710-be3e-490e-92e9-f08a6332c0e2
+        - b-77b11431-f1d8-4f9a-9b41-8df81da658ba
+        - b-4553987f-bd46-4001-8bce-f53ed7fb78e5
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-a55d7c32-29ae-43d3-8de8-a22a039a17a4
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6cb1256b-cdb4-45ea-959e-d60cc89484f7
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-be9517f1-2ecb-409e-b2cd-7840c8835650
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-90834475-429f-4fb1-9858-f153d07426af
+      template: text
+      blocks:
+        - b-90834475-429f-4fb1-9858-f153d07426af
+        - b-c1ebf459-6121-4a32-915a-8a7762ab15d1
+        - b-fb3a563a-a9cd-448b-bfdf-e365003b18c7
+        - b-211bdf10-2cb5-477e-9159-0906cf66af96
+        - b-aa16ee92-f0a4-4d69-908a-8cdc261e6c8f
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-66bc2a2f-1e5d-4f93-8305-e506995cdcd9
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-24cc1e8a-d31b-4bde-8a82-600bab37f138
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6a53bc76-59ac-4e60-8496-0e99f14f31c9
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7fc8d8e5-abba-4005-aefe-fcfbe6bc7fc3
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b4b459db-a18c-44d1-b504-58ef2a000093
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0769d169-ecba-4a31-8ed1-f4deaeefd859
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-c2cfc1ce-4c58-4d92-be8f-66253dd1b36c
+      template: text
+      blocks:
+        - b-c2cfc1ce-4c58-4d92-be8f-66253dd1b36c
+        - b-3415bcec-f243-4fb1-9906-3e5f5d45795f
+        - b-a98b0fc3-436d-4f63-977c-e74e620069b0
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-4229d35a-c26c-481c-a937-48a221ef4816
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-28fc0ce9-561c-4b29-9740-b0b628864913
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-3252a046-82e2-4fb2-b6fd-c3f34c788317
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-fd556147-b5ef-40a7-98da-1f0e1e36cd1b
+      template: text
+      blocks:
+        - b-fd556147-b5ef-40a7-98da-1f0e1e36cd1b
+        - b-3f383e05-6998-448c-9cb0-dad68200a59d
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-7625881a-0d6a-4f8d-8851-4e223ea07355
+            anchorId: end
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-7c425c18-a57d-4357-b910-c372842f54f4
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-31ab1186-f711-4cbf-94f5-98f2ee6ecd52
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-3f383e05-6998-448c-9cb0-dad68200a59d:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-4dacf604-82c3-4ece-9a91-f1f74c95808c
+      template: text
+      blocks:
+        - b-4dacf604-82c3-4ece-9a91-f1f74c95808c
+        - b-a5805e84-bbdc-4e3e-861c-476eb1e656b7
+        - b-0510feda-a4b0-4335-9d48-ecc576dc6690
+        - b-d0777c6f-caf0-488e-985f-9988cbd23201
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png
+            side: block
+            width: 100
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-3c3371bd-fc9d-428b-bc63-3dbbfa539f12
+            anchorId: t-b1eb58e0-a690-4717-bbfb-1c6c51a980f0
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-4dacf604-82c3-4ece-9a91-f1f74c95808c:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b1eb58e0-a690-4717-bbfb-1c6c51a980f0
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9619ce5d-cc62-4f2b-804f-49568750ffc2
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-bec41ef1-fa8e-4f3a-a389-2932580b9993
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-efaac8ee-36a1-4946-8932-3d58c5a2186a
+      template: text
+      blocks:
+        - b-efaac8ee-36a1-4946-8932-3d58c5a2186a
+        - b-f5da11e8-5593-4573-9930-1ec68a8b08e3
+        - b-c6a2fb3f-06ae-43a3-8800-d97593aeafa5
+        - b-b2c6a114-b029-49ed-ba9d-5645c582f1d0
+        - b-9a6e67a1-e315-4978-b8f6-cf80efe67706
+        - b-3c293e12-f9b5-4a37-a24b-c99073e2e78c
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-3f46db5d-bcb8-49d1-9cb5-44d6475bcbc4
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8d0cdc00-946d-4031-bb52-0193f45e65ff
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6e1fb283-516c-4af2-ad42-ceecf050fd06
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-a9e87736-9f93-46a6-81ef-77dfa9708faf
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8590eb79-3f5c-4e3e-8afa-7464d1a6c667
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e07e6dc5-4496-413d-b8b7-06a32b563deb
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-86f037cb-19d2-4b37-a3d9-bbdce1039fc8
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-e0fe5924-2d77-4358-be82-ff1cd7c6d00a
+      template: text
+      blocks:
+        - b-e0fe5924-2d77-4358-be82-ff1cd7c6d00a
+        - b-532e3175-172c-40f4-b409-b4261df0ae0a
+        - b-a8babbcf-aed5-477e-906f-1a8afef5b367
+        - b-c990f76d-3f16-441a-93f6-0d2d47682983
+        - b-868e2e68-1a62-44f8-b2fa-4f68cc645b54
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9c6192d9-07b8-40ce-b426-29646b5a9571
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-a19c7b3b-e7d3-4934-8acc-d6569adef7d9
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1c12b9b9-fb27-4f60-9f19-4de90922a1c8
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8568da2b-5e4b-4aba-b6d5-3569f461eab9
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-90c37b10-0197-4429-8925-7b7e54bada1a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b81ed494-72c4-46fd-9ca1-f7068c627517
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-ca16bfee-0b72-461f-9289-f33c72eb1865
+      template: text
+      blocks:
+        - b-ca16bfee-0b72-461f-9289-f33c72eb1865
+        - b-f5280eb4-dfbe-46dc-a00b-161478ba0f33
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-35434429-785b-4705-a2b1-9e7105f7b295
+            anchorId: end
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-d1e02011-6193-4ec7-a05b-b21d48cfc663
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-7d07683c-ecc4-4a54-845b-1e7d4ea1f97d
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-f5280eb4-dfbe-46dc-a00b-161478ba0f33:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-f3fb84c9-3533-483f-82a3-b172385b76f1
+      template: text
+      blocks:
+        - b-f3fb84c9-3533-483f-82a3-b172385b76f1
+        - b-c27a99fc-0b20-4bb0-89e1-0e2156ec8582
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-8df09f4d-0539-46a0-b78c-fc659118993f
+            anchorId: end
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png
+            side: block
+            width: 63
+            ratio: 1.5376569037656904
+            inset: 18
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-a661e3bd-d097-46c7-9814-856e387ff476
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-f3fb84c9-3533-483f-82a3-b172385b76f1:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-c27a99fc-0b20-4bb0-89e1-0e2156ec8582:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-65495db4-a957-4ebd-87ef-3aacd47686be
+      template: text
+      blocks:
+        - b-65495db4-a957-4ebd-87ef-3aacd47686be
+        - b-9e2143d0-0b03-4baa-98e6-017470105d99
+        - b-8e8ed153-eee7-4694-91d4-458c97466e11
+        - b-9f5c6f15-ad40-4871-9b5a-fdafebbaeccb
+      composition:
+        textWidth: 100
+        frames:
+          - source: >-
+              /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png
+            side: block
+            width: 100
+            ratio: 1.5376569037656904
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-ca24747e-eed0-4fa8-bddd-c46ef46fe5f4
+            anchorId: t-62864879-5150-4387-a70b-efcd214e167c
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-65495db4-a957-4ebd-87ef-3aacd47686be:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-62864879-5150-4387-a70b-efcd214e167c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-43ff6638-c0d8-48e8-893a-5e9a2376a5e1
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e5b0bf66-c853-43b5-ac47-a8025b347451
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-dbadce67-fea6-4cc4-b426-d46aedb08cba
+      template: text
+      blocks:
+        - b-dbadce67-fea6-4cc4-b426-d46aedb08cba
+        - b-12cf469c-174e-4666-8153-4997f8510f66
+        - b-c5d76bdb-ba85-4df1-b2f0-0e90aa90d743
+        - b-34155c26-5ea0-497b-bc56-d269b007d832
+        - b-3fdb3d19-62c5-4603-8ec9-eab7d423cc73
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-c0d381c8-d3c2-43aa-93f1-22f973e38cd4
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-2669b874-f031-40c4-84b1-2bf818d12d51
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-cfe8714e-ce87-40e5-8e0a-b8f40db0343b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d0ae38ca-97e0-4af9-94ce-0418b7be81b6
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-3178553c-4bcd-4fb1-9a9c-9d5c7125ecf7
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0952ba04-fe7c-4a5a-997a-1f0a27b22d2b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0c812aac-928a-49b4-a65e-8f53282d1697
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-b549d34b-edbe-4975-835e-f1b3ae199b96
+      template: text
+      blocks:
+        - b-b549d34b-edbe-4975-835e-f1b3ae199b96
+        - b-20a0636a-a3aa-424e-9b14-bf2e8e87a555
+        - b-18a34cbd-1652-48a6-a211-40ead5781d5a
+        - b-1a41400f-c3c0-4f1d-9750-40c2ecd4e3ed
+        - b-bfb32f94-f85c-49a3-8b3a-eace0816fed5
+        - b-cfb4a230-0eef-4b5e-afa7-a8377e76fdfd
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-35b02779-585f-45b5-90b4-dde00cfc30af
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1e5f946f-3509-4946-95bf-06eb4b217594
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-3c2bbff5-8f13-4af6-ab4e-aed427754745
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-a54e5b04-6881-4a19-9ad4-4888537bc665
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-df3bbd13-1b98-4cc4-aaa5-12eae22f4049
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-714e6e07-50cf-4550-b47c-93e627e12f71
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-e701f61a-3810-4999-8381-3889396fbf7d
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-5cd28abe-938a-4c74-a644-0bd53cd053fd
+      template: text
+      blocks:
+        - b-5cd28abe-938a-4c74-a644-0bd53cd053fd
+        - b-90d95640-764e-411f-9c02-c715a937fce4
+        - b-818cfd2a-ac94-41f2-8528-315686e62789
+        - b-2c01c8e6-85c7-4a5d-bc20-5365f489ead3
+        - b-60bf23b4-1f5b-46e7-b395-7650a18bc039
+        - b-7f8c5f26-acf1-4d3f-a930-ce64a9933fce
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-e7ee248a-f537-41e8-9969-8bcc92a685bb
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-1eacc499-f285-4505-8398-3badf67b1202
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b242d875-2791-427a-b197-553f0995981c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7ec9f4dc-ce81-4a4b-a1a9-b7ce1293aea7
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-05b48b8e-930c-4008-8a29-8bd92cc646f1
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-131aa1d8-718c-4c1a-bdcd-efd0972bb7d5
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-fdcf2614-24a6-4d98-b7ce-d8f335dc48d3
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-b51ec3cf-28ea-4bde-8815-c12ac184b804
+      template: text
+      blocks:
+        - b-b51ec3cf-28ea-4bde-8815-c12ac184b804
+        - b-ecd8f934-a24e-40a6-959d-c6e176e6e5a2
+        - b-4fdb4f26-3c03-4eb1-bfff-f5627f43fbbe
+        - b-b8b11d33-5d7c-4499-8d54-a7fb2e9c091c
+        - b-1f821f4e-d5cc-4a2c-88d6-75e54c11d7be
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-f6083d88-4668-47f7-8569-13becb2d5b39
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-2fcdefd9-e8b8-4af1-b44c-64116ed6e7ee
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7f2e285a-6586-454b-af94-28469828dda3
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d8f15707-dd06-4354-a293-1553895da241
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-09db4b93-bc78-4096-ada2-ae32335c6bc9
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b9744366-3e79-401d-a5ea-513592d4dcd5
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-0ff829c8-0cc1-454a-9128-097995ee377a
+      template: text
+      blocks:
+        - b-0ff829c8-0cc1-454a-9128-097995ee377a
+        - b-8da68f2f-fc9d-454a-a43b-fb337f53ee8a
+        - b-3a2211d7-a3f3-4a87-8ba0-709297fa60d6
+        - b-adc13eb3-0c4f-4e0e-a963-a90852607171
+        - b-60bcb560-41c5-4507-a5fa-5e7ac23cac21
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-ae095982-bf70-4113-ab48-8fe5e247537c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-67a18bbb-755a-4b9e-bb95-305b9d796863
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-07ed55ce-be78-402b-aa36-b33bc6efeff2
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-468c0ce7-335e-4d99-9eb8-56d1331a956a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8c7a3ee2-1112-4538-9eee-382e901b95e6
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-925b1c9d-b870-443e-837c-6793a84a8e1a
+      template: text
+      blocks:
+        - b-925b1c9d-b870-443e-837c-6793a84a8e1a
+        - b-8b0a0758-301f-4bc4-930c-293bd063dd62
+        - b-bbb1562a-f3c9-48ad-ab6d-77111c3f46e8
+        - b-a416a9d7-725d-423f-89c6-d6448ddb58da
+        - b-232a0a8a-862e-4068-8db3-93bfb96f0ccb
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-e38e14f6-4d10-472f-b30a-f8630276836b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-51d1beda-c886-48b3-8c50-2724a43cb67e
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-542c1278-f0d9-483a-b958-c27fa3a5f253
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7c30098f-0bb2-486d-b3b7-a72f426c28b6
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-4956119e-732f-4205-8005-c1b60ca1eb99
+            width: 100
+            inset: 0
+            offset: 0
+  schemaVersion: 2
+  articleId: article-1d35bd61-5d85-4ff3-b356-6e429496633a
 ---
+<ArticleBlock id="edition-title">
+
+{/* @layout-id t-4fa6f03c-e157-4500-91bf-94d96982891a */}
+
+<ArticleTitle />
+
+<Photo assetId="asset-00b9ddba-9216-483c-bbcd-162b0fde0077" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png" alt="" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6e9907f3-4a5c-42a8-ac82-e624ba28530f">
+
+{/* @layout-id t-59254f9a-a3af-40a7-8876-ffcfe7e29c90 */}
 
 Hello! I'm Darkmocha.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-94830f1b-d03b-45e3-9a26-1f4d867fce0c">
+
+{/* @layout-id t-e6c8895a-87f3-4351-97db-4810968c867e */}
+
 Continuing from Part 1, I will be looking back at the Unity games I have made so far.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-17e32656-91cd-408f-b787-5374cca9bfe7">
+
+{/* @layout-id t-840e4c05-b9f5-4e6f-bc6d-0ab028353c63 */}
 
 In Part 1, I introduced my first three games, where I learned the basics of Unity through hands-on tutorials. In Part 2, I will look back at games four through seven, where I gradually began experimenting with more original ideas and control systems.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-aafc3092-e723-419d-9859-83fc273fa702">
+
+{/* @layout-id t-c507d928-fce6-43c3-8f7b-9368b5988397 */}
+
 ## Game 4: "Armor Breakers"
 
-<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png, /images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" />
+<Photo assetId="asset-e606552f-6f29-46f9-bbf8-6ffba29d87f4" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersTitle.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c9c78960-b728-4a77-84d7-42467f5a8c8c">
+
+<Photo assetId="asset-00b9ddba-9216-483c-bbcd-162b0fde0077" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene1.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e5dbeadb-8f1e-4748-a93a-eec30f893b2a">
+
+<Photo assetId="asset-76d4ee01-d7de-4b1b-91e2-36a90c3fcfc9" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersGameScene2.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c12d1dc4-67ef-470f-8716-73f312e5383a">
+
+{/* @layout-id t-c65ce887-fa29-45ba-9ff6-a3bcc60631eb */}
 
 "Armor Breakers" is a top-down tank battle game in which the player controls a tank and fights against enemies.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-d08c0d71-e26d-4340-9c1f-c093c6b25427">
+
+{/* @layout-id t-dbc71841-20ce-4022-90fb-de1cf591f4fc */}
+
 The reason I made this game was very simple: I liked a game called "World of Tanks."
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9a206b88-284c-4a2f-9dcc-88325e08d9c2">
+
+{/* @layout-id t-79bf1d6b-25e8-46e3-a018-d24e9f0a8006 */}
 
 I wanted to try making a game featuring tanks myself, so I created this project.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-457efaab-a77d-43bd-98d1-99b0b0464bc1">
+
+{/* @layout-id t-5591356d-a92c-4863-bc67-35a999064314 */}
+
 ### What I Focused on in This Project
 
+{/* @layout-id t-b185f84d-076a-4374-a1ec-604691cd630f */}
+
 There were three areas I focused on in particular:
+
+</ArticleBlock>
+
+<ArticleBlock id="b-8422c133-a8c4-42bc-9efd-7b39e2685e90">
+
+{/* @layout-id t-7c7fedd6-cf69-4a18-9e78-d71df3517977 */}
 
 1. Generating images with AI
 2. Using explosion effects to make attacks feel more impactful
 3. Creating enemy tank behavior with raycasts
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f1aef201-215c-4917-ab52-e597750a132d">
+
+{/* @layout-id t-edbe6ad2-7d19-4f92-ad93-ad7832eb9999 */}
+
 ### Generating Images with AI
+
+{/* @layout-id t-21e56b11-f4d1-4838-b742-f2aba7cc6be1 */}
 
 Once again, I had difficulty finding free assets that matched the image I had in mind for the game, so I generated them using Gemini's Nano Banana Pro.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1ad46b97-0e7d-4dac-a783-6db211f9216d">
+
+{/* @layout-id t-136b40ab-5c1a-4155-a4dd-95642a2b238f */}
+
 The main sprites I created with image generation were the **tanks and projectiles**.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6cfe7188-74d6-4835-a6cd-d5f428a92f13">
+
+{/* @layout-id t-c1907b66-5a53-43a5-a9c4-ce70bf4ea20f */}
 
 To keep the visual style consistent throughout the game, I first asked AI to write an image-generation prompt. Using that prompt, I created five different tanks and their projectiles.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-33701990-aee3-4976-a0ce-0149e4694581">
+
+{/* @layout-id t-80b5d08f-eaa0-4190-9156-2a1afd347a13 */}
+
 I generated each tank's body and turret as separate parts, then combined them in Unity. Separating the parts allowed the turret to rotate independently from the direction in which the tank's body was moving.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ea5bd1c1-c67d-4f1a-8c90-fd9750463c21">
+
+{/* @layout-id t-eb4b3c51-e007-4d1f-835c-274c57a4092c */}
 
 ### The Importance of Effects
 
+{/* @layout-id t-dc7f1e67-f74d-4aa3-b7be-34da6ab86424 */}
+
 I had not used effects extensively in my previous games.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1999b24c-3462-4323-810b-d33886a8de89">
+
+{/* @layout-id t-eba0de0f-2c4c-4f74-bf20-e22a76b9923a */}
 
 However, when I tried adding an explosion effect when a tank was destroyed, it became much easier to feel the impact of an attack landing. That single addition made the game considerably more enjoyable.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-4ec10985-a743-4e23-99a8-42579590e402">
+
+{/* @layout-id t-0790b578-a5cb-4c2f-a650-29e2405d8eea */}
+
 Even when the rules and systems remain the same, adding effects can change the satisfaction and sense of immersion experienced by the player.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b4d07bb5-02d9-49b7-b844-6f2aa0d3b26c">
+
+{/* @layout-id t-15d2b87f-4a3c-4557-b3af-51a1eadd6817 */}
 
 I learned that effects are important not only for making a game look more impressive, but also for communicating the state of the game to the player.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c4103976-c91e-459b-8e11-9eed3c9b9212">
+
+{/* @layout-id t-8c35203b-cad9-4a19-99d2-09c8ae902c81 */}
+
 ### Enemy Tank Behavior Using Raycasts
+
+{/* @layout-id t-705f7aa9-9110-48a4-b1cf-158ac2c56a1d */}
 
 I used raycasts to automate the enemy tanks' movement and attacks.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-4cb74a10-23d5-46db-9beb-9d1be7de37c8">
+
+{/* @layout-id t-822fac3f-6195-4aa0-b74e-bba7a0299e63 */}
+
 The basic mechanism is similar to the `Physics2D.BoxCast` I used for ground detection in my first game. A ray is cast in front of the enemy tank, and if it detects a wall, the tank changes direction.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-eb0b5c3c-4d1a-4f27-b688-b5430f6b6bac">
+
+{/* @layout-id t-784dc3df-2b63-4048-b4bb-7a3a35b6b86c */}
+
 A simplified version of the process looks like this:
+
+</ArticleBlock>
+
+<ArticleBlock id="b-95dd9915-35c2-451d-b2ce-09ea398132fa">
+
+{/* @layout-id t-7c9c2c1c-e729-4165-8d14-679320f7a177 */}
 
 ```csharp
 RaycastHit2D hit = Physics2D.Raycast(
@@ -86,47 +1376,175 @@ else
 }
 ```
 
-<ImageSlider images="/images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png" alt="Tank game development screen showing raycasts" />
+</ArticleBlock>
+
+<ArticleBlock id="b-a6924d09-fe80-4afb-92aa-8f8964f0f6b3">
+
+<Photo assetId="asset-905a903d-9115-45a1-ba5b-334d8ba695fb" src="/images/Articles/Unity/ArmorBreakers/ArmorBreakersDev.png" alt="Tank game development screen showing raycasts" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-d076cce1-c4ed-452d-a1e6-161573fe7a63">
+
+{/* @layout-id t-1b0fc8f5-07c0-4cf9-8248-64b29827d466 */}
 
 The image above shows two circles centered around the enemy tank.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-83c32089-6fcf-4f30-b145-37a2334fb281">
+
+{/* @layout-id t-9390f60a-9348-41fd-bf4e-1ecfef2463af */}
+
 The inner circle represents its detection range. When the player enters this area, the enemy tank switches from patrol mode to chase mode.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-10809712-17d2-40ee-b9af-6510c03d9db3">
+
+{/* @layout-id t-ce74b881-2c01-40e8-a6c1-a459231aa317 */}
 
 The outer circle determines when the enemy has lost sight of the player. Once the player moves outside this circle, the enemy switches from chase mode back to patrol mode.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-59989c6a-4b6f-45e9-b4a1-7cb7d04a5ccc">
+
+{/* @layout-id t-f5e5d0e3-30f3-4807-8400-9205b9d51409 */}
+
 By separating the range that begins detection from the range that ends it, I prevented the enemy from repeatedly switching between patrol and chase modes near the boundary.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c7c4320e-cf24-4802-a057-155c4c5dd6ff">
+
+{/* @layout-id t-e1e439e8-9a23-4db2-8b9b-0bad08644fa3 */}
 
 The three rays extending from the front of the tank are used to avoid obstacles. I also cast a ray from the turret and made the tank fire a projectile when the player was detected along that ray.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-7d0b75fa-3815-47f5-bbf4-48a0e33e9ee2">
+
+{/* @layout-id t-a07a1e1b-f5e0-4471-8237-3f91861e2b7c */}
+
 Being able to apply the raycasts I first used for ground detection to the movement and attacks of enemy AI made me feel that I had grown as a developer.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6f92fb44-e464-469c-ac13-72a7ebe1a302">
+
+{/* @layout-id t-db9f0a91-3fc5-4439-a528-e941e332ae4a */}
 
 ### Looking Back
 
+{/* @layout-id t-d0a456e6-94ac-4ccd-b963-3576bd869be6 */}
+
 I put a lot of effort into the visuals and enemy behavior, but I think I could have developed the goals that encourage players to keep playing in more detail.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f44e55c4-1f59-4eb7-a8d9-4eba9ef0be2f">
+
+{/* @layout-id t-3fecbd21-7357-4bcb-8be8-4824ad8e19ec */}
 
 For example, a system that unlocked new tanks based on the number of enemies defeated might have given players a reason to continue fighting and made the game enjoyable for longer.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f5a25fae-cd7d-4aa6-bed7-5798e2d6d389">
+
+{/* @layout-id t-7fd2fb40-353a-4041-8b90-04c837f64425 */}
+
 I needed to think beyond the basic action of controlling a tank and defeating enemies, and consider what longer-term goals the game should offer.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-15766245-b711-49b4-9001-7d9c99148943">
+
+{/* @layout-id t-9a6a5878-8ce9-42e8-99b7-af65532a3826 */}
 
 ## Game 5: "Can Cracher"
 
-<ImageSlider images="/images/Articles/Unity/CanCracher/CanCracherTitle.png, /images/Articles/Unity/CanCracher/CanCracherGameScene1.png, /images/Articles/Unity/CanCracher/CanCracherGameScene2.png" />
+<Photo assetId="asset-f973d93a-9699-4480-8f55-cc5e100aee99" src="/images/Articles/Unity/CanCracher/CanCracherTitle.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-0dfea820-7e25-44bd-b49d-2e901aa540a9">
+
+<Photo assetId="asset-bbc46fa6-41b3-4e37-a9ba-ad4973830480" src="/images/Articles/Unity/CanCracher/CanCracherGameScene1.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-4c627592-1bb5-4aaf-9e83-9d93f516084c">
+
+<Photo assetId="asset-f7819c78-1103-470b-945f-089ab8ed6b1b" src="/images/Articles/Unity/CanCracher/CanCracherGameScene2.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3c5e2b9a-7a6a-415d-83e3-8d5db69d0315">
+
+{/* @layout-id t-a867e02a-ecd5-44a5-a980-d63601ddea2c */}
 
 My fifth game was "Can Cracher."
 
+</ArticleBlock>
+
+<ArticleBlock id="b-d83c9deb-6c27-4be0-9c48-a68e06b4d936">
+
+{/* @layout-id t-8754e93b-aeb3-41a2-a4ec-830c2c436868 */}
+
 In this game, empty cans fall from the sky. The player clicks them to launch them upward and tries to land them in a trash can.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9894a38a-b7dc-4715-ab51-16e7518c80e2">
+
+{/* @layout-id t-52292087-0e1f-4256-8877-8c3505084778 */}
 
 Even if I say so myself, I think I managed to create a fairly unique game.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-81d362b8-0645-4256-9980-f5f7760c148b">
+
+{/* @layout-id t-9109b930-b236-4103-9492-78300614c453 */}
+
 As the level increases, the maximum height to which the cans can be launched becomes lower, gradually making it more difficult to get them into the trash can.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-37ecbc98-19be-4513-8652-43f4dab02603">
+
+{/* @layout-id t-d86667c0-a268-4f2f-8aca-536712743d18 */}
 
 While making it, I was worried about whether it would actually be fun. Once it was finished and I played it, however, it turned out to be more enjoyable than I had expected.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-80f62f36-c104-47b7-8d44-61b611234103">
+
+{/* @layout-id t-1b15131c-6e88-4f8b-b2cc-eafde5b44767 */}
+
 ### Controls That Change Depending on Where You Click
+
+{/* @layout-id t-d2ff9f03-29db-4069-bfa0-0c47cc5d0969 */}
 
 The key to this game is how it feels when you click an empty can.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ecce6078-595f-468b-930c-d242116f93ac">
+
+{/* @layout-id t-49dfb218-990a-4f04-9c45-97f55b9c148c */}
+
 Rather than making the can fly in the same direction regardless of where it is clicked, I made both its direction and rotation change according to the click position.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-41aa5710-be3e-490e-92e9-f08a6332c0e2">
+
+{/* @layout-id t-a55d7c32-29ae-43d3-8de8-a22a039a17a4 */}
 
 ```csharp
 void OnMouseDown()
@@ -153,147 +1571,567 @@ void OnMouseDown()
 }
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-77b11431-f1d8-4f9a-9b41-8df81da658ba">
+
+{/* @layout-id t-6cb1256b-cdb4-45ea-959e-d60cc89484f7 */}
+
 When the player clicks to the right of the can's center, the can flies to the left. When the player clicks to the left, it flies to the right.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-4553987f-bd46-4001-8bce-f53ed7fb78e5">
+
+{/* @layout-id t-be9517f1-2ecb-409e-b2cd-7840c8835650 */}
+
 The direction of rotation also changes depending on the click position.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-90834475-429f-4fb1-9858-f153d07426af">
+
+{/* @layout-id t-66bc2a2f-1e5d-4f93-8305-e506995cdcd9 */}
 
 - Clicking the right side of the can makes `xOffset` negative, causing it to rotate clockwise.
 - Clicking the left side makes `xOffset` positive, causing it to rotate counterclockwise.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c1ebf459-6121-4a32-915a-8a7762ab15d1">
+
+{/* @layout-id t-24cc1e8a-d31b-4bde-8a82-600bab37f138 */}
+
 Even a slight difference in the click position changes the can's trajectory, so aiming it at a specific location requires small adjustments.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-fb3a563a-a9cd-448b-bfdf-e365003b18c7">
+
+{/* @layout-id t-6a53bc76-59ac-4e60-8496-0e99f14f31c9 */}
 
 I learned that even simple click controls can feel game-like when the position and direction of the applied force are taken into account.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-211bdf10-2cb5-477e-9159-0906cf66af96">
+
+{/* @layout-id t-7fc8d8e5-abba-4005-aefe-fcfbe6bc7fc3 */}
+
 ### A Display Problem in the WebGL Version
+
+{/* @layout-id t-b4b459db-a18c-44d1-b504-58ef2a000093 */}
 
 One thing I should have handled better was checking how the WebGL version appeared after publishing it.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-aa16ee92-f0a4-4d69-908a-8cdc261e6c8f">
+
+{/* @layout-id t-0769d169-ecba-4a31-8ed1-f4deaeefd859 */}
+
 I had been developing on Windows, so I did not notice the problem during development. However, when I embedded the WebGL build into a website using an iframe and opened it in a browser on a Mac, the aspect ratio was incorrect and both sides of the game screen were cut off.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c2cfc1ce-4c58-4d92-be8f-66253dd1b36c">
+
+{/* @layout-id t-4229d35a-c26c-481c-a937-48a221ef4816 */}
 
 In this game, being unable to click a can that has moved to the edge of the screen is a critical problem. If the edge is cut off, the player can no longer interact with a can that moves there, making it impossible to continue playing.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3415bcec-f243-4fb1-9906-3e5f5d45795f">
+
+{/* @layout-id t-28fc0ce9-561c-4b29-9740-b0b628864913 */}
+
 Even when the game itself works correctly, the page on which it is published or the way a browser displays it can make the game unplayable.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a98b0fc3-436d-4f63-977c-e74e620069b0">
+
+{/* @layout-id t-3252a046-82e2-4fb2-b6fd-c3f34c788317 */}
 
 I now own a Mac as well, so in the future, I want to make sure that I test a game on multiple environments and screen sizes before publishing it.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-fd556147-b5ef-40a7-98da-1f0e1e36cd1b">
+
+{/* @layout-id t-31ab1186-f711-4cbf-94f5-98f2ee6ecd52 */}
+
 ## Game 6: "Meteor Frontier Runner"
 
-<ImageSlider images="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png, /images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" />
+<Photo assetId="asset-7625881a-0d6a-4f8d-8851-4e223ea07355" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerTitle.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3f383e05-6998-448c-9cb0-dad68200a59d">
+
+<Photo assetId="asset-7c425c18-a57d-4357-b910-c372842f54f4" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene1.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-4dacf604-82c3-4ece-9a91-f1f74c95808c">
+
+<Photo assetId="asset-3c3371bd-fc9d-428b-bc63-3dbbfa539f12" src="/images/Articles/Unity/MeteorFrontierRunner/MeteorFrontierRunnerGameScene2.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-a5805e84-bbdc-4e3e-861c-476eb1e656b7">
+
+{/* @layout-id t-b1eb58e0-a690-4717-bbfb-1c6c51a980f0 */}
 
 Only two games left.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-0510feda-a4b0-4335-9d48-ecc576dc6690">
+
+{/* @layout-id t-9619ce5d-cc62-4f2b-804f-49568750ffc2 */}
+
 My sixth game, "Meteor Frontier Runner," is an endless runner in which the player controls a rocket and keeps moving forward while avoiding meteorites.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-d0777c6f-caf0-488e-985f-9988cbd23201">
+
+{/* @layout-id t-bec41ef1-fa8e-4f3a-a389-2932580b9993 */}
 
 The number of meteorites increases according to the distance traveled by the rocket, gradually raising the difficulty.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-efaac8ee-36a1-4946-8932-3d58c5a2186a">
+
+{/* @layout-id t-3f46db5d-bcb8-49d1-9cb5-44d6475bcbc4 */}
+
 I was inspired to make this project by the [Kenney 2D assets](https://kenney.nl/assets/category:2D/page:6), which I found while searching for game resources.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f5da11e8-5593-4573-9930-1ec68a8b08e3">
+
+{/* @layout-id t-8d0cdc00-946d-4031-bb52-0193f45e65ff */}
 
 While looking through the assets, I imagined a game involving a rocket and meteorites and developed the idea from there.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-c6a2fb3f-06ae-43a3-8800-d97593aeafa5">
+
+{/* @layout-id t-6e1fb283-516c-4af2-ad42-ceecf050fd06 */}
+
 ### What Happened When I Started Without Settling on a Concept
+
+{/* @layout-id t-a9e87736-9f93-46a6-81ef-77dfa9708faf */}
 
 Once again, I began development without deciding the details of the game in advance.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-b2c6a114-b029-49ed-ba9d-5645c582f1d0">
+
+{/* @layout-id t-8590eb79-3f5c-4e3e-8afa-7464d1a6c667 */}
+
 As a result, I changed the theme midway through development, undid things I had already made, and discarded another game idea. Even so, I eventually managed to shape everything into a complete game.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9a6e67a1-e315-4978-b8f6-cf80efe67706">
+
+{/* @layout-id t-e07e6dc5-4496-413d-b8b7-06a32b563deb */}
 
 By the time I reached this project, I had begun running into fewer implementation problems than before. Part of that was probably because I was using AI to assist with implementation, but I also think I had become more familiar with Unity's basic controls and the structure of my code.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3c293e12-f9b5-4a37-a24b-c99073e2e78c">
+
+{/* @layout-id t-86f037cb-19d2-4b37-a3d9-bbdce1039fc8 */}
+
 Still, being able to implement something and being able to make a game that people can play without confusion were two different things.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e0fe5924-2d77-4358-be82-ff1cd7c6d00a">
+
+{/* @layout-id t-9c6192d9-07b8-40ce-b426-29646b5a9571 */}
 
 ### Not Enough Explanation for First-Time Players
 
+{/* @layout-id t-a19c7b3b-e7d3-4934-8acc-d6569adef7d9 */}
+
 The main problem with this project was that I did not provide enough explanation for people playing it for the first time.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-532e3175-172c-40f4-b409-b4261df0ae0a">
+
+{/* @layout-id t-1c12b9b9-fb27-4f60-9f19-4de90922a1c8 */}
 
 There was no tutorial, which made the controls difficult to understand. Immediately after starting the game, it was also unclear which direction the rocket was moving.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-a8babbcf-aed5-477e-906f-1a8afef5b367">
+
+{/* @layout-id t-8568da2b-5e4b-4aba-b6d5-3569f461eab9 */}
+
 As the creator, I already knew all the controls and rules, so I could play without any explanation. For someone encountering the game for the first time, however, not knowing the direction of movement or how to control the rocket could be a major source of frustration.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c990f76d-3f16-441a-93f6-0d2d47682983">
+
+{/* @layout-id t-90c37b10-0197-4429-8925-7b7e54bada1a */}
 
 I did not necessarily need to make a long tutorial. Simply displaying the controls at the beginning or adding a visual cue to show the direction of movement could have made the game much easier to understand.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-868e2e68-1a62-44f8-b2fa-4f68cc645b54">
+
+{/* @layout-id t-b81ed494-72c4-46fd-9ca1-f7068c627517 */}
+
 I realized that finishing the game was not enough. I also needed to check whether players could understand its rules within the first few seconds.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ca16bfee-0b72-461f-9289-f33c72eb1865">
+
+{/* @layout-id t-7d07683c-ecc4-4a54-845b-1e7d4ea1f97d */}
 
 ## Game 7: "Monster & Panzer"
 
-<ImageSlider images="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png, /images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" />
+<Photo assetId="asset-35434429-785b-4705-a2b1-9e7105f7b295" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerTitle.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 1" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f5280eb4-dfbe-46dc-a00b-161478ba0f33">
+
+<Photo assetId="asset-d1e02011-6193-4ec7-a05b-b21d48cfc663" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene1.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 2" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f3fb84c9-3533-483f-82a3-b172385b76f1">
+
+<Photo assetId="asset-8df09f4d-0539-46a0-b78c-fc659118993f" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene2.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 3" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c27a99fc-0b20-4bb0-89e1-0e2156ec8582">
+
+<Photo assetId="asset-a661e3bd-d097-46c7-9814-856e387ff476" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene3.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 4" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-65495db4-a957-4ebd-87ef-3aacd47686be">
+
+<Photo assetId="asset-ca24747e-eed0-4fa8-bddd-c46ef46fe5f4" src="/images/Articles/Unity/MonsterAndPanzer/MonsterAndPanzerGameScene4.png" alt="Looking Back at the Unity Games I've Made So Far — Part 2 — 5" fit="contain" kind="screenshot" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9e2143d0-0b03-4baa-98e6-017470105d99">
+
+{/* @layout-id t-62864879-5150-4387-a70b-efcd214e167c */}
 
 My seventh game was "Monster & Panzer."
 
+</ArticleBlock>
+
+<ArticleBlock id="b-8e8ed153-eee7-4694-91d4-458c97466e11">
+
+{/* @layout-id t-43ff6638-c0d8-48e8-893a-5e9a2376a5e1 */}
+
 It is a 2D clicker game in which the player upgrades a tank, defeats monsters, and tries to reach the 1,000-meter mark.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9f5c6f15-ad40-4871-9b5a-fdafebbaeccb">
+
+{/* @layout-id t-e5b0bf66-c853-43b5-ac47-a8025b347451 */}
 
 This was one of the largest projects I had made so far, and it took around a month and a half to complete.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-dbadce67-fea6-4cc4-b426-d46aedb08cba">
+
+{/* @layout-id t-c0d381c8-d3c2-43aa-93f1-22f973e38cd4 */}
+
 ### Game Balance and Playtesting
+
+{/* @layout-id t-2669b874-f031-40c4-84b1-2bf818d12d51 */}
 
 The most difficult parts of this project were adjusting the game balance and conducting playtests.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-12cf469c-174e-4666-8153-4997f8510f66">
+
+{/* @layout-id t-cfe8714e-ce87-40e5-8e0a-b8f40db0343b */}
+
 Unlike my previous games, "Monster & Panzer" contains a wide variety of statistics and parameters, including the tank's attack power, enemy health, and the cost of upgrades.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-c5d76bdb-ba85-4df1-b2f0-0e90aa90d743">
+
+{/* @layout-id t-d0ae38ca-97e0-4af9-94ce-0418b7be81b6 */}
 
 As the number of variables increases, each value has a greater influence on the game as a whole. Because of this, adjusting the difficulty was particularly challenging.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-34155c26-5ea0-497b-bc56-d269b007d832">
+
+{/* @layout-id t-3178553c-4bcd-4fb1-9a9c-9d5c7125ecf7 */}
+
 It also takes around 40 to 50 minutes to play the game from the beginning through to completion. This made it difficult to test the entire game whenever I made even a small balance adjustment.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3fdb3d19-62c5-4603-8ec9-eab7d423cc73">
+
+{/* @layout-id t-0952ba04-fe7c-4a5a-997a-1f0a27b22d2b */}
 
 ### The Repetition I Discovered Through Playtesting
 
+{/* @layout-id t-0c812aac-928a-49b4-a65e-8f53282d1697 */}
+
 When I asked a friend to playtest the first completed version of the game, we found a major problem.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b549d34b-edbe-4975-835e-f1b3ae199b96">
+
+{/* @layout-id t-35b02779-585f-45b5-90b4-dde00cfc30af */}
 
 The player had to keep clicking continuously until reaching the end of the game.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-20a0636a-a3aa-424e-9b14-bf2e8e87a555">
+
+{/* @layout-id t-1e5f946f-3509-4946-95bf-06eb4b217594 */}
+
 Because I had repeated the same action so many times during development, I had become numb to it and failed to notice how repetitive it felt.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-18a34cbd-1652-48a6-a211-40ead5781d5a">
+
+{/* @layout-id t-3c2bbff5-8f13-4af6-ab4e-aed427754745 */}
 
 Based on the playtest feedback, I added several features, including devices that automatically generate in-game currency and a save system.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1a41400f-c3c0-4f1d-9750-40c2ecd4e3ed">
+
+{/* @layout-id t-a54e5b04-6881-4a19-9ad4-4888537bc665 */}
+
 However, as I wrote in Part 1, I had not worked out the content and balance of the game thoroughly enough at the beginning. This resulted in a great deal of backtracking and reworking.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-bfb32f94-f85c-49a3-8b3a-eace0816fed5">
+
+{/* @layout-id t-df3bbd13-1b98-4cc4-aaa5-12eae22f4049 */}
 
 As I continued adding features, there were also times when I lost sight of the original game I had imagined and simply continued developing without a clear direction.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-cfb4a230-0eef-4b5e-afa7-a8377e76fdfd">
+
+{/* @layout-id t-714e6e07-50cf-4550-b47c-93e627e12f71 */}
+
 ### The Question That Remained Until the End
+
+{/* @layout-id t-e701f61a-3810-4999-8381-3889396fbf7d */}
 
 I was never able to completely solve the problem of repetition in this game.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-5cd28abe-938a-4c74-a644-0bd53cd053fd">
+
+{/* @layout-id t-e7ee248a-f537-41e8-9969-8bcc92a685bb */}
+
 To create more variety, I added several checkpoints and features throughout the stages. Looking back at the finished game, however, it also feels as though I kept attaching new elements afterward whenever they became necessary.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-90d95640-764e-411f-9c02-c715a937fce4">
+
+{/* @layout-id t-1eacc499-f285-4505-8398-3badf67b1202 */}
 
 Someone playing it for the first time might still have fun.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-818cfd2a-ac94-41f2-8528-315686e62789">
+
+{/* @layout-id t-b242d875-2791-427a-b197-553f0995981c */}
+
 Even so, I was left wondering whether I had really made a game that remained enjoyable all the way to the end.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2c01c8e6-85c7-4a5d-bc20-5365f489ead3">
+
+{/* @layout-id t-7ec9f4dc-ce81-4a4b-a1a9-b7ce1293aea7 */}
 
 Completing the game was a significant achievement. However, finishing a project does not automatically remove the problems that its creator noticed along the way.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-60bf23b4-1f5b-46e7-b395-7650a18bc039">
+
+{/* @layout-id t-05b48b8e-930c-4008-8a29-8bd92cc646f1 */}
+
 I want to remember this question when I make my next game.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-7f8c5f26-acf1-4d3f-a930-ce64a9933fce">
+
+{/* @layout-id t-131aa1d8-718c-4c1a-bdcd-efd0972bb7d5 */}
 
 ### Developing the Game with Unity MCP
 
+{/* @layout-id t-fdcf2614-24a6-4d98-b7ce-d8f335dc48d3 */}
+
 During the second half of this project's development, I began using Unity MCP.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b51ec3cf-28ea-4bde-8815-c12ac184b804">
+
+{/* @layout-id t-f6083d88-4668-47f7-8569-13becb2d5b39 */}
 
 I currently use both Codex and Claude while comparing the differences between them. I tend to use Codex more often because of token consumption, but I feel that each has its own strengths.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ecd8f934-a24e-40a6-959d-c6e176e6e5a2">
+
+{/* @layout-id t-2fcdefd9-e8b8-4af1-b44c-64116ed6e7ee */}
+
 Unity MCP allowed AI to operate the Unity Editor and perform tasks such as creating GameObjects and Components or changing their settings.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-4fdb4f26-3c03-4eb1-bfff-f5627f43fbbe">
+
+{/* @layout-id t-7f2e285a-6586-454b-af94-28469828dda3 */}
 
 There are still areas where I feel it is better to make manual adjustments myself, particularly the exact positioning of UI elements and the player. On the other hand, when implementing features as individual Components, there were cases where I could create something of higher quality than I could have produced by myself.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-b8b11d33-5d7c-4499-8d54-a7fb2e9c091c">
+
+{/* @layout-id t-d8f15707-dd06-4354-a293-1553895da241 */}
+
 A game will not be completed simply by leaving everything to AI. Depending on how it is used, however, I feel that it can become a powerful tool for supporting game development.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1f821f4e-d5cc-4a2c-88d6-75e54c11d7be">
+
+{/* @layout-id t-09db4b93-bc78-4096-ada2-ae32335c6bc9 */}
 
 ## Looking Back at Seven Games
 
+{/* @layout-id t-b9744366-3e79-401d-a5ea-513592d4dcd5 */}
+
 I have now made a total of seven games.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-0ff829c8-0cc1-454a-9128-097995ee377a">
+
+{/* @layout-id t-ae095982-bf70-4113-ab48-8fe5e247537c */}
 
 You could say that it is "only seven." Still, while making those seven games, I experienced many failures and spent a great deal of time confronting the things I had created.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-8da68f2f-fc9d-454a-a43b-fb337f53ee8a">
+
+{/* @layout-id t-67a18bbb-755a-4b9e-bb95-305b9d796863 */}
+
 At first, I began by following hands-on videos and learning Unity's controls and basic implementation techniques.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3a2211d7-a3f3-4a87-8ba0-709297fa60d6">
+
+{/* @layout-id t-07ed55ce-be78-402b-aa36-b33bc6efeff2 */}
 
 From there, I gradually expanded the range of things I could design and build myself: AI-assisted asset creation, rule-based AI, enemy behavior using raycasts, controls that change according to where the player clicks, and game balance adjustments.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-adc13eb3-0c4f-4e0e-a963-a90852607171">
+
+{/* @layout-id t-468c0ce7-335e-4d99-9eb8-56d1331a956a */}
+
 At the same time, with every new project, I became more aware that being able to implement something and being able to make an enjoyable game are not the same thing.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-60bcb560-41c5-4507-a5fa-5e7ac23cac21">
+
+{/* @layout-id t-8c7a3ee2-1112-4538-9eee-382e901b95e6 */}
+
 The three biggest lessons I learned were:
+
+</ArticleBlock>
+
+<ArticleBlock id="b-925b1c9d-b870-443e-837c-6793a84a8e1a">
+
+{/* @layout-id t-e38e14f6-4d10-472f-b30a-f8630276836b */}
 
 1. Decide the core of the game and the scope of the finished project before starting development.
 2. Ask other people to play the game and listen to their objective feedback.
 3. Before adding more features, consider whether they will genuinely make the game more enjoyable.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-8b0a0758-301f-4bc4-930c-293bd063dd62">
+
+{/* @layout-id t-51d1beda-c886-48b3-8c50-2724a43cb67e */}
+
 As I prepare to release a game for iOS, I expect that I will need to consider even more than the enjoyment of the game itself. I will also need to think about the existing market, the target age group, game design, and how the game will generate revenue.
+
+</ArticleBlock>
+
+<ArticleBlock id="b-bbb1562a-f3c9-48ad-ab6d-77111c3f46e8">
+
+{/* @layout-id t-542c1278-f0d9-483a-b958-c27fa3a5f253 */}
 
 My past failures will not immediately tell me the correct answer.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-a416a9d7-725d-423f-89c6-d6448ddb58da">
+
+{/* @layout-id t-7c30098f-0bb2-486d-b3b7-a72f426c28b6 */}
+
 Even so, completing seven games and looking back at the parts that did not go well should give me something valuable to carry into my next project.
 
+</ArticleBlock>
+
+<ArticleBlock id="b-232a0a8a-862e-4068-8db3-93bfb96f0ccb">
+
+{/* @layout-id t-4956119e-732f-4205-8005-c1b60ca1eb99 */}
+
 I want to keep experimenting and making mistakes as I work toward creating a game that I genuinely find enjoyable.
+
+</ArticleBlock>

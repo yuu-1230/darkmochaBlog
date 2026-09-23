@@ -1,0 +1,534 @@
+---
+title: "UnityにおけるAI駆動開発"
+date: "2026-08-30"
+category: "Tech"
+tags: ["Unity", "AIDD"]
+description: "AIを用いてゲームをどこまで作成できるのか？"
+update: "2026-08-30"
+draft: true
+reader:
+  mode: magazine
+  pages:
+    - id: edition-title
+      template: text
+      blocks:
+        - edition-title
+        - b-9f9642ee-49a4-4eac-98fd-432b8e7789b2
+        - b-cd7dbccd-ebe9-4b95-8ebf-e845710ebdf7
+        - b-39038cee-9869-4827-879c-ea72eb3db88c
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-ce477c3e-7f73-414f-b202-1518d9829d0f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-8bcab702-c018-4a57-8628-e24b985ceb1f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-5bf4f853-4a83-40ea-9d9b-ac3b4f1be4d8
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-ec9a9140-fc27-49d3-9ace-1b3cc3172e6b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-f6da73c3-b881-4a4e-a61f-822bf8574d9a
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-f0fb12a1-f63c-4fb7-a8a1-955bf8ed1a3e
+      template: text
+      blocks:
+        - b-f0fb12a1-f63c-4fb7-a8a1-955bf8ed1a3e
+        - b-8211be3c-9f69-4f3d-b709-00b03dd93f88
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-f5dc1b01-d7dc-4e5e-a193-54182361df65
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-475bd4d9-cc9e-4220-b0d9-23c30c5b5881
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-26e8f801-761f-4905-a17a-f485a7e307a6
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-369297e6-1a1b-42d9-a715-824d4d390d85
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-67ddc597-ea84-4efd-bf00-0d6a74aac9ce
+      template: text
+      blocks:
+        - b-67ddc597-ea84-4efd-bf00-0d6a74aac9ce
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/your-article/photo.jpg
+            side: block
+            width: 100
+            ratio: 0.8
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-6f6f5006-9b14-4278-841c-53140e4d2a84
+            anchorId: end
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-a12a070c-a16b-4529-ae50-f1c3ced1f397
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-45c086d6-e053-476d-a62e-9bc9535cfedf
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-e9d65bda-b111-4457-af65-1c0e3de45f30
+      template: text
+      blocks:
+        - b-e9d65bda-b111-4457-af65-1c0e3de45f30
+        - b-65ab646d-3216-4600-8002-adb3f646ed6d
+        - b-6b3a2245-7209-47a4-a515-d6e94dac2dc5
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/your-article/photo-01.jpg
+            side: left
+            width: 44
+            ratio: 0.8
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-13ded3dd-9e19-4375-afbd-b9d6ff4ffd31
+            anchorId: end
+          - source: /images/Articles/your-article/photo-02.jpg
+            side: right
+            width: 44
+            ratio: 0.8
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: support
+            sourceId: asset-b75d3bb8-d929-411b-a138-c6bed0fa4f1e
+            anchorId: end
+        templateId: pair
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9d9e4241-fb39-4e9a-b557-a95281dd56ec
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-bd406df1-7aed-4975-837d-4aded605ec23
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-65ab646d-3216-4600-8002-adb3f646ed6d:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: 'b-6b3a2245-7209-47a4-a515-d6e94dac2dc5:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-b0d71d96-665a-43f0-98c5-d80d433ee1ea
+      template: text
+      blocks:
+        - b-b0d71d96-665a-43f0-98c5-d80d433ee1ea
+        - b-36b25d36-a3c6-4c14-9c5e-918bf48e8fff
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/your-article/photo-03.jpg
+            side: block
+            width: 100
+            ratio: 0.8
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 50
+            focalY: 50
+            role: main
+            sourceId: asset-2c4e254e-c70e-43a5-a903-1ec28dffe317
+            anchorId: t-36298442-7ce9-43c4-82ec-c0909f1d0e20
+        templateId: landscape
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: 'b-b0d71d96-665a-43f0-98c5-d80d433ee1ea:fb91c8327bf2a28b:1'
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-36298442-7ce9-43c4-82ec-c0909f1d0e20
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7e388b8f-6785-4da2-b893-f50f153a3302
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-3bf5b6bb-f39b-4b28-9c32-1fe385e5b784
+      template: text
+      blocks:
+        - b-3bf5b6bb-f39b-4b28-9c32-1fe385e5b784
+        - b-e09200e5-d969-436a-a3f1-78f7b277ad2a
+        - b-66f4b9cf-733b-47b3-8a9f-e4914a317418
+        - b-2d236b72-b998-4bd1-ae95-286a7fd294f3
+        - b-6ab32229-cbbe-43b9-89c1-894b66c9aa9f
+        - b-b5352d43-6b15-48ec-bb40-35220dcc0dcb
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-922a0f19-09e5-4811-b1f8-f4cd0405e76b
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-b73f688a-7145-4203-b7a2-942b8a57f617
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-3208d4ee-0d60-4592-a015-a998d1c90a72
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-c9b27839-22a0-4b4a-9e27-3d0f06ad3697
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-37b344cc-d2a7-4028-b97b-e2bad9ddca9e
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6d1201b7-5065-432c-b898-049d46241bdd
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-676f193a-3be1-4119-b5b0-be843cb60417
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-61e3c004-85ba-4582-b9c4-5512e80d8d0b
+            width: 100
+            inset: 0
+            offset: 0
+    - id: b-3e032cfa-2e0a-4f56-91bf-8def785c1554
+      template: text
+      blocks:
+        - b-3e032cfa-2e0a-4f56-91bf-8def785c1554
+        - b-57fe0232-e0fe-49b7-9abf-06595457cf4d
+        - b-bf2c5bb9-67e3-49ce-a3d9-a08605f6d16a
+        - b-159acba4-15ca-4040-9d47-fbe001c1ba70
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-404dcbd1-c776-4764-a1c1-10567dd08636
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-2e281596-49ae-4a8e-a6e0-1bee5a04898c
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-548723c2-a3b4-4b8e-831f-c8491995a45a
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-fe009f4e-c939-45fc-9c17-87ee8d1fd9c2
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-0f9515ef-57b2-4551-8053-480366480473
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-7ae30a83-4f19-492e-948f-a2ead5b75d1a
+            width: 100
+            inset: 0
+            offset: 0
+  schemaVersion: 2
+  articleId: article-fad28634-3a53-465a-8d98-cc11f67eb218
+---
+<ArticleBlock id="edition-title">
+
+{/* @layout-id t-ce477c3e-7f73-414f-b202-1518d9829d0f */}
+
+<ArticleTitle />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-9f9642ee-49a4-4eac-98fd-432b8e7789b2">
+
+{/* @layout-id t-8bcab702-c018-4a57-8628-e24b985ceb1f */}
+
+{/*
+使い方
+1. このファイルを複製し、ファイル名を `yyyy-mm-dd-your-article-slug.mdx` に変更する。
+2. フロントマターと本文中のプレースホルダーを置き換える。
+3. 画像は `public/images/Articles/your-article/` に置き、`/images/Articles/...` で参照する。
+4. 公開するときは `draft: false` に変更する。`readTime` は削除すると本文から自動計算される。
+*/}
+
+</ArticleBlock>
+
+<ArticleBlock id="b-cd7dbccd-ebe9-4b95-8ebf-e845710ebdf7">
+
+{/* @layout-id t-5bf4f853-4a83-40ea-9d9b-ac3b4f1be4d8 */}
+
+導入文を書く。この記事で扱うことと、読むと何が分かるかを簡潔に伝える。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-39038cee-9869-4827-879c-ea72eb3db88c">
+
+{/* @layout-id t-ec9a9140-fc27-49d3-9ace-1b3cc3172e6b */}
+
+## この記事の要点
+
+{/* @layout-id t-f6da73c3-b881-4a4e-a61f-822bf8574d9a */}
+
+- 要点その1
+- 要点その2
+- 要点その3
+
+</ArticleBlock>
+
+<ArticleBlock id="b-f0fb12a1-f63c-4fb7-a8a1-955bf8ed1a3e">
+
+{/* @layout-id t-f5dc1b01-d7dc-4e5e-a193-54182361df65 */}
+
+## セクション見出し
+
+{/* @layout-id t-475bd4d9-cc9e-4220-b0d9-23c30c5b5881 */}
+
+本文を書く。**太字**、*イタリック*、~~打ち消し線~~、`インラインコード` が使える。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-8211be3c-9f69-4f3d-b709-00b03dd93f88">
+
+{/* @layout-id t-26e8f801-761f-4905-a17a-f485a7e307a6 */}
+
+### 小見出し
+
+{/* @layout-id t-369297e6-1a1b-42d9-a715-824d4d390d85 */}
+
+必要に応じて補足を書く。`##` と `###` は目次に自動表示される。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-67ddc597-ea84-4efd-bf00-0d6a74aac9ce">
+
+{/* @layout-id t-a12a070c-a16b-4529-ae50-f1c3ced1f397 */}
+
+## 画像
+
+{/* @layout-id t-45c086d6-e053-476d-a62e-9bc9535cfedf */}
+
+### 1枚の画像
+
+<Photo assetId="asset-6f6f5006-9b14-4278-841c-53140e4d2a84" src="/images/Articles/your-article/photo.jpg" alt="画像の内容を説明する代替テキスト" fit="contain" kind="photo" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e9d65bda-b111-4457-af65-1c0e3de45f30">
+
+{/* @layout-id t-9d9e4241-fb39-4e9a-b557-a95281dd56ec */}
+
+### 複数画像のスライダー
+
+{/* @layout-id t-bd406df1-7aed-4975-837d-4aded605ec23 */}
+
+`images` に画像パスをカンマ区切りで渡す。並び順がスライダーの表示順になる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-65ab646d-3216-4600-8002-adb3f646ed6d">
+
+<Photo assetId="asset-13ded3dd-9e19-4375-afbd-b9d6ff4ffd31" src="/images/Articles/your-article/photo-01.jpg" alt="スライダー全体の内容を説明する代替テキスト" fit="contain" kind="photo" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6b3a2245-7209-47a4-a515-d6e94dac2dc5">
+
+<Photo assetId="asset-b75d3bb8-d929-411b-a138-c6bed0fa4f1e" src="/images/Articles/your-article/photo-02.jpg" alt="スライダー全体の内容を説明する代替テキスト" fit="contain" kind="photo" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b0d71d96-665a-43f0-98c5-d80d433ee1ea">
+
+<Photo assetId="asset-2c4e254e-c70e-43a5-a903-1ec28dffe317" src="/images/Articles/your-article/photo-03.jpg" alt="スライダー全体の内容を説明する代替テキスト" fit="contain" kind="photo" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-36b25d36-a3c6-4c14-9c5e-918bf48e8fff">
+
+{/* @layout-id t-36298442-7ce9-43c4-82ec-c0909f1d0e20 */}
+
+## 表
+
+{/* @layout-id t-7e388b8f-6785-4da2-b893-f50f153a3302 */}
+
+左寄せ・中央寄せ・右寄せは区切り行の `:` で指定できる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3bf5b6bb-f39b-4b28-9c32-1fe385e5b784">
+
+{/* @layout-id t-922a0f19-09e5-4811-b1f8-f4cd0405e76b */}
+
+| 項目 | 内容 | 金額 |
+| :--- | :--: | ---: |
+| 項目A | 中央寄せの値 | 1,000円 |
+| 項目B | 中央寄せの値 | 2,000円 |
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e09200e5-d969-436a-a3f1-78f7b277ad2a">
+
+{/* @layout-id t-b73f688a-7145-4203-b7a2-942b8a57f617 */}
+
+## Instagram リンク
+
+{/* @layout-id t-3208d4ee-0d60-4592-a015-a998d1c90a72 */}
+
+Instagram の投稿またはハイライトへのリンクをカードとして表示する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-66f4b9cf-733b-47b3-8a9f-e4914a317418">
+
+{/* @layout-id t-c9b27839-22a0-4b4a-9e27-3d0f06ad3697 */}
+
+<InstagramLink
+  href="https://www.instagram.com/p/xxxxxxxxx/"
+  title="Instagramで見せる投稿のタイトル"
+/>
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2d236b72-b998-4bd1-ae95-286a7fd294f3">
+
+{/* @layout-id t-37b344cc-d2a7-4028-b97b-e2bad9ddca9e */}
+
+通常の外部リンクは [リンクテキスト](https://example.com) のように書く。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6ab32229-cbbe-43b9-89c1-894b66c9aa9f">
+
+{/* @layout-id t-6d1201b7-5065-432c-b898-049d46241bdd */}
+
+## 補足・注意
+
+{/* @layout-id t-676f193a-3be1-4119-b5b0-be843cb60417 */}
+
+<Tip type="tip" title="ヒント">
+  読者に覚えておいてほしい補足を書く。**Markdown** も使える。
+</Tip>
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b5352d43-6b15-48ec-bb40-35220dcc0dcb">
+
+{/* @layout-id t-61e3c004-85ba-4582-b9c4-5512e80d8d0b */}
+
+<Tip type="warning" title="注意事項">
+  条件、リスク、失敗しやすい点を書く。
+</Tip>
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3e032cfa-2e0a-4f56-91bf-8def785c1554">
+
+{/* @layout-id t-404dcbd1-c776-4764-a1c1-10567dd08636 */}
+
+<Tip type="info" title="参考情報">
+  出典、バージョン、前提条件などを書く。
+</Tip>
+
+</ArticleBlock>
+
+<ArticleBlock id="b-57fe0232-e0fe-49b7-9abf-06595457cf4d">
+
+{/* @layout-id t-2e281596-49ae-4a8e-a6e0-1bee5a04898c */}
+
+## コード
+
+{/* @layout-id t-548723c2-a3b4-4b8e-831f-c8491995a45a */}
+
+```ts
+const message = "コード例をここに書く";
+console.log(message);
+```
+
+</ArticleBlock>
+
+<ArticleBlock id="b-bf2c5bb9-67e3-49ce-a3d9-a08605f6d16a">
+
+{/* @layout-id t-fe009f4e-c939-45fc-9c17-87ee8d1fd9c2 */}
+
+## まとめ
+
+{/* @layout-id t-0f9515ef-57b2-4551-8053-480366480473 */}
+
+記事の結論と、読者に持ち帰ってほしいことを簡潔にまとめる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-159acba4-15ca-4040-9d47-fbe001c1ba70">
+
+{/* @layout-id t-7ae30a83-4f19-492e-948f-a2ead5b75d1a */}
+
+{/*
+必要に応じて使える記法
+
+- 色付きテキスト: <C c="blue">強調したい言葉</C>
+- YouTubeカード:
+  <YoutubeLink href="https://www.youtube.com/watch?v=xxxxxxxxxxx" title="動画タイトル" />
+- 脚注: 本文に `[^1]`、記事末尾に `[^1]: 脚注の内容` と書く
+*/}
+
+</ArticleBlock>

@@ -6,23 +6,492 @@ tags: ["機械学習", "Machine Learning", "scikit-learn"]
 description: "scikit-learnで繰り返し登場するfit・predict・transformの役割を、Irisデータセットを動かしながら整理した。"
 draft: false
 image: "/images/Articles/ML/20260612/ Thumbnail20260612.png"
+displayTitle: "scikit-learnを学ぶ"
+cardSummary: "fit・predict・transform。それぞれの役割を、Pythonのコードで確かめる。"
+homeOrder: 5
+cover: {"template": "split", "title": "fit / predict\ntransform", "subtitle": "Learning notes / 02", "tone": "dark", "mode": "composed", "background": "sage", "titleSize": "small", "imageFit": "contain"}
+reader:
+  mode: magazine
+  pages:
+    - id: edition-title
+      template: text
+      blocks:
+        - edition-title
+        - b-1c422421-01b7-4fa5-8fb5-36d55fbcb566
+        - b-1a2ad854-b9ff-43ce-9b1e-65f358fb50bc
+        - b-e229b82d-7a43-4c84-81d2-7faa67caf650
+      composition:
+        textWidth: 100
+        frames:
+          - source: /images/Articles/ML/20260612/ Thumbnail20260612.png
+            side: right
+            width: 40.97046303986711
+            ratio: 1.5
+            inset: 0
+            offset: 0
+            gap: 18
+            fit: contain
+            focalX: 70.39453125
+            focalY: 0
+            role: main
+            sourceId: asset-c287c647-995e-49e0-b9a1-c49d8e0e2995
+            anchorId: t-833280de-7e00-4869-8c16-f16607ea7a06
+            position: free
+            x: 59.12946428571429
+            'y': 31.760433306709274
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-fb721f9b-84f8-4505-bb68-8fc8ba5809b8
+            width: 74.44326204318936
+            inset: 0
+            offset: 0
+            bottomSpace: 0
+            position: free
+            x: 0
+            'y': 0
+          - id: t-833280de-7e00-4869-8c16-f16607ea7a06
+            width: 56.40832641196013
+            inset: 0
+            offset: 0
+            bottomSpace: 0
+            position: free
+            x: 0
+            'y': 31.10523162939297
+          - id: t-46d9ffca-a9c8-4d2e-b901-607f0f62142e
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 62.34087959265176
+            bottomSpace: 0
+          - id: t-02ac4c4b-bafe-488d-a0d8-b2cc5a4350d3
+            width: 99.70540905315615
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 80.89868710063898
+            bottomSpace: 0
+    - id: b-158b0978-69e3-4dcc-9b63-80cbf44a31b7
+      template: text
+      blocks:
+        - b-158b0978-69e3-4dcc-9b63-80cbf44a31b7
+        - b-7fa34e79-994c-40bb-8e34-f3254294a588
+        - b-05e1a903-f0fe-4534-99a4-a481f291cafa
+        - b-cfd46973-d3d7-4e6e-be34-d53a022ba6e7
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-2a3f868e-9150-4451-8f6d-787d35ea3dd0
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-9056fa57-9072-4732-8729-275c5cacb214
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 12.655376397763579
+          - id: t-e8cadb03-c295-48fd-8945-f693cca7c2c7
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 25.389376996805115
+          - id: t-d2494c4d-9447-4892-bfb8-bbac04aab2e1
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 41.574106429712465
+          - id: t-de087258-cc03-4d8a-8ca7-abe46d3bd8fe
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 54.45661940894569
+          - id: t-8b894a07-50ef-4bce-8d67-5085de078558
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 66.16039337060703
+    - id: b-5c9c9fc1-ff2b-40a1-bef1-ace9358e6645
+      template: text
+      blocks:
+        - b-5c9c9fc1-ff2b-40a1-bef1-ace9358e6645
+        - b-6dfd2593-b364-4dd8-ba36-e10f53ef3096
+        - b-ad89beb1-0f6b-49a1-8ff8-c27017034f83
+        - b-2e50f4cd-b70d-458e-a00d-c6aa8d29fc21
+        - b-2e59e43e-58cc-4374-b93f-9aa2c9c356a5
+        - b-9b0b9ff9-f69a-47ea-a4a5-13663d252e43
+        - b-cb91daee-962b-4b4f-9772-ad0678f9abbc
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-b5c8989c-88a6-4bf3-b964-1755e5dbe5d4
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-cf4921bb-1c05-4283-b68f-b0279b00b177
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 12.972993210862619
+          - id: t-71189568-baa2-4b2a-9e35-48a4134b2912
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 20.70624500798722
+          - id: t-7382a51d-3f16-4cfa-ab08-507b43a951be
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 31.004143370607025
+          - id: t-1f8d1651-c77b-4ff9-af9c-6d9cc7a8d593
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 42.551916932907346
+          - id: t-ad3f73b0-9afd-4f38-9fc8-0096c0b128b6
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 48.69396465654952
+          - id: t-7236c6e8-ca40-41f9-a926-31b32786774a
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 74.57879892172524
+          - id: t-a322f343-56d0-48cf-9252-8db4866a52f8
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 81.27995207667732
+    - id: b-f87910c8-b8c3-41a8-9aec-c29d902e784e
+      template: text
+      blocks:
+        - b-f87910c8-b8c3-41a8-9aec-c29d902e784e
+        - b-967af935-ffd1-4508-9a4c-93be6caa9768
+        - b-5e1c76e5-a514-4230-ae21-b6ab2f5a1bfe
+        - b-b055b703-32a1-4b5f-b62a-bd378ca7b0ae
+        - b-ebe07f25-59d1-44a4-84b0-7b9bde0b87e7
+        - b-3e27a805-562d-4492-aae6-f5005085a1de
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9992939d-996a-457f-8ecf-628619dca76f
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-ad49d5aa-a419-436c-9283-e20f8d961118
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 6.748577276357828
+            bottomSpace: 0
+          - id: t-c20e1446-cb62-42d1-b95d-dc9bab3c9a69
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 35.94935603035144
+          - id: t-0aec3346-c05c-42c5-a6c7-961ba1af646b
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 45.714357028753994
+            bottomSpace: 0
+          - id: t-be144dfa-9b09-43ab-b77e-e9a36e49235f
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 56.183231829073485
+          - id: t-07af8dc0-d88e-4a36-a95d-283bf71f76fd
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 76.59307607827476
+            bottomSpace: 0
+          - id: t-6b0e9d34-35bc-46dc-861d-98afb2367265
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 87.1942392172524
+    - id: b-b87e4c9d-c665-493a-93ec-60d0157a2ef8
+      template: text
+      blocks:
+        - b-b87e4c9d-c665-493a-93ec-60d0157a2ef8
+        - b-71a4d45f-ceac-4279-afb3-73315564c0d3
+        - b-43e2b149-2abc-4dce-bc4a-0a01eeb045ad
+        - b-ede5762e-6d63-4218-bea4-2c4761c2bda8
+        - b-6fdeab05-4dc8-4368-b27e-bcbdb6a1f8f0
+        - b-248ac5bc-729b-4e7f-b0b4-ccaf39961140
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-bdcf40f2-7232-47d0-ac4a-30c488fd5674
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-6b73d187-0b7d-4905-95e8-e3844a2a72d9
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 12.17052715654952
+          - id: t-01d9d962-2dd1-4d63-bece-e4b05edb67b1
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 22.894618610223645
+          - id: t-54ce0201-d2f1-4875-9058-9fef0b513473
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 34.50728833865815
+          - id: t-3738e111-84ab-436f-914a-3033188ac836
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 45.109075479233226
+          - id: t-335b8010-5350-4224-822f-c0b44c57d6f4
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 73.28836361821087
+          - id: t-a813317b-a384-4a18-8e38-d0a3ed78e8c5
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 83.62557408146965
+    - id: b-03461334-037b-4d81-8138-6d71aa338c24
+      template: text
+      blocks:
+        - b-03461334-037b-4d81-8138-6d71aa338c24
+        - b-3766b9d3-a2d5-403c-b76d-fc19ba61cabb
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-345d2620-c349-482a-962a-9ca88ee046cf
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-fa2809cb-a12a-4afe-8633-d5bde5ad17cb
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 42.55254093450479
+          - id: t-853c051b-1576-4a3e-8787-1fec324b680f
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 52.5178464456869
+    - id: b-66154c1c-12c8-46e2-8174-3f28e0dc9e70
+      template: text
+      blocks:
+        - b-66154c1c-12c8-46e2-8174-3f28e0dc9e70
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: data
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-c785b104-3451-4026-9591-bbf6d716e0dd
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 0
+    - id: b-595cbc57-43d9-4893-97d5-6c61afdf7813
+      template: text
+      blocks:
+        - b-595cbc57-43d9-4893-97d5-6c61afdf7813
+        - b-e1fbf015-c112-4267-a11e-90c7a80f1b0d
+        - b-bab4a673-5286-4b19-81f4-8479d85bbba9
+        - b-ecf27042-91d9-4974-bb81-7940cb00cbd6
+      composition:
+        textWidth: 100
+        frames: []
+        templateId: text
+        density: standard
+        headingSize: standard
+        textUnit: paragraph
+        textGroups:
+          - id: t-9d8b6394-1797-43e9-838e-100cd51b70fe
+            width: 100
+            inset: 0
+            offset: 0
+          - id: t-d8f0c9d5-4bf8-44f5-a30b-d47d2858c782
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 11.266348841853034
+          - id: t-ab4243bd-5c3e-418a-9ede-2b5241d149c9
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 40.71610423322684
+          - id: t-7739f172-b250-4c82-96b2-d16ed4be1104
+            width: 100
+            inset: 0
+            offset: 0
+            position: free
+            x: 0
+            'y': 56.7354732428115
+  schemaVersion: 2
+  articleId: article-2fa641c9-3ba7-49e1-a95d-2b8ca0907d31
 ---
+<ArticleBlock id="edition-title">
+
+{/* @layout-id t-fb721f9b-84f8-4505-bb68-8fc8ba5809b8 */}
+
+<ArticleTitle />
+
+<Photo assetId="asset-c287c647-995e-49e0-b9a1-c49d8e0e2995" src="/images/Articles/ML/20260612/ Thumbnail20260612.png" alt="" fit="contain" kind="diagram" />
+
+</ArticleBlock>
+
+<ArticleBlock id="b-1c422421-01b7-4fa5-8fb5-36d55fbcb566">
+
+{/* @layout-id t-833280de-7e00-4869-8c16-f16607ea7a06 */}
 
 機械学習初学者による、絶望のアウトプット記録。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-1a2ad854-b9ff-43ce-9b1e-65f358fb50bc">
+
+{/* @layout-id t-46d9ffca-a9c8-4d2e-b901-607f0f62142e */}
+
 scikit-learnのサンプルコードを読んでいると、どのモデルにも同じように `fit()` が登場する。ロジスティック回帰とデータの標準化では役割が違うはずなのに、なぜ同じメソッドを使うのか。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e229b82d-7a43-4c84-81d2-7faa67caf650">
+
+{/* @layout-id t-02ac4c4b-bafe-488d-a0d8-b2cc5a4350d3 */}
 
 調べてみると、その理由は「推定器」という共通設計にあった。今回は `fit()`、`predict()`、`transform()` の3つに絞って、自分なりに整理する。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-158b0978-69e3-4dcc-9b63-80cbf44a31b7">
+
+{/* @layout-id t-2a3f868e-9150-4451-8f6d-787d35ea3dd0 */}
+
 ## scikit-learnでできること
+
+{/* @layout-id t-9056fa57-9072-4732-8729-275c5cacb214 */}
 
 scikit-learnは、機械学習を試すためのPythonライブラリだ。分類・回帰・クラスタリング・次元削減に加えて、前処理やモデル評価の道具も揃っている。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-7fa34e79-994c-40bb-8e34-f3254294a588">
+
+{/* @layout-id t-e8cadb03-c295-48fd-8945-f693cca7c2c7 */}
+
 最初は機能の多さに圧倒されたが、基本的な使い方はかなり統一されている。モデルが変わっても、データを渡して学習し、予測または変換するという流れは大きく変わらない。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-05e1a903-f0fe-4534-99a4-a481f291cafa">
+
+{/* @layout-id t-d2494c4d-9447-4892-bfb8-bbac04aab2e1 */}
 
 ## 推定器という共通の入口
 
+{/* @layout-id t-de087258-cc03-4d8a-8ca7-abe46d3bd8fe */}
+
 scikit-learnでは、データから何かを学ぶオブジェクトを推定器（Estimator）と呼ぶ。推定器は基本的に `fit()` を持ち、役割に応じて別のメソッドも実装する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-cfd46973-d3d7-4e6e-be34-d53a022ba6e7">
+
+{/* @layout-id t-8b894a07-50ef-4bce-8d67-5085de078558 */}
 
 | 役割 | 主なメソッド | 例 |
 | :--- | :--- | :--- |
@@ -30,15 +499,47 @@ scikit-learnでは、データから何かを学ぶオブジェクトを推定�
 | 予測器 | `predict()` | 分類器、回帰器 |
 | 変換器 | `transform()` | `StandardScaler`、`PCA` |
 
+</ArticleBlock>
+
+<ArticleBlock id="b-5c9c9fc1-ff2b-40a1-bef1-ace9358e6645">
+
+{/* @layout-id t-b5c8989c-88a6-4bf3-b964-1755e5dbe5d4 */}
+
 ひとつのクラスが複数の役割を持つこともある。`LogisticRegression` は学習と予測を行い、`StandardScaler` はデータから平均・標準偏差を学んでから値を変換する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-6dfd2593-b364-4dd8-ba36-e10f53ef3096">
+
+{/* @layout-id t-cf4921bb-1c05-4283-b68f-b0279b00b177 */}
 
 「どれも同じ書き方で使える」という設計が、scikit-learnの扱いやすさにつながっている。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ad89beb1-0f6b-49a1-8ff8-c27017034f83">
+
+{/* @layout-id t-71189568-baa2-4b2a-9e35-48a4134b2912 */}
+
 ## fit()でデータから学ぶ
+
+{/* @layout-id t-7382a51d-3f16-4cfa-ab08-507b43a951be */}
 
 `fit()` は、渡されたデータから必要な値を学ぶメソッドだ。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-2e50f4cd-b70d-458e-a00d-c6aa8d29fc21">
+
+{/* @layout-id t-1f8d1651-c77b-4ff9-af9c-6d9cc7a8d593 */}
+
 ロジスティック回帰なら、特徴量と正解ラベルから分類に使う係数を学習する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-2e59e43e-58cc-4374-b93f-9aa2c9c356a5">
+
+{/* @layout-id t-ad3f73b0-9afd-4f38-9fc8-0096c0b128b6 */}
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -47,7 +548,19 @@ model = LogisticRegression()
 model.fit(X_train, y_train)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-9b0b9ff9-f69a-47ea-a4a5-13663d252e43">
+
+{/* @layout-id t-7236c6e8-ca40-41f9-a926-31b32786774a */}
+
 `StandardScaler` の場合は、訓練データの平均と標準偏差を記憶する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-cb91daee-962b-4b4f-9772-ad0678f9abbc">
+
+{/* @layout-id t-a322f343-56d0-48cf-9252-8db4866a52f8 */}
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -56,35 +569,99 @@ scaler = StandardScaler()
 scaler.fit(X_train)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-f87910c8-b8c3-41a8-9aec-c29d902e784e">
+
+{/* @layout-id t-9992939d-996a-457f-8ecf-628619dca76f */}
+
 同じ `fit()` でも、何を学ぶかは推定器によって違う。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-967af935-ffd1-4508-9a4c-93be6caa9768">
+
+{/* @layout-id t-ad49d5aa-a419-436c-9283-e20f8d961118 */}
 
 <Tip type="warning" title="fit()にテストデータを渡さない">
   テストデータを使って平均や係数を学ぶと、本来は未知であるはずの情報がモデルに漏れてしまう。これをデータリークという。`fit()` は訓練データだけに使う。
 </Tip>
 
+</ArticleBlock>
+
+<ArticleBlock id="b-5e1c76e5-a514-4230-ae21-b6ab2f5a1bfe">
+
+{/* @layout-id t-c20e1446-cb62-42d1-b95d-dc9bab3c9a69 */}
+
 ## predict()で未知データを予測する
 
+{/* @layout-id t-0aec3346-c05c-42c5-a6c7-961ba1af646b */}
+
 `predict()` は、学習済みのモデルへ新しいデータを渡し、クラスや数値を予測するメソッドだ。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-b055b703-32a1-4b5f-b62a-bd378ca7b0ae">
+
+{/* @layout-id t-be144dfa-9b09-43ab-b77e-e9a36e49235f */}
 
 ```python
 y_pred = model.predict(X_test)
 print(y_pred)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ebe07f25-59d1-44a4-84b0-7b9bde0b87e7">
+
+{/* @layout-id t-07af8dc0-d88e-4a36-a95d-283bf71f76fd */}
+
 分類器ならクラスラベル、回帰器なら連続した数値が返る。確率出力に対応している分類器では、`predict_proba()` を使って各クラスに属する確率も取得できる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-3e27a805-562d-4492-aae6-f5005085a1de">
+
+{/* @layout-id t-6b0e9d34-35bc-46dc-861d-98afb2367265 */}
 
 ```python
 proba = model.predict_proba(X_test)
 print(proba)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-b87e4c9d-c665-493a-93ec-60d0157a2ef8">
+
+{/* @layout-id t-bdcf40f2-7232-47d0-ac4a-30c488fd5674 */}
+
 すべての分類器が `predict_proba()` を持つわけではない点には注意が必要だ。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-71a4d45f-ceac-4279-afb3-73315564c0d3">
+
+{/* @layout-id t-6b73d187-0b7d-4905-95e8-e3844a2a72d9 */}
 
 ## transform()でデータを変換する
 
+{/* @layout-id t-01d9d962-2dd1-4d63-bece-e4b05edb67b1 */}
+
 `transform()` は、学習済みの変換器を使ってデータを別の表現へ変えるメソッドだ。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-43e2b149-2abc-4dce-bc4a-0a01eeb045ad">
+
+{/* @layout-id t-54ce0201-d2f1-4875-9058-9fef0b513473 */}
+
 標準化では、訓練データで覚えた平均と標準偏差を使い、訓練データとテストデータを同じ基準で変換する。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-ede5762e-6d63-4218-bea4-2c4761c2bda8">
+
+{/* @layout-id t-3738e111-84ab-436f-914a-3033188ac836 */}
 
 ```python
 scaler = StandardScaler()
@@ -94,20 +671,52 @@ X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-6fdeab05-4dc8-4368-b27e-bcbdb6a1f8f0">
+
+{/* @layout-id t-335b8010-5350-4224-822f-c0b44c57d6f4 */}
+
 訓練データに対しては、`fit()` と `transform()` を続けて呼ぶ `fit_transform()` も使える。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-248ac5bc-729b-4e7f-b0b4-ccaf39961140">
+
+{/* @layout-id t-a813317b-a384-4a18-8e38-d0a3ed78e8c5 */}
 
 ```python
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-03461334-037b-4d81-8138-6d71aa338c24">
+
+{/* @layout-id t-345d2620-c349-482a-962a-9ca88ee046cf */}
+
 <Tip type="info" title="fit_transform()を一般化しすぎない">
   `StandardScaler` では `fit_transform(X_train)` と `fit(X_train)` 後の `transform(X_train)` は同じ結果になる。ただし、すべての変換器で同じとは限らない。まずは使うクラスのドキュメントを確認する。
 </Tip>
 
+</ArticleBlock>
+
+<ArticleBlock id="b-3766b9d3-a2d5-403c-b76d-fc19ba61cabb">
+
+{/* @layout-id t-fa2809cb-a12a-4afe-8633-d5bde5ad17cb */}
+
 ## Irisデータセットで一連の流れを試す
 
+{/* @layout-id t-853c051b-1576-4a3e-8787-1fec324b680f */}
+
 アヤメのIrisデータセットを使い、標準化してからロジスティック回帰で分類してみる。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-66154c1c-12c8-46e2-8174-3f28e0dc9e70">
+
+{/* @layout-id t-c785b104-3451-4026-9591-bbf6d716e0dd */}
 
 ```python
 from sklearn.datasets import load_iris
@@ -143,13 +752,39 @@ y_pred = model.predict(X_test_scaled)
 print(f"正解率: {accuracy_score(y_test, y_pred):.3f}")
 ```
 
+</ArticleBlock>
+
+<ArticleBlock id="b-595cbc57-43d9-4893-97d5-6c61afdf7813">
+
+{/* @layout-id t-9d8b6394-1797-43e9-838e-100cd51b70fe */}
+
 コードを追うと、処理の役割がきれいに分かれている。
+
+</ArticleBlock>
+
+<ArticleBlock id="b-e1fbf015-c112-4267-a11e-90c7a80f1b0d">
+
+{/* @layout-id t-d8f0c9d5-4bf8-44f5-a30b-d47d2858c782 */}
 
 1. `scaler.fit_transform()` で訓練データの基準を学びながら変換する
 2. `scaler.transform()` でテストデータを同じ基準に揃える
 3. `model.fit()` で分類モデルを学習する
 4. `model.predict()` で未知データを予測する
 
+</ArticleBlock>
+
+<ArticleBlock id="b-bab4a673-5286-4b19-81f4-8479d85bbba9">
+
+{/* @layout-id t-ab4243bd-5c3e-418a-9ede-2b5241d149c9 */}
+
 最初は `fit()`、`predict()`、`transform()` が別々の呪文に見えていた。実際には、学ぶ・予測する・変換するという役割を揃えた共通インターフェースだった。
 
+</ArticleBlock>
+
+<ArticleBlock id="b-ecf27042-91d9-4974-bb81-7940cb00cbd6">
+
+{/* @layout-id t-7739f172-b250-4c82-96b2-d16ed4be1104 */}
+
 モデルを別のアルゴリズムへ差し替えても、基本の流れはほとんど変わらない。次は前処理とモデルを `Pipeline` にまとめる方法を試してみたい。
+
+</ArticleBlock>
