@@ -1,5 +1,8 @@
 # darkmocha.dev
 
+> **公開アーカイブについて**
+> このリポジトリは、2026年9月時点のブログの実装をポートフォリオとして公開したものです。現在の開発は非公開リポジトリで継続しているため、ここにあるコードは[公開中のサイト](https://www.darkmocha.dev)と異なる場合があります。
+
 **Yuto Nagata** のパーソナルブログ。技術・ゲーム開発・旅行を発信。
 
 🌐 **[darkmocha.dev](https://www.darkmocha.dev)**　|　🗃 **[v1 アーカイブ](https://v1.darkmocha.dev)**
