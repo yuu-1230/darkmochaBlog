@@ -22,6 +22,7 @@ const editorialSerif = Noto_Serif_JP({
   weight: ["400", "500"], subsets: ["latin"], variable: "--font-editorial", display: "swap", preload: false,
 });
 
+
 const yomogi = Yomogi({
   weight: "400",
   subsets: ["latin"],
