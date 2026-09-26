@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { motion } from "motion/react";
 import {
   MapPin,
   Github,
@@ -13,20 +12,6 @@ import {
 } from "lucide-react";
 import { FaBluesky } from "react-icons/fa6";
 import { resolveImageUrl } from "@/lib/image-url";
-
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
 
 const techCategories = [
   {
@@ -70,16 +55,9 @@ export default function AboutPage() {
   const t = useTranslations("about");
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className="py-12 max-w-3xl mx-auto space-y-16"
-    >
-      {/* ── Hero ── */}
-      <motion.header variants={item} className="flex flex-col md:flex-row gap-8 items-start border-b border-border pb-12">
-        {/* Profile image */}
-        <div className="shrink-0 w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border border-border bg-muted">
+    <div className="editorial-index editorial-about">
+      <header className="editorial-about-hero">
+        <div className="editorial-profile-image">
           <Image
             src={resolveImageUrl("/images/About/profile.jpg")}
             alt="Yuto Nagata"
@@ -90,79 +68,64 @@ export default function AboutPage() {
           />
         </div>
 
-        <div className="space-y-3 flex-1">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Yuto Nagata
-          </h1>
-          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5">
+        <div className="editorial-about-intro">
+          <p className="editorial-kicker">About Darkmocha</p>
+          <h1>Yuto Nagata</h1>
+          <div className="editorial-about-meta">
+            <span>
               <MapPin className="w-3.5 h-3.5" />
               Nagano, Japan
             </span>
-            <span className="flex items-center gap-1.5">
+            <span>
               <ExternalLink className="w-3.5 h-3.5" />
               Suwa Tokyo Univ. of Science
             </span>
           </div>
-          <p className="text-foreground/80 leading-relaxed">
+          <p className="editorial-about-lead">
             University Student in Japan.
             Enjoying{" "}
-            <span className="text-primary font-medium">Code</span>,{" "}
-            <span className="text-primary font-medium">Games</span> &{" "}
-            <span className="text-primary font-medium">Travel</span>.
+            Code, Games & Travel.
           </p>
         </div>
-      </motion.header>
+      </header>
 
-      {/* ── Bio ── */}
-      <motion.section variants={item} className="space-y-4">
-        <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">{"//"}</span>
-          Bio
-        </h2>
-        <div className="space-y-4 text-foreground/85 leading-8 text-[15px]">
+      <section className="editorial-section editorial-about-bio">
+        <h2>Bio</h2>
+        <div className="editorial-prose">
           <p>{t("bio1")}</p>
           <p>{t("bio2")}</p>
           <p>{t("bio3")}</p>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ── Tech Stack ── */}
-      <motion.section variants={item} className="space-y-6">
-        <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">{"//"}</span>
-          Tech Stack
-        </h2>
-        <div className="space-y-5">
+      <section className="editorial-section">
+        <h2>Tech Stack</h2>
+        <div className="editorial-skill-list">
           {techCategories.map((cat) => (
-            <div key={cat.label} className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
-              <span className="text-xs font-mono text-muted-foreground shrink-0 w-32">
+            <div key={cat.label}>
+              <span>
                 {cat.label}
               </span>
-              <p className="text-sm text-foreground/85">
+              <p>
                 {cat.skills.join("  ·  ")}
               </p>
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      {/* ── Connect ── */}
-      <motion.section variants={item} className="space-y-6">
-        <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-          <span className="text-primary/60">{"//"}</span>
-          Connect
-        </h2>
-        <ul className="flex flex-wrap gap-4">
+      <section className="editorial-section">
+        <h2>Connect</h2>
+        <ul className="editorial-social-list">
           {socialLinks.map((link) => (
             <li key={link.label}>
               <Link
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                className="group"
               >
-                <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                <span>
                   {link.icon}
                 </span>
                 {link.label}
@@ -170,7 +133,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-      </motion.section>
-    </motion.div>
+      </section>
+    </div>
   );
 }

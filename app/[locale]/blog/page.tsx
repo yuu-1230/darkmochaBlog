@@ -1,8 +1,8 @@
 import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { buildBlogSections } from "@/lib/blog-sections";
-import { PostCard } from "@/components/PostCard";
+import { ArticleCoverCard } from "@/components/magazine/ArticleCoverCard";
+import { EditorialPageHeader } from "@/components/magazine/EditorialPageHeader";
 import { localeUrl, localeAlternates } from "@/lib/locale-url";
 import type { Locale } from "@/i18n/routing";
 
@@ -31,45 +31,25 @@ export default async function BlogPage({ params }: Props) {
 
   const t = await getTranslations("blog");
   const allPosts = await getAllPosts(locale);
-  const sections = buildBlogSections(allPosts);
-
   return (
-    <div className="py-12 max-w-3xl mx-auto space-y-16">
-      {/* Page header */}
-      <header className="space-y-2 border-b border-border pb-8">
-        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          {"// blog"}
-        </p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Blog</h1>
-        <p className="text-sm text-muted-foreground">
-          {t("postCount", { count: allPosts.length })}
-        </p>
-      </header>
+    <div className="editorial-index">
+      <EditorialPageHeader
+        title={locale === "ja" ? "記事一覧" : "Journal"}
+        description={locale === "ja" ? "つくること、学ぶこと、ときどき旅のこと。" : "Making, learning, and a little travel."}
+        meta={t("postCount", { count: allPosts.length })}
+      />
 
       {allPosts.length === 0 && (
-        <p className="text-muted-foreground text-sm italic py-8 text-center">
+        <p className="editorial-empty">
           {t("empty")}
         </p>
       )}
 
-      {/* Sections */}
-      {sections.map((section) => (
-        <section key={section.title} aria-label={section.title}>
-          <h2 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
-            <span className="text-primary/60">{"//"}</span>
-            {section.title}
-            <span className="text-muted-foreground font-normal normal-case tracking-normal">
-              ({section.posts.length})
-            </span>
-          </h2>
-
-          <ul className="space-y-3">
-            {section.posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </ul>
-        </section>
-      ))}
+      <section className="journal-grid editorial-article-grid" aria-label={locale === "ja" ? "すべての記事" : "All articles"}>
+        {allPosts.map((post, index) => (
+          <ArticleCoverCard key={post.slug} post={post} priority={index < 2} />
+        ))}
+      </section>
     </div>
   );
 }

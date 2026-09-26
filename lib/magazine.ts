@@ -75,7 +75,8 @@ export function homePosts(posts: PostData[], limit = 6) {
 }
 
 export function isMagazineRoute(pathname: string) {
-  return pathname === "/" || pathname === "/docs/magazine-layouts" || /^\/blog\/[^/]+$/.test(pathname);
+  return pathname === "/" || ["/blog", "/about", "/projects", "/travel", "/notes-timeline"].includes(pathname)
+    || pathname === "/docs/magazine-layouts" || /^\/blog\/[^/]+$/.test(pathname);
 }
 
 export function spreadForPage(index: number) {

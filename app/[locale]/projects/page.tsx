@@ -3,22 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/lib/projects";
 import type { Locale } from "@/i18n/routing";
 import { ImageLightbox } from "@/components/image-lightbox";
 import { resolveImageUrl } from "@/lib/image-url";
-
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
-};
+import { EditorialPageHeader } from "@/components/magazine/EditorialPageHeader";
 
 export default function ProjectsPage() {
   const t = useTranslations("projects");
@@ -26,68 +16,53 @@ export default function ProjectsPage() {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className="py-12 max-w-3xl mx-auto space-y-16"
-    >
-      {/* Page Header */}
-      <motion.header variants={item} className="space-y-2 border-b border-border pb-8">
-        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          {"// projects"}
-        </p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Projects</h1>
-        <p className="text-muted-foreground text-sm">
-          {t("count", { count: projects.length })}
-        </p>
-      </motion.header>
+    <div className="editorial-index">
+      <EditorialPageHeader
+        title="Projects"
+        description={locale === "ja" ? "これまでにつくったものと、そこから学んだこと。" : "Things I have made and what they taught me."}
+        meta={t("count", { count: projects.length })}
+      />
 
-      {/* Projects List */}
-      <ul className="space-y-12">
+      <ul className="editorial-project-grid">
         {projects.map((project) => (
-          <motion.li
+          <li
             key={project.id}
-            variants={item}
-            className="group border-b border-border pb-12 last:border-0 last:pb-0"
+            className="editorial-project-card group"
           >
-            {/* Thumbnail + Content */}
-            <div className="flex flex-col sm:flex-row gap-5 items-start">
-              {/* Thumbnail */}
-              <div
-                className={`w-full sm:w-40 shrink-0 aspect-video relative rounded-lg overflow-hidden border border-border bg-muted ${project.image ? "cursor-zoom-in" : ""}`}
-                onClick={() => project.image && setLightbox({ src: project.image, alt: project.title })}
+            {project.image ? (
+              <button
+                type="button"
+                className="editorial-project-image"
+                onClick={() => setLightbox({ src: project.image!, alt: project.title })}
+                aria-label={`${project.title} image`}
               >
-                {project.image ? (
                   <Image
                     src={resolveImageUrl(project.image)}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, 160px"
+                    className="object-cover"
+                    sizes="(max-width: 767px) 100vw, 42vw"
                   />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    <project.icon className="w-8 h-8 opacity-40" />
-                  </div>
-                )}
+              </button>
+            ) : (
+              <div className="editorial-project-image editorial-project-placeholder">
+                <project.icon className="w-8 h-8" />
               </div>
+            )}
 
-              {/* Text */}
-              <div className="flex-1 min-w-0 space-y-2">
-                {/* Title + Links */}
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <h2 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
+              <div className="editorial-project-copy">
+                <div className="editorial-project-heading">
+                  <h2>
                     {project.title}
                   </h2>
-                  <div className="flex items-center gap-3 shrink-0 flex-wrap">
+                  <div className="editorial-project-links">
                     {project.links.map((link) => (
                       <a
                         key={link.label}
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                        className="inline-flex items-center gap-1"
                       >
                         <ExternalLink className="w-3 h-3" />
                         {link.label}
@@ -96,25 +71,21 @@ export default function ProjectsPage() {
                   </div>
                 </div>
 
-                {/* Description */}
-                <p className="text-sm text-foreground/80 leading-relaxed">
+                <p className="editorial-project-description">
                   {project.description[locale]}
                 </p>
 
-                {/* Tech stack */}
-                <p className="text-xs text-muted-foreground font-mono">
+                <p className="editorial-project-stack">
                   {project.techStack.join("  ·  ")}
                 </p>
 
-                {/* Learned */}
                 {project.learned[locale] && (
-                  <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-border pl-3 italic">
+                  <p className="editorial-project-learned">
                     {project.learned[locale]}
                   </p>
                 )}
               </div>
-            </div>
-          </motion.li>
+          </li>
         ))}
       </ul>
 
@@ -125,6 +96,6 @@ export default function ProjectsPage() {
           onClose={() => setLightbox(null)}
         />
       )}
-    </motion.div>
+    </div>
   );
 }

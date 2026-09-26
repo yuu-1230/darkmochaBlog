@@ -70,7 +70,7 @@ export async function NoteTimeline({
       )}
 
       {/* Thread-style list */}
-      <div className="space-y-0">
+      <div className="note-thread-list">
         {displayNotes.map((note, index) => (
           <NoteArticle
             key={note.id}
@@ -154,7 +154,7 @@ async function NoteArticle({ note, isLast }: { note: Note; isLast: boolean }) {
   const urls = extractUrls(note.content);
 
   return (
-    <article className="flex gap-4 group" style={{ contentVisibility: "auto", containIntrinsicSize: "0 120px" }}>
+    <article className="editorial-note flex gap-4 group" style={{ contentVisibility: "auto", containIntrinsicSize: "0 120px" }}>
       {/* Timeline column */}
       <div className="flex flex-col items-center shrink-0 pt-1">
         <div className="w-2 h-2 rounded-full bg-primary/40 group-hover:bg-primary ring-4 ring-background transition-colors shrink-0 mt-0.5" />
